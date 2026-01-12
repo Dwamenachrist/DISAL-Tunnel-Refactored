@@ -1,0 +1,80 @@
+title DASSAL FYP Project Hosting & Monitoring Master Flow
+
+// Actors
+Student (Project Owner) [icon: user, color: green]
+Admin [icon: shield, color: orange]
+Git Repository [icon: github, color: black]
+
+// Interfaces
+Login Page [icon: layout, color: lightblue]
+Dashboard [icon: layout, color: lightpurple]
+Create Project Modal [icon: layers, color: lightblue]
+Deployment Status [icon: activity, color: lightpurple]
+Admin Dashboard [icon: layout, color: lightpurple]
+Project List [icon: list, color: lightblue]
+Project Details [icon: activity, color: lightblue]
+System Alerts [shape: oval, icon: alert-triangle, color: red]
+
+// Systems
+DASSAL Auth [icon: lock, color: red]
+Account Check [shape: diamond, icon: user-check, color: orange]
+Orchestrator (Deployment Service) [icon: cpu, color: blue]
+Webhook Listener [icon: zap, color: orange]
+Runtime Manager [icon: box, color: blue]
+Metrics Collector [icon: bar-chart, color: blue]
+DNS Manager [icon: globe, color: blue]
+Notification Service [icon: bell, color: lightpurple]
+
+// Logic
+Input Validation [shape: diamond, icon: check-circle, color: orange]
+Threshold Check [shape: diamond, icon: gauge, color: orange]
+Action Handler [icon: zap, color: blue]
+
+// Flow
+
+// 1️⃣ Authentication (Unified Path)
+Student (Project Owner) > Login Page: Opens Application
+Admin > Login Page: Opens Application
+Login Page > DASSAL Auth: Enter Credentials
+DASSAL Auth > Account Check: Validate & Fetch Role
+Account Check > Dashboard: Success (Student)
+Account Check > Admin Dashboard: Success (Admin)
+Account Check > Login Page: Failure → Retry
+
+// 2️⃣ Project Creation & Initial Deployment
+Dashboard > Create Project Modal: Opens Form
+Student (Project Owner) > Create Project Modal: Enters Project Name, Git URL, Stack, Subdomain (Opt)
+Create Project Modal > Input Validation: Validate Details
+Input Validation > Create Project Modal: Invalid → Retry
+Input Validation > Orchestrator (Deployment Service): Valid → Proceed
+Orchestrator (Deployment Service) > Runtime Manager: Clone Repo, Install Deps, & Start App
+Runtime Manager > DNS Manager: Register Port & Map Subdomain
+DNS Manager > Deployment Status: Live URL Generated
+Deployment Status > Notification Service: Update Status
+Notification Service > Dashboard: Project Active & Listed
+
+// 3️⃣ Redeployment (Auto vs Manual)
+Git Repository > Webhook Listener: Push Event
+Webhook Listener > Orchestrator (Deployment Service): Notify New Commit
+Orchestrator (Deployment Service) > Check Settings: Auto-Redeploy ON?
+Check Settings > Runtime Manager: ON → Pull Updates & Restart
+Check Settings > Notification Service: OFF → Log Event & Wait
+Dashboard > Orchestrator (Deployment Service): Click "Deploy Now" (Manual Trigger)
+Runtime Manager > Notification Service: Update Status
+Notification Service > Dashboard: Show Results
+
+// 4️⃣ Admin Monitoring & Resource Oversight
+Runtime Manager > Metrics Collector: Stream Live Stats (CPU/RAM)
+Metrics Collector > Threshold Check: Analyze Usage Data
+Threshold Check > Action Handler: Constraint Violated
+Action Handler > System Alerts: Trigger Alarm
+System Alerts > Admin Dashboard: Display Critical Alert
+Action Handler > Runtime Manager: Intervention (If Set)
+
+// 4b. Admin Viewing Data
+Admin Dashboard > Project List: View All Projects
+Project List > Project Details: Select Project
+Project Details > Admin Dashboard: Show Detailed View
+Admin Dashboard > Metrics Collector: Query Historical Data
+Metrics Collector > Admin Dashboard: Return Visualization
+

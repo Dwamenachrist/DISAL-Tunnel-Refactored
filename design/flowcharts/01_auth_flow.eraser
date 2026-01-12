@@ -1,0 +1,29 @@
+title DISAL SSO Login & Portal Access Flow
+
+// Actors
+Student (Project Owner) [icon: user, color: green]
+Admin [icon: shield, color: orange]
+
+// Interface
+Login Page [icon: layout, color: lightblue]
+Dashboard [icon: layout, color: lightpurple]
+Admin Dashboard [icon: layout, color: lightpurple]
+Error Message [shape: oval, icon: alert-triangle, color: red]
+
+// System & Auth
+DISAL Auth [icon: lock, color: red]
+Account Check [shape: diamond, icon: user-check, color: orange]
+
+// Flow
+Student (Project Owner) > Login Page: Opens Application
+Admin > Login Page: Opens Application
+
+Login Page > DISAL Auth: Enter DISAL Credentials
+DISAL Auth > Account Check: Validate & Fetch Role
+
+// Logic
+Account Check > Dashboard: Success (Student)
+Account Check > Admin Dashboard: Success (Admin)
+Account Check > Error Message: Failure (Invalid Credentials)
+Error Message > Login Page: Retry
+

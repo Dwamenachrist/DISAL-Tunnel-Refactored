@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-01-10T10:40:00.000Z" agent="Claude" version="21.0.0">
+  <diagram name="DASSAL FYP Master Flow" id="master-flow-diagram">
+    <mxGraphModel dx="1600" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== COLUMN 1: ACTORS (Terminators) ==================== -->
+        <mxCell id="student-start" value="Student&#xa;(Project Owner)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="40" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-start" value="Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+          <mxGeometry x="40" y="560" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="git-repo" value="Git&#xa;Repository" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#24292e;fontColor=#ffffff;strokeColor=#1b1f23;" vertex="1" parent="1">
+          <mxGeometry x="60" y="240" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== COLUMN 2: AUTHENTICATION ==================== -->
+        <mxCell id="login-page" value="Login Page" style="shape=manualInput;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="240" y="500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dassal-auth" value="DASSAL Auth" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="440" y="500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="account-check" value="Account&#xa;Valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+          <mxGeometry x="640" y="490" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== COLUMN 3: DASHBOARDS ==================== -->
+        <mxCell id="dashboard" value="Student&#xa;Dashboard" style="shape=display;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="840" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-dashboard" value="Admin&#xa;Dashboard" style="shape=display;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+          <mxGeometry x="840" y="560" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== COLUMN 4: PROJECT OPS ==================== -->
+        <mxCell id="create-modal" value="Create Project&#xa;Modal" style="shape=manualInput;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="input-validation" value="Input&#xa;Valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="430" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="orch-deploy" value="Orchestrator&#xa;(Ops Service)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="webhook-listener" value="Webhook&#xa;Listener" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="check-settings" value="Auto&#xa;Redeploy?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+          <mxGeometry x="1640" y="240" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== COLUMN 5: RUNTIME ==================== -->
+        <mxCell id="runtime-mgr" value="Runtime&#xa;Manager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dns-mgr" value="DNS&#xa;Manager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="2000" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="deploy-status" value="Deployment&#xa;Status" style="shape=display;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="2200" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== COLUMN 6: MONITORING ==================== -->
+        <mxCell id="metrics-collector" value="Metrics&#xa;Collector" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="threshold-check" value="Limits&#xa;OK?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+          <mxGeometry x="1640" y="670" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="action-handler" value="Action&#xa;Handler" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sys-alerts" value="System&#xa;Alerts" style="shape=display;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== FEEDBACK ==================== -->
+        <mxCell id="notif-svc" value="Notification&#xa;Service" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="1">
+          <mxGeometry x="2200" y="800" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== CONNECTIONS ==================== -->
+
+        <!-- 1. AUTH -->
+        <mxCell id="e1" value="Access Portal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="student-start" target="login-page">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="470" />
+              <mxPoint x="200" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="Access Portal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="admin-start" target="login-page">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="590" />
+              <mxPoint x="200" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="Credentials" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="login-page" target="dassal-auth" />
+        <mxCell id="e4" value="Validate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dassal-auth" target="account-check" />
+        <mxCell id="e5" value="Student" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" edge="1" parent="1" source="account-check" target="dashboard">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="530" />
+              <mxPoint x="780" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="Admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" edge="1" parent="1" source="account-check" target="admin-dashboard">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="530" />
+              <mxPoint x="780" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 2. CREATION -->
+        <mxCell id="e7" value="New Project" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dashboard" target="create-modal" />
+        <mxCell id="e8" value="Submit Form" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="create-modal" target="input-validation" />
+        <mxCell id="e9" value="Valid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" edge="1" parent="1" source="input-validation" target="orch-deploy" />
+        <mxCell id="e10" value="Invalid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#FF0000;entryX=1;entryY=1;" edge="1" parent="1" source="input-validation" target="create-modal">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1280" y="380" />
+              <mxPoint x="1150" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" value="Provision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="orch-deploy" target="runtime-mgr" />
+        <mxCell id="e12" value="Expose" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="runtime-mgr" target="dns-mgr" />
+        <mxCell id="e13" value="Generate URL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dns-mgr" target="deploy-status" />
+
+        <!-- 3. REDEPLOY -->
+        <mxCell id="e14" value="Push" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="git-repo" target="webhook-listener" />
+        <mxCell id="e15" value="Notify" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="webhook-listener" target="check-settings" />
+        <mxCell id="e16" value="ON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" edge="1" parent="1" source="check-settings" target="runtime-mgr">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1860" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" value="Manual" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dashboard" target="orch-deploy">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="420" />
+              <mxPoint x="1500" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 4. MONITORING -->
+        <mxCell id="e18" value="Live Stats" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="runtime-mgr" target="metrics-collector" />
+        <mxCell id="e19" value="Analyze" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="metrics-collector" target="threshold-check" />
+        <mxCell id="e20" value="Violated" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#FF0000;" edge="1" parent="1" source="threshold-check" target="action-handler" />
+        <mxCell id="e21" value="Interven" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#FF0000;" edge="1" parent="1" source="action-handler" target="runtime-mgr" />
+        <mxCell id="e22" value="Alert" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="action-handler" target="sys-alerts" />
+        <mxCell id="e23" value="Display" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="sys-alerts" target="admin-dashboard" />
+
+        <!-- 5. FEEDBACK -->
+        <mxCell id="e24" value="Status Update" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="deploy-status" target="notif-svc">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2260" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e25" value="Update UI" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0.25;entryY=1;" edge="1" parent="1" source="notif-svc" target="dashboard">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,41 @@
+title Project Creation & Initial Deployment Flow
+
+// Actors
+Student (Project Owner) [icon: user, color: green]
+Orchestrator (Deployment Service) [icon: server, color: blue]
+
+// Interface
+Dashboard [icon: layout, color: lightpurple]
+Create Project Modal [icon: layers, color: lightblue]
+Deployment Status [icon: activity, color: lightpurple]
+
+// Logic & Validation
+Input Validation [shape: diamond, icon: check-circle, color: orange]
+Runtime Manager [icon: box, color: blue]
+DNS Manager [icon: globe, color: blue]
+Notification Service [icon: bell, color: lightpurple]
+Error Handler [shape: oval, icon: alert-triangle, color: red]
+
+// Trigger
+Student (Project Owner) > Dashboard: Clicks Create Project
+Dashboard > Create Project Modal: Opens Form
+
+// Data Entry
+Student (Project Owner) > Create Project Modal: Enters Details
+// Inputs: Project Name, Git URL, Stack Type, Subdomain (Opt)
+
+// Validation Flow
+Create Project Modal > Input Validation: Submit Form
+Input Validation > Error Handler: Invalid Data / Name Taken
+Error Handler > Create Project Modal: Show Error & Retry
+
+// Provisioning Flow (Success)
+Input Validation > Orchestrator (Deployment Service): Valid & Unique (Proceed)
+Orchestrator (Deployment Service) > Runtime Manager: Clone Repo, Install Deps, & Start App
+Runtime Manager > DNS Manager: Register Port & Map Subdomain
+DNS Manager > Deployment Status: Live URL Generated
+
+// Feedback & Output
+Deployment Status > Notification Service: Update Project State
+Notification Service > Dashboard: Project Active & Listed
+

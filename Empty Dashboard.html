@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tunnel Manager Dashboard - Empty State</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6366F1", // Indigo
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0D0D10",
+                        "surface-dark": "#16161D",
+                        "border-dark": "#27272A",
+                        "text-main": "#EDEDEF",
+                        "text-muted": "#9BA1A6",
+                        "success": "#10B981",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-text-main h-screen overflow-hidden flex font-display">
+    <!-- Side Navigation -->
+    <aside class="w-64 bg-[#09090B] border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20">
+        <div class="flex flex-col gap-1 p-4">
+            <div class="flex flex-col mb-8 px-2">
+                <div onclick="window.location.href='Landing Page.html'"
+                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+                    <div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-[16px]">terminal</span>
+                    </div>
+                    <h1 class="text-white text-base font-bold tracking-tight">DISAL</h1>
+                </div>
+                <p class="text-text-muted text-xs font-mono mt-1 pl-8">TUNNEL_MANAGER_V1</p>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-md bg-surface-dark border border-border-dark group transition-colors"
+                    href="Tunnel Manager Board.html">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">grid_view</span>
+                    <span class="text-white text-sm font-medium">Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+                    href="Student Logs.html">
+                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+                        style="font-size: 20px;">terminal</span>
+                    <span
+                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Logs</span>
+                </a>
+                <div class="h-px bg-border-dark my-2 mx-3"></div>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+                    href="Documentation.html">
+                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+                        style="font-size: 20px;">menu_book</span>
+                    <span
+                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Docs</span>
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-border-dark">
+            <div class="flex items-center gap-3 px-2">
+                <div
+                    class="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 border border-gray-500 flex items-center justify-center text-xs font-bold text-white">
+                    JD</div>
+                <div class="flex flex-col">
+                    <span class="text-white text-sm font-medium">John Doe</span>
+                    <span class="text-text-muted text-xs">student@disal.io</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative">
+        <!-- Header -->
+        <header
+            class="h-16 border-b border-border-dark flex items-center justify-between px-8 bg-[#0D0D10]/80 backdrop-blur-md z-10 sticky top-0">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center text-sm font-medium text-text-muted">
+                    <span class="text-white">Dashboard</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 border border-gray-600 bg-cover bg-center"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5ochmeRBF9--DSF2U-fAINwy-6H4sZaJvucXmqV7UYS2FybePlQRF1yyNtaFMVnZaxCBMhMHLuf8pT38wewPFI2RI3lbNDAiTUwYIadqDngWoTchV1kLObb52ibXNGPgmjUVD5Gq7nWGUn14ukPZOMWWB8MG4xbCtKEond_P28uYpHqxtctL94FmcVHMO4oVZRHOgjSSXv4XYYSMy-bWavwrxbLDjypQbw82j69rYv2JBsH5gconRDDxz0zWLefD3pQcTLzSjaz0');">
+                </div>
+            </div>
+        </header>
+        <!-- Empty State Content -->
+        <div class="flex-1 flex flex-col items-center justify-center p-8">
+            <div class="max-w-md w-full text-center flex flex-col items-center">
+                <!-- Illustration (CSS Grid) -->
+                <div class="w-24 h-24 mb-6 relative">
+                    <div
+                        class="absolute inset-0 border-2 border-dashed border-border-dark rounded-xl animate-[spin_10s_linear_infinite]">
+                    </div>
+                    <div
+                        class="absolute inset-4 bg-surface-dark border border-border-dark rounded-lg flex items-center justify-center shadow-2xl">
+                        <span class="material-symbols-outlined text-text-muted text-[32px]">lan</span>
+                    </div>
+                </div>
+
+                <h1 class="text-2xl font-bold text-white mb-2">No Active Tunnels</h1>
+                <p class="text-text-muted text-sm mb-8 leading-relaxed">
+                    You haven't established any connections yet. Create your first secure tunnel to forward local
+                    traffic to the public internet.
+                </p>
+
+                <button onclick="openModal()"
+                    class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3.5 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95 group">
+                    <span class="material-symbols-outlined text-[20px]">add</span>
+                    Establish New Tunnel
+                </button>
+
+                <a href="Documentation.html"
+                    class="mt-6 text-xs text-text-muted hover:text-white transition-colors flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[14px]">menu_book</span>
+                    View documentation
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL OVERLAY -->
+    <div id="modalOverlay"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <!-- Modal Card -->
+        <div class="w-full max-w-[500px] bg-surface-dark border border-border-dark rounded-xl shadow-2xl flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-border-dark">
+                <div>
+                    <h2 class="text-lg font-bold text-white">Configure New Tunnel</h2>
+                    <p class="text-sm text-text-muted">Set up your localhost exposure</p>
+                </div>
+                <button onclick="closeModal()" class="text-text-muted hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="tunnelForm" onsubmit="handleCreateTunnel(event)" class="p-6 space-y-5">
+                <div class="space-y-1.5">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-text-muted">Project Name</label>
+                    <input required id="projectName" type="text" placeholder="e.g. grading-system"
+                        class="w-full bg-[#0D0D10] border border-border-dark rounded-lg px-4 py-2.5 text-sm text-white placeholder-text-muted/40 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-text-muted">Local Port</label>
+                    <input required id="localPort" type="number" placeholder="3000" value="3000"
+                        class="w-full bg-[#0D0D10] border border-border-dark rounded-lg px-4 py-2.5 text-sm text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono">
+                </div>
+                <div class="pt-4 flex justify-end gap-3">
+                    <button type="button" onclick="closeModal()"
+                        class="px-4 py-2 text-sm font-medium text-text-muted hover:text-white transition-colors">Cancel</button>
+                    <button type="submit"
+                        class="px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg shadow-primary/20 transition-all">Create
+                        Tunnel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modalOverlay');
+        const mainContent = document.querySelector('main');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            mainContent.classList.add('blur-[2px]', 'pointer-events-none');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            mainContent.classList.remove('blur-[2px]', 'pointer-events-none');
+        }
+
+        function handleCreateTunnel(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerText = 'Provisioning...';
+            setTimeout(() => {
+                window.location.href = 'Tunnel Manager Board.html';
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

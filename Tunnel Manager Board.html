@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <script>
+    if (!localStorage.getItem('userRole')) {
+      window.location.href = 'Login.html';
+    }
+  </script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Tunnel Manager Dashboard</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#6366F1", // Indigo
+            "background-light": "#f6f6f8",
+            "background-dark": "#0D0D10",
+            "surface-dark": "#16161D",
+            "border-dark": "#27272A",
+            "text-main": "#EDEDEF",
+            "text-muted": "#9BA1A6",
+            "success": "#10B981",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"],
+          },
+          borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-text-main h-screen overflow-hidden flex">
+  <!-- Side Navigation -->
+  <aside class="w-64 bg-[#09090B] border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20">
+    <div class="flex flex-col gap-1 p-4">
+      <div class="flex flex-col mb-8 px-2">
+        <div onclick="window.location.href='Landing Page.html'"
+          class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+          <div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
+            <span class="material-symbols-outlined text-white text-[16px]">terminal</span>
+          </div>
+          <h1 class="text-white text-base font-bold tracking-tight">DISAL</h1>
+        </div>
+        <p class="text-text-muted text-xs font-mono mt-1 pl-8">TUNNEL_MANAGER_V1</p>
+      </div>
+      <nav class="flex flex-col gap-1">
+        <a class="flex items-center gap-3 px-3 py-2 rounded-md bg-surface-dark border border-border-dark group transition-colors"
+          href="Tunnel Manager Board.html">
+          <span class="material-symbols-outlined text-primary" style="font-size: 20px;">grid_view</span>
+          <span class="text-white text-sm font-medium">Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+          href="Student Logs.html">
+          <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+            style="font-size: 20px;">terminal</span>
+          <span class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Logs</span>
+        </a>
+        <div class="h-px bg-border-dark my-2 mx-3"></div>
+        <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+          href="Documentation.html">
+          <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+            style="font-size: 20px;">menu_book</span>
+          <span class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Docs</span>
+        </a>
+      </nav>
+    </div>
+    <div class="p-4 border-t border-border-dark">
+      <div class="flex items-center gap-3 px-2">
+        <div
+          class="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 border border-gray-500 flex items-center justify-center text-xs font-bold text-white">
+          JD</div>
+        <div class="flex flex-col">
+          <span class="text-white text-sm font-medium">John Doe</span>
+          <span class="text-text-muted text-xs">student@disal.io</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative">
+    <!-- Header -->
+    <header
+      class="h-16 border-b border-border-dark flex items-center justify-between px-8 bg-[#0D0D10]/80 backdrop-blur-md z-10 sticky top-0">
+      <div class="flex items-center gap-4">
+        <nav class="flex items-center text-sm font-medium text-text-muted">
+          <a class="hover:text-white transition-colors" href="Landing Page.html">Home</a>
+          <span class="mx-2 text-border-dark">/</span>
+          <span
+            class="text-white text-surface-dark bg-white/5 px-2 py-0.5 rounded border border-border-dark">Dashboard</span>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Search Bar -->
+        <div class="relative group">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span
+              class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors text-[20px]">search</span>
+          </div>
+          <input
+            class="bg-surface-dark border border-border-dark text-white text-sm rounded-lg focus:ring-1 focus:ring-primary focus:border-primary block w-64 pl-10 p-2 placeholder-gray-500 transition-all font-display"
+            placeholder="Search tunnels... (Cmd+K)" type="text" />
+        </div>
+        <!-- Primary Action -->
+        <button onclick="openModal()"
+          class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_15px_-3px_rgba(99,102,241,0.4)]">
+          <span class="material-symbols-outlined text-[20px]">add</span>
+          Establish New Tunnel
+        </button>
+      </div>
+    </header>
+    <!-- Scrollable Content -->
+    <div class="flex-1 overflow-y-auto p-8 scrollbar-hide">
+      <!-- Filter & View Controls -->
+      <div class="flex justify-between items-end mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-white mb-1">Active Connections</h1>
+          <p class="text-text-muted text-sm">Manage your active SSH forwarding sessions.</p>
+        </div>
+        <div class="flex items-center bg-surface-dark rounded-lg p-1 border border-border-dark">
+          <button class="p-1.5 rounded bg-white/10 text-white shadow-sm transition-all">
+            <span class="material-symbols-outlined text-[20px]">grid_view</span>
+          </button>
+          <button class="p-1.5 rounded text-text-muted hover:text-white transition-all">
+            <span class="material-symbols-outlined text-[20px]">view_list</span>
+          </button>
+        </div>
+      </div>
+      <!-- Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div
+          class="bg-surface-dark border border-border-dark rounded-lg p-5 flex flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
+          <div class="flex justify-between items-start">
+            <div class="flex flex-col gap-1">
+              <h3 class="font-medium text-white text-base">API Gateway - Port 8080</h3>
+              <span class="text-xs text-text-muted">Production Preview</span>
+            </div>
+            <span
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
+              Live
+            </span>
+          </div>
+          <div
+            class="bg-[#0D0D10] rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
+            <div class="truncate flex items-center gap-2">
+              <span class="text-gray-500">loc:</span>8080 <span class="text-gray-600">→</span> <span
+                class="text-primary truncate">api.tunnel.disal.io</span>
+            </div>
+            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+              <span class="material-symbols-outlined text-[16px]">content_copy</span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
+            <div class="flex items-center gap-2 text-xs text-text-muted">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              Uptime: 4d 12h
+            </div>
+            <div class="flex gap-2">
+              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
+                title="Restart">
+                <span class="material-symbols-outlined text-[18px]">refresh</span>
+              </button>
+              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
+                title="Disconnect">
+                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div
+          class="bg-surface-dark border border-border-dark rounded-lg p-5 flex flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
+          <div class="flex justify-between items-start">
+            <div class="flex flex-col gap-1">
+              <h3 class="font-medium text-white text-base">React Frontend</h3>
+              <span class="text-xs text-text-muted">Staging Environment</span>
+            </div>
+            <span
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
+              Live
+            </span>
+          </div>
+          <div
+            class="bg-[#0D0D10] rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
+            <div class="truncate flex items-center gap-2">
+              <span class="text-gray-500">loc:</span>3000 <span class="text-gray-600">→</span> <span
+                class="text-primary truncate">preview.disal.io/usr99</span>
+            </div>
+            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+              <span class="material-symbols-outlined text-[16px]">content_copy</span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
+            <div class="flex items-center gap-2 text-xs text-text-muted">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              Uptime: 0h 45m
+            </div>
+            <div class="flex gap-2">
+              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
+                title="Restart">
+                <span class="material-symbols-outlined text-[18px]">refresh</span>
+              </button>
+              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
+                title="Disconnect">
+                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div
+          class="bg-surface-dark border border-border-dark rounded-lg p-5 flex flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
+          <div class="flex justify-between items-start">
+            <div class="flex flex-col gap-1">
+              <h3 class="font-medium text-white text-base">Database Tunnel (Postgres)</h3>
+              <span class="text-xs text-text-muted">Debug Session</span>
+            </div>
+            <span
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-500 border border-yellow-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+              Idle
+            </span>
+          </div>
+          <div
+            class="bg-[#0D0D10] rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
+            <div class="truncate flex items-center gap-2">
+              <span class="text-gray-500">loc:</span>5432 <span class="text-gray-600">→</span> <span
+                class="text-primary truncate">db.tunnel.disal.io</span>
+            </div>
+            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+              <span class="material-symbols-outlined text-[16px]">content_copy</span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
+            <div class="flex items-center gap-2 text-xs text-text-muted">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              Uptime: 2d 01h
+            </div>
+            <div class="flex gap-2">
+              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
+                title="Restart">
+                <span class="material-symbols-outlined text-[18px]">refresh</span>
+              </button>
+              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
+                title="Disconnect">
+                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div
+          class="bg-surface-dark border border-border-dark rounded-lg p-5 flex flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
+          <div class="flex justify-between items-start">
+            <div class="flex flex-col gap-1">
+              <h3 class="font-medium text-white text-base">Redis Cache</h3>
+              <span class="text-xs text-text-muted">Feature Branch #220</span>
+            </div>
+            <span
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
+              Live
+            </span>
+          </div>
+          <div
+            class="bg-[#0D0D10] rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
+            <div class="truncate flex items-center gap-2">
+              <span class="text-gray-500">loc:</span>6379 <span class="text-gray-600">→</span> <span
+                class="text-primary truncate">cache.tunnel.disal.io</span>
+            </div>
+            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+              <span class="material-symbols-outlined text-[16px]">content_copy</span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
+            <div class="flex items-center gap-2 text-xs text-text-muted">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              Uptime: 0h 12m
+            </div>
+            <div class="flex gap-2">
+              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
+                title="Restart">
+                <span class="material-symbols-outlined text-[18px]">refresh</span>
+              </button>
+              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
+                title="Disconnect">
+                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Add New Card -->
+        <button onclick="openModal()"
+          class="bg-surface-dark/40 border border-dashed border-border-dark rounded-lg p-5 flex flex-col gap-4 items-center justify-center min-h-[180px] hover:border-primary/50 hover:bg-surface-dark transition-all group cursor-pointer text-text-muted hover:text-primary">
+          <div
+            class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+            <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">add</span>
+          </div>
+          <span class="text-sm font-medium">Configure New Tunnel</span>
+        </button>
+      </div>
+      <!-- Recent Activity Log (Optional fill for density) -->
+      <div class="mt-8">
+        <h2 class="text-lg font-bold text-white mb-4">Recent Connection Logs</h2>
+        <div class="rounded-lg border border-border-dark bg-surface-dark overflow-hidden">
+          <table class="w-full text-left text-sm text-text-muted">
+            <thead class="bg-[#111116] text-xs uppercase font-medium border-b border-border-dark">
+              <tr>
+                <th class="px-6 py-3">Timestamp</th>
+                <th class="px-6 py-3">Event</th>
+                <th class="px-6 py-3">Tunnel</th>
+                <th class="px-6 py-3">Source</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border-dark/50">
+              <tr class="hover:bg-white/5 transition-colors">
+                <td class="px-6 py-3 font-mono text-xs">Oct 24, 14:32:01</td>
+                <td class="px-6 py-3 text-success">Connection Established</td>
+                <td class="px-6 py-3">API Gateway</td>
+                <td class="px-6 py-3">192.168.1.42</td>
+              </tr>
+              <tr class="hover:bg-white/5 transition-colors">
+                <td class="px-6 py-3 font-mono text-xs">Oct 24, 12:15:44</td>
+                <td class="px-6 py-3 text-red-400">Connection Reset</td>
+                <td class="px-6 py-3">Redis Cache</td>
+                <td class="px-6 py-3">192.168.1.42</td>
+              </tr>
+              <tr class="hover:bg-white/5 transition-colors">
+                <td class="px-6 py-3 font-mono text-xs">Oct 24, 09:10:22</td>
+                <td class="px-6 py-3 text-success">Connection Established</td>
+                <td class="px-6 py-3">React Frontend</td>
+                <td class="px-6 py-3">10.0.0.55</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL OVERLAY -->
+  <div id="modalOverlay"
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <!-- Modal Card -->
+    <div class="w-full max-w-[500px] bg-surface-dark border border-border-dark rounded-xl shadow-2xl flex flex-col">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b border-border-dark">
+        <div>
+          <h2 class="text-lg font-bold text-white">Configure New Tunnel</h2>
+          <p class="text-sm text-text-muted">Set up your localhost exposure</p>
+        </div>
+        <button onclick="closeModal()" class="text-text-muted hover:text-white transition-colors">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <form id="tunnelForm" onsubmit="handleCreateTunnel(event)" class="p-6 space-y-5">
+        <!-- Field 1 -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-text-muted">Project Name</label>
+          <input required id="projectName" type="text" placeholder="e.g. grading-system"
+            class="w-full bg-[#0D0D10] border border-border-dark rounded-lg px-4 py-2.5 text-sm text-white placeholder-text-muted/40 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+          <p class="text-[11px] text-text-muted/60">Used for your subdomain</p>
+        </div>
+
+        <!-- Field 2 -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-text-muted">Local Port</label>
+          <input required id="localPort" type="number" placeholder="3000" value="3000"
+            class="w-full bg-[#0D0D10] border border-border-dark rounded-lg px-4 py-2.5 text-sm text-white placeholder-text-muted/40 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono">
+          <p class="text-[11px] text-text-muted/60">The port your app runs on locally</p>
+        </div>
+
+        <!-- Preview -->
+        <div class="bg-primary/5 border border-primary/20 rounded-lg p-3 flex items-center justify-between">
+          <span class="text-xs font-medium text-primary">Your Public URL</span>
+          <span id="urlPreview" class="text-xs font-mono text-white">project.disal.io</span>
+        </div>
+
+        <!-- Field 3 -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-text-muted">Protocol</label>
+          <select
+            class="w-full bg-[#0D0D10] border border-border-dark rounded-lg px-4 py-2.5 text-sm text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+            <option>HTTP</option>
+            <option>HTTPS</option>
+            <option>TCP</option>
+          </select>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="pt-4 flex justify-end gap-3">
+          <button type="button" onclick="closeModal()"
+            class="px-4 py-2 text-sm font-medium text-text-muted hover:text-white transition-colors">Cancel</button>
+          <button type="submit"
+            class="px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg shadow-primary/20 transition-all">Create
+            Tunnel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalOverlay');
+    const mainContent = document.querySelector('main');
+    const projectNameInput = document.getElementById('projectName');
+    const urlPreview = document.getElementById('urlPreview');
+
+    function openModal() {
+      modal.classList.remove('hidden');
+      mainContent.classList.add('blur-[2px]', 'pointer-events-none');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      mainContent.classList.remove('blur-[2px]', 'pointer-events-none');
+    }
+
+    projectNameInput.addEventListener('input', (e) => {
+      const val = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+      urlPreview.innerText = (val || 'project') + '.disal.io';
+    });
+
+    function handleCreateTunnel(e) {
+      e.preventDefault();
+      const name = projectNameInput.value;
+      const port = document.getElementById('localPort').value;
+
+      // Simulation: Input Validation Node
+      if (!name || !port) {
+        alert('Please fill in all fields (Error Handler Node)');
+        return;
+      }
+
+      // Simulation: Orchestrator -> Deploy Sequence
+      const btn = e.target.querySelector('button[type="submit"]');
+      const originalText = btn.innerText;
+      btn.disabled = true;
+      btn.innerText = 'Provisioning...';
+
+      setTimeout(() => {
+        alert(`Success! Tunnel "${name}" is being orchestrated on port ${port}.`);
+        closeModal();
+        btn.disabled = false;
+        btn.innerText = originalText;
+        // In a real app, we'd add a card to the grid here.
+      }, 1500);
+    }
+  </script>
+</body>
+
+</html>

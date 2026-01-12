@@ -1,0 +1,40 @@
+title Redeployment Flow (Auto vs Manual)
+
+// Actors
+Student (Project Owner) [icon: user, color: green]
+Git Repository [icon: github, color: black]
+
+// Interface
+Dashboard [icon: layout, color: lightpurple]
+
+// System
+Orchestrator (Deployment Service) [icon: cpu, color: blue]
+Webhook Listener [icon: zap, color: orange]
+
+// Logic
+Check Settings [shape: diamond, icon: settings, color: orange]
+Runtime Manager [icon: box, color: blue]
+Notification Service [icon: bell, color: lightpurple]
+
+// Trigger
+Student (Project Owner) > Git Repository: Pushes Code
+Git Repository > Webhook Listener: Sends Webhook Payload (Push Event)
+Webhook Listener > Orchestrator (Deployment Service): Notify New Commit
+
+// Decision Logic
+Orchestrator (Deployment Service) > Check Settings: Check Auto-Redeploy Status
+Check Settings > Runtime Manager: ON (Proceed to Update)
+Check Settings > Notification Service: OFF (Log Event & Wait)
+
+// Execution
+Runtime Manager > Notification Service: Deploy Success/Fail Status
+
+// Manual Trigger
+Student (Project Owner) > Dashboard: Clicks "Deploy Now"
+Dashboard > Orchestrator (Deployment Service): Trigger Manual Override
+Orchestrator (Deployment Service) > Runtime Manager: Force Deploy
+
+// Feedback
+Notification Service > Dashboard: Show Update Result
+
+

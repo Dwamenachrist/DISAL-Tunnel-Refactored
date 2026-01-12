@@ -1,0 +1,74 @@
+<mxfile host="65bd71144e">
+    <diagram name="Authentication Flow" id="auth-flow-diagram">
+        <mxGraphModel dx="456" dy="375" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1000" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="student" value="Student&#10;(Project Owner)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="admin" value="Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="login-page" value="Login Page" style="shape=manualInput;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="160" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dassal-auth" value="DISAL Auth" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="160" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="account-check" value="Account&#10;Valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="150" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="dashboard" value="Student&#10;Dashboard" style="shape=display;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="100" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="admin-dashboard" value="Admin&#10;Dashboard" style="shape=display;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="220" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="error-message" value="Error Message" style="shape=display;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1" value="Opens Application" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="student" target="login-page" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="260" y="110"/>
+                            <mxPoint x="260" y="190"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="c2" value="Opens Application" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="admin" target="login-page" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="260" y="270"/>
+                            <mxPoint x="260" y="190"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="c3" value="Enter Credentials" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="login-page" target="dassal-auth" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="c4" value="Validate &amp; Fetch Role" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="dassal-auth" target="account-check" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c5" value="Success&#10;(Student)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" parent="1" source="account-check" target="dashboard" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c6" value="Success&#10;(Admin)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" parent="1" source="account-check" target="admin-dashboard" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c7" value="Failure" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#FF0000;entryX=0;entryY=0;entryDx=60;entryDy=0;entryPerimeter=0;" parent="1" source="account-check" target="error-message" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c8" value="Retry" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0.5;entryY=1;" parent="1" source="error-message" target="login-page" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="380" y="350"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

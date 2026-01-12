@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-01-10T10:20:00.000Z" agent="Claude" version="21.0.0">
+  <diagram name="Project Creation Flow" id="creation-flow-diagram">
+    <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Actor -->
+        <mxCell id="student" value="Student&#xa;(Project Owner)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="60" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Dashboard -->
+        <mxCell id="dashboard" value="Dashboard" style="shape=display;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="240" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Input Modal -->
+        <mxCell id="create-modal" value="Create Project&#xa;Modal" style="shape=manualInput;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="440" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Decision -->
+        <mxCell id="input-validation" value="Input&#xa;Valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+          <mxGeometry x="640" y="230" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Systems -->
+        <mxCell id="orchestrator" value="Orchestrator&#xa;(Provisioning)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="840" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="runtime-mgr" value="Runtime&#xa;Manager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dns-mgr" value="DNS&#xa;Manager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Feedback UI -->
+        <mxCell id="deploy-status" value="Deployment&#xa;Status" style="shape=display;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="notif-svc" value="Notification&#xa;Service" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="error-handler" value="Error Handler" style="shape=display;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="620" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Connections -->
+        <mxCell id="e1" value="Clicks Create Project" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="student" target="dashboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="Opens Form" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dashboard" target="create-modal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="Enters Details" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0.25;entryY=1;" edge="1" parent="1" source="student" target="create-modal">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="470" />
+              <mxPoint x="470" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="Submit Form" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="create-modal" target="input-validation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="Invalid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#FF0000;" edge="1" parent="1" source="input-validation" target="error-handler">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="Retry" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="error-handler" target="create-modal">
+           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="Valid &amp; Unique" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" edge="1" parent="1" source="input-validation" target="orchestrator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="Clone &amp; Start App" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="orchestrator" target="runtime-mgr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="Register Port" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="runtime-mgr" target="dns-mgr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="Live URL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dns-mgr" target="deploy-status">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="Update State" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="deploy-status" target="notif-svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="List Project" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="notif-svc" target="dashboard">
+          <mxGeometry relative="1" as="geometry">
+             <Array as="points">
+              <mxPoint x="300" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

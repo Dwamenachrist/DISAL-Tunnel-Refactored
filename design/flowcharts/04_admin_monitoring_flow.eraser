@@ -1,0 +1,47 @@
+title Admin Monitoring & Resource Oversight Flow
+
+// Actors
+Admin [icon: shield, color: orange]
+
+// Interface
+Login Page [icon: layout, color: lightblue]
+Admin Dashboard [icon: layout, color: lightpurple]
+Project List [icon: list, color: lightblue]
+Project Details [icon: activity, color: lightblue]
+System Alerts [shape: oval, icon: alert-triangle, color: red]
+
+// System
+DISAL Auth [icon: lock, color: red]
+Orchestrator (Deployment Service) [icon: cpu, color: blue]
+Runtime Manager [icon: box, color: blue]
+Metrics Collector [icon: bar-chart, color: blue]
+
+// Monitoring Logic
+Threshold Check [shape: diamond, icon: gauge, color: orange]
+Action Handler [icon: zap, color: blue]
+
+// 1. Entry & Auth
+Admin > Login Page: Opens Portal
+Login Page > DISAL Auth: Admin Credentials
+DISAL Auth > Admin Dashboard: Success (Admin Role)
+
+// 2. Monitoring Navigation
+Admin Dashboard > Project List: View All Projects
+Project List > Project Details: Select Project
+
+// 3. Metrics Collection (Live)
+Project Details > Metrics Collector: Request Resource Metrics
+Metrics Collector > Threshold Check: Analyze CPU / Memory / Uptime
+
+// 4. Decision Logic
+Threshold Check > Action Handler: Threshold Exceeded
+Threshold Check > Project Details: Normal Usage
+
+// 5. Admin Actions & Feedback
+Action Handler > System Alerts: Generate Warning
+Action Handler > Orchestrator (Deployment Service): Restart / Stop App (Optional)
+
+// 6. Loop Closure
+Orchestrator (Deployment Service) > Runtime Manager: Execute Action
+Runtime Manager > Project Details: Update Status
+

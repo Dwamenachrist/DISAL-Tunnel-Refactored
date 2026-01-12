@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tunnel Status &amp; Health - Disal.io</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6467f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0D0D10", // Deep charcoal background
+                        "surface-dark": "#16161D", // Card background
+                        "border-dark": "#27272A", // Subtle borders
+                        "text-main": "#EDEDEF",
+                        "text-muted": "#9ca3af",
+                        emerald: {
+                            500: "#10B981", // Custom Emerald
+                            600: "#059669",
+                        }
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for the log console */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #16161D;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #333338;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #4B4B52;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-text-main h-screen overflow-hidden flex font-display">
+    <!-- Side Navigation -->
+    <aside class="w-64 bg-[#09090B] border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20">
+        <div class="flex flex-col gap-1 p-4">
+            <div class="flex flex-col mb-8 px-2">
+                <div onclick="window.location.href='Landing Page.html'"
+                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+                    <div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-[16px]">terminal</span>
+                    </div>
+                    <h1 class="text-white text-base font-bold tracking-tight">DISAL</h1>
+                </div>
+                <p class="text-text-muted text-xs font-mono mt-1 pl-8">TUNNEL_MANAGER_V1</p>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+                    href="Tunnel Manager Board.html">
+                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+                        style="font-size: 20px;">grid_view</span>
+                    <span
+                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-md bg-surface-dark border border-border-dark group transition-colors"
+                    href="Student Logs.html">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">terminal</span>
+                    <span class="text-white text-sm font-medium">Logs</span>
+                </a>
+                <div class="h-px bg-border-dark my-2 mx-3"></div>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+                    href="Documentation.html">
+                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+                        style="font-size: 20px;">menu_book</span>
+                    <span
+                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Docs</span>
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-border-dark">
+            <div class="flex items-center gap-3 px-2">
+                <div
+                    class="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 border border-gray-500 flex items-center justify-center text-xs font-bold text-white">
+                    JD</div>
+                <div class="flex flex-col">
+                    <span class="text-white text-sm font-medium">John Doe</span>
+                    <span class="text-text-muted text-xs">student@disal.io</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative">
+        <!-- Header -->
+        <header
+            class="h-16 border-b border-border-dark flex items-center justify-between px-8 bg-[#0D0D10]/80 backdrop-blur-md z-10 sticky top-0">
+            <div class="flex items-center gap-4">
+                <nav class="flex items-center text-sm font-medium text-text-muted">
+                    <a class="hover:text-white transition-colors" href="Landing Page.html">Home</a>
+                    <span class="mx-2 text-border-dark">/</span>
+                    <a class="hover:text-white transition-colors" href="Tunnel Manager Board.html">Dashboard</a>
+                    <span class="mx-2 text-border-dark">/</span>
+                    <span
+                        class="text-white text-surface-dark bg-white/5 px-2 py-0.5 rounded border border-border-dark font-mono">tun-8291-xya</span>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 px-3 py-1.5 bg-surface-dark rounded-full border border-border-dark">
+                    <div
+                        class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                    </div>
+                    <span class="text-xs font-medium text-emerald-500 uppercase tracking-wider">Online</span>
+                </div>
+                <button onclick="window.location.href='Tunnel_Status_Settings.html'"
+                    class="bg-surface-dark hover:bg-border-dark text-text-muted hover:text-white p-2 rounded-lg transition-colors border border-border-dark">
+                    <span class="material-symbols-outlined text-[20px]">settings</span>
+                </button>
+            </div>
+        </header>
+        <!-- Main Content Area -->
+        <main
+            class="flex-1 p-6 lg:p-8 flex flex-col gap-6 max-w-[1600px] mx-auto w-full h-[calc(100vh-64px)] overflow-hidden">
+            <!-- Page Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-3">
+                        Tunnel Status
+                        <span
+                            class="px-2 py-0.5 rounded text-xs font-mono bg-primary/10 text-primary border border-primary/20">v2.4.0</span>
+                    </h1>
+                    <p class="text-text-muted text-sm mt-1">Managed secure tunnel for local development.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button
+                        class="flex items-center gap-2 px-4 h-10 rounded-lg border border-border-dark bg-surface-dark text-white text-sm font-medium hover:bg-[#202028] transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+                        <span>Restart</span>
+                    </button>
+                    <a href="https://gradeapp.disal.io" target="_blank"
+                        class="flex items-center gap-2 px-5 h-10 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold shadow-lg shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5 justify-center">
+                        <span>Visit Live App</span>
+                        <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Split View Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full min-h-0">
+                <!-- Left Pane: Configuration Vault (5 cols) -->
+                <section class="lg:col-span-5 flex flex-col gap-6 h-full overflow-y-auto pr-2 custom-scrollbar">
+                    <!-- Command Card -->
+                    <div class="bg-surface-dark border border-border-dark rounded-lg p-6 flex flex-col gap-5 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">terminal</span>
+                                Configuration Vault
+                            </h2>
+                            <span class="text-xs font-medium text-text-muted uppercase tracking-wider">SSH Access</span>
+                        </div>
+                        <p class="text-sm text-text-muted leading-relaxed">
+                            Run this command in your local terminal to establish the secure tunnel connection
+                            immediately.
+                        </p>
+                        <!-- Code Block -->
+                        <div
+                            class="group relative bg-[#09090b] border border-border-dark rounded-lg p-4 font-mono text-sm shadow-inner">
+                            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="bg-[#1f1f26] hover:bg-primary hover:text-white text-text-muted p-1.5 rounded transition-colors"
+                                    title="Copy to clipboard">
+                                    <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                                </button>
+                            </div>
+                            <div
+                                class="flex gap-3 text-text-muted select-none mb-1 text-xs uppercase tracking-widest opacity-50">
+                                Command
+                            </div>
+                            <code class="text-emerald-400 block break-all">
+                            ssh <span class="text-white">-R</span> <span class="text-primary">80:localhost:3000</span> student@disal.io
+                        </code>
+                        </div>
+                        <div
+                            class="flex items-center gap-2 text-xs text-amber-500 bg-amber-500/10 border border-amber-500/20 p-3 rounded">
+                            <span class="material-symbols-outlined text-[16px]">warning</span>
+                            <span>Ensure your local server is running on port 3000.</span>
+                        </div>
+                    </div>
+                    <!-- Details List -->
+                    <div class="bg-surface-dark border border-border-dark rounded-lg p-0 flex flex-col shadow-sm grow">
+                        <div class="px-6 py-4 border-b border-border-dark flex items-center justify-between">
+                            <h3 class="text-sm font-semibold text-white">Connection Details</h3>
+                            <span class="material-symbols-outlined text-text-muted text-[18px]">info</span>
+                        </div>
+                        <div class="divide-y divide-border-dark">
+                            <div
+                                class="grid grid-cols-3 px-6 py-4 items-center hover:bg-white/[0.02] transition-colors">
+                                <span class="text-sm text-text-muted">Host</span>
+                                <span class="col-span-2 text-sm text-white font-mono text-right">disal.io</span>
+                            </div>
+                            <div
+                                class="grid grid-cols-3 px-6 py-4 items-center hover:bg-white/[0.02] transition-colors">
+                                <span class="text-sm text-text-muted">Remote Port</span>
+                                <span class="col-span-2 text-sm text-white font-mono text-right">80</span>
+                            </div>
+                            <div
+                                class="grid grid-cols-3 px-6 py-4 items-center hover:bg-white/[0.02] transition-colors">
+                                <span class="text-sm text-text-muted">User</span>
+                                <span class="col-span-2 text-sm text-white font-mono text-right">student</span>
+                            </div>
+                            <div
+                                class="grid grid-cols-3 px-6 py-4 items-center hover:bg-white/[0.02] transition-colors">
+                                <span class="text-sm text-text-muted">Region</span>
+                                <span class="col-span-2 text-sm text-white flex items-center justify-end gap-2">
+                                    <span class="material-symbols-outlined text-[16px] text-primary">public</span>
+                                    us-east-1
+                                </span>
+                            </div>
+                            <div
+                                class="grid grid-cols-3 px-6 py-4 items-center hover:bg-white/[0.02] transition-colors">
+                                <span class="text-sm text-text-muted">Encryption</span>
+                                <span
+                                    class="col-span-2 text-sm text-emerald-500 font-medium text-right flex items-center justify-end gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">lock</span>
+                                    AES-256-GCM
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Right Pane: Tunnel Health (7 cols) -->
+                <section
+                    class="lg:col-span-7 flex flex-col h-full min-h-0 bg-surface-dark border border-border-dark rounded-lg shadow-sm overflow-hidden">
+                    <!-- Header -->
+                    <div class="px-4 py-3 border-b border-border-dark flex items-center justify-between bg-[#1f1f26]">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-sm font-semibold text-white">Tunnel Health</h2>
+                            <span
+                                class="flex h-5 items-center rounded-full bg-primary/20 px-2 text-[10px] font-bold text-primary">LIVE</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <span
+                                    class="absolute left-2.5 top-1/2 -translate-y-1/2 text-text-muted material-symbols-outlined text-[16px]">search</span>
+                                <input
+                                    class="bg-[#13131a] border border-border-dark rounded text-xs text-white pl-8 pr-3 py-1.5 focus:ring-1 focus:ring-primary focus:border-primary outline-none w-48 placeholder-gray-600 transition-all"
+                                    placeholder="Filter logs..." type="text" />
+                            </div>
+                            <button class="text-text-muted hover:text-white transition-colors" title="Clear Logs">
+                                <span class="material-symbols-outlined text-[18px]">block</span>
+                            </button>
+                            <button class="text-text-muted hover:text-white transition-colors" title="Download Logs">
+                                <span class="material-symbols-outlined text-[18px]">download</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Log Console Area -->
+                    <div class="flex-1 bg-background-dark overflow-y-auto p-4 font-mono text-xs custom-scrollbar">
+                        <div class="flex flex-col gap-1">
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:14:02]</span>
+                                <span class="text-emerald-500 font-bold shrink-0">SYS</span>
+                                <span class="text-text-main">Tunnel established successfully. Handshake completed in
+                                    45ms.</span>
+                            </div>
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:14:05]</span>
+                                <span class="text-primary font-bold shrink-0">NET</span>
+                                <span class="text-text-muted">Listener bound to <span
+                                        class="text-white">https://tun-8291-xya.disal.io</span></span>
+                            </div>
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:15:30]</span>
+                                <span class="text-blue-400 font-bold shrink-0">HTTP</span>
+                                <span class="text-text-main">GET / <span class="text-gray-500">→</span>
+                                    localhost:3000</span>
+                            </div>
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:15:31]</span>
+                                <span class="text-emerald-500 font-bold shrink-0">200</span>
+                                <span class="text-text-main">OK <span class="text-gray-500">(24ms)</span> - 1.4kb
+                                    sent</span>
+                            </div>
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:16:12]</span>
+                                <span class="text-blue-400 font-bold shrink-0">HTTP</span>
+                                <span class="text-text-main">GET /api/status <span class="text-gray-500">→</span>
+                                    localhost:3000</span>
+                            </div>
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:16:12]</span>
+                                <span class="text-emerald-500 font-bold shrink-0">200</span>
+                                <span class="text-text-main">OK <span class="text-gray-500">(12ms)</span> - 420b
+                                    sent</span>
+                            </div>
+                            <!-- Log Entry Warning -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:18:45]</span>
+                                <span class="text-amber-500 font-bold shrink-0">WARN</span>
+                                <span class="text-text-main">High latency detected on upstream (150ms)</span>
+                            </div>
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:19:01]</span>
+                                <span class="text-blue-400 font-bold shrink-0">HTTP</span>
+                                <span class="text-text-main">POST /auth/login <span class="text-gray-500">→</span>
+                                    localhost:3000</span>
+                            </div>
+                            <!-- Log Entry -->
+                            <div class="flex gap-3 py-0.5 hover:bg-white/[0.02]">
+                                <span class="text-gray-500 shrink-0 select-none w-20">[10:19:02]</span>
+                                <span class="text-emerald-500 font-bold shrink-0">201</span>
+                                <span class="text-text-main">Created <span class="text-gray-500">(108ms)</span></span>
+                            </div>
+                            <!-- Blinking Cursor Line -->
+                            <div class="flex gap-3 py-0.5 mt-2 animate-pulse">
+                                <span class="text-gray-700 w-20 select-none">...</span>
+                                <span class="w-2 h-4 bg-primary block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer Metrics Bar -->
+                    <div
+                        class="bg-[#1f1f26] border-t border-border-dark px-4 py-2 flex flex-wrap gap-6 text-xs text-text-muted font-medium shrink-0">
+                        <div class="flex items-center gap-2" title="Server Latency">
+                            <span class="material-symbols-outlined text-[14px]">speed</span>
+                            <span class="text-white">&lt; 20ms</span>
+                        </div>
+                        <div class="w-px h-4 bg-border-dark"></div>
+                        <div class="flex items-center gap-2" title="Data Transferred">
+                            <span class="material-symbols-outlined text-[14px]">swap_vert</span>
+                            <span class="text-white">1.2 MB</span>
+                        </div>
+                        <div class="w-px h-4 bg-border-dark"></div>
+                        <div class="flex items-center gap-2" title="Current Uptime">
+                            <span class="material-symbols-outlined text-[14px]">schedule</span>
+                            <span class="text-white">4h 23m</span>
+                        </div>
+                        <div class="ml-auto flex items-center gap-2 text-emerald-500">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            Operational
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+</body>
+
+</html>

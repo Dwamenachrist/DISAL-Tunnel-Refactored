@@ -1,0 +1,82 @@
+<mxfile host="65bd71144e">
+    <diagram name="Redeployment Flow" id="redeploy-flow-diagram">
+        <mxGraphModel dx="709" dy="559" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="600" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="student" value="Student" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="200" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="git-repo" value="Git&#10;Repository" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#24292e;fontColor=#ffffff;strokeColor=#1b1f23;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="60" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="webhook" value="Webhook&#10;Listener" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
+                    <mxGeometry x="467" y="70" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="orchestrator" value="Orchestrator&#10;(Deployment Svc)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="730" y="70" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="check-settings" value="Auto&#10;Redeploy?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
+                    <mxGeometry x="963" y="60" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="runtime" value="Runtime&#10;Manager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" parent="1" vertex="1">
+                    <mxGeometry x="1123" y="70" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="notif-svc" value="Notification&#10;Service" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="1" vertex="1">
+                    <mxGeometry x="1330" y="70" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" value="Pushes Code" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="student" target="git-repo" edge="1">
+                    <mxGeometry x="-0.5455" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="100" y="100"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e2" value="Sends Webhook" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="git-repo" target="webhook" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" value="Notify Commit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="webhook" target="orchestrator" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="640" y="120"/>
+                            <mxPoint x="640" y="120"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e4" value="Check Config" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="orchestrator" target="check-settings" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" value="ON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" parent="1" source="check-settings" target="runtime" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" value="OFF" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#FF0000;" parent="1" source="check-settings" target="notif-svc" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1003" y="40"/>
+                            <mxPoint x="1380" y="40"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e7" value="Deploy Status" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="runtime" target="notif-svc" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e8" value="Clicks Deploy Now" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" parent="1" source="student" target="orchestrator" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="790" y="230"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e9" value="Force Deploy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00FF00;" parent="1" source="orchestrator" target="runtime" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="820" y="230"/>
+                            <mxPoint x="1173" y="230"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
