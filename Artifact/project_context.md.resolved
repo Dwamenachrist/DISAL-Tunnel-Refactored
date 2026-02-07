@@ -1,0 +1,57 @@
+# DISAL Hosting Platform: Flowchart-Accurate Context (10/10)
+
+**Objective:** Provide a managed hosting platform (Control Plane) for DISAL members to deploy projects on a shared server safely.
+
+---
+
+## 1. Core Rule & Validation Gate (Non-Negotiable)
+> [!IMPORTANT]
+> **Admin must provision a member’s port FIRST.**
+> The system strictly enforces a "Vending Machine" logic. If a member attempts to deploy without a pre-provisioned port, the **Input & Port Valid?** check fails and the deployment stops immediately.
+
+---
+
+## 2. Routing & Access Strategy
+*   **Primary Mode (Current):** **TCP Port Routing**. Each member is assigned a unique port (e.g., `9000–9999`).
+*   **Access URL:** `http://<Server_IP>:<Member_Port>`
+*   **Future Mode:** **Subdomain Routing**. The architecture is designed to support subdomains later, but it is **not** the current requirement.
+
+---
+
+## 3. Provisioning Flow (Admin "Vending Machine")
+1.  **Selection:** Admin uses **Port Allocation Manager** to reserve a port.
+2.  **Entitlement:** System updates the source of truth—the **TOML Config File**—with the mapping `{member_id -> port}`.
+3.  **Activation:** System triggers **Service Restart / Reload** specifically for the proxy layer (**FRP**) so it applies the new port bindings from the config. (Application-specific restarts are handled by the Runtime Manager).
+4.  **Dashboard:** Member is now "entitled"; their dashboard displays the assigned port.
+
+---
+
+## 4. Member Deployment Flow (Control Plane Logic)
+1.  **Event:** Member pushes code to Git. Webhook triggers **Repo Update Event**.
+2.  **Check:** **Auto Redeploy?**
+    *   **ON:** Orchestrator redeploys automatically.
+    *   **OFF:** Notification Service alerts member: *"Update detected"* -> Member clicks **Manual Redeploy**.
+3.  **Handoff:** Orchestrator -> **Runtime Manager**.
+4.  **Execution (Contract):** Runtime Manager runs the member's `deploy.sh`.
+    *   **Constraint:** The application **must** bind to the assigned port provided by the system.
+5.  **Output:** **Access Manager** generates the final public URL (port-based).
+
+---
+
+## 5. Monitoring & Safety
+*   **Collector:** Metrics (CPU/RAM/Storage/Health) are gathered from the runtime processes.
+*   **Intervention:** If limits are violated, the **Action Handler** interrupts the process (Stop/Restart/Kill) and sends **System Alerts** to the Admin.
+*   **Lifecycle:** Admins maintain the system by **reclaiming ports**, **removing FRP mappings**, and **disabling accounts**.
+
+---
+
+## 6. Roles (Flowchart & Control Plane Alignment)
+| Role | Responsibility |
+| :--- | :--- |
+| **Orchestrator** | Decides deployment type (Initial vs. Redeploy) and coordinates the lifecycle. |
+| **Runtime Manager** | Executes the `deploy.sh` script and manages active processes. |
+| **Access Manager** | **Logic Module:** Generates the final public access URL (IP:Port or Subdomain) based on current configuration. |
+| **Notification Service** | Handles status updates and "Update Detected" alerts (when Auto-Redeploy is OFF). |
+| **Port Allocation Manager** | Reserves/Assigns ports and updates the system configuration. |
+| **TOML Config File** | Source of truth for port entitlements and routing bindings. |
+| **Service Restart** | Applies configuration changes to the **FRP** proxy service. |

@@ -1,0 +1,83 @@
+/* 
+   THEME LOCK: 
+   primary #6467f2 
+   bg-dark #0D0D10 
+   surface-dark #16161D 
+   border-dark #2D2D35 
+   text-dim #9293c9 
+   grid 40px 
+   radius 0.75rem (12px)
+*/
+
+:root {
+    /* --- Light Mode (Default) --- */
+    /* Core Backgrounds */
+    --bg-main: #FAFAFA;       /* Zinc-50 */
+    --bg-surface-1: #FFFFFF;  /* White */
+    --bg-surface-2: #F4F4F5;  /* Zinc-100 */
+    
+    /* Core Borders */
+    --border-subtle: #E4E4E7; /* Zinc-200 */
+    --border-strong: #D4D4D8; /* Zinc-300 */
+    
+    /* Core Text */
+    --text-primary: #09090B;   /* Zinc-950 (Near Black) */
+    --text-secondary: #52525B; /* Zinc-600 */
+    --text-muted: #71717A;     /* Zinc-500 */
+    
+    /* Legacy/Alias Mappings for Compatibility */
+    --color-bg-base: #FAFAFA;
+    --color-text-main: #09090B;
+    --grid-line-color: rgba(9, 9, 11, 0.05); /* Very subtle dark grid for light mode */
+}
+
+/* --- Dark Mode (Model B Tokens) --- */
+[data-theme="dark"],
+.dark {
+    /* Core Backgrounds */
+    --bg-main: #09090B;       /* Zinc-950 */
+    --bg-surface-1: #18181B;  /* Zinc-900 */
+    --bg-surface-2: #27272A;  /* Zinc-800 */
+    
+    /* Core Borders */
+    --border-subtle: #3F3F46; /* Zinc-700 */
+    --border-strong: #52525B; /* Zinc-600 */
+    
+    /* Core Text */
+    --text-primary: #FAFAFA;   /* Zinc-50 */
+    --text-secondary: #D4D4D8; /* Zinc-300 */
+    --text-muted: #A1A1AA;     /* Zinc-400 */
+    
+    /* Legacy/Alias Mappings */
+    --color-bg-base: #09090B;
+    --color-text-main: #FAFAFA;
+    --grid-line-color: rgba(255, 255, 255, 0.08); /* Subtle white grid for dark mode */
+}
+
+/* Base Utilities using Variables */
+body {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-main);
+}
+
+/* Grid Pattern (Strict 40px + Mask + Variable Color) */
+.bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* Standard Utils */
+.font-display {
+    font-family: var(--font-display);
+}
+
+.font-mono {
+    font-family: var(--font-mono);
+}

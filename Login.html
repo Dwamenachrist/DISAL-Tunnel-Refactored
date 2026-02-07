@@ -4,236 +4,205 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Login - DISAL Tunnel</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
-    <!-- Material Symbols -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <!-- Tailwind CSS -->
+    <title>Login - DISAL Hosting</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Theme Config -->
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#6366F1", // Indigo
-                        "background-dark": "#0D0D10", // Deep Void
-                        "surface-dark": "#16161D", // Dark Carbon
-                        "surface-border": "#27272A",
-                        "text-main": "#EDEDEF",
-                        "text-muted": "#71717A",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"],
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.5rem",
-                        "lg": "0.75rem",
-                        "xl": "1rem",
-                        "full": "9999px"
-                    },
-                },
-            },
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <script>
+        function togglePassword() {
+            const pwd = document.getElementById('password');
+            const icon = document.getElementById('eye-icon');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+                icon.innerText = 'visibility_off';
+            } else {
+                pwd.type = 'password';
+                icon.innerText = 'visibility';
+            }
+        }
+
+        // Simple client-side validation mirroring the "Account Valid?" node
+        function validateCredentials(studentId, password) {
+            const idPattern = /^[0-9]{8}$/; // e.g. 21005678
+            if (!idPattern.test(studentId)) return false;
+            if (!password) return false;
+            return true;
+        }
+
+        function showAuthError(message) {
+            const banner = document.getElementById('auth-error');
+            const text = document.getElementById('auth-error-text');
+            if (text) {
+                text.textContent = message || 'Invalid credentials. Please verify your Student ID and password.';
+            }
+            if (banner) {
+                banner.classList.remove('hidden');
+            }
+        }
+
+        function hideAuthError() {
+            const banner = document.getElementById('auth-error');
+            if (banner) banner.classList.add('hidden');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            hideAuthError();
+
+            const role = document.getElementById('role').value;
+            const studentId = document.getElementById('studentId').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Button loading state
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'Authenticating...';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                const isValid = validateCredentials(studentId, password);
+
+                if (!isValid) {
+                    // NO (Failure) -> Error Message + Retry
+                    showAuthError('Account not found or invalid credentials. Please try again or contact your administrator.');
+                    btn.innerText = originalText;
+                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    return;
+                }
+
+                // YES (Student/Admin)
+                localStorage.setItem('userRole', role);
+
+                if (role === 'admin') {
+                    window.location.href = 'Admin Dashboard.html';
+                } else {
+                    const hasDeployment = localStorage.getItem('hasDeployment') === 'true';
+                    if (hasDeployment) {
+                        window.location.href = 'Tunnel Manager Board.html';
+                    } else {
+                        window.location.href = 'Empty Dashboard.html';
+                    }
+                }
+            }, 600);
         }
     </script>
     <style>
-        .bg-mesh {
-            background-color: #0D0D10;
-            background-image:
-                radial-gradient(at 50% 50%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.02) 0px, transparent 50%);
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(45, 45, 53, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(45, 45, 53, 0.15) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
         }
     </style>
 </head>
 
 <body
-    class="bg-background-dark text-text-main font-display antialiased flex flex-col h-screen overflow-hidden selection:bg-primary/30 selection:text-white bg-mesh">
+    class="bg-background-main font-display text-text-primary overflow-hidden antialiased selection:bg-primary selection:text-text-on-primary flex h-screen items-center justify-center relative">
 
-    <!-- Top Status Bar -->
-    <div class="absolute top-0 w-full p-6 flex items-center justify-between text-[10px] sm:text-xs">
-        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-            <div class="size-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-            <span class="text-text-muted uppercase tracking-widest font-semibold font-mono">System Operational</span>
+    <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div>
+
+    <div class="w-full max-w-md p-6 z-10">
+        <!-- Logo -->
+
+        <a class="flex justify-center mb-8 cursor-pointer hover:opacity-90 transition-opacity" href="index.html">
+            <div class="flex items-center gap-2">
+                <div class="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">dns</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-text-primary">DISAL Hosting</span>
+            </div>
+        </a>
+
+        <!-- Card -->
+        <div class="bg-surface-1 border border-border-subtle rounded-2xl shadow-strong p-8 transition-all">
+            <h1 id="form-title" class="text-2xl font-bold text-center mb-2 text-text-primary">Welcome Back</h1>
+            <p id="form-subtitle" class="text-text-secondary text-center text-sm mb-1">Sign in to manage your
+                deployments</p>
+            <p class="text-text-muted text-center text-xs mb-6">Sign in with your organization credentials.</p>
+
+            <!-- Error Message (maps to Error Message node in master flow) -->
+            <div id="auth-error"
+                class="hidden mb-4 rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-xs text-error flex items-start gap-2">
+                <span class="material-symbols-outlined text-[18px] mt-[1px]">error</span>
+                <p id="auth-error-text">
+                    Invalid credentials. Please verify your Student ID and password, then retry.
+                </p>
+            </div>
+
+            <form onsubmit="handleLogin(event)" class="flex flex-col gap-5">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1" for="studentId">Student
+                        ID</label>
+                    <input type="text" id="studentId" required
+                        class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-text-muted font-mono"
+                        placeholder="e.g. 21005678">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1"
+                        for="password">Password</label>
+                    <div class="relative">
+                        <input type="password" id="password" required
+                            class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-text-muted pr-10"
+                            placeholder="">
+                        <button type="button" onclick="togglePassword()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors focus:outline-none">
+                            <span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1" for="role">Role</label>
+                    <div class="relative">
+                        <select id="role"
+                            class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer">
+                            <option value="student">Student</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                        <span
+                            class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none"
+                            style="font-size: 20px;">expand_more</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs mt-1 px-1">
+                    <label
+                        class="flex items-center gap-2 text-text-secondary cursor-pointer hover:text-text-primary transition-colors">
+                        <input type="checkbox"
+                            class="rounded border-border-subtle bg-surface-2 text-primary focus:ring-offset-0 focus:ring-primary size-4">
+                        Remember me
+                    </label>
+                </div>
+
+                <button type="submit" id="submit-btn"
+                    class="mt-2 w-full bg-primary hover:bg-primary-hover text-text-on-primary font-bold h-12 rounded-xl transition-all shadow-glow hover:scale-[1.01] active:scale-[0.99]">
+                    Sign In
+                </button>
+
+                <div class="text-center text-sm mt-4 text-text-secondary">
+                    <span id="toggle-text">Don't have access?</span>
+                    <a href="mailto:admin@disal.com"
+                        class="text-primary hover:text-text-primary cursor-pointer ml-1 font-medium transition-colors">Contact
+                        your administrator</a>
+                </div>
+            </form>
         </div>
-        <div class="font-mono text-text-muted opacity-40">
-            v2.4.0 stable
-        </div>
+
+        <p class="text-center text-xs text-gray-600 mt-8">
+            &copy; 2026 DISAL Hosting. All rights reserved.
+        </p>
     </div>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col items-center justify-center p-4">
-
-        <!-- Auth Card -->
-        <div class="w-full max-w-[420px] bg-surface-dark border border-surface-border rounded-lg shadow-2xl shadow-black p-8 sm:p-10 transition-all duration-300"
-            id="authCard">
-
-            <!-- Branding -->
-            <div class="flex flex-col items-center mb-8 select-none">
-                <div class="size-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4 transition-colors duration-300"
-                    id="logoBg">
-                    <span class="material-symbols-outlined text-primary text-[28px]" id="logoIcon">dataset</span>
-                </div>
-                <h1 class="text-xl font-black tracking-[0.2em] text-white flex items-center gap-2">
-                    DISAL <span class="text-text-muted font-normal">INFRA</span>
-                </h1>
-                <p class="text-xs text-text-muted mt-2 uppercase tracking-widest font-bold" id="formTitle">Student
-                    Access</p>
-            </div>
-
-            <!-- Login Form -->
-            <form class="space-y-6" onsubmit="handleLogin(event)">
-                <!-- Username -->
-                <div>
-                    <label class="block text-[10px] font-bold text-text-muted uppercase tracking-[0.1em] mb-2"
-                        for="username" id="labelUsername">
-                        Student Identifier
-                    </label>
-                    <div class="relative group">
-                        <input id="username"
-                            class="w-full bg-background-dark border border-surface-border rounded-md px-4 py-3 text-sm font-mono text-white placeholder-text-muted/30 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
-                            type="text" placeholder="2023-XX-XXXX" required />
-                        <span
-                            class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted/40 text-[18px]"
-                            id="iconUsername">badge</span>
-                    </div>
-                </div>
-
-                <!-- Access Token / Password -->
-                <div>
-                    <label class="block text-[10px] font-bold text-text-muted uppercase tracking-[0.1em] mb-2"
-                        for="password" id="labelPassword">
-                        Private Access Token
-                    </label>
-                    <div class="relative group">
-                        <input id="password"
-                            class="w-full bg-background-dark border border-surface-border rounded-md px-4 py-3 text-sm font-mono text-white placeholder-text-muted/30 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
-                            type="password" placeholder="••••••••••••••••" required />
-                        <span
-                            class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted/40 text-[18px]">key</span>
-                    </div>
-                </div>
-
-                <!-- Submit -->
-                <button type="submit"
-                    class="w-full h-12 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold text-sm rounded-md shadow-lg shadow-primary/20 transition-all active:scale-[0.98] mt-2 group">
-                    <span id="btnText">Enter Dashboard</span>
-                    <span
-                        class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </button>
-            </form>
-
-            <!-- Toggle Admin Mode -->
-            <div class="mt-8 pt-6 border-t border-surface-border flex justify-between items-center">
-                <a href="#"
-                    class="text-xs text-text-muted hover:text-white transition-colors underline underline-offset-4 decoration-white/10">
-                    Trouble signing in?
-                </a>
-
-                <button onclick="toggleAdminMode()"
-                    class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-text-muted hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined text-[14px]">admin_panel_settings</span>
-                    <span id="toggleText">Admin Login</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Footer Info -->
-        <div class="mt-10 flex flex-col items-center gap-4 text-center">
-            <p class="text-[10px] font-medium text-text-muted uppercase tracking-widest">
-                Final Year Project Infrastructure • Managed by DISAL
-            </p>
-        </div>
-    </main>
-
-    <script>
-        let isAdminMode = false;
-
-        function toggleAdminMode() {
-            isAdminMode = !isAdminMode;
-
-            const formTitle = document.getElementById('formTitle');
-            const labelUsername = document.getElementById('labelUsername');
-            const labelPassword = document.getElementById('labelPassword');
-            const iconUsername = document.getElementById('iconUsername');
-            const btnText = document.getElementById('btnText');
-            const toggleText = document.getElementById('toggleText');
-            const usernameInput = document.getElementById('username');
-            const logoBg = document.getElementById('logoBg');
-            const logoIcon = document.getElementById('logoIcon');
-
-            if (isAdminMode) {
-                // Switch to Admin UI
-                formTitle.innerText = "Administrative Access";
-                formTitle.classList.add('text-primary');
-
-                labelUsername.innerText = "Admin Username";
-                iconUsername.innerText = "person";
-                usernameInput.placeholder = "admin";
-
-                labelPassword.innerText = "Password";
-
-                btnText.innerText = "Authenticate Admin";
-                toggleText.innerText = "Student Login";
-
-                logoBg.classList.add('bg-primary/10', 'border-primary/20');
-                logoIcon.innerText = "shield_person";
-            } else {
-                // Switch to Student UI
-                formTitle.innerText = "Student Access";
-                formTitle.classList.remove('text-primary');
-
-                labelUsername.innerText = "Student Identifier";
-                iconUsername.innerText = "badge";
-                usernameInput.placeholder = "2023-XX-XXXX";
-
-                labelPassword.innerText = "Private Access Token";
-
-                btnText.innerText = "Enter Dashboard";
-                toggleText.innerText = "Admin Login";
-
-                logoBg.classList.remove('bg-primary/10', 'border-primary/20');
-                logoIcon.innerText = "dataset";
-            }
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Simulation: Failure path for flowchart "Account Check -> Failure"
-            if (password === 'error') {
-                window.location.href = 'Connection Error.html';
-                return;
-            }
-
-            if (isAdminMode) {
-                if (username === 'admin' && password === 'admin123') {
-                    localStorage.setItem('userRole', 'admin');
-                    localStorage.setItem('userName', 'Admin User');
-                    window.location.href = 'Admin Dashboard.html';
-                } else {
-                    alert('Invalid Admin Credentials (Try: admin / admin123). Use password "error" to see flowchart failure state.');
-                }
-            } else {
-                if (password.length > 0) {
-                    localStorage.setItem('userRole', 'student');
-                    localStorage.setItem('userName', 'Student User');
-                    window.location.href = 'Tunnel Manager Board.html';
-                } else {
-                    alert('Please enter your access token. Use password "error" to see flowchart failure state.');
-                }
-            }
-        }
-    </script>
 </body>
 
 </html>

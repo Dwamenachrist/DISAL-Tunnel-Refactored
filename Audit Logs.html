@@ -1,128 +1,108 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en">
+<!-- THEME LOCK: Verified Dark Mode Tokens via CSS Variables -->
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Audit Logs - Admin</title>
+    <title>Audit Logs - Admin | DISAL Hosting</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="assets/css/tokens.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#6366F1", // Indigo
-                        "background-light": "#f6f6f8",
-                        "background-dark": "#0D0D10",
-                        "surface-dark": "#16161D",
-                        "border-dark": "#27272A",
-                        "text-main": "#EDEDEF",
-                        "text-muted": "#9BA1A6",
-                        "success": "#10B981",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"],
-                    },
-                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
-                },
-            },
-        }
-    </script>
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-text-main h-screen overflow-hidden flex font-display">
+<body
+    class="bg-background-dark text-text-main h-screen overflow-hidden flex font-display antialiased transition-colors duration-200">
+
     <!-- Side Navigation -->
-    <aside class="w-64 bg-[#09090B] border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20">
-        <div class="flex flex-col gap-1 p-4">
-            <div class="flex flex-col mb-8 px-2">
-                <div onclick="window.location.href='Landing Page.html'"
+    <aside
+        class="dark hidden md:flex w-64 bg-sidebar border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <div class="flex flex-col mb-8">
+                <div onclick="window.location.href='index.html'"
                     class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-[16px]">terminal</span>
+                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
                     </div>
-                    <h1 class="text-white text-base font-bold tracking-tight">DISAL</h1>
+                    <span class="text-lg font-bold tracking-tight text-text-main">DISAL</span>
                 </div>
-                <p class="text-text-muted text-xs font-mono mt-1 pl-8">INFRA_CONTROLLER_V2</p>
+                <p class="text-text-dim text-xs mt-2">INFRA_CONTROLLER_V2</p>
             </div>
             <nav class="flex flex-col gap-1">
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
                     href="Admin Dashboard.html">
-                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
                         style="font-size: 20px;">grid_view</span>
                     <span
-                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Overview</span>
+                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Overview</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
                     href="Admin Active Tunnels.html">
-                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
+                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
                         style="font-size: 20px;">cloud_sync</span>
-                    <span class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Active
-                        Tunnels</span>
+                    <span class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Project
+                        List</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
-                    href="Edge Nodes.html">
-                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
-                        style="font-size: 20px;">dns</span>
-                    <span class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Edge
-                        Nodes</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md bg-surface-dark border border-border-dark group transition-colors"
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-dark border-l-2 border-primary group transition-colors"
                     href="Audit Logs.html">
                     <span class="material-symbols-outlined text-primary" style="font-size: 20px;">article</span>
-                    <span class="text-white text-sm font-medium">Audit Logs</span>
+                    <span class="text-text-main text-sm font-medium">System Alerts</span>
                 </a>
-                <div class="h-px bg-border-dark my-2 mx-3"></div>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
-                    href="Security Settings.html">
-                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
-                        style="font-size: 20px;">shield</span>
+                <div class="h-px bg-border-dark my-4"></div>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
+                    href="Documentation.html">
+                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
+                        style="font-size: 20px;">menu_book</span>
                     <span
-                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Security</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
-                        style="font-size: 20px;">settings</span>
-                    <span
-                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Settings</span>
+                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Docs</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-border-dark">
+        <div class="p-4 border-t border-border-dark flex items-center justify-between">
             <div class="flex items-center gap-3 px-2">
                 <div
-                    class="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 border border-gray-500 flex items-center justify-center text-xs font-bold text-white">
+                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-text-dim">
                     AD</div>
                 <div class="flex flex-col">
-                    <span class="text-white text-sm font-medium">Admin User</span>
-                    <span class="text-text-muted text-xs">admin@disal.io</span>
+                    <span class="text-text-main text-sm font-medium">Admin User</span>
+                    <span class="text-text-dim text-xs">admin@disal.io</span>
                 </div>
             </div>
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()"
+                class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
+                title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+            </button>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative">
+    <main
+        class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative transition-colors duration-200">
+        <!-- Strict Grid Pattern -->
+        <!-- Strict Grid Pattern: Removed -->
+        <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
+
         <!-- Header -->
         <header
-            class="h-16 border-b border-border-dark flex items-center justify-between px-8 bg-[#0D0D10]/80 backdrop-blur-md z-10 sticky top-0">
+            class="h-16 border-b border-border-dark flex items-center justify-between px-4 md:px-8 bg-background-dark/80 backdrop-blur-md z-10 sticky top-0 transition-colors duration-200">
             <div class="flex items-center gap-4">
-                <div class="flex items-center text-sm font-medium text-text-muted">
-                    <span class="text-white">Audit Logs</span>
+                <div class="flex items-center text-sm font-medium text-text-dim">
+                    <span class="text-text-main">System Alerts</span>
                 </div>
             </div>
             <div class="flex items-center gap-4">
                 <button
-                    class="flex items-center gap-2 bg-surface-dark hover:bg-white/5 border border-border-dark text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                    class="flex items-center gap-2 bg-surface-dark hover:bg-background-dark border border-border-dark text-text-main px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
                     <span class="material-symbols-outlined text-[18px]">download</span>
                     Export CSV
                 </button>
@@ -130,84 +110,90 @@
         </header>
 
         <!-- Content -->
-        <div class="flex-1 overflow-y-auto p-8 scrollbar-hide">
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide relative z-10">
 
             <!-- Filters -->
             <div class="flex gap-4 mb-6">
                 <div class="relative grow max-w-sm">
                     <span
-                        class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted text-[18px]">search</span>
+                        class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-dim text-[18px]">search</span>
                     <input type="text" placeholder="Search event, user, or IP..."
-                        class="w-full bg-surface-dark border border-border-dark rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-text-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                        class="w-full bg-surface-dark border border-border-dark rounded-default pl-10 pr-4 py-2.5 text-sm text-text-main placeholder-text-dim/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
                 </div>
                 <select
-                    class="bg-surface-dark border border-border-dark rounded-lg px-4 py-2 text-sm text-white outline-none">
+                    class="bg-surface-dark border border-border-dark rounded-default px-4 py-2.5 text-sm text-text-main outline-none focus:border-primary focus:ring-1 focus:ring-primary">
                     <option>All Events</option>
-                    <option>Tunnel Creation</option>
+                    <option>App Deployment</option>
                     <option>Security Alert</option>
                     <option>User Login</option>
                 </select>
             </div>
 
             <!-- Table -->
-            <div class="bg-surface-dark border border-border-dark rounded-lg overflow-hidden">
-                <table class="w-full text-left text-sm text-text-muted">
-                    <thead class="bg-[#111116] text-xs uppercase font-medium border-b border-border-dark">
+            <div
+                class="bg-surface-dark border border-border-dark rounded-default overflow-hidden shadow-lg shadow-black/20">
+                <table class="w-full text-left text-sm text-text-dim">
+                    <thead class="bg-inset text-xs uppercase font-medium border-b border-border-dark">
                         <tr>
-                            <th class="px-6 py-3 font-semibold text-white">Timestamp</th>
-                            <th class="px-6 py-3 font-semibold text-white">Event Type</th>
-                            <th class="px-6 py-3 font-semibold text-white">Severity</th>
-                            <th class="px-6 py-3 font-semibold text-white">User</th>
-                            <th class="px-6 py-3 font-semibold text-white">Details</th>
+                            <th class="px-6 py-4 font-semibold text-text-main">Timestamp</th>
+                            <th class="px-6 py-4 font-semibold text-text-main">Event Type</th>
+                            <th class="px-6 py-4 font-semibold text-text-main">Severity</th>
+                            <th class="px-6 py-4 font-semibold text-text-main">User</th>
+                            <th class="px-6 py-4 font-semibold text-text-main">Details</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-border-dark/50">
+                    <tbody class="divide-y divide-border-dark">
                         <!-- Row 1 -->
-                        <tr class="hover:bg-white/[0.02] transition-colors">
+                        <tr class="hover:bg-text-main/[0.02] even:bg-white/[0.02] transition-colors">
                             <td class="px-6 py-4 font-mono text-xs">2023-12-25 14:30:22</td>
-                            <td class="px-6 py-4 text-white font-medium">TUNNEL_CREATED</td>
-                            <td class="px-6 py-4"><span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">INFO</span>
+                            <td class="px-6 py-4 text-text-main font-medium">APP_DEPLOYED</td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-success/10 text-success border border-success/20">INFO</span>
                             </td>
                             <td class="px-6 py-4">student_99</td>
-                            <td class="px-6 py-4 font-mono text-xs">Created tunnel: grade-app (port 3000)</td>
+                            <td class="px-6 py-4 font-mono text-xs">Deployed: grading-system-v1 (port 3000)</td>
                         </tr>
                         <!-- Row 2 -->
-                        <tr class="hover:bg-white/[0.02] transition-colors">
+                        <tr class="hover:bg-text-main/[0.02] transition-colors">
                             <td class="px-6 py-4 font-mono text-xs">2023-12-25 14:28:10</td>
-                            <td class="px-6 py-4 text-white font-medium">AUTH_FAILURE</td>
-                            <td class="px-6 py-4"><span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">WARN</span>
+                            <td class="px-6 py-4 text-text-main font-medium">AUTH_FAILURE</td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-warning/10 text-warning border border-warning/20">WARN</span>
                             </td>
-                            <td class="px-6 py-4">unknown_jp</td>
+                            <td class="px-6 py-4">unknown_user</td>
                             <td class="px-6 py-4 font-mono text-xs">Invalid token from IP 192.168.1.105</td>
                         </tr>
                         <!-- Row 3 -->
-                        <tr class="hover:bg-white/[0.02] transition-colors">
+                        <tr class="hover:bg-text-main/[0.02] transition-colors">
                             <td class="px-6 py-4 font-mono text-xs">2023-12-25 12:10:05</td>
-                            <td class="px-6 py-4 text-white font-medium">SYSTEM_UPDATE</td>
-                            <td class="px-6 py-4"><span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/10 text-blue-500 border border-blue-500/20">SYSTEM</span>
+                            <td class="px-6 py-4 text-text-main font-medium">SYSTEM_UPDATE</td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-info/10 text-info border border-info/20">SYSTEM</span>
                             </td>
                             <td class="px-6 py-4">admin_root</td>
                             <td class="px-6 py-4 font-mono text-xs">Edge Node US-EAST-1 patched</td>
                         </tr>
                         <!-- Row 4 -->
-                        <tr class="hover:bg-white/[0.02] transition-colors">
+                        <tr class="hover:bg-text-main/[0.02] transition-colors">
                             <td class="px-6 py-4 font-mono text-xs">2023-12-25 09:45:00</td>
-                            <td class="px-6 py-4 text-white font-medium">TUNNEL_DESTROYED</td>
-                            <td class="px-6 py-4"><span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">INFO</span>
+                            <td class="px-6 py-4 text-text-main font-medium">APP_DESTROYED</td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-success/10 text-success border border-success/20">INFO</span>
                             </td>
                             <td class="px-6 py-4">student_42</td>
                             <td class="px-6 py-4 font-mono text-xs">Teardown requested via Dashboard</td>
                         </tr>
                         <!-- Row 5 -->
-                        <tr class="hover:bg-white/[0.02] transition-colors">
+                        <tr class="hover:bg-text-main/[0.02] transition-colors">
                             <td class="px-6 py-4 font-mono text-xs">2023-12-24 23:55:12</td>
-                            <td class="px-6 py-4 text-white font-medium">RATE_LIMIT_EXCEEDED</td>
-                            <td class="px-6 py-4"><span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/10 text-red-500 border border-red-500/20">CRITICAL</span>
+                            <td class="px-6 py-4 text-text-main font-medium">RATE_LIMIT_EXCEEDED</td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-error/10 text-error border border-error/20">CRITICAL</span>
                             </td>
                             <td class="px-6 py-4">bot_net_scan</td>
                             <td class="px-6 py-4 font-mono text-xs">Blocked 5000 requests/sec from 10.0.0.5</td>
@@ -217,18 +203,20 @@
             </div>
 
             <!-- Pagination -->
-            <div class="flex items-center justify-between mt-4 text-xs text-text-muted">
+            <div class="flex items-center justify-between mt-4 text-xs text-text-dim">
                 <span>Showing 1-5 of 1,240 events</span>
                 <div class="flex gap-2">
                     <button
-                        class="px-3 py-1 bg-surface-dark border border-border-dark rounded hover:text-white transition-colors">Previous</button>
+                        class="px-3 py-1.5 bg-surface-dark border border-border-dark rounded-lg hover:text-text-main transition-colors">Previous</button>
                     <button
-                        class="px-3 py-1 bg-surface-dark border border-border-dark rounded hover:text-white transition-colors">Next</button>
+                        class="px-3 py-1.5 bg-surface-dark border border-border-dark rounded-lg hover:text-text-main transition-colors">Next</button>
                 </div>
             </div>
 
         </div>
     </main>
+
+
 </body>
 
 </html>

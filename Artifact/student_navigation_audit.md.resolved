@@ -1,0 +1,138 @@
+# Student Navigation Audit & Cleanup Plan
+
+**Auditor Role:** DISAL Hosting Platform QA + UX Auditor
+**Date:** January 18, 2026
+**Scope:** Student User Journey (Landing → Login → Dashboard → Features)
+
+---
+
+## 1. Inventory & Start Point
+
+**Start File:** `Landing Page.html`
+**Total Files Scanned:** 18 HTML files
+
+| File Name | Purpose (Observed) | Linked From | Reachable? |
+| :--- | :--- | :--- | :--- |
+| `Landing Page.html` | **Canonical Entry Point**. Marketing & entry. | N/A (Start) | **Yes** |
+| [Login.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Login.html) | Student/Admin Authentication. | Landing Page | **Yes** |
+| [Documentation.html](file:///c:/Users/agent/Downloads/Final-Year-Project/Documentation.html) | User Docs. | Landing, Dashboard | **Yes** |
+| `Empty Dashboard.html` | Student Dashboard (Initial State). | Login.html | **Yes** |
+| `Tunnel Manager Board.html` | Student Dashboard (Active State). | Empty Dashboard, Logs | **Yes** |
+| `Student Logs.html` | Deployment Logs. | Dashboard Sidebar | **Yes** |
+| [index.html](file:///C:/Users/agent/Downloads/Final-Year-Project/index.html) | **Duplicate** of Landing Page (Old branding). | None | No |
+| `login.html` | **Duplicate** of Login.html. | None | No |
+| [Tunnel_Status_Health.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Tunnel_Status_Health.html) | Isolated status page (Redundant?). | None | No |
+| `Connection Error.html` | Error state page. | None (Likely utility) | No |
+| `Admin...` files | Admin Suite. | None (Student flow) | No |
+
+---
+
+## 2. Student Journey Walkthrough
+
+### A) Landing → Login
+1.  **Open:** `Landing Page.html`
+    *   *Observation:* Canonical "Git deploys" design.
+2.  **Click "Get Started":**
+    *   *Destination:* [Login.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Login.html) (Success)
+3.  **Click "Login":**
+    *   *Destination:* [Login.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Login.html) (Success)
+4.  **Click "Docs" / "View Documentation":**
+    *   *Destination:* [Documentation.html](file:///c:/Users/agent/Downloads/Final-Year-Project/Documentation.html) (Success)
+5.  **Click Footer Links (Status, Terms, Privacy):**
+    *   *Result:* `#` (Placeholder/No action)
+
+### B) Login → Student Dashboard
+1.  **Open:** [Login.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Login.html)
+2.  **Action:** Click "Authenticate" (Submit form).
+3.  **Destination:** `Empty Dashboard.html`
+    *   *Observation:* Correct routing for first-time user.
+
+### C) Student Dashboard → Features
+1.  **From `Empty Dashboard.html`:**
+    *   **Click "Deploy New App":** Opens Modal.
+    *   **Action:** Fill Modal -> "Initialize Deployment".
+    *   **Destination:** `Tunnel Manager Board.html` (Active State).
+2.  **From `Tunnel Manager Board.html`:**
+    *   **Sidebar "Dashboard":** Reloads `Tunnel Manager Board.html`.
+    *   **Sidebar "Logs":** Navigates to `Student Logs.html`.
+    *   **Sidebar "Docs":** Navigates to [Documentation.html](file:///c:/Users/agent/Downloads/Final-Year-Project/Documentation.html).
+    *   **Card Actions:** No "View Logs" button found on cards. Access is sidebar-only.
+3.  **From `Student Logs.html`:**
+    *   **Sidebar "Dashboard":** Returns to `Tunnel Manager Board.html`.
+    *   **Sidebar "Home":** Returns to `Landing Page.html`.
+
+---
+
+## 3. Observed Navigation Map
+
+```mermaid
+graph TD
+    A[Landing Page.html] -->|Get Started / Login| B[Login.html]
+    A -->|Docs| D[Documentation.html]
+    B -->|Authenticate| C[Empty Dashboard.html]
+    C -->|Deploy New App| E[Tunnel Manager Board.html]
+    E -->|Sidebar: Logs| F[Student Logs.html]
+    E -->|Sidebar: Docs| D
+    F -->|Sidebar: Dashboard| E
+    F -->|Sidebar: Home| A
+    
+    %% Broken/Orphaned
+    A -.->|Footer Links| Broken[# Placeholder]
+    G[index.html] -.->|Orphan| Null
+    H[login.html] -.->|Orphan| Null
+    I[Tunnel_Status_Health.html] -.->|Orphan| Null
+```
+
+### Broken Links & Placeholders
+*   **Landing Page Footer:** Status, Terms, Privacy -> `#`
+*   **Login Page:** "Forgot Password" (if present) -> Not verified (assumed `#`)
+
+---
+
+## 4. Cleanup Recommendations
+
+### 1) DELETE List (Redundant/Orphaned)
+
+| File | Reason | Replacement |
+| :--- | :--- | :--- |
+| [index.html](file:///C:/Users/agent/Downloads/Final-Year-Project/index.html) | Old version of Landing Page. Outdated branding. | `Landing Page.html` |
+| `login.html` | Lowercase duplicate. | [Login.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Login.html) |
+| [Tunnel_Status_Health.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Tunnel_Status_Health.html) | Unreachable. `Student Logs.html` covers this function. | `Student Logs.html` |
+| `Visual Story/` folder | Redundant demo/story files. | N/A |
+| `dashboard/` folder | If containing duplicates of root files, delete to avoid confusion. | Root files |
+
+### 2) MERGE List
+*   *None.* The separate `Empty` vs `Active` dashboard files are distinct enough to keep separate for prototype clarity, or could be merged logic-wise later, but for HTML prototyping, they represent distinct states well.
+
+### 3) KEEP List (The Core Student Suite)
+*   `Landing Page.html` (Rename to [index.html](file:///C:/Users/agent/Downloads/Final-Year-Project/index.html) *after* deletion of old one).
+*   [Login.html](file:///C:/Users/agent/Downloads/Final-Year-Project/Login.html)
+*   `Empty Dashboard.html`
+*   `Tunnel Manager Board.html` (Recommend renaming to `Student_Dashboard_Active.html`)
+*   `Student Logs.html`
+*   [Documentation.html](file:///c:/Users/agent/Downloads/Final-Year-Project/Documentation.html)
+
+---
+
+## 5. Naming + Folder Structure Proposal
+
+To adhere to the "Clean & Consistent" rule:
+
+```text
+/ (Root)
+├── index.html                  <-- (Was Landing Page.html)
+├── login.html                  <-- (Was Login.html - prefer lowercase)
+├── documentation.html          <-- (Was Documentation.html)
+├── error.html                  <-- (Was Connection Error.html)
+│
+├── student/
+│   ├── dashboard.html          <-- (Was Empty Dashboard.html - default state)
+│   ├── dashboard-active.html   <-- (Was Tunnel Manager Board.html)
+│   └── logs.html               <-- (Was Student Logs.html)
+│
+└── admin/
+    ├── dashboard.html          <-- (Was Admin Dashboard.html)
+    └── ...
+```
+
+*Note: For the current prototype, simply deleting the DELETE list is the safest first step.*

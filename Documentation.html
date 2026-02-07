@@ -1,224 +1,149 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
+<!-- THEME LOCK: Verified Dark Mode Tokens via CSS Variables -->
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Documentation - DISAL Tunnel</title>
+    <title>Documentation - DISAL Hosting</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="assets/css/tokens.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#6366F1",
-                        "background-dark": "#0D0D10",
-                        "surface-dark": "#16161D",
-                        "border-dark": "#27272A",
-                        "text-main": "#EDEDEF",
-                        "text-muted": "#9BA1A6",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"],
-                    },
-                },
-            },
-        }
-    </script>
-    <style>
-        .sidebar-link-active {
-            background: rgba(99, 102, 241, 0.1);
-            color: #6366F1;
-            border-left: 2px solid #6366F1;
-        }
-
-        pre {
-            background: #09090B !important;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #27272A;
-            border-radius: 10px;
-        }
-    </style>
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
 </head>
 
-<body class="bg-background-dark text-text-main font-display flex h-screen overflow-hidden">
+<body
+    class="bg-background-dark text-text-main h-screen overflow-hidden flex font-display antialiased selection:bg-primary selection:text-white transition-colors duration-200">
 
-    <!-- Sidebar -->
-    <aside class="w-64 border-r border-border-dark flex flex-col shrink-0">
-        <div class="p-6 border-b border-border-dark">
-            <div onclick="window.location.href='Landing Page.html'" class="flex items-center gap-2 cursor-pointer">
-                <div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
-                    <span class="material-symbols-outlined text-white text-[16px]">terminal</span>
+    <!-- Side Navigation -->
+    <aside
+        class="dark w-64 bg-background-dark border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <div class="flex flex-col mb-8">
+                <div onclick="window.location.href='index.html'"
+                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-text-main">DISAL</span>
                 </div>
-                <h1 class="text-white text-base font-bold tracking-tight">DISAL DOCS</h1>
+                <p class="text-text-dim text-xs mt-2">HOSTING_PLATFORM_V2</p>
             </div>
+            <nav class="flex flex-col gap-1">
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark/50 group transition-colors"
+                    href="Empty Dashboard.html">
+                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
+                        style="font-size: 20px;">grid_view</span>
+                    <span
+                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark/50 group transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
+                        style="font-size: 20px;">terminal</span>
+                    <span
+                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Logs</span>
+                </a>
+                <div class="h-px bg-border-dark my-4"></div>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-dark border-l-2 border-primary group transition-colors"
+                    href="Documentation.html">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">menu_book</span>
+                    <span class="text-text-main text-sm font-medium">Docs</span>
+                </a>
+            </nav>
         </div>
-        <nav class="flex-1 overflow-y-auto p-4 space-y-6">
-            <div>
-                <h3 class="px-4 text-[10px] font-bold text-text-muted uppercase tracking-widest mb-2">Getting Started
-                </h3>
-                <div class="space-y-1">
-                    <a href="#introduction"
-                        class="block px-4 py-2 text-sm rounded-md sidebar-link-active">Introduction</a>
-                    <a href="#quickstart"
-                        class="block px-4 py-2 text-sm text-text-muted hover:text-white hover:bg-white/5 rounded-md transition-colors">Quickstart</a>
-                    <a href="#architecture"
-                        class="block px-4 py-2 text-sm text-text-muted hover:text-white hover:bg-white/5 rounded-md transition-colors">Architecture</a>
+        <div class="p-4 border-t border-border-dark flex items-center justify-between">
+            <div class="flex items-center gap-3 px-2">
+                <div
+                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-text-dim">
+                    S</div>
+                <div class="flex flex-col">
+                    <span class="text-text-main text-sm font-medium">Student</span>
+                    <span class="text-text-dim text-xs">student@disal.io</span>
                 </div>
             </div>
-            <div>
-                <h3 class="px-4 text-[10px] font-bold text-text-muted uppercase tracking-widest mb-2">Guides</h3>
-                <div class="space-y-1">
-                    <a href="#nodejs"
-                        class="block px-4 py-2 text-sm text-text-muted hover:text-white hover:bg-white/5 rounded-md transition-colors">Node.js
-                        / Express</a>
-                    <a href="#python"
-                        class="block px-4 py-2 text-sm text-text-muted hover:text-white hover:bg-white/5 rounded-md transition-colors">Python
-                        / Flask</a>
-                    <a href="#react"
-                        class="block px-4 py-2 text-sm text-text-muted hover:text-white hover:bg-white/5 rounded-md transition-colors">React
-                        / Vite</a>
-                </div>
-            </div>
-            <div>
-                <h3 class="px-4 text-[10px] font-bold text-text-muted uppercase tracking-widest mb-2">Advanced</h3>
-                <div class="space-y-1">
-                    <a href="#security"
-                        class="block px-4 py-2 text-sm text-text-muted hover:text-white hover:bg-white/5 rounded-md transition-colors">Security
-                        & Tokens</a>
-                    <a href="#custom-domains"
-                        class="block px-4 py-2 text-sm text-text-muted hover:text-white hover:bg-white/5 rounded-md transition-colors">Custom
-                        Domains</a>
-                </div>
-            </div>
-        </nav>
-        <div class="p-4 border-t border-border-dark">
-            <button onclick="window.location.href='Login.html'"
-                class="w-full flex items-center justify-center gap-2 bg-primary/10 text-primary border border-primary/20 py-2 rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors">
-                <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
-                Go to App
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()"
+                class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
+                title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
             </button>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 overflow-y-auto scroll-smooth">
-        <div class="max-w-4xl mx-auto py-16 px-8 space-y-24">
+    <main
+        class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative transition-colors duration-200">
+        <!-- Strict Grid Pattern -->
+        <!-- Grid Background Removed -->
+        <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
 
-            <!-- Introduction -->
-            <section id="introduction" class="space-y-6">
-                <h2 class="text-4xl font-bold text-white tracking-tight">Introduction</h2>
-                <p class="text-lg text-text-muted leading-relaxed">
-                    DISAL Tunnel is a secure, high-performance tunneling service designed for university students to
-                    expose their local development environments to the public internet instantly.
-                </p>
-                <div class="p-6 bg-surface-dark border border-border-dark rounded-xl space-y-4">
-                    <h4 class="font-bold text-white flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">psychology</span>
-                        The Problem it Solves
-                    </h4>
-                    <p class="text-sm text-text-muted">
-                        Students often lack public IP addresses or the ability to configure port forwarding on campus
-                        networks. DISAL provides an authenticated bridge between our global edge nodes and your machine.
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-8 scrollbar-hide relative z-10">
+            <div class="max-w-3xl mx-auto space-y-12">
+
+                <!-- Intro Section -->
+                <div>
+                    <h1 class="text-4xl font-extrabold tracking-tight text-text-main mb-6">Introduction</h1>
+                    <p class="text-lg text-text-dim leading-relaxed">
+                        The DISAL Hosting Platform is an internal PaaS designed to simplify the deployment of Final Year
+                        Projects.
+                        Instead of managing raw SSH connections and firewall rules, students can use this platform to
+                        provision ephemeral environments and deploy containerized applications with a single click.
                     </p>
                 </div>
-            </section>
 
-            <!-- Quickstart -->
-            <section id="quickstart" class="space-y-6">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Quickstart</h2>
-                <p class="text-text-muted">The fastest way to get your app online is using the standard SSH reverse
-                    tunnel command.</p>
+                <div class="h-px bg-border-dark w-full"></div>
 
-                <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-white">1. Provision Credentials</h3>
-                    <p class="text-sm text-text-muted">Log in to your DISAL dashboard and generate a new tunnel. You'll
-                        receive a unique username and a remote port.</p>
-
-                    <h3 class="text-xl font-semibold text-white">2. Run the Command</h3>
-                    <div class="relative group">
-                        <pre
-                            class="p-6 rounded-lg border border-border-dark font-mono text-sm overflow-x-auto text-text-muted">
-<span class="text-emerald-500">$</span> ssh -R 80:localhost:3000 student@disal.ac.gh</pre>
-                        <button
-                            class="absolute top-4 right-4 text-text-muted hover:text-white transition-colors opacity-0 group-hover:opacity-100">
-                            <span class="material-symbols-outlined">content_copy</span>
-                        </button>
-                    </div>
-                    <p
-                        class="text-xs text-text-muted bg-primary/5 p-3 border border-primary/10 rounded flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[16px] text-primary">info</span>
-                        Replace <code class="text-white">3000</code> with your local application's port.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Architecture -->
-            <section id="architecture" class="space-y-8">
-                <h2 class="text-3xl font-bold text-white tracking-tight">How it Works</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-                    <!-- Lines (Desktop only) -->
-                    <div
-                        class="hidden md:block absolute top-12 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-border-dark to-transparent z-0">
-                    </div>
-
-                    <div class="bg-surface-dark border border-border-dark p-6 rounded-xl text-center relative z-10">
-                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span class="material-symbols-outlined text-primary">language</span>
-                        </div>
-                        <h4 class="font-bold text-white mb-2">Public Internet</h4>
-                        <p class="text-xs text-text-muted">Users visit <br> app.disal.ac.gh</p>
-                    </div>
-
-                    <div
-                        class="bg-surface-dark border border-border-dark p-6 rounded-xl text-center relative z-10 ring-2 ring-primary">
+                <!-- Architecture/Flow -->
+                <div>
+                    <h2 class="text-2xl font-bold text-text-main mb-6">How it Works</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div
-                            class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-primary/20">
-                            <span class="material-symbols-outlined text-white">hub</span>
+                            class="bg-surface-dark border border-border-dark rounded-default p-6 hover:border-primary/30 transition-all">
+                            <div
+                                class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xl mb-4 font-mono border border-primary/20">
+                                01</div>
+                            <h3 class="text-lg font-bold text-text-main mb-2">Provision</h3>
+                            <p class="text-sm text-text-dim leading-relaxed">After your first deployment, the system
+                                provisions an assigned port and generates your access URL.</p>
                         </div>
-                        <h4 class="font-bold text-white mb-2">DISAL Relay</h4>
-                        <p class="text-xs text-text-muted">Global Edge nodes route traffic via SSH</p>
-                    </div>
-
-                    <div class="bg-surface-dark border border-border-dark p-6 rounded-xl text-center relative z-10">
-                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span class="material-symbols-outlined text-primary">terminal</span>
+                        <div
+                            class="bg-surface-dark border border-border-dark rounded-default p-6 hover:border-primary/30 transition-all">
+                            <div
+                                class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xl mb-4 font-mono border border-primary/20">
+                                02</div>
+                            <h3 class="text-lg font-bold text-text-main mb-2">Deploy</h3>
+                            <p class="text-sm text-text-dim leading-relaxed">Push code to your repository. Our
+                                integrated CI/CD pipeline builds the Docker image and executes your <code
+                                    class="bg-background-dark border border-border-dark px-1 rounded text-text-main font-mono text-xs">deploy.sh</code>
+                                script.</p>
                         </div>
-                        <h4 class="font-bold text-white mb-2">Your Machine</h4>
-                        <p class="text-xs text-text-muted">Traffic received at <br> localhost</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- Footer -->
-            <footer class="pt-16 border-t border-border-dark flex justify-between items-center text-text-muted text-sm">
-                <p>&copy; 2025 DISAL Infrastructure Team</p>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-white transition-colors">GitHub</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms</a>
-                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <!-- Alert -->
+                <div class="rounded-default bg-primary/10 border border-primary/20 p-4 flex gap-3 items-start">
+                    <span class="material-symbols-outlined text-primary mt-0.5">info</span>
+                    <p class="text-sm text-text-dim leading-relaxed">
+                        <strong class="text-text-main block mb-1">Note</strong>
+                        Access to the Admin Control Plane is restricted to faculty members and system administrators. If
+                        you require elevated privileges, please contact your supervisor.
+                    </p>
                 </div>
-            </footer>
+
+            </div>
         </div>
     </main>
+
+
 </body>
 
 </html>

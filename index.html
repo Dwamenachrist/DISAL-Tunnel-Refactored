@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DISAL Hosting Platform</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(45, 45, 53, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(45, 45, 53, 0.15) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-main font-display text-text-primary overflow-x-hidden antialiased selection:bg-primary selection:text-text-on-primary">
+    <div class="relative flex min-h-screen w-full flex-col">
+        <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div>
+        <!-- Header -->
+        <header class="relative z-50 w-full border-b border-border-subtle bg-background-main/80 backdrop-blur-md">
+            <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+                <div class="flex items-center gap-2">
+                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <span class="material-symbols-outlined text-[20px]">dns</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-text-primary">DISAL Hosting</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors hover:underline underline-offset-4 decoration-primary/50"
+                        href="Documentation.html">Docs</a>
+                    <a class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors hover:underline underline-offset-4 decoration-primary/50"
+                        href="Login.html">Sign In</a>
+                    <!-- Theme Toggle -->
+                    <button onclick="toggleTheme()"
+                        class="p-2 rounded-lg hover:bg-surface-2 text-text-secondary hover:text-text-primary transition-colors"
+                        title="Toggle Theme">
+                        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                    </button>
+
+                </div>
+                <button class="flex md:hidden text-white">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-10 pb-20">
+            <div class="mx-auto flex w-full max-w-4xl flex-col items-center gap-12 text-center">
+                <!-- Hero Text -->
+                <div class="flex flex-col items-center gap-6">
+                    <div
+                        class="inline-flex items-center rounded-full border border-border-subtle bg-surface-1 px-3 py-1 mb-2 shadow-soft">
+                        <span class="flex size-2 rounded-full bg-primary mr-2 animate-pulse shadow-glow"></span>
+                        <span class="text-xs font-medium text-text-secondary">Use your organization credentials • Port
+                            assigned on first deploy</span>
+                    </div>
+                    <h1
+                        class="font-display text-5xl font-black leading-tight tracking-tight text-text-primary sm:text-7xl drop-shadow-2xl">
+                        Deploy from Git.<br class="hidden sm:block" /> Get a stable URL.
+                    </h1>
+                    <p class="max-w-2xl text-lg font-normal text-text-secondary sm:text-xl leading-relaxed">
+                        Push to Git. We provision access, deploy, and monitor — right from your dashboard.
+                    </p>
+                </div>
+
+                <!-- CTAs -->
+                <div class="flex flex-col items-center gap-6 sm:flex-row">
+                    <button onclick="window.location.href='Login.html'"
+                        class="group relative flex h-12 w-full min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-primary px-8 text-base font-bold text-text-on-primary transition-all hover:bg-primary-hover hover:scale-[1.02] shadow-glow sm:w-auto">
+                        <span class="mr-2">Sign In</span>
+                        <span
+                            class="material-symbols-outlined ml-2 text-lg transition-transform group-hover:translate-x-1">login</span>
+                    </button>
+                    <a class="text-sm font-medium text-text-secondary hover:text-text-primary underline decoration-text-muted/30 underline-offset-4 decoration-1 hover:decoration-text-primary transition-all"
+                        href="Documentation.html">
+                        View Documentation
+                    </a>
+                </div>
+
+                <!-- Hero Visual - Deployment Pipeline -->
+                <div class="w-full max-w-2xl group cursor-default">
+                    <div
+                        class="relative overflow-hidden rounded-2xl border border-border-subtle bg-surface-1 shadow-strong transition-all duration-300 hover:border-primary/30">
+
+                        <!-- Header/Top Bar -->
+                        <div
+                            class="flex items-center justify-between border-b border-border-subtle bg-surface-2/50 px-4 py-3">
+                            <div class="flex gap-2">
+                                <span class="material-symbols-outlined text-text-muted"
+                                    style="font-size: 16px;">public</span>
+                                <span class="text-xs font-mono font-medium text-text-muted">Pipeline
+                                    Visualization</span>
+                            </div>
+                            <div class="flex gap-1">
+                                <div class="size-2 rounded-full bg-border-strong"></div>
+                                <div class="size-2 rounded-full bg-border-strong"></div>
+                            </div>
+                        </div>
+
+                        <!-- Pipeline Content -->
+                        <div class="p-6 sm:p-8">
+                            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 relative">
+
+                                <!-- Connecting Line (Desktop) -->
+                                <div
+                                    class="hidden sm:block absolute top-1/2 left-10 right-10 h-0.5 bg-border-subtle -z-10 -translate-y-[14px]">
+                                </div>
+
+                                <!-- Step 1: Provisioned -->
+                                <div class="flex flex-col items-center gap-3 relative z-10">
+                                    <div
+                                        class="flex size-12 items-center justify-center rounded-full border border-border-subtle bg-surface-1 text-text-primary shadow-soft transition-transform group-hover:scale-110 group-hover:border-primary/50">
+                                        <span class="material-symbols-outlined text-blue-400">dns</span>
+                                    </div>
+                                    <div class="flex flex-col gap-0.5">
+                                        <span class="text-sm font-bold text-text-primary">Access Provisioned</span>
+                                        <span
+                                            class="text-xs font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full mx-auto ring-1 ring-inset ring-emerald-400/20">Assigned</span>
+                                    </div>
+                                </div>
+
+                                <!-- Mobile Arrow -->
+                                <span
+                                    class="material-symbols-outlined text-border-strong sm:hidden rotate-90">arrow_forward</span>
+
+                                <!-- Step 2: Deploy -->
+                                <div class="flex flex-col items-center gap-3 relative z-10">
+                                    <div
+                                        class="flex size-12 items-center justify-center rounded-full border border-border-subtle bg-surface-1 text-text-primary shadow-soft transition-transform group-hover:scale-110 group-hover:border-primary/50">
+                                        <span class="material-symbols-outlined text-amber-400">deployed_code</span>
+                                    </div>
+                                    <div class="flex flex-col gap-0.5">
+                                        <span class="text-sm font-bold text-text-primary">Git Deploy</span>
+                                        <span class="text-xs font-mono text-text-muted">Update Detected</span>
+                                    </div>
+                                </div>
+
+                                <!-- Mobile Arrow -->
+                                <span
+                                    class="material-symbols-outlined text-border-strong sm:hidden rotate-90">arrow_forward</span>
+
+                                <!-- Step 3: Online -->
+                                <div class="flex flex-col items-center gap-3 relative z-10">
+                                    <div
+                                        class="flex size-12 items-center justify-center rounded-full border border-border-subtle bg-surface-1 text-text-primary shadow-soft transition-transform group-hover:scale-110 group-hover:border-primary/50">
+                                        <span class="material-symbols-outlined text-emerald-400">check_circle</span>
+                                    </div>
+                                    <div class="flex flex-col gap-0.5">
+                                        <span class="text-sm font-bold text-text-primary">Stable URL</span>
+                                        <span class="text-xs font-mono text-emerald-400">Online</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Example URL Box -->
+                            <div class="mt-8 flex justify-center">
+                                <div
+                                    class="inline-flex items-center gap-2 rounded-lg border border-border-subtle bg-surface-2/50 px-4 py-2 font-mono text-xs sm:text-sm text-text-muted transition-colors hover:border-border-strong hover:text-text-secondary">
+                                    <span class="text-primary font-bold">Example</span>
+                                    <span class="text-border-strong">|</span>
+                                    <span>stable-url:<span class="text-text-primary font-bold">9001</span></span>
+                                    <span
+                                        class="material-symbols-outlined ml-2 text-[14px] cursor-pointer hover:text-text-primary">content_copy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="mt-24 grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-3 px-4">
+                <div
+                    class="flex flex-col gap-3 rounded-2xl border border-border-subtle bg-surface-1 p-6 transition-colors hover:border-border-strong hover:bg-surface-2 group">
+                    <div class="mb-1 text-primary transition-transform group-hover:scale-110 origin-left">
+                        <span class="material-symbols-outlined text-[32px]">settings_ethernet</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-text-primary">Provisioned Access</h3>
+                    <p class="text-sm leading-relaxed text-text-secondary">
+                        Dedicated access — stable URL tied to your deployment (assigned on first deploy).
+                    </p>
+                </div>
+                <div
+                    class="flex flex-col gap-3 rounded-2xl border border-border-subtle bg-surface-1 p-6 transition-colors hover:border-border-strong hover:bg-surface-2 group">
+                    <div class="mb-1 text-primary transition-transform group-hover:scale-110 origin-left">
+                        <span class="material-symbols-outlined text-[32px]">code_blocks</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-text-primary">Git Deployments</h3>
+                    <p class="text-sm leading-relaxed text-text-secondary">
+                        Push updates to your repository to trigger builds. Auto-redeploy supported.
+                    </p>
+                </div>
+                <div
+                    class="flex flex-col gap-3 rounded-2xl border border-border-subtle bg-surface-1 p-6 transition-colors hover:border-border-strong hover:bg-surface-2 group">
+                    <div class="mb-1 text-primary transition-transform group-hover:scale-110 origin-left">
+                        <span class="material-symbols-outlined text-[32px]">monitoring</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-text-primary">Status, Logs & Control</h3>
+                    <p class="text-sm leading-relaxed text-text-secondary">
+                        Track deployment status and view service logs directly from your dashboard.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="relative z-10 border-t border-border-subtle bg-surface-1 py-10">
+            <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
+                <div class="flex items-center gap-2">
+                    <div class="flex size-6 items-center justify-center rounded bg-primary/20 text-primary">
+                        <span class="material-symbols-outlined text-[16px]">dns</span>
+                    </div>
+                    <span class="text-sm font-semibold text-text-secondary">DISAL Hosting</span>
+                </div>
+                <div class="flex gap-8 text-sm text-text-muted">
+                    <a class="hover:text-text-primary transition-colors" href="#">Status</a>
+                    <a class="hover:text-text-primary transition-colors" href="#">Terms of Service</a>
+                    <a class="hover:text-text-primary transition-colors" href="#">Privacy Policy</a>
+                </div>
+                <div class="text-sm text-text-muted">
+                    © 2024 DISAL. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

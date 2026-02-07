@@ -1,0 +1,98 @@
+/* DISAL Hosting Platform - Design Tokens (Modern Dark Grid) */
+
+:root {
+  /* --- Color Palette --- */
+
+  /* Primary Brand - Electric Indigo (Vibrant) */
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-200: #c7d2fe;
+  --primary-300: #a5b4fc;
+  --primary-400: #818cf8;
+  --primary-500: #6366f1;
+  /* Main Action */
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+  --primary-800: #3730a3;
+  --primary-900: #312e81;
+  --primary-glow: rgba(99, 102, 241, 0.5);
+
+  /* Secondary/Accent - Neon Cyan */
+  --accent-400: #22d3ee;
+  --accent-500: #06b6d4;
+  --accent-glow: rgba(34, 211, 238, 0.5);
+
+  /* Neutrals (Zinc/Carbon) - True Dark Mode */
+  --neutral-50: #fafafa;
+  --neutral-100: #f4f4f5;
+  --neutral-200: #e4e4e7;
+  --neutral-300: #d4d4d8;
+  --neutral-400: #a1a1aa;
+  --neutral-500: #71717a;
+  --neutral-600: #52525b;
+  --neutral-700: #3f3f46;
+  /* Borders */
+  --neutral-800: #27272a;
+  /* Cards/Panels */
+  --neutral-900: #18181b;
+  /* Sidebar/Secondary BG */
+  --neutral-950: #09090b;
+  /* Main Background (Deep Void) */
+
+  /* Semantic State Colors */
+  --success: #10b981;
+  /* Emerald */
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --error: #ef4444;
+  /* Red */
+  --error-bg: rgba(239, 68, 68, 0.15);
+  --warning: #f59e0b;
+  /* Amber */
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --info: #3b82f6;
+  /* Blue */
+
+  /* --- Typography --- */
+  /* Modern clean sans-serif, no "terminal" fonts unless for code */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
+
+  --text-heading: #ffffff;
+  --text-body: #d4d4d8;
+  --text-muted: #a1a1aa;
+
+  /* Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-display: 3.5rem;
+
+  /* --- Spacing --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* --- Layout & Effects --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 25px -5px var(--primary-glow);
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
