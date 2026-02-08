@@ -1,667 +1,797 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en">
+<html lang="en">
 
 <head>
-  <script>
-    if (!localStorage.getItem('userRole')) {
-      window.location.href = 'Login.html';
-    }
-  </script>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Tunnel Manager Dashboard</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="assets/css/variables.css" rel="stylesheet" />
-  <link href="assets/css/tokens.css" rel="stylesheet" />
-  <script src="assets/js/tailwind-config.js"></script>
-  <script src="assets/js/theme-toggle.js"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-
-    .font-mono {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    /* Grid Pattern */
-    .bg-grid-pattern {
-      background-size: 40px 40px;
-      background-image: linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
-    }
-  </style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard — DISAL Hosting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body{font-family:var(--font-sans)}.font-mono{font-family:var(--font-mono)}
+        .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .filter-pill{transition:all .15s ease}.filter-pill.active{background:var(--navy-600);color:#fff;border-color:var(--navy-600)}
+        .project-card{transition:border-color .15s ease,box-shadow .15s ease}
+        .project-card:hover{border-color:var(--border-strong);box-shadow:0 4px 6px -1px rgba(0,0,0,.04),0 2px 4px -2px rgba(0,0,0,.04)}
+        .view-toggle-btn.active{background:var(--bg-surface-2);color:var(--text-primary)}
+        .list-row{transition:background .15s ease}.list-row:hover{background:var(--bg-surface-2)}
+    </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-text-main h-screen overflow-hidden flex">
-  <!-- Side Navigation -->
-  <aside
-    class="dark hidden md:flex w-64 bg-sidebar border-r border-border-dark flex-col justify-between h-full shrink-0 z-20 relative">
-    <div class="flex flex-col gap-1 p-4">
-      <div class="flex flex-col mb-8 px-2">
-        <div onclick="window.location.href='index.html'"
-          class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-          <div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
-            <span class="material-symbols-outlined text-white text-[16px]">terminal</span>
-          </div>
-          <h1 class="text-white text-base font-bold tracking-tight">DISAL</h1>
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <div class="flex flex-col mb-8">
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
+                    </div>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING</p>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a href="Tunnel Manager Board.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">grid_view</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Dashboard</span>
+                </a>
+                <a href="Student Logs.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">terminal</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Logs</span>
+                </a>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
+                </a>
+            </nav>
         </div>
-        <p class="text-text-muted text-xs mt-1 pl-8">HOSTING_PLATFORM_V2</p>
-      </div>
-      <nav class="flex flex-col gap-1">
-        <a class="flex items-center gap-3 px-3 py-2 rounded-md bg-surface-dark border-l-2 border-primary group transition-colors"
-          href="Tunnel Manager Board.html">
-          <span class="material-symbols-outlined text-primary" style="font-size: 20px;">grid_view</span>
-          <span class="text-white text-sm font-medium">Dashboard</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
-          href="Student Logs.html">
-          <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
-            style="font-size: 20px;">terminal</span>
-          <span class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Logs</span>
-        </a>
-        <div class="h-px bg-border-dark my-2 mx-3"></div>
-        <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
-          href="Documentation.html">
-          <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
-            style="font-size: 20px;">menu_book</span>
-          <span class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Docs</span>
-        </a>
-      </nav>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
+                <div class="flex flex-col">
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@apatechlab.com</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
+
+        <!-- Header -->
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);" class="font-semibold">Projects</span>
+            </nav>
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-symbols-outlined" style="font-size:16px;color:var(--text-muted);">search</span>
+                    </div>
+                    <input id="projectSearch" type="text" placeholder="Search projects… (⌘K)" oninput="searchProjects(this.value)" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-52 pl-9 pr-4 py-1.5 text-sm rounded-lg placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                </div>
+                <button onclick="openModal()" style="background:var(--color-primary);color:white;" class="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all hover:opacity-90 shadow-sm cursor-pointer">
+                    <span class="material-symbols-outlined" style="font-size:18px;">add</span> New Project
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide">
+
+            <!-- Title -->
+            <div class="flex flex-col gap-1 mb-6">
+                <h1 style="color:var(--text-primary);" class="text-2xl font-extrabold tracking-tight mb-0">Your Projects</h1>
+                <p style="color:var(--text-muted);" class="text-sm mb-0">Manage your deployed applications and environments.</p>
+            </div>
+
+            <!-- Filter Pills + View Toggle -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-2">
+                    <button data-filter="all" class="filter-pill active px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);">All</button>
+                    <button data-filter="live" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#22C55E;"></span>Live
+                    </button>
+                    <button data-filter="idle" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#F59E0B;"></span>Idle
+                    </button>
+                    <button data-filter="failed" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#EF4444;"></span>Failed
+                    </button>
+                </div>
+                <div class="flex items-center gap-1" style="border:1px solid var(--border-subtle);border-radius:8px;padding:2px;">
+                    <button id="gridViewBtn" onclick="setView('grid')" class="view-toggle-btn active p-1.5 rounded-md cursor-pointer" title="Card View">
+                        <span class="material-symbols-outlined" style="font-size:18px;">grid_view</span>
+                    </button>
+                    <button id="listViewBtn" onclick="setView('list')" class="view-toggle-btn p-1.5 rounded-md cursor-pointer" style="color:var(--text-muted);" title="List View">
+                        <span class="material-symbols-outlined" style="font-size:18px;">view_list</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Redeploy Policy (compact bar) -->
+            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="flex flex-wrap items-center justify-between gap-3 rounded-lg px-4 py-2.5 mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined" style="font-size:18px;color:var(--color-primary);">webhook</span>
+                    <div class="flex flex-col">
+                        <span style="color:var(--text-primary);" class="text-xs font-semibold">Redeploy Policy</span>
+                        <span id="redeploySubtitle" style="color:var(--text-muted);" class="text-[11px]">Webhook listener auto-redeploys on push.</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="simulateRepoUpdate" type="button" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="flex items-center gap-1.5 rounded-lg px-3 py-1 text-[11px] font-medium hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                        <span class="material-symbols-outlined" style="font-size:14px;">commit</span> Simulate Repo Update
+                    </button>
+                    <button id="manualRedeployBtn" type="button" style="background:var(--color-primary);color:white;" class="hidden items-center gap-1.5 rounded-lg px-3 py-1 text-[11px] font-semibold shadow-sm hover:opacity-90 transition-colors cursor-pointer">
+                        <span class="material-symbols-outlined" style="font-size:14px;">restart_alt</span> Manual Redeploy
+                    </button>
+                    <button id="autoRedeployToggle" type="button" class="ml-1 inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-mono cursor-pointer transition-colors" style="border:1px solid var(--border-subtle);background:var(--bg-surface-2);color:var(--text-muted);">
+                        <span class="material-symbols-outlined" style="font-size:14px;" id="autoRedeployIcon">bolt</span>
+                        <span id="autoRedeployLabel">AUTO: ON</span>
+                    </button>
+                </div>
+            </div>
+            <div id="updateDetectedBanner" style="background:var(--color-warning-bg);border:1px solid var(--color-warning);color:var(--color-warning);" class="hidden text-xs flex items-center gap-2 rounded-lg px-4 py-2.5 mb-6">
+                <span class="material-symbols-outlined" style="font-size:16px;">notifications_active</span>
+                <span>Update detected — Auto-redeploy is OFF. Run a Manual Redeploy to apply.</span>
+            </div>
+
+            <!-- ═══ GRID VIEW: Vercel-style cards ═══ -->
+            <div id="gridView" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+                <!-- Dynamic Primary Deployment -->
+                <div id="deployment-card" data-status="live" data-project="primary-deployment" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card hidden rounded-xl p-5 flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full animate-pulse" style="background:#22C55E;"></span><h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">Primary Deployment</h3></div>
+                        <span style="color:#22C55E;" class="text-xs font-medium">Live</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);">
+                        <span>main</span><span style="color:var(--border-strong);">·</span><span id="deploy-commit">a1b2c3d</span>
+                    </div>
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center justify-between group">
+                        <span style="color:var(--color-primary);" class="truncate">102.176.94.45:<span id="display-port">…</span></span>
+                        <button style="color:var(--text-muted);" class="hover:text-[var(--text-primary)] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Copy"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span></button>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <span style="color:var(--text-muted);" class="text-xs">Deployed just now</span>
+                        <div class="flex items-center gap-1">
+                            <a id="deploy-open-link" href="#" target="_blank" onclick="event.stopPropagation()" style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-colors" title="Open"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></a>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Restart"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-error)] hover:bg-[var(--color-error-bg)] transition-colors cursor-pointer" title="Stop"><span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- React Frontend -->
+                <div data-status="live" data-project="react-frontend" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full animate-pulse" style="background:#22C55E;"></span><h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">React Frontend</h3></div>
+                        <span style="color:#22C55E;" class="text-xs font-medium">Live</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);"><span>main</span><span style="color:var(--border-strong);">·</span><span>e7f8a2b</span><span style="color:var(--border-strong);">·</span><span>Staging</span></div>
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center justify-between group">
+                        <span style="color:var(--color-primary);" class="truncate">102.176.94.45:3000</span>
+                        <button style="color:var(--text-muted);" class="hover:text-[var(--text-primary)] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Copy"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span></button>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <span style="color:var(--text-muted);" class="text-xs">Deployed 45 min ago</span>
+                        <div class="flex items-center gap-1">
+                            <a href="http://102.176.94.45:3000" target="_blank" onclick="event.stopPropagation()" style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-colors" title="Open"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></a>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Restart"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-error)] hover:bg-[var(--color-error-bg)] transition-colors cursor-pointer" title="Stop"><span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Tunnel (Postgres) — Idle -->
+                <div data-status="idle" data-project="database-tunnel" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full" style="background:#F59E0B;"></span><h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">Database Tunnel (Postgres)</h3></div>
+                        <span style="color:#F59E0B;" class="text-xs font-medium">Idle</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);"><span>main</span><span style="color:var(--border-strong);">·</span><span>c4d5e6f</span><span style="color:var(--border-strong);">·</span><span>Debug</span></div>
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center justify-between group">
+                        <span style="color:var(--color-primary);" class="truncate">102.176.94.45:5432</span>
+                        <button style="color:var(--text-muted);" class="hover:text-[var(--text-primary)] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Copy"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span></button>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <span style="color:var(--text-muted);" class="text-xs">Deployed 2 days ago</span>
+                        <div class="flex items-center gap-1">
+                            <a href="http://102.176.94.45:5432" target="_blank" onclick="event.stopPropagation()" style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-colors" title="Open"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></a>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Restart"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-error)] hover:bg-[var(--color-error-bg)] transition-colors cursor-pointer" title="Stop"><span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Redis Cache — Live -->
+                <div data-status="live" data-project="redis-cache" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full animate-pulse" style="background:#22C55E;"></span><h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">Redis Cache</h3></div>
+                        <span style="color:#22C55E;" class="text-xs font-medium">Live</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);"><span>feature/cache-v2</span><span style="color:var(--border-strong);">·</span><span>9a8b7c6</span></div>
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center justify-between group">
+                        <span style="color:var(--color-primary);" class="truncate">102.176.94.45:6379</span>
+                        <button style="color:var(--text-muted);" class="hover:text-[var(--text-primary)] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Copy"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span></button>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <span style="color:var(--text-muted);" class="text-xs">Deployed 12 min ago</span>
+                        <div class="flex items-center gap-1">
+                            <a href="http://102.176.94.45:6379" target="_blank" onclick="event.stopPropagation()" style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-colors" title="Open"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></a>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Restart"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-error)] hover:bg-[var(--color-error-bg)] transition-colors cursor-pointer" title="Stop"><span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grading System V1 — Failed -->
+                <div data-status="failed" data-project="grading-system" style="background:var(--bg-surface-1);border:1px solid var(--color-error);" class="project-card rounded-xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full" style="background:#EF4444;"></span><h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">Grading System V1</h3></div>
+                        <span style="color:#EF4444;" class="text-xs font-medium">Failed</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);"><span>main</span><span style="color:var(--border-strong);">·</span><span>f1e2d3c</span><span style="color:var(--border-strong);">·</span><span style="color:var(--color-error);">Build failed</span></div>
+                    <div style="background:var(--color-error-bg);border:1px solid rgba(239,68,68,.2);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined" style="font-size:14px;color:var(--color-error);">error</span>
+                        <span style="color:var(--color-error);" class="text-xs truncate">err: 503 — Connection Refused</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <span style="color:var(--text-muted);" class="text-xs">Failed 1 hour ago</span>
+                        <div class="flex items-center gap-1">
+                            <a href="Student Logs.html" style="color:var(--color-error);background:var(--color-error-bg);" class="flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium hover:opacity-80 transition-colors no-underline"><span class="material-symbols-outlined" style="font-size:14px;">terminal</span>Logs</a>
+                            <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Retry"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- + New Project (dashed CTA) -->
+                <button onclick="openModal()" style="border:2px dashed var(--border-subtle);color:var(--text-muted);" class="project-card rounded-xl p-5 flex flex-col gap-3 items-center justify-center min-h-[190px] hover:!border-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all group cursor-pointer bg-transparent">
+                    <div style="background:var(--bg-surface-2);" class="w-11 h-11 rounded-full flex items-center justify-center group-hover:bg-[var(--color-primary-light)] transition-colors">
+                        <span class="material-symbols-outlined text-xl group-hover:text-[var(--color-primary)] group-hover:scale-110 transition-all">add</span>
+                    </div>
+                    <span class="text-sm font-medium group-hover:text-[var(--color-primary)]">New Project</span>
+                </button>
+            </div>
+
+            <!-- ═══ LIST VIEW: Render-style table (hidden default) ═══ -->
+            <div id="listView" class="hidden">
+                <div style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="rounded-xl overflow-hidden">
+                    <table class="w-full text-left text-sm">
+                        <thead style="background:var(--bg-surface-2);border-bottom:1px solid var(--border-subtle);">
+                            <tr>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Project</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Status</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider hidden md:table-cell">Branch</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider hidden lg:table-cell">Endpoint</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Deployed</th>
+                                <th class="px-5 py-3 w-20"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-status="live" data-project="react-frontend" class="list-row cursor-pointer" style="border-bottom:1px solid var(--border-subtle);">
+                                <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-semibold">React Frontend</span><span style="color:var(--text-muted);" class="text-xs block">Staging</span></td>
+                                <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 text-xs font-medium" style="color:#22C55E;"><span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:#22C55E;"></span>Live</span></td>
+                                <td class="px-5 py-3.5 hidden md:table-cell"><span class="font-mono text-xs" style="color:var(--text-muted);">main · e7f8a2b</span></td>
+                                <td class="px-5 py-3.5 hidden lg:table-cell"><span class="font-mono text-xs" style="color:var(--color-primary);">102.176.94.45:3000</span></td>
+                                <td class="px-5 py-3.5"><span class="text-xs" style="color:var(--text-muted);">45 min ago</span></td>
+                                <td class="px-5 py-3.5"><div class="flex items-center gap-1"><button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-primary)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></button><button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:16px;">more_vert</span></button></div></td>
+                            </tr>
+                            <tr data-status="idle" data-project="database-tunnel" class="list-row cursor-pointer" style="border-bottom:1px solid var(--border-subtle);">
+                                <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-semibold">Database Tunnel (Postgres)</span><span style="color:var(--text-muted);" class="text-xs block">Debug Session</span></td>
+                                <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 text-xs font-medium" style="color:#F59E0B;"><span class="w-1.5 h-1.5 rounded-full" style="background:#F59E0B;"></span>Idle</span></td>
+                                <td class="px-5 py-3.5 hidden md:table-cell"><span class="font-mono text-xs" style="color:var(--text-muted);">main · c4d5e6f</span></td>
+                                <td class="px-5 py-3.5 hidden lg:table-cell"><span class="font-mono text-xs" style="color:var(--color-primary);">102.176.94.45:5432</span></td>
+                                <td class="px-5 py-3.5"><span class="text-xs" style="color:var(--text-muted);">2 days ago</span></td>
+                                <td class="px-5 py-3.5"><div class="flex items-center gap-1"><button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-primary)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></button><button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:16px;">more_vert</span></button></div></td>
+                            </tr>
+                            <tr data-status="live" data-project="redis-cache" class="list-row cursor-pointer" style="border-bottom:1px solid var(--border-subtle);">
+                                <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-semibold">Redis Cache</span><span style="color:var(--text-muted);" class="text-xs block">Feature #220</span></td>
+                                <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 text-xs font-medium" style="color:#22C55E;"><span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:#22C55E;"></span>Live</span></td>
+                                <td class="px-5 py-3.5 hidden md:table-cell"><span class="font-mono text-xs" style="color:var(--text-muted);">feature/cache-v2 · 9a8b7c6</span></td>
+                                <td class="px-5 py-3.5 hidden lg:table-cell"><span class="font-mono text-xs" style="color:var(--color-primary);">102.176.94.45:6379</span></td>
+                                <td class="px-5 py-3.5"><span class="text-xs" style="color:var(--text-muted);">12 min ago</span></td>
+                                <td class="px-5 py-3.5"><div class="flex items-center gap-1"><button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-primary)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></button><button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:16px;">more_vert</span></button></div></td>
+                            </tr>
+                            <tr data-status="failed" data-project="grading-system" class="list-row cursor-pointer">
+                                <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-semibold">Grading System V1</span><span style="color:var(--color-error);" class="text-xs block">Crash Detected</span></td>
+                                <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 text-xs font-medium" style="color:#EF4444;"><span class="w-1.5 h-1.5 rounded-full" style="background:#EF4444;"></span>Failed</span></td>
+                                <td class="px-5 py-3.5 hidden md:table-cell"><span class="font-mono text-xs" style="color:var(--text-muted);">main · f1e2d3c</span></td>
+                                <td class="px-5 py-3.5 hidden lg:table-cell"><span class="font-mono text-xs" style="color:var(--color-error);">503 — Connection Refused</span></td>
+                                <td class="px-5 py-3.5"><span class="text-xs" style="color:var(--text-muted);">1 hour ago</span></td>
+                                <td class="px-5 py-3.5"><div class="flex items-center gap-1"><a href="Student Logs.html" style="color:var(--color-error);" class="p-1 rounded hover:bg-[var(--color-error-bg)] transition-colors"><span class="material-symbols-outlined" style="font-size:16px;">terminal</span></a><button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:16px;">more_vert</span></button></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Activity (collapsible) -->
+            <details style="border-top:1px solid var(--border-subtle);" class="mt-10 pt-6" open>
+                <summary style="color:var(--text-primary);" class="cursor-pointer text-sm font-bold flex items-center gap-2 select-none mb-4 list-none">
+                    <span class="material-symbols-outlined" style="font-size:18px;">expand_more</span> Recent Activity
+                    <span style="color:var(--text-muted);" class="font-normal text-xs ml-1">— orchestrator events</span>
+                </summary>
+                <div style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="rounded-xl overflow-hidden">
+                    <table class="w-full text-left text-sm">
+                        <thead style="background:var(--bg-surface-2);border-bottom:1px solid var(--border-subtle);">
+                            <tr>
+                                <th style="color:var(--text-primary);" class="px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider">Time</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider">Event</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider">Project</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider hidden md:table-cell">Source</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventsTableBody">
+                            <tr class="hover:bg-[var(--bg-surface-2)] transition-colors" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs">14:32:01</td>
+                                <td style="color:var(--color-success);" class="px-5 py-2.5 text-xs font-medium">Connection Established</td>
+                                <td style="color:var(--text-secondary);" class="px-5 py-2.5 text-xs">API Gateway</td>
+                                <td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs hidden md:table-cell">192.168.1.42</td>
+                            </tr>
+                            <tr class="hover:bg-[var(--bg-surface-2)] transition-colors" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs">12:15:44</td>
+                                <td style="color:var(--color-error);" class="px-5 py-2.5 text-xs font-medium">Connection Reset</td>
+                                <td style="color:var(--text-secondary);" class="px-5 py-2.5 text-xs">Redis Cache</td>
+                                <td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs hidden md:table-cell">192.168.1.42</td>
+                            </tr>
+                            <tr class="hover:bg-[var(--bg-surface-2)] transition-colors">
+                                <td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs">09:10:22</td>
+                                <td style="color:var(--color-success);" class="px-5 py-2.5 text-xs font-medium">Connection Established</td>
+                                <td style="color:var(--text-secondary);" class="px-5 py-2.5 text-xs">React Frontend</td>
+                                <td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs hidden md:table-cell">10.0.0.55</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+        </div>
+    </main>
+
+    <!-- ═══ CREATE PROJECT MODAL (Vercel-style GitHub import) ═══ -->
+    <div id="modalOverlay" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" style="background:var(--bg-overlay);backdrop-filter:blur(4px);">
+        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-xl);" class="w-full max-w-[540px] rounded-2xl flex flex-col max-h-[92vh] overflow-hidden">
+            <div style="border-bottom:1px solid var(--border-subtle);" class="flex items-center justify-between px-6 py-4 shrink-0">
+                <h2 style="color:var(--text-primary);" class="text-base font-bold mb-0">Import Project</h2>
+                <button onclick="closeModal()" style="color:var(--text-muted);" class="p-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:18px;">close</span></button>
+            </div>
+
+            <!-- Step Tabs: GitHub Import | Manual URL -->
+            <div id="modalTabBar" style="border-bottom:1px solid var(--border-subtle);" class="flex px-6 shrink-0">
+                <button onclick="setModalTab('github')" id="tabGithub" class="modal-tab relative px-4 py-3 text-sm font-medium transition-colors cursor-pointer" style="color:var(--color-primary);border-bottom:2px solid var(--color-primary);">
+                    <span class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Import from GitHub</span>
+                </button>
+                <button onclick="setModalTab('manual')" id="tabManual" class="modal-tab relative px-4 py-3 text-sm font-medium transition-colors cursor-pointer" style="color:var(--text-muted);border-bottom:2px solid transparent;">
+                    <span class="flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:16px;">link</span> Enter URL</span>
+                </button>
+            </div>
+
+            <div class="overflow-y-auto flex-1 scrollbar-hide">
+
+                <!-- ── GITHUB TAB ── -->
+                <div id="panelGithub" class="p-6">
+
+                    <!-- State: Not Connected -->
+                    <div id="ghNotConnected" class="flex flex-col items-center py-6">
+                        <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-5">
+                            <svg class="w-8 h-8" viewBox="0 0 16 16" style="color:var(--text-primary);" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </div>
+                        <h3 style="color:var(--text-primary);" class="text-sm font-semibold mb-1">Connect your GitHub account</h3>
+                        <p style="color:var(--text-muted);" class="text-xs text-center max-w-xs mb-5">Import a repository directly from GitHub. We'll set up webhooks for auto-deploy on push.</p>
+                        <button onclick="connectGitHub()" style="background:#24292f;color:white;" class="flex items-center gap-2.5 h-10 px-5 rounded-lg text-sm font-medium transition-all hover:opacity-90 cursor-pointer">
+                            <svg class="w-5 h-5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                            Continue with GitHub
+                        </button>
+                    </div>
+
+                    <!-- State: Connected (hidden initially) -->
+                    <div id="ghConnected" class="hidden">
+                        <!-- Account badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2.5">
+                                <div style="background:#24292f;" class="w-7 h-7 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                                </div>
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-medium" id="ghUsername">student-dev</span>
+                                    <span style="color:var(--color-success);" class="text-[10px] font-semibold ml-2 px-1.5 py-0.5 rounded-full" class="bg-green-50">✓ Connected</span>
+                                </div>
+                            </div>
+                            <button onclick="disconnectGitHub()" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="text-[11px] font-medium px-2.5 py-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Disconnect</button>
+                        </div>
+
+                        <!-- Search repos -->
+                        <div class="relative mb-3">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined" style="font-size:16px;color:var(--text-muted);">search</span>
+                            <input type="text" id="repoSearch" oninput="filterRepos()" placeholder="Search repositories…" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full pl-9 pr-4 py-2 text-sm rounded-lg placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                        </div>
+
+                        <!-- Repo List -->
+                        <div id="repoList" class="space-y-1.5 max-h-[240px] overflow-y-auto scrollbar-hide">
+                            <!-- repos injected by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── MANUAL URL TAB (hidden default) ── -->
+                <div id="panelManual" class="hidden p-6">
+                    <div class="space-y-4">
+                        <div class="space-y-1.5">
+                            <label style="color:var(--text-primary);" class="text-sm font-medium">Git Repository URL <span style="color:var(--color-error);">*</span></label>
+                            <input id="manualRepoUrl" type="url" placeholder="https://github.com/user/repo.git" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                        </div>
+                        <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg p-3 flex gap-3 items-start">
+                            <span class="material-symbols-outlined mt-0.5" style="font-size:16px;color:var(--text-muted);">info</span>
+                            <p style="color:var(--text-muted);" class="text-xs mb-0">Paste a public or private Git URL. Webhooks must be configured manually for auto-deploy.</p>
+                        </div>
+                        <button type="button" onclick="selectManualRepo()" style="background:var(--color-primary);color:white;" class="w-full h-10 rounded-lg text-sm font-semibold transition-all hover:opacity-90 cursor-pointer flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span> Continue
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ── CONFIGURE STEP (hidden, shown after repo selected) ── -->
+                <div id="panelConfigure" class="hidden p-6">
+                    <div style="border-bottom:1px solid var(--border-subtle);" class="pb-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="w-9 h-9 rounded-lg flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 16 16" style="color:var(--text-primary);" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                            </div>
+                            <div>
+                                <p style="color:var(--text-primary);" class="text-sm font-semibold mb-0" id="selectedRepoName">repo-name</p>
+                                <p style="color:var(--text-muted);" class="text-[11px] font-mono mb-0" id="selectedRepoUrl">github.com/user/repo</p>
+                            </div>
+                            <button onclick="goBackToRepoSelect()" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="ml-auto text-[11px] font-medium px-2.5 py-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Change</button>
+                        </div>
+                    </div>
+                    <form id="tunnelForm" onsubmit="handleCreateTunnel(event)" class="space-y-4">
+                        <div class="space-y-1.5">
+                            <label style="color:var(--text-primary);" class="text-sm font-medium">Project Name <span style="color:var(--color-error);">*</span></label>
+                            <input required id="projectName" type="text" placeholder="e.g. grading-system-v1" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                            <p id="urlPreview" style="color:var(--text-muted);" class="text-xs font-mono mb-0 mt-1">→ 102.176.94.45:<span class="urlPort">9001</span></p>
+                            <p id="urlPreviewDomain" style="color:var(--text-muted);" class="text-[10px] font-mono mb-0 mt-0.5 flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:12px;">language</span> project.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span></p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label style="color:var(--text-primary);" class="text-sm font-medium">Branch</label>
+                                <input id="branchInput" type="text" value="main" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label style="color:var(--text-primary);" class="text-sm font-medium">Assigned Port</label>
+                                <div class="relative">
+                                    <input disabled id="localPort" type="text" value="Pending Assignment" style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="w-full rounded-lg px-3 py-2 text-sm font-mono italic cursor-not-allowed">
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">lock</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deploy Script (locked — always deploy.sh) -->
+                        <div class="space-y-1.5">
+                            <label style="color:var(--text-primary);" class="text-sm font-medium">Deploy Script</label>
+                            <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2 flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined" style="font-size:16px;color:var(--color-primary);">description</span>
+                                    <span style="color:var(--text-primary);" class="text-sm font-mono font-medium">deploy.sh</span>
+                                    <span style="background:var(--color-primary-light);color:var(--color-primary);" class="text-[9px] font-semibold px-1.5 py-0.5 rounded-full">Required</span>
+                                </div>
+                                <span class="material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">lock</span>
+                            </div>
+                            <p style="color:var(--text-muted);" class="text-[11px] mt-1">The platform always executes <code style="color:var(--color-primary);" class="font-mono">deploy.sh</code> from repo root on every deploy.</p>
+                        </div>
+
+                        <!-- deploy.sh template preview -->
+                        <div>
+                            <button type="button" onclick="toggleDeployTemplate()" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1.5 mb-2 hover:text-[var(--text-primary)] transition-colors cursor-pointer bg-transparent border-0 p-0">
+                                <span id="templateChevron" class="material-symbols-outlined transition-transform" style="font-size:14px;">expand_more</span>
+                                Example deploy.sh template
+                            </button>
+                            <div id="deployTemplate" class="hidden">
+                                <div style="background:#0A0A0A;border:1px solid #262626;border-radius:8px;" class="overflow-hidden">
+                                    <div style="background:#171717;border-bottom:1px solid #262626;" class="flex items-center justify-between px-3 py-1.5">
+                                        <span class="text-[10px] font-mono" style="color:#737373;">deploy.sh</span>
+                                        <button type="button" onclick="copyTemplate()" style="color:#737373;" class="hover:text-white transition-colors cursor-pointer p-0.5 rounded hover:bg-[#262626] bg-transparent border-0" title="Copy">
+                                            <span class="material-symbols-outlined" style="font-size:12px;">content_copy</span>
+                                        </button>
+                                    </div>
+                                    <pre class="p-3 font-mono text-[11px] leading-relaxed overflow-x-auto" style="color:#A3A3A3;margin:0;"><span style="color:#22C55E;">#!/bin/bash</span>
+<span style="color:#525252;"># Install dependencies</span>
+<span style="color:#E5E5E5;">npm install</span>
+
+<span style="color:#525252;"># Build (if needed)</span>
+<span style="color:#E5E5E5;">npm run build</span>
+
+<span style="color:#525252;"># Start on the assigned port</span>
+<span style="color:#E5E5E5;">PORT=</span><span style="color:#E8792B;">$ASSIGNED_PORT</span><span style="color:#E5E5E5;"> npm start</span></pre>
+                                </div>
+                                <p style="color:var(--text-muted);" class="text-[10px] mt-1.5 flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:12px;color:var(--color-primary);">info</span> <code style="color:var(--color-primary);" class="font-mono">$ASSIGNED_PORT</code> is injected automatically — your app must listen on it.</p>
+                            </div>
+                        </div>
+                        <div class="pt-1 flex justify-end gap-3">
+                            <button type="button" onclick="closeModal()" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="px-4 py-2 text-sm font-medium rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Cancel</button>
+                            <button type="submit" style="background:var(--color-primary);color:white;" class="px-5 py-2 text-sm font-semibold rounded-lg hover:opacity-90 shadow-sm transition-all cursor-pointer flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:18px;">rocket_launch</span>Create &amp; Deploy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="p-4 border-t border-border-dark">
-      <div class="flex items-center gap-3 px-2">
-        <div
-          class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-text-dim">
-          S</div>
-        <div class="flex flex-col">
-          <span class="text-text-main text-sm font-medium">Student</span>
-          <span class="text-text-dim text-xs">student@disal.io</span>
-        </div>
-      </div>
-      <!-- Theme Toggle -->
-      <button onclick="toggleTheme()"
-        class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
-        title="Toggle Theme">
-        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-      </button>
-    </div>
-  </aside>
-  <!-- Main Content -->
-  <main class="flex-1 flex flex-col h-full overflow-hidden bg-background-main relative">
-    <!-- Grid Background (CSS Variable Controlled) -->
-    <!-- Grid Background Removed -->
-    <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
-    <!-- Header -->
-    <header
-      class="h-16 border-b border-border-strong flex items-center justify-between px-4 md:px-8 bg-background-main/80 backdrop-blur-md z-10 sticky top-0">
-      <div class="flex items-center gap-4">
-        <nav class="flex items-center text-sm font-medium text-text-muted">
-          <a class="hover:text-white transition-colors" href="index.html">Home</a>
-          <span class="mx-2 text-border-dark">/</span>
-          <span class="text-white">Dashboard</span>
-        </nav>
-      </div>
-      <div class="flex items-center gap-4">
-        <!-- Search Bar -->
-        <div class="relative group">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span
-              class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors text-[20px]">search</span>
-          </div>
-          <input
-            class="bg-surface-dark border border-border-dark text-white text-sm rounded-lg focus:ring-1 focus:ring-primary focus:border-primary block w-64 pl-10 p-2 placeholder-gray-500 transition-all font-display"
-            placeholder="Search tunnels... (Cmd+K)" type="text" />
-        </div>
-        <!-- Primary Action -->
-        <button onclick="openModal()"
-          class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_15px_-3px_rgba(99,102,241,0.4)]">
-          <span class="material-symbols-outlined text-[20px]">add</span>
-          Establish New Tunnel
-        </button>
-      </div>
-    </header>
-    <!-- Scrollable Content -->
-    <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide">
-      <!-- Filter & View Controls -->
-      <div class="flex flex-col gap-4 mb-6 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <h1 class="text-2xl font-bold text-text-primary mb-1">Active Connections</h1>
-          <p class="text-text-muted text-sm">Manage your active SSH forwarding sessions.</p>
-        </div>
-        <div class="flex flex-col gap-3 items-stretch lg:items-end">
-          <!-- Auto Redeploy Controls -->
-          <div
-            class="flex items-center gap-3 bg-surface-dark rounded-lg px-3 py-2 border border-border-dark/80 text-xs text-text-muted">
-            <div class="flex flex-col">
-              <span class="font-semibold text-[11px] text-text-main uppercase tracking-wide">Redeploy Policy</span>
-              <span id="redeploySubtitle" class="text-[11px] text-text-muted">
-                Webhook listener will auto-redeploy when updates are pushed.
-              </span>
-            </div>
-            <button id="autoRedeployToggle" type="button"
-              class="ml-2 inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-mono border border-border-dark bg-background-dark/60 hover:border-primary/60 hover:text-primary transition-colors">
-              <span class="material-symbols-outlined text-[16px]" id="autoRedeployIcon">bolt</span>
-              <span id="autoRedeployLabel">AUTO: ON</span>
-            </button>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="simulateRepoUpdate" type="button"
-              class="flex items-center gap-1.5 rounded-lg bg-surface-dark px-3 py-1.5 text-[11px] font-medium text-text-muted border border-border-dark hover:text-white hover:bg-white/5 transition-colors">
-              <span class="material-symbols-outlined text-[16px]">commit</span>
-              Simulate Repo Update
-            </button>
-            <button id="manualRedeployBtn" type="button"
-              class="hidden flex items-center gap-1.5 rounded-lg bg-primary/90 px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_0_15px_-3px_rgba(99,102,241,0.6)] hover:bg-primary transition-colors">
-              <span class="material-symbols-outlined text-[16px]">restart_alt</span>
-              Manual Redeploy
-            </button>
-          </div>
-          <div id="updateDetectedBanner"
-            class="hidden text-[11px] text-amber-300 flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/40 rounded-lg px-3 py-1">
-            <span class="material-symbols-outlined text-[14px]">notifications_active</span>
-            <span>Update detected. Auto‑redeploy is OFF — run a Manual Redeploy to apply changes.</span>
-          </div>
-        </div>
-      </div>
-      <!-- Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        <!-- Card 1 -->
-        <!-- Card 1: Dynamic Primary Deployment -->
-        <div id="deployment-card"
-          class="hidden bg-surface-dark border border-border-dark rounded-lg p-5 flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
-          <div class="flex justify-between items-start">
-            <div class="flex flex-col gap-1">
-              <h3 class="font-medium text-white text-base">Primary Deployment</h3>
-              <span class="text-xs text-text-muted">Production Preview</span>
-            </div>
-            <span
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
-              Live
-            </span>
-          </div>
-          <div
-            class="bg-[#0D0D10] rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
-            <div class="truncate flex items-center gap-2">
-              <span class="text-gray-500">port:</span><span id="display-port">...</span> <span
-                class="text-gray-600">→</span> <span class="text-primary truncate">app.tunnel.disal.io</span>
-            </div>
-            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
-              <span class="material-symbols-outlined text-[16px]">content_copy</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
-            <div class="flex items-center gap-2 text-xs text-text-muted">
-              <span class="material-symbols-outlined text-[16px]">schedule</span>
-              Uptime: Just now
-            </div>
-            <div class="flex gap-2">
-              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
-                title="Restart">
-                <span class="material-symbols-outlined text-[18px]">refresh</span>
-              </button>
-              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
-                title="Disconnect">
-                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <script>
-          // Initialize primary deployment card from localStorage (Deployment Status)
-          (function initDeploymentCard() {
-            const hasDeploy = localStorage.getItem('hasDeployment') === 'true';
-            const assignedPort = localStorage.getItem('assignedPort');
-
-            if (hasDeploy && assignedPort) {
-              const card = document.getElementById('deployment-card');
-              const portDisplay = document.getElementById('display-port');
-
-              if (card && portDisplay) {
-                card.classList.remove('hidden');
-                card.classList.add('flex');
-                portDisplay.innerText = assignedPort;
-              }
+    <script>
+        /* ── Deploy Template Toggle ── */
+        function toggleDeployTemplate() {
+            const tpl = document.getElementById('deployTemplate');
+            const chevron = document.getElementById('templateChevron');
+            if (tpl.classList.contains('hidden')) {
+                tpl.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                tpl.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
             }
-          })();
-        </script>
-        <!-- Card 2 -->
-        <div
-          class="bg-surface-dark border border-border-dark rounded-lg p-5 flex flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
-          <div class="flex justify-between items-start">
-            <div class="flex flex-col gap-1">
-              <h3 class="font-medium text-white text-base">React Frontend</h3>
-              <span class="text-xs text-text-muted">Staging Environment</span>
-            </div>
-            <span
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
-              Live
-            </span>
-          </div>
-          <div
-            class="bg-background-dark rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
-            <div class="truncate flex items-center gap-2">
-              <span class="text-gray-500">loc:</span>3000 <span class="text-gray-600">→</span> <span
-                class="text-primary truncate">preview.disal.io/usr99</span>
-            </div>
-            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
-              <span class="material-symbols-outlined text-[16px]">content_copy</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
-            <div class="flex items-center gap-2 text-xs text-text-muted">
-              <span class="material-symbols-outlined text-[16px]">schedule</span>
-              Uptime: 0h 45m
-            </div>
-            <div class="flex gap-2">
-              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
-                title="Restart">
-                <span class="material-symbols-outlined text-[18px]">refresh</span>
-              </button>
-              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
-                title="Disconnect">
-                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div
-          class="bg-surface-dark border border-border-dark rounded-lg p-5 flex flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
-          <div class="flex justify-between items-start">
-            <div class="flex flex-col gap-1">
-              <h3 class="font-medium text-white text-base">Database Tunnel (Postgres)</h3>
-              <span class="text-xs text-text-muted">Debug Session</span>
-            </div>
-            <span
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-500 border border-yellow-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
-              Idle
-            </span>
-          </div>
-          <div
-            class="bg-background-dark rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
-            <div class="truncate flex items-center gap-2">
-              <span class="text-gray-500">loc:</span>5432 <span class="text-gray-600">→</span> <span
-                class="text-primary truncate">db.tunnel.disal.io</span>
-            </div>
-            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
-              <span class="material-symbols-outlined text-[16px]">content_copy</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
-            <div class="flex items-center gap-2 text-xs text-text-muted">
-              <span class="material-symbols-outlined text-[16px]">schedule</span>
-              Uptime: 2d 01h
-            </div>
-            <div class="flex gap-2">
-              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
-                title="Restart">
-                <span class="material-symbols-outlined text-[18px]">refresh</span>
-              </button>
-              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
-                title="Disconnect">
-                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Card 4 -->
-        <div
-          class="bg-surface-dark border border-border-dark rounded-lg p-5 flex flex-col gap-4 hover:border-primary/30 transition-colors group relative overflow-hidden">
-          <div class="flex justify-between items-start">
-            <div class="flex flex-col gap-1">
-              <h3 class="font-medium text-white text-base">Redis Cache</h3>
-              <span class="text-xs text-text-muted">Feature Branch #220</span>
-            </div>
-            <span
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
-              Live
-            </span>
-          </div>
-          <div
-            class="bg-background-dark rounded border border-border-dark p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-gray-600 transition-colors">
-            <div class="truncate flex items-center gap-2">
-              <span class="text-gray-500">loc:</span>6379 <span class="text-gray-600">→</span> <span
-                class="text-primary truncate">cache.tunnel.disal.io</span>
-            </div>
-            <button class="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
-              <span class="material-symbols-outlined text-[16px]">content_copy</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
-            <div class="flex items-center gap-2 text-xs text-text-muted">
-              <span class="material-symbols-outlined text-[16px]">schedule</span>
-              Uptime: 0h 12m
-            </div>
-            <div class="flex gap-2">
-              <button class="text-text-muted hover:text-white transition-colors p-1 rounded hover:bg-white/5"
-                title="Restart">
-                <span class="material-symbols-outlined text-[18px]">refresh</span>
-              </button>
-              <button class="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
-                title="Disconnect">
-                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Failed Card -->
-      <div
-        class="bg-surface-dark border border-red-500/30 rounded-lg p-5 flex flex-col gap-4 hover:border-red-500/50 transition-colors group relative overflow-hidden">
-        <div class="flex justify-between items-start">
-          <div class="flex flex-col gap-1">
-            <h3 class="font-medium text-white text-base">Grading System V1</h3>
-            <span class="text-xs text-red-400">Crash Detected</span>
-          </div>
-          <span
-            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-500 border border-red-500/20">
-            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-            Failed
-          </span>
-        </div>
-        <div
-          class="bg-background-dark rounded border border-red-500/20 p-3 font-mono text-sm text-gray-300 flex items-center justify-between group-hover:border-red-500/30 transition-colors">
-          <div class="truncate flex items-center gap-2">
-            <span class="text-gray-500">err:</span>503 <span class="text-gray-600">→</span> <span
-              class="text-red-400 truncate">Connection Refused</span>
-          </div>
-        </div>
-        <div class="flex items-center justify-between pt-2 border-t border-border-dark/50 mt-auto">
-          <div class="flex gap-2">
-            <button
-              class="text-white bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 transition-colors px-3 py-1 rounded text-xs font-medium"
-              title="View Logs">
-              View Logs
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Add New Card -->
-      <button onclick="openModal()"
-        class="bg-surface-dark/40 border border-dashed border-border-dark rounded-lg p-5 flex flex-col gap-4 items-center justify-center min-h-[180px] hover:border-primary/50 hover:bg-surface-dark transition-all group cursor-pointer text-text-muted hover:text-primary">
-        <div
-          class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-          <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">add</span>
-        </div>
-        <span class="text-sm font-medium">Configure New Tunnel</span>
-      </button>
-    </div>
-    <!-- Recent Activity Log (Optional fill for density) -->
-    <div class="mt-12 pt-8 border-t border-border-dark">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h2 class="text-lg font-bold text-white mb-1">System Events</h2>
-          <p class="text-text-muted text-sm">Audit logs and orchestrator events.</p>
-        </div>
-      </div>
-      <div class="rounded-lg border border-border-dark bg-surface-dark overflow-hidden">
-        <table class="w-full text-left text-sm text-text-muted">
-          <thead class="bg-surface-dark text-xs uppercase font-medium border-b border-border-dark">
-            <tr>
-              <th class="px-6 py-3">Timestamp</th>
-              <th class="px-6 py-3">Event</th>
-              <th class="px-6 py-3">Tunnel</th>
-              <th class="px-6 py-3">Source</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-border-dark/50">
-            <tr class="hover:bg-white/5 transition-colors">
-              <td class="px-6 py-3 font-mono text-xs">Oct 24, 14:32:01</td>
-              <td class="px-6 py-3 text-success">Connection Established</td>
-              <td class="px-6 py-3">API Gateway</td>
-              <td class="px-6 py-3">192.168.1.42</td>
-            </tr>
-            <tr class="hover:bg-white/5 transition-colors">
-              <td class="px-6 py-3 font-mono text-xs">Oct 24, 12:15:44</td>
-              <td class="px-6 py-3 text-red-400">Connection Reset</td>
-              <td class="px-6 py-3">Redis Cache</td>
-              <td class="px-6 py-3">192.168.1.42</td>
-            </tr>
-            <tr class="hover:bg-white/5 transition-colors">
-              <td class="px-6 py-3 font-mono text-xs">Oct 24, 09:10:22</td>
-              <td class="px-6 py-3 text-success">Connection Established</td>
-              <td class="px-6 py-3">React Frontend</td>
-              <td class="px-6 py-3">10.0.0.55</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    </div>
-  </main>
+        }
 
-  <!-- MODAL OVERLAY -->
-  <div id="modalOverlay"
-    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <!-- Modal Card -->
-    <div class="w-full max-w-[500px] bg-surface-dark border border-border-dark rounded-xl shadow-2xl flex flex-col">
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between p-6 border-b border-border-dark">
-        <div>
-          <h2 class="text-lg font-bold text-white">Configure New Tunnel</h2>
-          <p class="text-sm text-text-muted">Set up your localhost exposure</p>
-        </div>
-        <button onclick="closeModal()" class="text-text-muted hover:text-white transition-colors">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
+        function copyTemplate() {
+            const text = '#!/bin/bash\n# Install dependencies\nnpm install\n\n# Build (if needed)\nnpm run build\n\n# Start on the assigned port\nPORT=$ASSIGNED_PORT npm start';
+            navigator.clipboard.writeText(text).then(() => alert('Template copied!'));
+        }
 
-      <!-- Modal Body -->
-      <form id="tunnelForm" onsubmit="handleCreateTunnel(event)" class="p-6 space-y-5">
-        <!-- Field 1 -->
-        <div class="mb-4">
-          <label class="block text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Project Name</label>
-          <input required id="projectName" type="text"
-            class="w-full bg-surface-dark border border-border-dark rounded-lg px-4 py-3 text-white placeholder-text-muted/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono text-sm"
-            placeholder="e.g. grading-system-v1">
-        </div>
+        /* ── Mock GitHub Repos ── */
+        const mockRepos = [
+            { name: 'grading-system-v2', desc: 'Final Year Project — automated grading platform', lang: 'JavaScript', langColor: '#f1e05a', updated: '2 hours ago', visibility: 'Private' },
+            { name: 'fyp-portfolio-site', desc: 'Personal portfolio for FYP showcase', lang: 'TypeScript', langColor: '#3178c6', updated: '5 hours ago', visibility: 'Public' },
+            { name: 'ml-model-api', desc: 'Flask API serving trained ML model', lang: 'Python', langColor: '#3572A5', updated: '1 day ago', visibility: 'Private' },
+            { name: 'student-dashboard', desc: 'React dashboard for student analytics', lang: 'JavaScript', langColor: '#f1e05a', updated: '3 days ago', visibility: 'Public' },
+            { name: 'chat-app-backend', desc: 'Node.js + Socket.io real-time chat server', lang: 'TypeScript', langColor: '#3178c6', updated: '5 days ago', visibility: 'Private' },
+            { name: 'database-migrations', desc: 'PostgreSQL migration scripts', lang: 'SQL', langColor: '#e38c00', updated: '1 week ago', visibility: 'Public' },
+            { name: 'deploy-scripts', desc: 'CI/CD pipeline and deploy.sh configs', lang: 'Shell', langColor: '#89e051', updated: '2 weeks ago', visibility: 'Public' },
+        ];
 
-        <!-- Field 2 -->
-        <div class="mb-4">
-          <label class="block text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Git Repository
-            URL</label>
-          <input type="text"
-            class="w-full bg-surface-dark border border-border-dark rounded-lg px-4 py-3 text-white placeholder-text-muted/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-mono text-sm"
-            placeholder="https://github.com/user/repo.git">
-        </div>
+        function renderRepoList(filter = '') {
+            const container = document.getElementById('repoList');
+            const filtered = mockRepos.filter(r => r.name.toLowerCase().includes(filter.toLowerCase()) || r.desc.toLowerCase().includes(filter.toLowerCase()));
+            container.innerHTML = filtered.map(r => `
+                <div class="flex items-center justify-between p-3 rounded-lg transition-colors hover:bg-[var(--bg-surface-2)] group cursor-pointer" style="border:1px solid var(--border-subtle);" onclick="selectRepo('${r.name}','https://github.com/student-dev/${r.name}','${r.lang}')">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 16 16" style="color:var(--text-muted);" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span style="color:var(--text-primary);" class="text-sm font-medium truncate">${r.name}</span>
+                                <span style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="text-[10px] px-1.5 py-0.5 rounded-full shrink-0">${r.visibility}</span>
+                            </div>
+                            <p style="color:var(--text-muted);" class="text-[11px] mb-0 truncate">${r.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0 ml-3">
+                        <div class="flex items-center gap-1.5 text-[11px]" style="color:var(--text-muted);">
+                            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${r.langColor};"></span>${r.lang}
+                        </div>
+                        <span style="color:var(--text-muted);" class="text-[11px] hidden sm:inline">${r.updated}</span>
+                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" style="font-size:18px;color:var(--color-primary);">arrow_forward</span>
+                    </div>
+                </div>
+            `).join('');
+            if (!filtered.length) container.innerHTML = `<div class="py-8 text-center"><span style="color:var(--text-muted);" class="text-sm">No repositories found.</span></div>`;
+        }
 
-        <!-- Field 3 -->
-        <div class="space-y-1.5">
-          <label class="text-xs font-semibold uppercase tracking-wider text-text-muted">Assigned Port</label>
-          <!-- Model B: Port Logic -->
-          <input disabled id="localPort" type="text" value="Pending Assignment"
-            class="w-full bg-background-dark/50 border border-border-dark rounded-lg px-4 py-2.5 text-sm text-text-muted opacity-70 cursor-not-allowed font-mono italic">
-        </div>
+        function filterRepos() { renderRepoList(document.getElementById('repoSearch')?.value || ''); }
 
-        <!-- Preview -->
-        <div class="bg-primary/5 border border-primary/20 rounded-lg p-3 flex items-center justify-between">
-          <span class="text-xs font-medium text-primary">Your Public URL</span>
-          <span id="urlPreview" class="text-xs font-mono text-text-main">project.disal.io</span>
-        </div>
+        function connectGitHub() {
+            const btn = event.target.closest('button');
+            btn.innerHTML = '<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Connecting…';
+            btn.disabled = true;
+            setTimeout(() => {
+                localStorage.setItem('ghConnected', 'true');
+                document.getElementById('ghNotConnected').classList.add('hidden');
+                document.getElementById('ghConnected').classList.remove('hidden');
+                renderRepoList();
+            }, 800);
+        }
 
-        <!-- Field 4 -->
-        <div class="space-y-1.5">
-          <label class="text-xs font-semibold uppercase tracking-wider text-text-muted">Protocol</label>
-          <select
-            class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-2.5 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-            <option>HTTP</option>
-            <option>HTTPS</option>
-            <option>TCP</option>
-          </select>
-        </div>
+        function disconnectGitHub() {
+            localStorage.removeItem('ghConnected');
+            document.getElementById('ghConnected').classList.add('hidden');
+            document.getElementById('ghNotConnected').classList.remove('hidden');
+            const btn = document.querySelector('#ghNotConnected button');
+            if (btn) { btn.innerHTML = '<svg class="w-5 h-5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Continue with GitHub'; btn.disabled = false; }
+        }
 
-        <!-- Modal Footer -->
-        <div class="pt-4 flex justify-end gap-3">
-          <button type="button" onclick="closeModal()"
-            class="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">Cancel</button>
-          <button type="submit"
-            class="px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg shadow-primary/20 transition-all">Create
-            Tunnel</button>
-        </div>
-      </form>
-    </div>
-  </div>
+        function selectRepo(name, url, lang) {
+            document.getElementById('selectedRepoName').textContent = name;
+            document.getElementById('selectedRepoUrl').textContent = url.replace('https://','');
+            document.getElementById('projectName').value = name;
+            document.getElementById('urlPreview').innerHTML = '→ 102.176.94.45:' + (localStorage.getItem('assignedPort') || '9001');
+            const domLine = document.getElementById('urlPreviewDomain');
+            if (domLine) domLine.innerHTML = '<span class="material-symbols-outlined" style="font-size:12px;">language</span> ' + name + '.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span>';
+            document.getElementById('panelGithub').classList.add('hidden');
+            document.getElementById('panelManual').classList.add('hidden');
+            document.getElementById('panelConfigure').classList.remove('hidden');
+            document.getElementById('modalTabBar')?.classList.add('hidden');
+        }
 
-  <script>
-    // Redeploy policy + webhook simulation (Webhook Listener, Auto Redeploy?, Notification Service)
-    function syncAutoRedeployUI() {
-      const auto = localStorage.getItem('autoRedeploy') !== 'false'; // default ON
-      const toggle = document.getElementById('autoRedeployToggle');
-      const label = document.getElementById('autoRedeployLabel');
-      const icon = document.getElementById('autoRedeployIcon');
-      const subtitle = document.getElementById('redeploySubtitle');
-      const manualBtn = document.getElementById('manualRedeployBtn');
+        function selectManualRepo() {
+            const url = document.getElementById('manualRepoUrl')?.value;
+            if (!url) { alert('Please enter a repository URL.'); return; }
+            const parts = url.replace(/\.git$/,'').split('/');
+            const name = parts[parts.length - 1] || 'project';
+            document.getElementById('selectedRepoName').textContent = name;
+            document.getElementById('selectedRepoUrl').textContent = url.replace('https://','');
+            document.getElementById('projectName').value = name;
+            document.getElementById('urlPreview').innerHTML = '→ 102.176.94.45:' + (localStorage.getItem('assignedPort') || '9001');
+            const domLine2 = document.getElementById('urlPreviewDomain');
+            if (domLine2) domLine2.innerHTML = '<span class="material-symbols-outlined" style="font-size:12px;">language</span> ' + name + '.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span>';
+            document.getElementById('panelGithub').classList.add('hidden');
+            document.getElementById('panelManual').classList.add('hidden');
+            document.getElementById('panelConfigure').classList.remove('hidden');
+            document.getElementById('modalTabBar')?.classList.add('hidden');
+        }
 
-      if (!toggle || !label || !icon || !subtitle || !manualBtn) return;
+        function goBackToRepoSelect() {
+            document.getElementById('panelConfigure').classList.add('hidden');
+            document.getElementById('modalTabBar')?.classList.remove('hidden');
+            const isGH = document.getElementById('tabGithub').style.color.includes('var(--color-primary)');
+            if (isGH) document.getElementById('panelGithub').classList.remove('hidden');
+            else document.getElementById('panelManual').classList.remove('hidden');
+        }
 
-      if (auto) {
-        label.textContent = 'AUTO: ON';
-        icon.textContent = 'bolt';
-        subtitle.textContent = 'Webhook listener will auto-redeploy when updates are pushed.';
-        manualBtn.classList.add('hidden');
-      } else {
-        label.textContent = 'AUTO: OFF';
-        icon.textContent = 'bolt_off';
-        subtitle.textContent = 'Updates will notify you. Manual Redeploy is required to apply changes.';
-        manualBtn.classList.remove('hidden');
-      }
-    }
+        function setModalTab(tab) {
+            const gh = document.getElementById('tabGithub'), m = document.getElementById('tabManual');
+            const pg = document.getElementById('panelGithub'), pm = document.getElementById('panelManual'), pc = document.getElementById('panelConfigure');
+            pc.classList.add('hidden');
+            if (tab === 'github') {
+                gh.style.color = 'var(--color-primary)'; gh.style.borderBottom = '2px solid var(--color-primary)';
+                m.style.color = 'var(--text-muted)'; m.style.borderBottom = '2px solid transparent';
+                pg.classList.remove('hidden'); pm.classList.add('hidden');
+            } else {
+                m.style.color = 'var(--color-primary)'; m.style.borderBottom = '2px solid var(--color-primary)';
+                gh.style.color = 'var(--text-muted)'; gh.style.borderBottom = '2px solid transparent';
+                pm.classList.remove('hidden'); pg.classList.add('hidden');
+            }
+        }
 
-    function toggleAutoRedeploy() {
-      const current = localStorage.getItem('autoRedeploy') !== 'false';
-      localStorage.setItem('autoRedeploy', current ? 'false' : 'true');
-      syncAutoRedeployUI();
-    }
+        /* ── Filter Pills ── */
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(p => { p.classList.remove('active'); p.style.background = 'transparent'; p.style.color = 'var(--text-muted)'; });
+                pill.classList.add('active'); pill.style.background = ''; pill.style.color = '';
+                const f = pill.dataset.filter;
+                const cards = document.querySelectorAll('#gridView .project-card[data-status]');
+                const rows = document.querySelectorAll('#listView tr[data-status]');
+                [...cards, ...rows].forEach(el => { el.style.display = (f === 'all' || el.dataset.status === f) ? '' : 'none'; });
+                const addBtn = document.querySelector('#gridView button[onclick="openModal()"]');
+                if (addBtn) addBtn.style.display = '';
+            });
+        });
 
-    function simulateRepoUpdate() {
-      const auto = localStorage.getItem('autoRedeploy') !== 'false';
-      const banner = document.getElementById('updateDetectedBanner');
+        /* ── View Toggle ── */
+        function setView(v) {
+            const grid = document.getElementById('gridView'), list = document.getElementById('listView');
+            const gBtn = document.getElementById('gridViewBtn'), lBtn = document.getElementById('listViewBtn');
+            if (v === 'grid') { grid.classList.remove('hidden'); list.classList.add('hidden'); gBtn.classList.add('active'); gBtn.style.color = ''; lBtn.classList.remove('active'); lBtn.style.color = 'var(--text-muted)'; }
+            else { grid.classList.add('hidden'); list.classList.remove('hidden'); lBtn.classList.add('active'); lBtn.style.color = ''; gBtn.classList.remove('active'); gBtn.style.color = 'var(--text-muted)'; }
+        }
 
-      const now = new Date();
-      const timestamp = now.toLocaleString(undefined, {
-        hour12: false
-      });
+        /* ── Redeploy Policy ── */
+        function syncAutoUI() {
+            const auto = localStorage.getItem('autoRedeploy') !== 'false';
+            const l = document.getElementById('autoRedeployLabel'), i = document.getElementById('autoRedeployIcon'), s = document.getElementById('redeploySubtitle'), m = document.getElementById('manualRedeployBtn');
+            if (!l) return;
+            if (auto) { l.textContent = 'AUTO: ON'; i.textContent = 'bolt'; s.textContent = 'Webhook listener auto-redeploys on push.'; m.classList.add('hidden'); m.classList.remove('flex'); }
+            else { l.textContent = 'AUTO: OFF'; i.textContent = 'bolt_off'; s.textContent = 'Updates notify you. Manual Redeploy required.'; m.classList.remove('hidden'); m.classList.add('flex'); }
+        }
+        document.getElementById('autoRedeployToggle')?.addEventListener('click', () => { const c = localStorage.getItem('autoRedeploy') !== 'false'; localStorage.setItem('autoRedeploy', c ? 'false' : 'true'); syncAutoUI(); });
+        document.getElementById('simulateRepoUpdate')?.addEventListener('click', () => {
+            const auto = localStorage.getItem('autoRedeploy') !== 'false';
+            const banner = document.getElementById('updateDetectedBanner');
+            const now = new Date().toLocaleTimeString('en-GB');
+            const tbody = document.getElementById('eventsTableBody');
+            if (tbody) { const r = document.createElement('tr'); r.style.borderBottom = '1px solid var(--border-subtle)'; r.className = 'hover:bg-[var(--bg-surface-2)] transition-colors'; r.innerHTML = `<td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs">${now}</td><td style="color:var(--color-primary);" class="px-5 py-2.5 text-xs font-medium">Repo Update Event</td><td style="color:var(--text-secondary);" class="px-5 py-2.5 text-xs">Webhook</td><td style="color:var(--text-muted);" class="px-5 py-2.5 font-mono text-xs hidden md:table-cell">git@repo</td>`; tbody.prepend(r); }
+            if (auto) alert('Auto-redeploy triggered via Orchestrator.');
+            else { if (banner) banner.classList.remove('hidden'); localStorage.setItem('updatePending', 'true'); }
+        });
+        document.getElementById('manualRedeployBtn')?.addEventListener('click', () => { alert('Manual Redeploy started.'); localStorage.removeItem('updatePending'); document.getElementById('updateDetectedBanner')?.classList.add('hidden'); });
+        syncAutoUI();
+        if (localStorage.getItem('updatePending') === 'true') document.getElementById('updateDetectedBanner')?.classList.remove('hidden');
 
-      // Append event row to System Events table
-      const tbody = document.querySelector('table tbody');
-      if (tbody) {
-        const row = document.createElement('tr');
-        row.className = 'hover:bg-white/5 transition-colors';
-        row.innerHTML = `
-          <td class="px-6 py-3 font-mono text-xs">${timestamp}</td>
-          <td class="px-6 py-3 text-primary">Repo Update Event</td>
-          <td class="px-6 py-3">Webhook Listener</td>
-          <td class="px-6 py-3">git@repository</td>
-        `;
-        tbody.prepend(row);
-      }
+        /* ── Search Projects ── */
+        function searchProjects(q) {
+            q = q.toLowerCase();
+            document.querySelectorAll('.project-card[data-project]').forEach(card => {
+                const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                const match = !q || name.includes(q);
+                card.style.display = match ? '' : 'none';
+            });
+            document.querySelectorAll('.list-row[data-project]').forEach(row => {
+                const name = row.querySelector('.font-semibold, .font-medium')?.textContent.toLowerCase() || '';
+                const match = !q || name.includes(q);
+                row.style.display = match ? '' : 'none';
+            });
+        }
+        // ⌘K / Ctrl+K shortcut to focus search
+        document.addEventListener('keydown', e => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); document.getElementById('projectSearch')?.focus(); }
+        });
 
-      if (auto) {
-        // Directly simulate Orchestrator -> Runtime Manager path
-        alert('Webhook Listener: update detected. Auto‑redeploy triggered via Orchestrator.');
-      } else {
-        // OFF branch -> Notification Service -> student banner
-        if (banner) banner.classList.remove('hidden');
-        localStorage.setItem('updatePending', 'true');
-      }
-    }
+        /* ── Card / Row → Project Detail navigation (event delegation) ── */
+        document.addEventListener('click', e => {
+            // Ignore clicks on interactive children
+            if (e.target.closest('a, button, input, textarea, select')) return;
+            const card = e.target.closest('.project-card[data-project], .list-row[data-project]');
+            if (card) location.href = 'Project Detail.html?project=' + card.dataset.project;
+        });
 
-    function manualRedeploy() {
-      const banner = document.getElementById('updateDetectedBanner');
-      alert('Manual Redeploy started via Orchestrator. Runtime Manager will execute deploy.sh on your assigned port.');
-      localStorage.removeItem('updatePending');
-      if (banner) banner.classList.add('hidden');
-    }
+        /* ── Dynamic Deployment Card ── */
+        (function() {
+            if (localStorage.getItem('hasDeployment') === 'true' && localStorage.getItem('assignedPort')) {
+                const c = document.getElementById('deployment-card'), p = document.getElementById('display-port');
+                if (c && p) {
+                    c.classList.remove('hidden'); c.classList.add('flex'); p.innerText = localStorage.getItem('assignedPort');
+                    document.getElementById('deploy-open-link').href = 'http://102.176.94.45:' + localStorage.getItem('assignedPort');
+                }
+            }
+        })();
 
-    (function initRedeployControls() {
-      const toggle = document.getElementById('autoRedeployToggle');
-      const repoBtn = document.getElementById('simulateRepoUpdate');
-      const manualBtn = document.getElementById('manualRedeployBtn');
-      const banner = document.getElementById('updateDetectedBanner');
-
-      if (toggle) toggle.addEventListener('click', toggleAutoRedeploy);
-      if (repoBtn) repoBtn.addEventListener('click', simulateRepoUpdate);
-      if (manualBtn) manualBtn.addEventListener('click', manualRedeploy);
-
-      // Restore previous state
-      syncAutoRedeployUI();
-      if (localStorage.getItem('updatePending') === 'true' && banner) {
-        banner.classList.remove('hidden');
-      }
-    })();
-
-    const modal = document.getElementById('modalOverlay');
-    const mainContent = document.querySelector('main');
-    const projectNameInput = document.getElementById('projectName');
-    const urlPreview = document.getElementById('urlPreview');
-
-    function openModal() {
-      modal.classList.remove('hidden');
-      mainContent.classList.add('blur-[2px]', 'pointer-events-none');
-    }
-
-    function closeModal() {
-      modal.classList.add('hidden');
-      mainContent.classList.remove('blur-[2px]', 'pointer-events-none');
-    }
-
-    projectNameInput.addEventListener('input', (e) => {
-      const val = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-      urlPreview.innerText = (val || 'project') + '.disal.io';
-    });
-
-    function handleCreateTunnel(e) {
-      e.preventDefault();
-      const name = projectNameInput.value;
-      const port = document.getElementById('localPort').value;
-
-      // Simulation: Input Validation Node
-      if (!name || !port) {
-        alert('Please fill in all fields (Error Handler Node)');
-        return;
-      }
-
-      // Simulation: Orchestrator -> Deploy Sequence
-      const btn = e.target.querySelector('button[type="submit"]');
-      const originalText = btn.innerText;
-      btn.disabled = true;
-      btn.innerText = 'Provisioning...';
-
-      setTimeout(() => {
-        alert(`Success! Tunnel "${name}" is being orchestrated on port ${port}.`);
-        closeModal();
-        btn.disabled = false;
-        btn.innerText = originalText;
-        // In a real app, we'd add a card to the grid here.
-      }, 1500);
-    }
-  </script>
+        /* ── Modal ── */
+        const modal = document.getElementById('modalOverlay'), mainEl = document.querySelector('main');
+        function openModal() {
+            modal.classList.remove('hidden'); mainEl.classList.add('blur-sm','pointer-events-none');
+            // Reset to step 1
+            document.getElementById('panelGithub').classList.remove('hidden');
+            document.getElementById('panelManual').classList.add('hidden');
+            document.getElementById('panelConfigure').classList.add('hidden');
+            setModalTab('github');
+            document.getElementById('modalTabBar')?.classList.remove('hidden');
+            // If previously connected, show repos
+            if (localStorage.getItem('ghConnected') === 'true') {
+                document.getElementById('ghNotConnected').classList.add('hidden');
+                document.getElementById('ghConnected').classList.remove('hidden');
+                renderRepoList();
+            }
+        }
+        function closeModal() { modal.classList.add('hidden'); mainEl.classList.remove('blur-sm','pointer-events-none'); }
+        const pInput = document.getElementById('projectName'), uPrev = document.getElementById('urlPreview');
+        pInput?.addEventListener('input', e => { const v = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g,'-'); uPrev.innerHTML = '→ 102.176.94.45:' + (localStorage.getItem('assignedPort') || '9001'); const dl = document.getElementById('urlPreviewDomain'); if(dl) dl.innerHTML = '<span class="material-symbols-outlined" style="font-size:12px;">language</span> ' + (v || 'project') + '.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span>'; });
+        function handleCreateTunnel(e) {
+            e.preventDefault(); const n = pInput.value; if (!n) { alert('Fill required fields.'); return; }
+            const slug = n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            const port = localStorage.getItem('assignedPort') || '9001';
+            const btn = e.target.querySelector('button[type="submit"]'), orig = btn.innerHTML;
+            btn.disabled = true; btn.innerHTML = '<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Deploying…';
+            setTimeout(() => {
+                // Persist deployment state
+                localStorage.setItem('hasDeployment', 'true');
+                localStorage.setItem('assignedPort', port);
+                // Persist created project data
+                const repoUrl = document.getElementById('repoUrl')?.value || '';
+                const projects = JSON.parse(localStorage.getItem('disalProjects') || '{}');
+                projects[slug] = { name: n, port: port, branch: 'main', commit: (Math.random().toString(36).slice(2,9)), status: 'live', time: 'Just now', repo: repoUrl ? repoUrl.replace('https://github.com/','') : 'student/' + slug, domain: slug };
+                localStorage.setItem('disalProjects', JSON.stringify(projects));
+                // Redirect to project detail
+                window.location.href = 'Project Detail.html?project=' + encodeURIComponent(slug);
+            }, 1500);
+        }
+    </script>
 </body>
-
 </html>

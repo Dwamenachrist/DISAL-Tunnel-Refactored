@@ -1,98 +1,55 @@
-/* DISAL Hosting Platform - Design Tokens (Modern Dark Grid) */
+/* ============================================================
+   DISAL HOSTING PLATFORM — Semantic Variables Layer
+   This file provides backward-compatible aliases that map
+   old variable names → new token system in tokens.css.
+   Import tokens.css BEFORE this file.
+   ============================================================ */
+
+/* All tokens are defined in tokens.css.
+   This file provides ONLY legacy / convenience aliases
+   so existing HTML pages don't break during migration. */
 
 :root {
-  /* --- Color Palette --- */
+    /* --- Legacy Primary Aliases → Now Orange --- */
+    --primary-50:  var(--orange-50);
+    --primary-100: var(--orange-100);
+    --primary-200: var(--orange-200);
+    --primary-300: var(--orange-300);
+    --primary-400: var(--orange-400);
+    --primary-500: var(--orange-500);
+    --primary-600: var(--orange-600);
+    --primary-700: var(--orange-700);
+    --primary-800: var(--orange-800);
+    --primary-900: var(--orange-900);
+    --primary-glow: var(--color-primary-ring);
 
-  /* Primary Brand - Electric Indigo (Vibrant) */
-  --primary-50: #eef2ff;
-  --primary-100: #e0e7ff;
-  --primary-200: #c7d2fe;
-  --primary-300: #a5b4fc;
-  --primary-400: #818cf8;
-  --primary-500: #6366f1;
-  /* Main Action */
-  --primary-600: #4f46e5;
-  --primary-700: #4338ca;
-  --primary-800: #3730a3;
-  --primary-900: #312e81;
-  --primary-glow: rgba(99, 102, 241, 0.5);
+    /* --- Legacy Accent → Now Navy --- */
+    --accent-400: var(--navy-400);
+    --accent-500: var(--navy-500);
 
-  /* Secondary/Accent - Neon Cyan */
-  --accent-400: #22d3ee;
-  --accent-500: #06b6d4;
-  --accent-glow: rgba(34, 211, 238, 0.5);
+    /* --- Legacy Semantic States --- */
+    --success:    var(--color-success);
+    --success-bg: var(--color-success-bg);
+    --error:      var(--color-error);
+    --error-bg:   var(--color-error-bg);
+    --warning:    var(--color-warning);
+    --warning-bg: var(--color-warning-bg);
+    --info:       var(--color-info);
 
-  /* Neutrals (Zinc/Carbon) - True Dark Mode */
-  --neutral-50: #fafafa;
-  --neutral-100: #f4f4f5;
-  --neutral-200: #e4e4e7;
-  --neutral-300: #d4d4d8;
-  --neutral-400: #a1a1aa;
-  --neutral-500: #71717a;
-  --neutral-600: #52525b;
-  --neutral-700: #3f3f46;
-  /* Borders */
-  --neutral-800: #27272a;
-  /* Cards/Panels */
-  --neutral-900: #18181b;
-  /* Sidebar/Secondary BG */
-  --neutral-950: #09090b;
-  /* Main Background (Deep Void) */
+    /* --- Legacy Typography --- */
+    --text-heading: var(--text-primary);
+    --text-body:    var(--text-secondary);
 
-  /* Semantic State Colors */
-  --success: #10b981;
-  /* Emerald */
-  --success-bg: rgba(16, 185, 129, 0.15);
-  --error: #ef4444;
-  /* Red */
-  --error-bg: rgba(239, 68, 68, 0.15);
-  --warning: #f59e0b;
-  /* Amber */
-  --warning-bg: rgba(245, 158, 11, 0.15);
-  --info: #3b82f6;
-  /* Blue */
+    /* --- Sidebar Alias --- */
+    --sidebar-bg: var(--bg-sidebar);
 
-  /* --- Typography --- */
-  /* Modern clean sans-serif, no "terminal" fonts unless for code */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
+    /* --- Component-Level Shortcuts --- */
+    --card-bg:     var(--bg-surface-1);
+    --card-border: var(--border-subtle);
+    --input-bg:    var(--bg-surface-1);
+    --input-border: var(--border-subtle);
+    --input-focus-ring: var(--color-primary-ring);
 
-  --text-heading: #ffffff;
-  --text-body: #d4d4d8;
-  --text-muted: #a1a1aa;
-
-  /* Scale */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 2rem;
-  --text-4xl: 2.5rem;
-  --text-display: 3.5rem;
-
-  /* --- Spacing --- */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-
-  /* --- Layout & Effects --- */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-full: 9999px;
-
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 25px -5px var(--primary-glow);
-
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* --- Shadow Aliases --- */
+    --shadow-glow: 0 0 20px -5px var(--color-primary-ring);
 }

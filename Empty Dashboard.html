@@ -1,302 +1,455 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-<!-- THEME LOCK: Verified Dark Mode Tokens via CSS Variables -->
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>DISAL Hosting Platform - Dashboard</title>
+    <title>Dashboard — DISAL Hosting</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-    <link href="assets/css/tokens.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
     <script src="assets/js/tailwind-config.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    </script>
+    <style>
+        body{font-family:var(--font-sans)}.font-mono{font-family:var(--font-mono)}
+        .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .bg-grid{background-image:linear-gradient(var(--border-subtle) 1px,transparent 1px),linear-gradient(90deg,var(--border-subtle) 1px,transparent 1px);background-size:40px 40px;opacity:.35;mask-image:linear-gradient(to bottom,rgba(0,0,0,.5),transparent 60%)}
+    </style>
 </head>
 
-<body
-    class="bg-background-dark text-text-main h-screen overflow-hidden flex font-display antialiased selection:bg-primary selection:text-white transition-colors duration-200">
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
 
-    <!-- Side Navigation -->
-    <aside
-        class="dark hidden md:flex w-64 bg-sidebar border-r border-border-dark flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
         <div class="flex flex-col gap-1 p-6">
             <div class="flex flex-col mb-8">
-                <div onclick="window.location.href='index.html'"
-                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-text-main">DISAL</span>
-                </div>
-                <p class="text-text-dim text-xs mt-2 pl-8">HOSTING_PLATFORM_V2</p>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING</p>
             </div>
             <nav class="flex flex-col gap-1">
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-dark border-l-2 border-primary group transition-colors"
-                    href="Empty Dashboard.html">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">grid_view</span>
-                    <span class="text-text-main text-sm font-medium">Dashboard</span>
+                <a href="Tunnel Manager Board.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">grid_view</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Dashboard</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Student Logs.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">terminal</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Logs</span>
+                <a href="Student Logs.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">terminal</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Logs</span>
                 </a>
-                <div class="h-px bg-border-dark my-4"></div>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Documentation.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">menu_book</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Docs</span>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-border-dark flex items-center justify-between">
-            <div class="flex items-center gap-3 px-2">
-                <div
-                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-text-dim">
-                    S</div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
                 <div class="flex flex-col">
-                    <span class="text-text-main text-sm font-medium">Student</span>
-                    <span class="text-text-dim text-xs">student@disal.io</span>
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@apatechlab.com</span>
                 </div>
+            </div>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
             </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main
-        class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative transition-colors duration-200">
-        <!-- Grid Background (CSS Variable Controlled) -->
-        <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div>
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
+        <!-- Grid Background (Vercel-style) -->
+        <div class="bg-grid absolute inset-0 pointer-events-none"></div>
 
         <!-- Header -->
-        <header
-            class="h-16 border-b border-border-dark flex items-center justify-between px-4 md:px-8 bg-background-dark/80 backdrop-blur-md z-10 sticky top-0 transition-colors duration-200">
-            <div class="flex items-center gap-4">
-                <div class="flex items-center text-sm font-medium text-text-dim">
-                    <span class="text-text-main">Dashboard</span>
-                    <span class="mx-2">/</span>
-                    <span>Overview</span>
-                </div>
-            </div>
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);" class="font-semibold">Dashboard</span>
+            </nav>
         </header>
 
-        <!-- Empty State Content -->
+        <!-- Empty State (Vercel-inspired centered card) -->
         <div class="flex-1 flex flex-col items-center justify-center p-4 md:p-8 relative z-10">
             <div class="max-w-md w-full text-center flex flex-col items-center">
-                <!-- Icon container -->
-                <div
-                    class="w-20 h-20 mb-8 relative flex items-center justify-center rounded-xl bg-surface-dark/50 border border-white/5 shadow-2xl transition-colors backdrop-blur-sm">
-                    <span class="material-symbols-outlined text-text-dim" style="font-size: 40px;">dns</span>
+
+                <!-- Illustration -->
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-lg);" class="w-20 h-20 mb-8 flex items-center justify-center rounded-2xl">
+                    <span class="material-symbols-outlined" style="font-size:40px;color:var(--text-muted);">deployed_code</span>
                 </div>
 
-                <h3 class="text-lg font-bold text-text-main mb-2">No deployments yet</h3>
-                <p class="text-text-muted text-sm max-w-sm mb-6">Deploy your first app to get an assigned port and
-                    access URL.</p>
-
-                <button onclick="openModal()"
-                    class="flex h-10 items-center justify-center rounded-lg bg-primary px-6 text-sm font-bold text-white transition-all hover:bg-primary/90 hover:scale-[1.02] shadow-lg shadow-black/20">
-                    <span class="material-symbols-outlined mr-2" style="font-size: 20px;">add</span>
-                    Deploy New App
+                <!-- Always-visible: No Projects Yet -->
+                <h2 style="color:var(--text-primary);" class="text-xl font-bold mb-2">No projects yet</h2>
+                <p style="color:var(--text-muted);" class="text-sm max-w-sm mb-6">Import a repository from GitHub and deploy it in seconds.</p>
+                <button onclick="openModal()" style="background:var(--color-primary);color:white;" class="flex h-11 items-center justify-center rounded-lg px-6 text-sm font-semibold transition-all hover:opacity-90 hover:scale-[1.02] shadow-sm cursor-pointer">
+                    <span class="material-symbols-outlined mr-2" style="font-size:20px;">add</span> New Project
                 </button>
 
-                <a href="Documentation.html"
-                    class="mt-8 text-xs font-medium text-text-dim hover:text-text-main transition-colors flex items-center gap-1.5 underline decoration-border-dark underline-offset-4 hover:decoration-text-main">
-                    Read the deployment guide
+                <!-- Port + Status chips -->
+                <div class="mt-8 flex items-center gap-3">
+                    <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="px-3.5 py-2 rounded-lg flex items-center gap-2.5">
+                        <span class="material-symbols-outlined" style="font-size:16px;color:var(--color-primary);">dns</span>
+                        <div class="text-left">
+                            <span style="color:var(--text-muted);" class="text-[10px] uppercase tracking-wider font-medium block leading-none mb-0.5">Your Port</span>
+                            <span id="displayPort" style="color:var(--text-primary);" class="text-sm font-mono font-semibold">9001</span>
+                        </div>
+                    </div>
+                    <div style="background:var(--color-success-bg);border:1px solid var(--color-success);color:var(--color-success);" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium">
+                        <span class="material-symbols-outlined" style="font-size:14px;">check_circle</span> Ready to deploy
+                    </div>
+                </div>
+
+                <a href="Documentation.html" style="color:var(--text-muted);" class="mt-10 text-xs font-medium transition-colors flex items-center gap-1.5 no-underline hover:!text-[var(--color-primary)]">
+                    <span class="material-symbols-outlined" style="font-size:16px;">menu_book</span> Read the deployment guide
                 </a>
             </div>
         </div>
     </main>
 
-    <!-- MODAL OVERLAY -->
-    <div id="modalOverlay"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-opacity duration-200">
-        <!-- Modal Card -->
-        <div
-            class="w-full max-w-[500px] bg-surface-dark border border-border-dark rounded-xl shadow-2xl flex flex-col transform transition-all scale-100">
+    <!-- ═══ CREATE PROJECT MODAL (Vercel-style GitHub import) ═══ -->
+    <div id="modalOverlay" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 transition-opacity duration-200" style="background:var(--bg-overlay);backdrop-filter:blur(4px);">
+        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-xl);" class="w-full max-w-[520px] rounded-2xl flex flex-col transform transition-all max-h-[90vh] overflow-hidden">
             <!-- Modal Header -->
-            <div class="flex items-center justify-between p-6 border-b border-border-dark bg-background-dark/50">
-                <div>
-                    <h2 class="text-lg font-bold text-text-main">Deploy New App</h2>
-                    <p class="text-sm text-text-dim mt-1">Configure your container environment</p>
-                </div>
-                <button onclick="closeModal()"
-                    class="text-text-dim hover:text-text-main transition-colors rounded-lg hover:bg-background-dark p-1">
-                    <span class="material-symbols-outlined" style="font-size: 20px;">close</span>
+            <div style="border-bottom:1px solid var(--border-subtle);" class="flex items-center justify-between px-6 py-4 shrink-0">
+                <h2 style="color:var(--text-primary);" class="text-base font-bold mb-0">Import Project</h2>
+                <button onclick="closeModal()" style="color:var(--text-muted);" class="p-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:18px;">close</span></button>
+            </div>
+
+            <!-- Tab Bar -->
+            <div style="border-bottom:1px solid var(--border-subtle);" class="flex px-6 shrink-0" id="modalTabBar">
+                <button id="tabGithub" onclick="setModalTab('github')" style="color:var(--color-primary);border-bottom:2px solid var(--color-primary);" class="px-4 py-3 text-sm font-medium transition-colors cursor-pointer bg-transparent flex items-center gap-2">
+                    <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    Import from GitHub
+                </button>
+                <button id="tabManual" onclick="setModalTab('manual')" style="color:var(--text-muted);border-bottom:2px solid transparent;" class="px-4 py-3 text-sm font-medium transition-colors cursor-pointer bg-transparent flex items-center gap-2">
+                    <span class="material-symbols-outlined" style="font-size:18px;">link</span> Enter URL
                 </button>
             </div>
 
-            <!-- Modal Body -->
-            <form id="tunnelForm" onsubmit="handleCreateTunnel(event)" class="p-6 space-y-6">
-                <div class="space-y-2">
-                    <label class="text-xs font-semibold uppercase tracking-wider text-text-dim font-mono">Project
-                        Name</label>
-                    <input required id="projectName" type="text" placeholder="e.g. grading-system-v1"
-                        class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-sm text-text-main placeholder-text-dim/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                </div>
-
-                <div class="space-y-2">
-                    <label class="text-xs font-semibold uppercase tracking-wider text-text-dim font-mono">Git
-                        Repository URL</label>
-                    <input required id="gitRepoUrl" type="text" placeholder="https://github.com/user/repo.git"
-                        class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-sm text-text-main placeholder-text-dim/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                </div>
-
-                <div id="entitlementNotice" class="hidden rounded-lg border border-error/30 bg-error/10 px-4 py-3 text-[11px] text-error flex gap-2 items-start">
-                    <span class="material-symbols-outlined text-[16px] mt-[1px]">error</span>
-                    <p>
-                        No port allocation detected for this account. Please contact your administrator to allocate a port
-                        via the Port Allocation Manager before deploying.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-2">
-                        <label class="text-xs font-semibold uppercase tracking-wider text-text-dim font-mono">Assigned
-                            Port</label>
-                        <input id="assignedPortField" disabled type="text" value="Pending Assignment"
-                            class="w-full bg-background-dark/50 border border-border-dark rounded-lg px-4 py-3 text-sm text-text-dim opacity-70 cursor-not-allowed font-mono italic">
-                        <p id="assignedPortHint" class="text-[10px] text-text-dim/60">
-                            Port is assigned by your administrator via the Port Allocation Manager.
-                        </p>
+            <!-- ── Panel: GitHub Import ── -->
+            <div id="panelGithub" class="flex-1 overflow-y-auto scrollbar-hide">
+                <!-- Not Connected -->
+                <div id="ghNotConnected" class="p-8 flex flex-col items-center text-center">
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="w-16 h-16 rounded-full flex items-center justify-center mb-5">
+                        <svg class="w-8 h-8" viewBox="0 0 16 16" fill="currentColor" style="color:var(--text-muted);"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                     </div>
-                    <div class="space-y-2">
-                        <label
-                            class="text-xs font-semibold uppercase tracking-wider text-text-dim font-mono">Runtime</label>
-                        <select
-                            class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none">
-                            <option>Node.js 18</option>
-                            <option>Python 3.10</option>
-                            <option>Go 1.21</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="rounded-lg border border-border-dark bg-background-dark p-4 flex gap-3">
-                    <span class="material-symbols-outlined text-primary mt-0.5" style="font-size: 20px;">info</span>
-                    <p class="text-xs text-text-dim leading-relaxed">
-                        Ensure your repository contains a <code
-                            class="text-text-main bg-surface-dark px-1 py-0.5 rounded font-mono border border-border-dark">deploy.sh</code>
-                        script.
-                    </p>
-                </div>
-
-                <div class="pt-4 flex justify-end gap-3">
-                    <button type="button" onclick="closeModal()"
-                        class="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">Cancel</button>
-                    <button type="submit"
-                        class="px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg shadow-primary/20 transition-all">
-                        Initialize Deployment
+                    <h3 style="color:var(--text-primary);" class="text-sm font-semibold mb-1.5">Connect your GitHub account</h3>
+                    <p style="color:var(--text-muted);" class="text-xs mb-5 max-w-xs">Link your GitHub account to import repositories directly. We'll only request read access.</p>
+                    <button onclick="connectGitHub()" style="background:#24292e;color:#fff;" class="flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#2f363d] transition-colors cursor-pointer shadow-sm">
+                        <svg class="w-5 h-5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        Continue with GitHub
                     </button>
                 </div>
-            </form>
+                <!-- Connected — Repo List -->
+                <div id="ghConnected" class="hidden">
+                    <div style="border-bottom:1px solid var(--border-subtle);" class="px-6 py-3 flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <div style="background:#24292e;" class="w-6 h-6 rounded-full flex items-center justify-center"><svg class="w-3.5 h-3.5 text-white" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></div>
+                            <span id="ghUsername" style="color:var(--text-primary);" class="text-sm font-medium">student-dev</span>
+                        </div>
+                        <button onclick="disconnectGitHub()" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="text-[11px] px-2.5 py-1 rounded-md hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer bg-transparent">Disconnect</button>
+                    </div>
+                    <div class="px-6 py-3">
+                        <input id="repoSearch" oninput="filterRepos()" type="text" placeholder="Search repositories…" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                    </div>
+                    <div id="repoList" class="px-6 pb-4 space-y-2 max-h-[300px] overflow-y-auto scrollbar-hide"></div>
+                </div>
+            </div>
+
+            <!-- ── Panel: Manual URL ── -->
+            <div id="panelManual" class="hidden p-6">
+                <div class="space-y-4">
+                    <div class="space-y-1.5">
+                        <label style="color:var(--text-primary);" class="text-sm font-medium">Git Repository URL</label>
+                        <input id="manualRepoUrl" type="url" placeholder="https://github.com/user/repo.git" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                        <p style="color:var(--text-muted);" class="text-[11px] mt-1">Enter the full URL of your Git repository.</p>
+                    </div>
+                    <button onclick="selectManualRepo()" style="background:var(--color-primary);color:white;" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all cursor-pointer shadow-sm">
+                        Continue <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Panel: Configure Project ── -->
+            <div id="panelConfigure" class="hidden flex-1 overflow-y-auto scrollbar-hide">
+                <div style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-2);" class="px-6 py-3 flex items-center gap-3 shrink-0">
+                    <button onclick="goBackToRepoSelect()" style="color:var(--text-muted);" class="p-1 rounded-lg hover:bg-[var(--bg-surface-1)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:18px;">arrow_back</span></button>
+                    <svg class="w-4 h-4 shrink-0" viewBox="0 0 16 16" style="color:var(--text-muted);" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                    <div class="min-w-0"><span id="selectedRepoName" style="color:var(--text-primary);" class="text-sm font-medium block truncate">repo-name</span><span id="selectedRepoUrl" style="color:var(--text-muted);" class="text-[11px] truncate block">github.com/user/repo</span></div>
+                </div>
+                <form id="tunnelForm" onsubmit="handleCreateTunnel(event)" class="p-6 space-y-4">
+                    <div class="space-y-1.5">
+                        <label style="color:var(--text-primary);" class="text-sm font-medium">Project Name <span style="color:var(--color-error);">*</span></label>
+                        <input required id="projectName" type="text" placeholder="e.g. grading-system-v1" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                        <p id="urlPreview" style="color:var(--text-muted);" class="text-[11px] mt-1 font-mono">→ 102.176.94.45:9001</p>
+                        <p id="urlPreviewDomain" style="color:var(--text-muted);" class="text-[10px] mt-0.5 font-mono flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:12px;">language</span> project.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span></p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label style="color:var(--text-primary);" class="text-sm font-medium">Branch</label>
+                            <input id="branchInput" type="text" value="main" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label style="color:var(--text-primary);" class="text-sm font-medium">Assigned Port</label>
+                            <div class="relative">
+                                <input id="localPort" disabled type="text" value="—" style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="w-full rounded-lg px-3 py-2 text-sm font-mono cursor-not-allowed">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">lock</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deploy Script (locked — always deploy.sh) -->
+                    <div class="space-y-1.5">
+                        <label style="color:var(--text-primary);" class="text-sm font-medium">Deploy Script</label>
+                        <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined" style="font-size:16px;color:var(--color-primary);">description</span>
+                                <span style="color:var(--text-primary);" class="text-sm font-mono font-medium">deploy.sh</span>
+                                <span style="background:var(--color-primary-light);color:var(--color-primary);" class="text-[9px] font-semibold px-1.5 py-0.5 rounded-full">Required</span>
+                            </div>
+                            <span class="material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">lock</span>
+                        </div>
+                        <p style="color:var(--text-muted);" class="text-[11px] mt-1">The platform always executes <code style="color:var(--color-primary);" class="font-mono">deploy.sh</code> from repo root on every deploy.</p>
+                    </div>
+
+                    <!-- deploy.sh template preview -->
+                    <div>
+                        <button type="button" onclick="toggleDeployTemplate()" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1.5 mb-2 hover:text-[var(--text-primary)] transition-colors cursor-pointer bg-transparent border-0 p-0">
+                            <span id="templateChevron" class="material-symbols-outlined transition-transform" style="font-size:14px;">expand_more</span>
+                            Example deploy.sh template
+                        </button>
+                        <div id="deployTemplate" class="hidden">
+                            <div style="background:#0A0A0A;border:1px solid #262626;border-radius:8px;" class="overflow-hidden">
+                                <div style="background:#171717;border-bottom:1px solid #262626;" class="flex items-center justify-between px-3 py-1.5">
+                                    <span class="text-[10px] font-mono" style="color:#737373;">deploy.sh</span>
+                                    <button type="button" onclick="copyTemplate()" style="color:#737373;" class="hover:text-white transition-colors cursor-pointer p-0.5 rounded hover:bg-[#262626] bg-transparent border-0" title="Copy">
+                                        <span class="material-symbols-outlined" style="font-size:12px;">content_copy</span>
+                                    </button>
+                                </div>
+                                <pre class="p-3 font-mono text-[11px] leading-relaxed overflow-x-auto" style="color:#A3A3A3;margin:0;"><span style="color:#22C55E;">#!/bin/bash</span>
+<span style="color:#525252;"># Install dependencies</span>
+<span style="color:#E5E5E5;">npm install</span>
+
+<span style="color:#525252;"># Build (if needed)</span>
+<span style="color:#E5E5E5;">npm run build</span>
+
+<span style="color:#525252;"># Start on the assigned port</span>
+<span style="color:#E5E5E5;">PORT=</span><span style="color:#E8792B;">$ASSIGNED_PORT</span><span style="color:#E5E5E5;"> npm start</span></pre>
+                            </div>
+                            <p style="color:var(--text-muted);" class="text-[10px] mt-1.5 flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:12px;color:var(--color-primary);">info</span> <code style="color:var(--color-primary);" class="font-mono">$ASSIGNED_PORT</code> is injected automatically — your app must listen on it.</p>
+                        </div>
+                    </div>
+                    <div class="pt-1 flex justify-end gap-3">
+                        <button type="button" onclick="closeModal()" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="px-4 py-2 text-sm font-medium rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer bg-transparent">Cancel</button>
+                        <button type="submit" style="background:var(--color-primary);color:white;" class="px-5 py-2 text-sm font-semibold rounded-lg hover:opacity-90 shadow-sm transition-all cursor-pointer flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:18px;">rocket_launch</span>Create &amp; Deploy</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        // Init dark mode logic
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+        /* ── Port Display ── */
+        const studentPort = localStorage.getItem('assignedPort') || '9001';
+        (function showPort() {
+            const dp = document.getElementById('displayPort'), mp = document.getElementById('localPort');
+            if (dp) dp.textContent = studentPort;
+            if (mp) mp.value = studentPort;
+        })();
 
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
+        /* ── Deploy Template Toggle ── */
+        function toggleDeployTemplate() {
+            const tpl = document.getElementById('deployTemplate');
+            const chevron = document.getElementById('templateChevron');
+            if (tpl.classList.contains('hidden')) {
+                tpl.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
             } else {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
+                tpl.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
             }
         }
 
-        const modal = document.getElementById('modalOverlay');
-        const mainContent = document.querySelector('main');
-        const sidebar = document.querySelector('aside');
+        function copyTemplate() {
+            const text = '#!/bin/bash\n# Install dependencies\nnpm install\n\n# Build (if needed)\nnpm run build\n\n# Start on the assigned port\nPORT=$ASSIGNED_PORT npm start';
+            navigator.clipboard.writeText(text).then(() => alert('Template copied!'));
+        }
 
+        /* ── Mock GitHub Repos ── */
+        const mockRepos = [
+            { name: 'grading-system-v2', desc: 'Final Year Project — automated grading platform', lang: 'JavaScript', langColor: '#f1e05a', updated: '2 hours ago', visibility: 'Private' },
+            { name: 'fyp-portfolio-site', desc: 'Personal portfolio for FYP showcase', lang: 'TypeScript', langColor: '#3178c6', updated: '5 hours ago', visibility: 'Public' },
+            { name: 'ml-model-api', desc: 'Flask API serving trained ML model', lang: 'Python', langColor: '#3572A5', updated: '1 day ago', visibility: 'Private' },
+            { name: 'student-dashboard', desc: 'React dashboard for student analytics', lang: 'JavaScript', langColor: '#f1e05a', updated: '3 days ago', visibility: 'Public' },
+            { name: 'chat-app-backend', desc: 'Node.js + Socket.io real-time chat server', lang: 'TypeScript', langColor: '#3178c6', updated: '5 days ago', visibility: 'Private' },
+            { name: 'database-migrations', desc: 'PostgreSQL migration scripts', lang: 'SQL', langColor: '#e38c00', updated: '1 week ago', visibility: 'Public' },
+            { name: 'deploy-scripts', desc: 'CI/CD pipeline and deploy.sh configs', lang: 'Shell', langColor: '#89e051', updated: '2 weeks ago', visibility: 'Public' },
+        ];
+
+        function renderRepoList(filter = '') {
+            const container = document.getElementById('repoList');
+            const filtered = mockRepos.filter(r => r.name.toLowerCase().includes(filter.toLowerCase()) || r.desc.toLowerCase().includes(filter.toLowerCase()));
+            container.innerHTML = filtered.map(r => `
+                <div class="flex items-center justify-between p-3 rounded-lg transition-colors hover:bg-[var(--bg-surface-2)] group cursor-pointer" style="border:1px solid var(--border-subtle);" onclick="selectRepo('${r.name}','https://github.com/student-dev/${r.name}','${r.lang}')">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 16 16" style="color:var(--text-muted);" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span style="color:var(--text-primary);" class="text-sm font-medium truncate">${r.name}</span>
+                                <span style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="text-[10px] px-1.5 py-0.5 rounded-full shrink-0">${r.visibility}</span>
+                            </div>
+                            <p style="color:var(--text-muted);" class="text-[11px] mb-0 truncate">${r.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0 ml-3">
+                        <div class="flex items-center gap-1.5 text-[11px]" style="color:var(--text-muted);">
+                            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${r.langColor};"></span>${r.lang}
+                        </div>
+                        <span style="color:var(--text-muted);" class="text-[11px] hidden sm:inline">${r.updated}</span>
+                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" style="font-size:18px;color:var(--color-primary);">arrow_forward</span>
+                    </div>
+                </div>
+            `).join('');
+            if (!filtered.length) container.innerHTML = `<div class="py-8 text-center"><span style="color:var(--text-muted);" class="text-sm">No repositories found.</span></div>`;
+        }
+
+        function filterRepos() { renderRepoList(document.getElementById('repoSearch')?.value || ''); }
+
+        function connectGitHub() {
+            const btn = event.target.closest('button');
+            btn.innerHTML = '<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Connecting…';
+            btn.disabled = true;
+            setTimeout(() => {
+                localStorage.setItem('ghConnected', 'true');
+                document.getElementById('ghNotConnected').classList.add('hidden');
+                document.getElementById('ghConnected').classList.remove('hidden');
+                renderRepoList();
+            }, 800);
+        }
+
+        function disconnectGitHub() {
+            localStorage.removeItem('ghConnected');
+            document.getElementById('ghConnected').classList.add('hidden');
+            document.getElementById('ghNotConnected').classList.remove('hidden');
+            const btn = document.querySelector('#ghNotConnected button');
+            if (btn) { btn.innerHTML = '<svg class="w-5 h-5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Continue with GitHub'; btn.disabled = false; }
+        }
+
+        function selectRepo(name, url, lang) {
+            document.getElementById('selectedRepoName').textContent = name;
+            document.getElementById('selectedRepoUrl').textContent = url.replace('https://','');
+            document.getElementById('projectName').value = name;
+            document.getElementById('urlPreview').innerHTML = '→ 102.176.94.45:' + studentPort;
+            const domLine = document.getElementById('urlPreviewDomain');
+            if (domLine) domLine.innerHTML = '<span class="material-symbols-outlined" style="font-size:12px;">language</span> ' + name + '.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span>';
+            document.getElementById('panelGithub').classList.add('hidden');
+            document.getElementById('panelManual').classList.add('hidden');
+            document.getElementById('panelConfigure').classList.remove('hidden');
+            document.getElementById('modalTabBar')?.classList.add('hidden');
+            document.getElementById('localPort').value = studentPort;
+        }
+
+        function selectManualRepo() {
+            const url = document.getElementById('manualRepoUrl')?.value;
+            if (!url) { alert('Please enter a repository URL.'); return; }
+            const parts = url.replace(/\.git$/,'').split('/');
+            const name = parts[parts.length - 1] || 'project';
+            document.getElementById('selectedRepoName').textContent = name;
+            document.getElementById('selectedRepoUrl').textContent = url.replace('https://','');
+            document.getElementById('projectName').value = name;
+            document.getElementById('urlPreview').innerHTML = '→ 102.176.94.45:' + studentPort;
+            const domLine2 = document.getElementById('urlPreviewDomain');
+            if (domLine2) domLine2.innerHTML = '<span class="material-symbols-outlined" style="font-size:12px;">language</span> ' + name + '.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span>';
+            document.getElementById('panelGithub').classList.add('hidden');
+            document.getElementById('panelManual').classList.add('hidden');
+            document.getElementById('panelConfigure').classList.remove('hidden');
+            document.getElementById('modalTabBar')?.classList.add('hidden');
+            document.getElementById('localPort').value = studentPort;
+        }
+
+        function goBackToRepoSelect() {
+            document.getElementById('panelConfigure').classList.add('hidden');
+            document.getElementById('modalTabBar')?.classList.remove('hidden');
+            const isGH = document.getElementById('tabGithub').style.color.includes('var(--color-primary)');
+            if (isGH) document.getElementById('panelGithub').classList.remove('hidden');
+            else document.getElementById('panelManual').classList.remove('hidden');
+        }
+
+        function setModalTab(tab) {
+            const gh = document.getElementById('tabGithub'), m = document.getElementById('tabManual');
+            const pg = document.getElementById('panelGithub'), pm = document.getElementById('panelManual'), pc = document.getElementById('panelConfigure');
+            pc.classList.add('hidden');
+            if (tab === 'github') {
+                gh.style.color = 'var(--color-primary)'; gh.style.borderBottom = '2px solid var(--color-primary)';
+                m.style.color = 'var(--text-muted)'; m.style.borderBottom = '2px solid transparent';
+                pg.classList.remove('hidden'); pm.classList.add('hidden');
+            } else {
+                m.style.color = 'var(--color-primary)'; m.style.borderBottom = '2px solid var(--color-primary)';
+                gh.style.color = 'var(--text-muted)'; gh.style.borderBottom = '2px solid transparent';
+                pm.classList.remove('hidden'); pg.classList.add('hidden');
+            }
+        }
+
+        /* ── Modal ── */
+        const modal = document.getElementById('modalOverlay'), mainEl = document.querySelector('main'), sidebarEl = document.querySelector('aside');
         function openModal() {
-            modal.classList.remove('hidden');
-            mainContent.style.filter = 'blur(4px)';
-            sidebar.style.filter = 'blur(4px)';
-            syncEntitlementState();
-        }
-
-        function closeModal() {
-            modal.classList.add('hidden');
-            mainContent.style.filter = 'none';
-            sidebar.style.filter = 'none';
-        }
-
-        function syncEntitlementState() {
-            const hasEntitlement = localStorage.getItem('hasPortEntitlement') === 'true';
-            const assignedPort = localStorage.getItem('assignedPort');
-            const entitlementNotice = document.getElementById('entitlementNotice');
-            const portField = document.getElementById('assignedPortField');
-            const hint = document.getElementById('assignedPortHint');
-
-            if (hasEntitlement && assignedPort) {
-                if (entitlementNotice) entitlementNotice.classList.add('hidden');
-                if (portField) {
-                    portField.value = assignedPort;
-                    portField.classList.remove('text-text-dim');
-                    portField.classList.add('text-text-main');
-                }
-                if (hint) {
-                    hint.textContent = 'Port entitlement detected. Your app must bind to this port in deploy.sh.';
-                }
-            } else {
-                if (entitlementNotice) entitlementNotice.classList.remove('hidden');
-                if (portField) {
-                    portField.value = 'No Port Allocated';
-                    portField.classList.remove('text-text-main');
-                    portField.classList.add('text-text-dim');
-                }
-                if (hint) {
-                    hint.textContent = 'Admin must allocate a port before you can deploy.';
-                }
+            modal.classList.remove('hidden'); mainEl.style.filter = 'blur(4px)'; sidebarEl.style.filter = 'blur(4px)';
+            // Reset to step 1
+            document.getElementById('panelGithub').classList.remove('hidden');
+            document.getElementById('panelManual').classList.add('hidden');
+            document.getElementById('panelConfigure').classList.add('hidden');
+            document.getElementById('modalTabBar')?.classList.remove('hidden');
+            setModalTab('github');
+            document.getElementById('localPort').value = studentPort;
+            // If previously connected, show repos
+            if (localStorage.getItem('ghConnected') === 'true') {
+                document.getElementById('ghNotConnected').classList.add('hidden');
+                document.getElementById('ghConnected').classList.remove('hidden');
+                renderRepoList();
             }
         }
+        function closeModal() { modal.classList.add('hidden'); mainEl.style.filter = 'none'; sidebarEl.style.filter = 'none'; }
+
+        const pInput = document.getElementById('projectName'), uPrev = document.getElementById('urlPreview');
+        pInput?.addEventListener('input', e => { const v = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g,'-'); uPrev.innerHTML = '→ 102.176.94.45:' + studentPort; const dl = document.getElementById('urlPreviewDomain'); if(dl) dl.innerHTML = '<span class="material-symbols-outlined" style="font-size:12px;">language</span> ' + (v || 'project') + '.apatechlab.com <span style="color:var(--color-warning);" class="text-[9px]">(DNS pending)</span>'; });
 
         function handleCreateTunnel(e) {
             e.preventDefault();
-
-            const hasEntitlement = localStorage.getItem('hasPortEntitlement') === 'true';
-            const assignedPort = localStorage.getItem('assignedPort');
-
-            if (!hasEntitlement || !assignedPort) {
-                // Mirrors "Input & Port Valid? -> NO -> Error Handler"
-                alert('Deployment blocked: no assigned port found for this account. Please contact your administrator.');
-                syncEntitlementState();
-                return;
-            }
-
+            const n = document.getElementById('projectName').value; if (!n) { alert('Please enter a project name.'); return; }
+            const slug = n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            const port = studentPort;
             const btn = e.target.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="animate-pulse">Provisioning...</span>';
-
+            btn.disabled = true; btn.innerHTML = '<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Provisioning…';
             setTimeout(() => {
-                // Model B Logic: Set Deployment State using previously allocated port
+                // Persist deployment state
                 localStorage.setItem('hasDeployment', 'true');
-
-                alert('Deployment Successful! Port ' + assignedPort + ' is now orchestrated for your workspace.');
-                window.location.href = 'Tunnel Manager Board.html';
-            }, 1000);
+                localStorage.setItem('assignedPort', port);
+                // Persist created project data
+                const repoUrl = document.getElementById('repoUrl')?.value || '';
+                const projects = JSON.parse(localStorage.getItem('disalProjects') || '{}');
+                projects[slug] = { name: n, port: port, branch: 'main', commit: (Math.random().toString(36).slice(2,9)), status: 'live', time: 'Just now', repo: repoUrl ? repoUrl.replace('https://github.com/','') : 'student/' + slug, domain: slug };
+                localStorage.setItem('disalProjects', JSON.stringify(projects));
+                // Redirect to project detail
+                window.location.href = 'Project Detail.html?project=' + encodeURIComponent(slug);
+            }, 1200);
         }
-
-        // Ensure entitlement state is in sync if modal is already open on load
-        syncEntitlementState();
     </script>
 </body>
-
 </html>

@@ -1,244 +1,328 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>DISAL Hosting Platform</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/variables.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
     <script src="assets/js/tailwind-config.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
-    <style>
-        .bg-grid-pattern {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(45, 45, 53, 0.15) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(45, 45, 53, 0.15) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-        }
-    </style>
 </head>
 
-<body
-    class="bg-background-main font-display text-text-primary overflow-x-hidden antialiased selection:bg-primary selection:text-text-on-primary">
-    <div class="relative flex min-h-screen w-full flex-col">
-        <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div>
-        <!-- Header -->
-        <header class="relative z-50 w-full border-b border-border-subtle bg-background-main/80 backdrop-blur-md">
-            <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
-                <div class="flex items-center gap-2">
-                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <span class="material-symbols-outlined text-[20px]">dns</span>
-                    </div>
-                    <span class="text-lg font-bold tracking-tight text-text-primary">DISAL Hosting</span>
-                </div>
-                <div class="hidden md:flex items-center gap-8">
-                    <a class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors hover:underline underline-offset-4 decoration-primary/50"
-                        href="Documentation.html">Docs</a>
-                    <a class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors hover:underline underline-offset-4 decoration-primary/50"
-                        href="Login.html">Sign In</a>
-                    <!-- Theme Toggle -->
-                    <button onclick="toggleTheme()"
-                        class="p-2 rounded-lg hover:bg-surface-2 text-text-secondary hover:text-text-primary transition-colors"
-                        title="Toggle Theme">
-                        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-                        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-                    </button>
+<body class="font-display text-text-primary overflow-x-hidden antialiased selection:bg-primary/20 selection:text-primary"
+      style="background-color: var(--bg-main);">
 
-                </div>
-                <button class="flex md:hidden text-white">
+    <div class="relative flex min-h-screen w-full flex-col">
+
+        <!-- Grid Pattern Background -->
+        <div class="bg-grid-pattern"></div>
+
+        <!-- ============================================================
+             HEADER — Minimal: Logo · Docs · Sign In · Theme Toggle
+             Ref: Vercel nav — clean, no clutter, backdrop blur
+             ============================================================ -->
+        <header class="relative z-50 w-full border-b backdrop-blur-md"
+                style="border-color: var(--border-subtle); background: color-mix(in srgb, var(--bg-main) 80%, transparent);">
+            <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2.5 hover:opacity-90 transition-opacity">
+                    <div class="flex size-8 items-center justify-center rounded-lg text-white"
+                         style="background-color: var(--color-primary);">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">deployed_code</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight" style="color: var(--text-primary);">DISAL Hosting</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <a href="Documentation.html"
+                       class="px-3 py-2 text-sm font-medium rounded-lg transition-colors"
+                       style="color: var(--text-secondary);"
+                       onmouseover="this.style.color='var(--text-primary)';this.style.backgroundColor='var(--bg-surface-2)'"
+                       onmouseout="this.style.color='var(--text-secondary)';this.style.backgroundColor='transparent'">
+                        Docs
+                    </a>
+                    <a href="Login.html"
+                       class="px-3 py-2 text-sm font-medium rounded-lg transition-colors"
+                       style="color: var(--text-secondary);"
+                       onmouseover="this.style.color='var(--text-primary)';this.style.backgroundColor='var(--bg-surface-2)'"
+                       onmouseout="this.style.color='var(--text-secondary)';this.style.backgroundColor='transparent'">
+                        Sign In
+                    </a>
+                    <div class="w-px h-5 mx-2" style="background-color: var(--border-subtle);"></div>
+                    <button onclick="toggleTheme()"
+                            class="p-2 rounded-lg transition-colors"
+                            style="color: var(--text-secondary);"
+                            onmouseover="this.style.color='var(--text-primary)';this.style.backgroundColor='var(--bg-surface-2)'"
+                            onmouseout="this.style.color='var(--text-secondary)';this.style.backgroundColor='transparent'"
+                            title="Toggle theme">
+                        <span class="material-symbols-outlined text-[20px] dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined text-[20px] hidden dark:block">light_mode</span>
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu -->
+                <button class="flex md:hidden p-2 rounded-lg" style="color: var(--text-secondary);">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-10 pb-20">
-            <div class="mx-auto flex w-full max-w-4xl flex-col items-center gap-12 text-center">
-                <!-- Hero Text -->
-                <div class="flex flex-col items-center gap-6">
-                    <div
-                        class="inline-flex items-center rounded-full border border-border-subtle bg-surface-1 px-3 py-1 mb-2 shadow-soft">
-                        <span class="flex size-2 rounded-full bg-primary mr-2 animate-pulse shadow-glow"></span>
-                        <span class="text-xs font-medium text-text-secondary">Use your organization credentials • Port
-                            assigned on first deploy</span>
-                    </div>
-                    <h1
-                        class="font-display text-5xl font-black leading-tight tracking-tight text-text-primary sm:text-7xl drop-shadow-2xl">
-                        Deploy from Git.<br class="hidden sm:block" /> Get a stable URL.
+        <!-- ============================================================
+             HERO SECTION
+             Ref: Vercel landing — one bold message, one CTA, pipeline below
+             Spec: "Deploy your Final Year Projects. Zero infrastructure."
+             ============================================================ -->
+        <main class="relative z-10 flex flex-1 flex-col items-center px-4 pt-16 sm:pt-24 pb-20">
+            <div class="mx-auto flex w-full max-w-4xl flex-col items-center gap-10 text-center">
+
+                <!-- Status Pill -->
+                <div class="inline-flex items-center rounded-full px-4 py-1.5"
+                     style="border: 1px solid var(--border-subtle); background-color: var(--bg-surface-1);">
+                    <span class="flex size-1.5 rounded-full mr-2 animate-pulse"
+                          style="background-color: var(--color-success);"></span>
+                    <span class="text-xs font-medium" style="color: var(--text-secondary);">
+                        Platform operational · Accepting deployments
+                    </span>
+                </div>
+
+                <!-- Heading + Subtext -->
+                <div class="flex flex-col items-center gap-5">
+                    <h1 class="text-5xl sm:text-7xl font-extrabold leading-[1.05]"
+                        style="color: var(--text-primary); letter-spacing: -0.03em;">
+                        Deploy your Final<br class="hidden sm:block" /> Year Projects.
                     </h1>
-                    <p class="max-w-2xl text-lg font-normal text-text-secondary sm:text-xl leading-relaxed">
-                        Push to Git. We provision access, deploy, and monitor — right from your dashboard.
+                    <p class="text-center text-base sm:text-lg leading-relaxed" style="color: var(--text-muted);">
+                        Zero infrastructure.
+                    </p>
+                    <p class="max-w-xl text-base sm:text-lg leading-relaxed"
+                       style="color: var(--text-secondary);">
+                        Push your code. We handle the rest. DISAL Hosting gives every member
+                        a provisioned port and automated deployment.
                     </p>
                 </div>
 
                 <!-- CTAs -->
-                <div class="flex flex-col items-center gap-6 sm:flex-row">
-                    <button onclick="window.location.href='Login.html'"
-                        class="group relative flex h-12 w-full min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-primary px-8 text-base font-bold text-text-on-primary transition-all hover:bg-primary-hover hover:scale-[1.02] shadow-glow sm:w-auto">
-                        <span class="mr-2">Sign In</span>
-                        <span
-                            class="material-symbols-outlined ml-2 text-lg transition-transform group-hover:translate-x-1">login</span>
-                    </button>
-                    <a class="text-sm font-medium text-text-secondary hover:text-text-primary underline decoration-text-muted/30 underline-offset-4 decoration-1 hover:decoration-text-primary transition-all"
-                        href="Documentation.html">
-                        View Documentation
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <a href="Login.html"
+                       class="inline-flex items-center justify-center h-12 px-8 rounded-lg text-base font-semibold text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
+                       style="background-color: var(--color-primary); box-shadow: 0 1px 3px rgba(232,121,43,0.3);"
+                       onmouseover="this.style.backgroundColor='var(--color-primary-hover)'"
+                       onmouseout="this.style.backgroundColor='var(--color-primary)'">
+                        Get Started
+                        <span class="material-symbols-outlined ml-2 text-[18px]">arrow_forward</span>
+                    </a>
+                    <a href="Documentation.html"
+                       class="inline-flex items-center text-sm font-medium transition-colors"
+                       style="color: var(--text-secondary);"
+                       onmouseover="this.style.color='var(--color-primary)'"
+                       onmouseout="this.style.color='var(--text-secondary)'">
+                        Read the Docs
+                        <span class="material-symbols-outlined ml-1 text-[16px]">arrow_forward</span>
                     </a>
                 </div>
 
-                <!-- Hero Visual - Deployment Pipeline -->
-                <div class="w-full max-w-2xl group cursor-default">
-                    <div
-                        class="relative overflow-hidden rounded-2xl border border-border-subtle bg-surface-1 shadow-strong transition-all duration-300 hover:border-primary/30">
+                <!-- ============================================================
+                     PIPELINE VISUAL
+                     [Provisioned] → [Git Push] → [Deploy] → [Live 🟢]
+                     Ref: Vercel hero visual — window chrome, pipeline steps
+                     ============================================================ -->
+                <div class="w-full max-w-2xl mt-4">
+                    <div class="overflow-hidden rounded-xl"
+                         style="border: 1px solid var(--border-subtle); background-color: var(--bg-surface-1); box-shadow: var(--shadow-md);">
 
-                        <!-- Header/Top Bar -->
-                        <div
-                            class="flex items-center justify-between border-b border-border-subtle bg-surface-2/50 px-4 py-3">
-                            <div class="flex gap-2">
-                                <span class="material-symbols-outlined text-text-muted"
-                                    style="font-size: 16px;">public</span>
-                                <span class="text-xs font-mono font-medium text-text-muted">Pipeline
-                                    Visualization</span>
-                            </div>
-                            <div class="flex gap-1">
-                                <div class="size-2 rounded-full bg-border-strong"></div>
-                                <div class="size-2 rounded-full bg-border-strong"></div>
+                        <!-- Window Chrome Bar -->
+                        <div class="flex items-center justify-between px-4 py-3"
+                             style="border-bottom: 1px solid var(--border-subtle); background-color: var(--bg-surface-2);">
+                            <div class="flex items-center gap-3">
+                                <div class="flex gap-1.5">
+                                    <div class="size-2.5 rounded-full" style="background-color: var(--neutral-300);"></div>
+                                    <div class="size-2.5 rounded-full" style="background-color: var(--neutral-300);"></div>
+                                    <div class="size-2.5 rounded-full" style="background-color: var(--neutral-300);"></div>
+                                </div>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">deployment pipeline</span>
                             </div>
                         </div>
 
-                        <!-- Pipeline Content -->
+                        <!-- Steps -->
                         <div class="p-6 sm:p-8">
-                            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 relative">
+                            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 relative">
 
                                 <!-- Connecting Line (Desktop) -->
-                                <div
-                                    class="hidden sm:block absolute top-1/2 left-10 right-10 h-0.5 bg-border-subtle -z-10 -translate-y-[14px]">
-                                </div>
+                                <div class="hidden sm:block absolute top-6 left-[60px] right-[60px] h-px"
+                                     style="background: linear-gradient(to right, var(--color-info), var(--color-primary), var(--color-warning), var(--color-success));"></div>
 
                                 <!-- Step 1: Provisioned -->
                                 <div class="flex flex-col items-center gap-3 relative z-10">
-                                    <div
-                                        class="flex size-12 items-center justify-center rounded-full border border-border-subtle bg-surface-1 text-text-primary shadow-soft transition-transform group-hover:scale-110 group-hover:border-primary/50">
-                                        <span class="material-symbols-outlined text-blue-400">dns</span>
+                                    <div class="flex size-12 items-center justify-center rounded-full"
+                                         style="border: 1.5px solid var(--border-subtle); background-color: var(--bg-surface-1); box-shadow: var(--shadow-xs);">
+                                        <span class="material-symbols-outlined" style="color: var(--color-info);">shield_person</span>
                                     </div>
-                                    <div class="flex flex-col gap-0.5">
-                                        <span class="text-sm font-bold text-text-primary">Access Provisioned</span>
-                                        <span
-                                            class="text-xs font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full mx-auto ring-1 ring-inset ring-emerald-400/20">Assigned</span>
-                                    </div>
-                                </div>
-
-                                <!-- Mobile Arrow -->
-                                <span
-                                    class="material-symbols-outlined text-border-strong sm:hidden rotate-90">arrow_forward</span>
-
-                                <!-- Step 2: Deploy -->
-                                <div class="flex flex-col items-center gap-3 relative z-10">
-                                    <div
-                                        class="flex size-12 items-center justify-center rounded-full border border-border-subtle bg-surface-1 text-text-primary shadow-soft transition-transform group-hover:scale-110 group-hover:border-primary/50">
-                                        <span class="material-symbols-outlined text-amber-400">deployed_code</span>
-                                    </div>
-                                    <div class="flex flex-col gap-0.5">
-                                        <span class="text-sm font-bold text-text-primary">Git Deploy</span>
-                                        <span class="text-xs font-mono text-text-muted">Update Detected</span>
+                                    <div class="flex flex-col items-center gap-1">
+                                        <span class="text-sm font-semibold" style="color: var(--text-primary);">Provisioned</span>
+                                        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full"
+                                              style="color: var(--color-info); background-color: var(--color-info-bg);">Admin assigns port</span>
                                     </div>
                                 </div>
 
                                 <!-- Mobile Arrow -->
-                                <span
-                                    class="material-symbols-outlined text-border-strong sm:hidden rotate-90">arrow_forward</span>
+                                <span class="material-symbols-outlined sm:hidden" style="color: var(--border-strong); transform: rotate(90deg);">arrow_forward</span>
 
-                                <!-- Step 3: Online -->
+                                <!-- Step 2: Git Push -->
                                 <div class="flex flex-col items-center gap-3 relative z-10">
-                                    <div
-                                        class="flex size-12 items-center justify-center rounded-full border border-border-subtle bg-surface-1 text-text-primary shadow-soft transition-transform group-hover:scale-110 group-hover:border-primary/50">
-                                        <span class="material-symbols-outlined text-emerald-400">check_circle</span>
+                                    <div class="flex size-12 items-center justify-center rounded-full"
+                                         style="border: 1.5px solid var(--border-subtle); background-color: var(--bg-surface-1); box-shadow: var(--shadow-xs);">
+                                        <span class="material-symbols-outlined" style="color: var(--color-primary);">code</span>
                                     </div>
-                                    <div class="flex flex-col gap-0.5">
-                                        <span class="text-sm font-bold text-text-primary">Stable URL</span>
-                                        <span class="text-xs font-mono text-emerald-400">Online</span>
+                                    <div class="flex flex-col items-center gap-1">
+                                        <span class="text-sm font-semibold" style="color: var(--text-primary);">Git Push</span>
+                                        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full"
+                                              style="color: var(--color-primary); background-color: var(--color-primary-light);">Build triggered</span>
+                                    </div>
+                                </div>
+
+                                <!-- Mobile Arrow -->
+                                <span class="material-symbols-outlined sm:hidden" style="color: var(--border-strong); transform: rotate(90deg);">arrow_forward</span>
+
+                                <!-- Step 3: Deploy -->
+                                <div class="flex flex-col items-center gap-3 relative z-10">
+                                    <div class="flex size-12 items-center justify-center rounded-full"
+                                         style="border: 1.5px solid var(--border-subtle); background-color: var(--bg-surface-1); box-shadow: var(--shadow-xs);">
+                                        <span class="material-symbols-outlined" style="color: var(--color-warning);">deployed_code</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-1">
+                                        <span class="text-sm font-semibold" style="color: var(--text-primary);">Deploy</span>
+                                        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full"
+                                              style="color: var(--color-warning); background-color: var(--color-warning-bg);">In progress</span>
+                                    </div>
+                                </div>
+
+                                <!-- Mobile Arrow -->
+                                <span class="material-symbols-outlined sm:hidden" style="color: var(--border-strong); transform: rotate(90deg);">arrow_forward</span>
+
+                                <!-- Step 4: Live -->
+                                <div class="flex flex-col items-center gap-3 relative z-10">
+                                    <div class="flex size-12 items-center justify-center rounded-full"
+                                         style="border: 1.5px solid var(--color-success); background-color: var(--color-success-bg); box-shadow: var(--shadow-xs);">
+                                        <span class="material-symbols-outlined" style="color: var(--color-success);">check_circle</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-1">
+                                        <span class="text-sm font-semibold" style="color: var(--text-primary);">Live</span>
+                                        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full"
+                                              style="color: var(--color-success); background-color: var(--color-success-bg);">🟢 Online</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Example URL Box -->
+                            <!-- Example URL -->
                             <div class="mt-8 flex justify-center">
-                                <div
-                                    class="inline-flex items-center gap-2 rounded-lg border border-border-subtle bg-surface-2/50 px-4 py-2 font-mono text-xs sm:text-sm text-text-muted transition-colors hover:border-border-strong hover:text-text-secondary">
-                                    <span class="text-primary font-bold">Example</span>
-                                    <span class="text-border-strong">|</span>
-                                    <span>stable-url:<span class="text-text-primary font-bold">9001</span></span>
-                                    <span
-                                        class="material-symbols-outlined ml-2 text-[14px] cursor-pointer hover:text-text-primary">content_copy</span>
+                                <div class="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 font-mono text-xs sm:text-sm cursor-default"
+                                     style="border: 1px solid var(--border-subtle); background-color: var(--bg-surface-2);">
+                                    <span class="font-semibold" style="color: var(--color-primary);">→</span>
+                                    <span style="color: var(--text-muted);">your-app</span>
+                                    <span style="color: var(--border-strong);">·</span>
+                                    <span style="color: var(--text-primary);">10.0.0.1:<strong style="color: var(--color-primary);">9001</strong></span>
+                                    <button onclick="navigator.clipboard.writeText('10.0.0.1:9001');this.querySelector('span').textContent='done';setTimeout(()=>this.querySelector('span').textContent='content_copy',1500)"
+                                            class="ml-1 p-0.5 rounded transition-colors"
+                                            style="color: var(--text-muted);"
+                                            onmouseover="this.style.color='var(--color-primary)'"
+                                            onmouseout="this.style.color='var(--text-muted)'"
+                                            title="Copy URL">
+                                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
-            <!-- Feature Cards -->
-            <div class="mt-24 grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-3 px-4">
-                <div
-                    class="flex flex-col gap-3 rounded-2xl border border-border-subtle bg-surface-1 p-6 transition-colors hover:border-border-strong hover:bg-surface-2 group">
-                    <div class="mb-1 text-primary transition-transform group-hover:scale-110 origin-left">
-                        <span class="material-symbols-outlined text-[32px]">settings_ethernet</span>
+            <!-- ============================================================
+                 FEATURE CARDS — 3 columns
+                 Ref: Vercel landing features — icon, title, short desc
+                 Spec: Provisioned Access · Auto Deploy · Real-Time Metrics
+                 ============================================================ -->
+            <div class="mt-24 grid w-full max-w-5xl grid-cols-1 sm:grid-cols-3 gap-5 px-4">
+
+                <!-- Card 1: Provisioned Access -->
+                <div class="flex flex-col gap-3 rounded-xl p-6 transition-all cursor-default"
+                     style="border: 1px solid var(--border-subtle); background-color: var(--bg-surface-1);"
+                     onmouseover="this.style.borderColor='var(--border-strong)';this.style.boxShadow='var(--shadow-sm)'"
+                     onmouseout="this.style.borderColor='var(--border-subtle)';this.style.boxShadow='none'">
+                    <div class="flex size-10 items-center justify-center rounded-lg"
+                         style="background-color: var(--color-primary-light); color: var(--color-primary);">
+                        <span class="material-symbols-outlined text-[22px]">lock</span>
                     </div>
-                    <h3 class="text-lg font-bold text-text-primary">Provisioned Access</h3>
-                    <p class="text-sm leading-relaxed text-text-secondary">
-                        Dedicated access — stable URL tied to your deployment (assigned on first deploy).
+                    <h3 class="text-base font-semibold" style="color: var(--text-primary); margin-bottom: 0;">Provisioned Access</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+                        Your admin assigns a dedicated port. Every deployment gets a stable, persistent URL.
                     </p>
                 </div>
-                <div
-                    class="flex flex-col gap-3 rounded-2xl border border-border-subtle bg-surface-1 p-6 transition-colors hover:border-border-strong hover:bg-surface-2 group">
-                    <div class="mb-1 text-primary transition-transform group-hover:scale-110 origin-left">
-                        <span class="material-symbols-outlined text-[32px]">code_blocks</span>
+
+                <!-- Card 2: Auto Deploy -->
+                <div class="flex flex-col gap-3 rounded-xl p-6 transition-all cursor-default"
+                     style="border: 1px solid var(--border-subtle); background-color: var(--bg-surface-1);"
+                     onmouseover="this.style.borderColor='var(--border-strong)';this.style.boxShadow='var(--shadow-sm)'"
+                     onmouseout="this.style.borderColor='var(--border-subtle)';this.style.boxShadow='none'">
+                    <div class="flex size-10 items-center justify-center rounded-lg"
+                         style="background-color: var(--color-primary-light); color: var(--color-primary);">
+                        <span class="material-symbols-outlined text-[22px]">bolt</span>
                     </div>
-                    <h3 class="text-lg font-bold text-text-primary">Git Deployments</h3>
-                    <p class="text-sm leading-relaxed text-text-secondary">
-                        Push updates to your repository to trigger builds. Auto-redeploy supported.
+                    <h3 class="text-base font-semibold" style="color: var(--text-primary); margin-bottom: 0;">Auto Deploy</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+                        Push to Git and deploy in seconds. Toggle auto-redeploy on or off from your dashboard.
                     </p>
                 </div>
-                <div
-                    class="flex flex-col gap-3 rounded-2xl border border-border-subtle bg-surface-1 p-6 transition-colors hover:border-border-strong hover:bg-surface-2 group">
-                    <div class="mb-1 text-primary transition-transform group-hover:scale-110 origin-left">
-                        <span class="material-symbols-outlined text-[32px]">monitoring</span>
+
+                <!-- Card 3: Real-Time Metrics -->
+                <div class="flex flex-col gap-3 rounded-xl p-6 transition-all cursor-default"
+                     style="border: 1px solid var(--border-subtle); background-color: var(--bg-surface-1);"
+                     onmouseover="this.style.borderColor='var(--border-strong)';this.style.boxShadow='var(--shadow-sm)'"
+                     onmouseout="this.style.borderColor='var(--border-subtle)';this.style.boxShadow='none'">
+                    <div class="flex size-10 items-center justify-center rounded-lg"
+                         style="background-color: var(--color-primary-light); color: var(--color-primary);">
+                        <span class="material-symbols-outlined text-[22px]">monitoring</span>
                     </div>
-                    <h3 class="text-lg font-bold text-text-primary">Status, Logs & Control</h3>
-                    <p class="text-sm leading-relaxed text-text-secondary">
-                        Track deployment status and view service logs directly from your dashboard.
+                    <h3 class="text-base font-semibold" style="color: var(--text-primary); margin-bottom: 0;">Real-Time Metrics</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+                        CPU, RAM, and health at a glance. Admins monitor every project from a single dashboard.
                     </p>
                 </div>
             </div>
         </main>
 
-        <!-- Footer -->
-        <footer class="relative z-10 border-t border-border-subtle bg-surface-1 py-10">
-            <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
+        <!-- ============================================================
+             FOOTER — Logo · Links · Copyright
+             Ref: Vercel footer — clean, minimal, centered on mobile
+             ============================================================ -->
+        <footer class="relative z-10 py-8"
+                style="border-top: 1px solid var(--border-subtle); background-color: var(--bg-surface-1);">
+            <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 sm:flex-row">
                 <div class="flex items-center gap-2">
-                    <div class="flex size-6 items-center justify-center rounded bg-primary/20 text-primary">
-                        <span class="material-symbols-outlined text-[16px]">dns</span>
+                    <div class="flex size-6 items-center justify-center rounded text-white"
+                         style="background-color: var(--color-primary);">
+                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">deployed_code</span>
                     </div>
-                    <span class="text-sm font-semibold text-text-secondary">DISAL Hosting</span>
+                    <span class="text-sm font-semibold" style="color: var(--text-secondary);">DISAL Hosting</span>
                 </div>
-                <div class="flex gap-8 text-sm text-text-muted">
-                    <a class="hover:text-text-primary transition-colors" href="#">Status</a>
-                    <a class="hover:text-text-primary transition-colors" href="#">Terms of Service</a>
-                    <a class="hover:text-text-primary transition-colors" href="#">Privacy Policy</a>
+                <div class="flex gap-6 text-sm" style="color: var(--text-muted);">
+                    <a href="Documentation.html" class="transition-colors hover:underline underline-offset-4"
+                       onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">Docs</a>
+                    <a href="#" class="transition-colors hover:underline underline-offset-4"
+                       onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">GitHub</a>
+                    <a href="#" class="transition-colors hover:underline underline-offset-4"
+                       onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
                 </div>
-                <div class="text-sm text-text-muted">
-                    © 2024 DISAL. All rights reserved.
-                </div>
+                <span class="text-sm" style="color: var(--text-muted);">© 2026 DISAL</span>
             </div>
         </footer>
     </div>

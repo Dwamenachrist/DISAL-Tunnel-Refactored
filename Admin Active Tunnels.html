@@ -189,7 +189,7 @@
                 <div class="flex items-center justify-between mb-2">
                     <span class="text-xs font-semibold text-text-main">toml_config/ports.toml</span>
                     <span id="tomlStatusBadge"
-                        class="px-2 py-0.5 rounded-full text-[10px] border border-border-dark text-text-dim">No student
+                        class="px-2 py-0.5 rounded-full text-[10px] border border-border-dark text-text-dim bg-background-dark">No student
                         ports allocated</span>
                 </div>
                 <pre id="tomlPreview" class="whitespace-pre-wrap leading-relaxed text-[11px]">
@@ -368,7 +368,8 @@
             if (tomlStatusBadge) {
                 tomlStatusBadge.textContent = 'Port allocation updated';
                 tomlStatusBadge.classList.remove('text-text-dim');
-                tomlStatusBadge.classList.add('text-success', 'border-success/40');
+                tomlStatusBadge.classList.remove('border-border-dark', 'bg-background-dark');
+                tomlStatusBadge.classList.add('text-success', 'border-success/20', 'bg-success/10');
             }
 
             if (allocStatus) {
@@ -398,7 +399,8 @@
                 if (tomlStatusBadge) {
                     tomlStatusBadge.textContent = 'Existing student port mappings loaded';
                     tomlStatusBadge.classList.remove('text-text-dim');
-                    tomlStatusBadge.classList.add('text-success', 'border-success/40');
+                    tomlStatusBadge.classList.remove('border-border-dark', 'bg-background-dark');
+                    tomlStatusBadge.classList.add('text-success', 'border-success/20', 'bg-success/10');
                 }
             }
         })();

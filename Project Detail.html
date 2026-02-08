@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Project Detail — DISAL Hosting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body {
+            font-family: var(--font-sans)
+        }
+
+        .font-mono {
+            font-family: var(--font-mono)
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none
+        }
+
+        .tab-btn {
+            position: relative;
+            padding: 10px 0;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color .15s
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary)
+        }
+
+        .tab-btn.active {
+            color: var(--text-primary);
+            font-weight: 600
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--color-primary);
+            border-radius: 2px 2px 0 0
+        }
+
+        .tab-panel {
+            display: none
+        }
+
+        .tab-panel.active {
+            display: block
+        }
+
+        .deploy-row {
+            transition: background .1s ease
+        }
+
+        .deploy-row:hover {
+            background: var(--bg-surface-2)
+        }
+
+        .log-line {
+            font-size: 12px;
+            line-height: 1.7;
+            font-family: var(--font-mono)
+        }
+
+        .log-line:hover {
+            background: rgba(255, 255, 255, .04)
+        }
+
+        .resource-bar-track {
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-surface-2);
+            overflow: hidden
+        }
+
+        .resource-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width .6s ease
+        }
+
+        .toast {
+            transform: translateX(120%);
+            transition: transform .3s ease
+        }
+
+        .toast.show {
+            transform: translateX(0)
+        }
+
+        .env-row {
+            transition: background .1s
+        }
+
+        .env-row:hover {
+            background: var(--bg-surface-2)
+        }
+    </style>
+</head>
+
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;"
+    class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);"
+        class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <div class="flex flex-col mb-8">
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);"
+                        class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
+                    </div>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING
+                </p>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a href="Tunnel Manager Board.html"
+                    style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined"
+                        style="font-size:20px;color:var(--color-primary);">grid_view</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Dashboard</span>
+                </a>
+                <a href="Student Logs.html" style="color:var(--text-muted);"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]"
+                        style="font-size:20px;color:var(--text-muted);">terminal</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Logs</span>
+                </a>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]"
+                        style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
+                </a>
+            </nav>
+        </div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);"
+                    class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
+                <div class="flex flex-col">
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@apatechlab.com</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);"
+                    class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer"
+                    title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);"
+        class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
+
+        <!-- Header -->
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);"
+            class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="Tunnel Manager Board.html" style="color:var(--text-muted);"
+                    class="hover:!text-[var(--text-primary)] transition-colors no-underline flex items-center gap-1">
+                    <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Projects
+                </a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span id="breadcrumbName" style="color:var(--text-primary);" class="font-semibold">React Frontend</span>
+            </nav>
+            <div class="flex items-center gap-2">
+                <button onclick="triggerRedeploy()"
+                    style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" style="font-size:16px;">refresh</span> Redeploy
+                </button>
+                <a id="openLiveBtn" href="#" target="_blank" style="background:var(--color-primary);color:white;"
+                    class="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all hover:opacity-90 shadow-sm no-underline">
+                    <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span> Open
+                </a>
+            </div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto scrollbar-hide">
+
+            <!-- Project Header Banner -->
+            <div style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);"
+                class="px-4 md:px-8 pt-6 pb-0">
+                <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+                    <div class="flex items-center gap-3">
+                        <span id="statusDot" class="w-3 h-3 rounded-full animate-pulse"
+                            style="background:#22C55E;"></span>
+                        <div>
+                            <h1 id="projectTitle" style="color:var(--text-primary);"
+                                class="text-xl font-extrabold tracking-tight mb-0">React Frontend</h1>
+                            <div class="flex items-center gap-1.5 mt-1 text-xs font-mono"
+                                style="color:var(--text-muted);">
+                                <span id="branchName">main</span>
+                                <span style="color:var(--border-strong);">·</span>
+                                <span id="commitHash">e7f8a2b</span>
+                                <span style="color:var(--border-strong);">·</span>
+                                <span id="deployTime">45 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="statusBadge"
+                            style="background:rgba(34,197,94,.1);color:#22C55E;border:1px solid rgba(34,197,94,.2);"
+                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="w-1.5 h-1.5 rounded-full" style="background:currentColor;"></span> Live
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <nav class="flex items-center gap-6"
+                    style="border-bottom:1px solid var(--border-subtle);margin:0 -32px;padding:0 32px;">
+                    <button class="tab-btn active" data-tab="overview"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:-3px;margin-right:4px;">dashboard</span>Overview</button>
+                    <button class="tab-btn" data-tab="deployments"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:-3px;margin-right:4px;">rocket_launch</span>Deployments</button>
+                    <button class="tab-btn" data-tab="logs"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:-3px;margin-right:4px;">terminal</span>Logs</button>
+                    <button class="tab-btn" data-tab="settings"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:-3px;margin-right:4px;">settings</span>Settings</button>
+                </nav>
+            </div>
+
+            <!-- ═══ TAB PANELS ═══ -->
+            <div class="p-4 md:p-8">
+
+                <!-- ── OVERVIEW TAB ── -->
+                <div id="panel-overview" class="tab-panel active">
+
+                    <!-- Live URL Card -->
+                    <div class="mb-6">
+                        <label style="color:var(--text-muted);"
+                            class="text-xs font-semibold uppercase tracking-wider mb-2 block">Production
+                            Endpoint</label>
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl px-5 py-4 flex items-center justify-between group">
+                            <div class="flex flex-col gap-1">
+                                <div class="flex items-center gap-2 font-mono text-base"
+                                    style="color:var(--color-primary);">
+                                    <span class="material-symbols-outlined" style="font-size:18px;">link</span>
+                                    <span id="liveUrl">102.176.94.45:3000</span>
+                                </div>
+                                <div id="domainLine" class="flex items-center gap-1 font-mono text-xs"
+                                    style="color:var(--text-muted);">
+                                    <span class="material-symbols-outlined" style="font-size:14px;">language</span>
+                                    <span>react-frontend.apatechlab.com</span>
+                                    <span style="color:var(--color-warning);" class="text-[9px] ml-1">(DNS
+                                        pending)</span>
+                                </div>
+                            </div>
+                            <button onclick="copyUrl()" style="color:var(--text-muted);"
+                                class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] hover:text-[var(--text-primary)] transition-colors cursor-pointer opacity-0 group-hover:opacity-100"
+                                title="Copy URL">
+                                <span class="material-symbols-outlined" style="font-size:18px;">content_copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Deployment Info Cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl px-4 py-3.5">
+                            <span style="color:var(--text-muted);"
+                                class="text-[11px] font-medium uppercase tracking-wider block mb-1">Commit</span>
+                            <span style="color:var(--text-primary);"
+                                class="font-mono text-sm font-semibold">e7f8a2b</span>
+                        </div>
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl px-4 py-3.5">
+                            <span style="color:var(--text-muted);"
+                                class="text-[11px] font-medium uppercase tracking-wider block mb-1">Build
+                                Duration</span>
+                            <span style="color:var(--text-primary);" class="font-mono text-sm font-semibold">34s</span>
+                        </div>
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl px-4 py-3.5">
+                            <span style="color:var(--text-muted);"
+                                class="text-[11px] font-medium uppercase tracking-wider block mb-1">Port</span>
+                            <span style="color:var(--text-primary);" class="font-mono text-sm font-semibold">3000</span>
+                        </div>
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl px-4 py-3.5">
+                            <span style="color:var(--text-muted);"
+                                class="text-[11px] font-medium uppercase tracking-wider block mb-1">Status</span>
+                            <span class="flex items-center gap-1.5 text-sm font-semibold" style="color:#22C55E;"><span
+                                    class="w-1.5 h-1.5 rounded-full" style="background:currentColor;"></span>
+                                Ready</span>
+                        </div>
+                    </div>
+
+                    <!-- Auto-Redeploy Toggle -->
+                    <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                        class="rounded-xl px-5 py-4 flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined"
+                                style="font-size:20px;color:var(--color-primary);">webhook</span>
+                            <div>
+                                <span style="color:var(--text-primary);"
+                                    class="text-sm font-semibold block">Auto-Redeploy</span>
+                                <span style="color:var(--text-muted);" class="text-xs">Automatically redeploy when you
+                                    push to Git.</span>
+                            </div>
+                        </div>
+                        <button id="autoToggle" onclick="toggleAutoRedeploy()"
+                            class="relative w-11 h-6 rounded-full transition-colors cursor-pointer"
+                            style="background:var(--color-primary);">
+                            <span
+                                class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+                                style="transform:translateX(20px);"></span>
+                        </button>
+                    </div>
+
+                    <!-- Resource Usage -->
+                    <div class="mb-6">
+                        <label style="color:var(--text-muted);"
+                            class="text-xs font-semibold uppercase tracking-wider mb-3 block">Resource Usage</label>
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl px-5 py-4 space-y-4">
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span style="color:var(--text-primary);" class="text-xs font-medium">CPU</span>
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono">42% <span style="color:var(--border-strong);">·</span> 0.84 / 2.0 vCPU</span>
+                                </div>
+                                <div class="resource-bar-track">
+                                    <div class="resource-bar-fill" style="width:42%;background:#22C55E;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span style="color:var(--text-primary);" class="text-xs font-medium">Memory</span>
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono">28% <span style="color:var(--border-strong);">·</span> 143 / 512 MB</span>
+                                </div>
+                                <div class="resource-bar-track">
+                                    <div class="resource-bar-fill" style="width:28%;background:#22C55E;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span style="color:var(--text-primary);" class="text-xs font-medium">Disk</span>
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono">15% <span style="color:var(--border-strong);">·</span> 76 / 512 MB</span>
+                                </div>
+                                <div class="resource-bar-track">
+                                    <div class="resource-bar-fill" style="width:15%;background:#22C55E;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Git Source -->
+                    <div>
+                        <label style="color:var(--text-muted);"
+                            class="text-xs font-semibold uppercase tracking-wider mb-3 block">Source</label>
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl px-5 py-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);"
+                                    class="w-9 h-9 rounded-lg flex items-center justify-center">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                                        style="color:var(--text-primary);">
+                                        <path
+                                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span id="repoName" style="color:var(--text-primary);"
+                                        class="text-sm font-semibold block">student/react-frontend</span>
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono">main branch</span>
+                                </div>
+                            </div>
+                            <a id="openGithubBtn" href="https://github.com/student/react-frontend" target="_blank" style="color:var(--text-muted);"
+                                class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] hover:text-[var(--text-primary)] transition-colors no-underline"
+                                title="Open on GitHub">
+                                <span class="material-symbols-outlined" style="font-size:18px;">open_in_new</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── DEPLOYMENTS TAB ── -->
+                <div id="panel-deployments" class="tab-panel">
+                    <div class="flex items-center justify-between mb-5">
+                        <div>
+                            <h2 style="color:var(--text-primary);" class="text-lg font-bold mb-0.5">Deployment History
+                            </h2>
+                            <p style="color:var(--text-muted);" class="text-xs mb-0">All deployments for this project.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);"
+                        class="rounded-xl overflow-hidden">
+                        <!-- Current (Live) -->
+                        <div class="deploy-row px-5 py-4 flex items-center justify-between"
+                            style="border-bottom:1px solid var(--border-subtle);background:rgba(34,197,94,.03);">
+                            <div class="flex items-center gap-4">
+                                <span class="w-2 h-2 rounded-full animate-pulse" style="background:#22C55E;"></span>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span style="color:var(--text-primary);"
+                                            class="text-sm font-semibold">Production</span>
+                                        <span style="background:rgba(34,197,94,.1);color:#22C55E;"
+                                            class="text-[10px] font-semibold px-2 py-0.5 rounded-full">Current</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 mt-0.5 text-xs font-mono"
+                                        style="color:var(--text-muted);">
+                                        <span>e7f8a2b</span><span style="color:var(--border-strong);">·</span><span>Fix
+                                            navigation routes</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 mt-1 text-[11px]" style="color:var(--text-muted);">
+                                        <span class="material-symbols-outlined" style="font-size:12px;">commit</span>
+                                        <span>Triggered by <span style="color:var(--text-primary);" class="font-medium">git push</span> to main</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs" style="color:var(--text-muted);">
+                                <span class="font-mono">34s</span>
+                                <span>45 min ago</span>
+                                <span class="inline-flex items-center gap-1 font-medium" style="color:#22C55E;"><span
+                                        class="material-symbols-outlined" style="font-size:14px;">check_circle</span>
+                                    Ready</span>
+                            </div>
+                        </div>
+                        <!-- Deploy 2 -->
+                        <div class="deploy-row px-5 py-4 flex items-center justify-between"
+                            style="border-bottom:1px solid var(--border-subtle);">
+                            <div class="flex items-center gap-4">
+                                <span class="w-2 h-2 rounded-full" style="background:#A1A1AA;"></span>
+                                <div>
+                                    <span style="color:var(--text-primary);"
+                                        class="text-sm font-medium">Production</span>
+                                    <div class="flex items-center gap-1.5 mt-0.5 text-xs font-mono"
+                                        style="color:var(--text-muted);">
+                                        <span>b3c4d5e</span><span
+                                            style="color:var(--border-strong);">·</span><span>Update API
+                                            endpoints</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 mt-1 text-[11px]" style="color:var(--text-muted);">
+                                        <span class="material-symbols-outlined" style="font-size:12px;">commit</span>
+                                        <span>Triggered by <span style="color:var(--text-primary);" class="font-medium">git push</span> to main</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs" style="color:var(--text-muted);">
+                                <span class="font-mono">28s</span>
+                                <span>2 hours ago</span>
+                                <span class="inline-flex items-center gap-1 font-medium" style="color:#A1A1AA;"><span
+                                        class="material-symbols-outlined" style="font-size:14px;">check_circle</span>
+                                    Superseded</span>
+                                <button onclick="rollbackDeploy('d4c3b2a')" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="ml-1 px-2 py-0.5 rounded text-[10px] font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Rollback</button>
+                            </div>
+                        </div>
+                        <!-- Deploy 3 — failed -->
+                        <div class="deploy-row px-5 py-4 flex items-center justify-between"
+                            style="border-bottom:1px solid var(--border-subtle);">
+                            <div class="flex items-center gap-4">
+                                <span class="w-2 h-2 rounded-full" style="background:#EF4444;"></span>
+                                <div>
+                                    <span style="color:var(--text-primary);"
+                                        class="text-sm font-medium">Production</span>
+                                    <div class="flex items-center gap-1.5 mt-0.5 text-xs font-mono"
+                                        style="color:var(--text-muted);">
+                                        <span>a1b2c3d</span><span style="color:var(--border-strong);">·</span><span>Add
+                                            auth middleware</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 mt-1 text-[11px]" style="color:var(--text-muted);">
+                                        <span class="material-symbols-outlined" style="font-size:12px;">person</span>
+                                        <span>Triggered by <span style="color:var(--text-primary);" class="font-medium">manual redeploy</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs" style="color:var(--text-muted);">
+                                <span class="font-mono">12s</span>
+                                <span>5 hours ago</span>
+                                <span class="inline-flex items-center gap-1 font-medium" style="color:#EF4444;"><span
+                                        class="material-symbols-outlined" style="font-size:14px;">cancel</span>
+                                    Failed</span>
+                            </div>
+                        </div>
+                        <!-- Deploy 4 -->
+                        <div class="deploy-row px-5 py-4 flex items-center justify-between"
+                            style="border-bottom:1px solid var(--border-subtle);">
+                            <div class="flex items-center gap-4">
+                                <span class="w-2 h-2 rounded-full" style="background:#A1A1AA;"></span>
+                                <div>
+                                    <span style="color:var(--text-primary);"
+                                        class="text-sm font-medium">Production</span>
+                                    <div class="flex items-center gap-1.5 mt-0.5 text-xs font-mono"
+                                        style="color:var(--text-muted);">
+                                        <span>f9e8d7c</span><span
+                                            style="color:var(--border-strong);">·</span><span>Initial deployment</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 mt-1 text-[11px]" style="color:var(--text-muted);">
+                                        <span class="material-symbols-outlined" style="font-size:12px;">commit</span>
+                                        <span>Triggered by <span style="color:var(--text-primary);" class="font-medium">git push</span> to main</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs" style="color:var(--text-muted);">
+                                <span class="font-mono">41s</span>
+                                <span>1 day ago</span>
+                                <span class="inline-flex items-center gap-1 font-medium" style="color:#A1A1AA;"><span
+                                        class="material-symbols-outlined" style="font-size:14px;">check_circle</span>
+                                    Superseded</span>
+                                <button onclick="rollbackDeploy('f9e8d7c')" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="ml-1 px-2 py-0.5 rounded text-[10px] font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Rollback</button>
+                            </div>
+                        </div>
+                        <!-- Deploy 5 -->
+                        <div class="deploy-row px-5 py-4 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <span class="w-2 h-2 rounded-full" style="background:#A1A1AA;"></span>
+                                <div>
+                                    <span style="color:var(--text-primary);"
+                                        class="text-sm font-medium">Production</span>
+                                    <div class="flex items-center gap-1.5 mt-0.5 text-xs font-mono"
+                                        style="color:var(--text-muted);">
+                                        <span>c6b5a4f</span><span
+                                            style="color:var(--border-strong);">·</span><span>Setup project
+                                            structure</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 mt-1 text-[11px]" style="color:var(--text-muted);">
+                                        <span class="material-symbols-outlined" style="font-size:12px;">commit</span>
+                                        <span>Triggered by <span style="color:var(--text-primary);" class="font-medium">git push</span> to main</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs" style="color:var(--text-muted);">
+                                <span class="font-mono">38s</span>
+                                <span>2 days ago</span>
+                                <span class="inline-flex items-center gap-1 font-medium" style="color:#A1A1AA;"><span
+                                        class="material-symbols-outlined" style="font-size:14px;">check_circle</span>
+                                    Superseded</span>
+                                <button onclick="rollbackDeploy('c6b5a4f')" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="ml-1 px-2 py-0.5 rounded text-[10px] font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Rollback</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── LOGS TAB (Build/Runtime Logs — dark terminal) ── -->
+                <div id="panel-logs" class="tab-panel">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <select id="logFilter"
+                                style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                                class="rounded-lg px-3 py-1.5 text-xs font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer">
+                                <option>All Logs</option>
+                                <option>Build Only</option>
+                                <option>Runtime Only</option>
+                                <option>Errors Only</option>
+                            </select>
+                            <div class="relative">
+                                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined"
+                                    style="font-size:14px;color:var(--text-muted);">search</span>
+                                <input type="text" placeholder="Filter logs…"
+                                    style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                                    class="w-48 pl-8 pr-3 py-1.5 text-xs rounded-lg placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] transition-all">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="downloadLogs()" style="color:var(--text-muted);border:1px solid var(--border-subtle);"
+                                class="flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                                <span class="material-symbols-outlined" style="font-size:14px;">download</span> Download
+                            </button>
+                            <span id="liveIndicator" class="flex items-center gap-1.5 text-[11px] font-medium"
+                                style="color:#22C55E;">
+                                <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:#22C55E;"></span>
+                                Live
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Dark Terminal Log Viewer -->
+                    <div style="background:#0A0A0A;border:1px solid #262626;border-radius:12px;"
+                        class="overflow-hidden">
+                        <!-- Terminal Header -->
+                        <div style="background:#171717;border-bottom:1px solid #262626;"
+                            class="flex items-center justify-between px-4 py-2.5">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#EF4444;"></span>
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#F59E0B;"></span>
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#22C55E;"></span>
+                            </div>
+                            <span class="text-[11px] font-mono" style="color:#737373;">deploy.sh — React Frontend</span>
+                            <button style="color:#737373;" class="hover:text-white transition-colors cursor-pointer">
+                                <span class="material-symbols-outlined" style="font-size:16px;">fullscreen</span>
+                            </button>
+                        </div>
+                        <!-- Log Lines -->
+                        <div class="p-4 max-h-[420px] overflow-y-auto scrollbar-hide space-y-0.5">
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:00</span> <span style="color:#22C55E;">[build]</span>
+                                <span style="color:#E5E5E5;">Cloning repository...</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:02</span> <span style="color:#22C55E;">[build]</span>
+                                <span style="color:#E5E5E5;">Cloned to /home/disal/deployments/react-frontend</span>
+                            </div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:03</span> <span style="color:#22C55E;">[build]</span>
+                                <span style="color:#E5E5E5;">Running deploy.sh...</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:04</span> <span style="color:#3B82F6;">[info]</span>
+                                <span style="color:#A3A3A3;">Node.js v18.17.0 detected</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:05</span> <span style="color:#22C55E;">[build]</span>
+                                <span style="color:#E5E5E5;">Installing dependencies...</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:08</span> <span style="color:#A3A3A3;">[npm]</span>
+                                <span style="color:#A3A3A3;">added 1247 packages in 3.2s</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:09</span> <span style="color:#22C55E;">[build]</span>
+                                <span style="color:#E5E5E5;">Building application...</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:14</span> <span style="color:#A3A3A3;">[npm]</span>
+                                <span style="color:#A3A3A3;">Creating optimized production build...</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:22</span> <span style="color:#A3A3A3;">[npm]</span>
+                                <span style="color:#A3A3A3;">Compiled successfully.</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:22</span> <span style="color:#22C55E;">[build]</span>
+                                <span style="color:#E5E5E5;">Build complete — output: /build (4.2 MB)</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:23</span> <span style="color:#22C55E;">[deploy]</span>
+                                <span style="color:#E5E5E5;">Starting server on port 3000...</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:24</span> <span style="color:#22C55E;">[deploy]</span>
+                                <span style="color:#E5E5E5;">Binding FRP tunnel → 102.176.94.45:3000</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:24</span> <span style="color:#3B82F6;">[info]</span>
+                                <span style="color:#A3A3A3;">TOML entry: DISAL1_21005678 → tcp:3000</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:25</span> <span style="color:#22C55E;">[deploy]</span>
+                                <span style="color:#E5E5E5;">FRP service restarted — tunnel active</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:31:25</span> <span
+                                    style="color:#22C55E;font-weight:600;">✓ Ready</span> <span
+                                    style="color:#E5E5E5;">Deployment complete in <span
+                                        style="color:#E8792B;font-weight:600;">34s</span></span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:32:01</span> <span style="color:#3B82F6;">[runtime]</span>
+                                <span style="color:#A3A3A3;">GET /api/v1/users → 200 OK (12ms)</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:32:05</span> <span style="color:#F59E0B;">[warn]</span>
+                                <span style="color:#F59E0B;">Slow query: SELECT * FROM grades — 1.2s</span></div>
+                            <div class="log-line px-2 py-0.5 rounded" style="color:#737373;"><span
+                                    style="color:#525252;">14:33:10</span> <span style="color:#3B82F6;">[runtime]</span>
+                                <span style="color:#A3A3A3;">GET /static/js/main.chunk.js → 200 OK (3ms)</span></div>
+                            <div class="log-line px-2 py-0.5 rounded animate-pulse" style="color:#737373;"><span
+                                    style="color:#525252;">14:33:15</span> <span style="color:#22C55E;">█</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── SETTINGS TAB ── -->
+                <div id="panel-settings" class="tab-panel">
+
+                    <!-- General -->
+                    <div class="mb-8">
+                        <h2 style="color:var(--text-primary);" class="text-lg font-bold mb-1">General</h2>
+                        <p style="color:var(--text-muted);" class="text-xs mb-5">Project configuration and identity.</p>
+
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);"
+                            class="rounded-xl">
+                            <div class="px-5 py-4 flex items-center justify-between" style="border-bottom:1px solid var(--border-subtle);">
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-medium block">Project Name</span>
+                                    <span style="color:var(--text-muted);" class="text-xs">react-frontend</span>
+                                </div>
+                                <button onclick="editSettingsField(this, 'Project Name')" style="color:var(--text-muted);border:1px solid var(--border-subtle);"
+                                    class="px-3 py-1 rounded-lg text-xs font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Edit</button>
+                            </div>
+                            <div class="px-5 py-4 flex items-center justify-between" style="border-bottom:1px solid var(--border-subtle);">
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-medium block">Repository</span>
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono">github.com/student/react-frontend</span>
+                                </div>
+                                <a id="settingsRepoLink" href="https://github.com/student/react-frontend" target="_blank" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors no-underline"><span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span></a>
+                            </div>
+                            <div class="px-5 py-4 flex items-center justify-between">
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-medium block">Branch</span>
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono">main</span>
+                                </div>
+                                <button onclick="editSettingsField(this, 'Branch')" style="color:var(--text-muted);border:1px solid var(--border-subtle);"
+                                    class="px-3 py-1 rounded-lg text-xs font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deploy Script (deploy.sh — the core of DISAL) -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h2 style="color:var(--text-primary);" class="text-lg font-bold mb-0.5">Deploy Script</h2>
+                                <p style="color:var(--text-muted);" class="text-xs mb-0">Your <code style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--color-primary);" class="px-1.5 py-0.5 rounded text-[11px] font-mono">deploy.sh</code> controls the full deployment pipeline. The platform executes this script on every deploy.</p>
+                            </div>
+                        </div>
+                        <div style="background:#0A0A0A;border:1px solid #262626;border-radius:12px;" class="overflow-hidden">
+                            <!-- Script Header -->
+                            <div style="background:#171717;border-bottom:1px solid #262626;" class="flex items-center justify-between px-4 py-2.5">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="material-symbols-outlined" style="font-size:14px;color:#737373;">description</span>
+                                    <span class="text-xs font-mono" style="color:#A3A3A3;">deploy.sh</span>
+                                    <span style="background:rgba(34,197,94,.15);color:#22C55E;" class="text-[9px] font-semibold px-1.5 py-0.5 rounded-full">detected</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <button onclick="copyDeployScript()" style="color:#737373;" class="hover:text-white transition-colors cursor-pointer p-1 rounded hover:bg-[#262626]" title="Copy script">
+                                        <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+                                    </button>
+                                    <button onclick="window.open('https://github.com/' + proj.repo + '/blob/main/deploy.sh', '_blank')" style="color:#737373;" class="hover:text-white transition-colors cursor-pointer p-1 rounded hover:bg-[#262626]" title="View on GitHub">
+                                        <span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Script Content -->
+                            <div class="p-4 font-mono text-xs leading-relaxed overflow-x-auto">
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">1</span><span style="color:#22C55E;">#!/bin/bash</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">2</span><span style="color:#525252;"># Deploy script for React Frontend</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">3</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">4</span><span style="color:#525252;"># Install dependencies</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">5</span><span style="color:#E5E5E5;">npm install</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">6</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">7</span><span style="color:#525252;"># Build production bundle</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">8</span><span style="color:#E5E5E5;">npm run build</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">9</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">10</span><span style="color:#525252;"># Start server on assigned port</span></div>
+                                <div style="color:#737373;" class="flex"><span class="select-none mr-4" style="color:#525252;">11</span><span style="color:#E5E5E5;">PORT=</span><span style="color:#E8792B;">$ASSIGNED_PORT</span><span style="color:#E5E5E5;"> npm start</span></div>
+                            </div>
+                        </div>
+                        <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-4 py-3 mt-3 flex gap-3 items-start">
+                            <span class="material-symbols-outlined mt-0.5" style="font-size:16px;color:var(--color-primary);">info</span>
+                            <div class="text-xs leading-relaxed" style="color:var(--text-muted);">
+                                <span style="color:var(--text-primary);" class="font-medium">How it works:</span> On each deploy, the platform clones your repo, executes <code style="color:var(--color-primary);" class="font-mono">deploy.sh</code>, and binds the process to your assigned port via FRP tunnel. The <code style="color:var(--color-primary);" class="font-mono">$ASSIGNED_PORT</code> environment variable is injected automatically.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auto-Deploy Configuration -->
+                    <div class="mb-8">
+                        <h2 style="color:var(--text-primary);" class="text-lg font-bold mb-1">Auto-Deploy</h2>
+                        <p style="color:var(--text-muted);" class="text-xs mb-4">Configure automatic deployments on repository changes.</p>
+
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl">
+                            <div class="px-5 py-4 flex items-center justify-between" style="border-bottom:1px solid var(--border-subtle);">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined" style="font-size:18px;color:var(--color-primary);">webhook</span>
+                                    <div>
+                                        <span style="color:var(--text-primary);" class="text-sm font-medium block">Deploy on Push</span>
+                                        <span style="color:var(--text-muted);" class="text-xs">Automatically run deploy.sh when you push to the watched branch.</span>
+                                    </div>
+                                </div>
+                                <button class="relative w-11 h-6 rounded-full transition-colors cursor-pointer" style="background:var(--color-primary);">
+                                    <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform" style="transform:translateX(20px);"></span>
+                                </button>
+                            </div>
+                            <div class="px-5 py-4 flex items-center justify-between" style="border-bottom:1px solid var(--border-subtle);">
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-medium block">Watch Branch</span>
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono">main</span>
+                                </div>
+                                <button style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="px-3 py-1 rounded-lg text-xs font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Change</button>
+                            </div>
+                            <div class="px-5 py-4">
+                                <span style="color:var(--text-primary);" class="text-sm font-medium block mb-1.5">Webhook URL</span>
+                                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2 flex items-center justify-between font-mono text-xs group">
+                                    <span style="color:var(--text-muted);" class="truncate">https://disal.apatechlab.com/webhooks/deploy/react-frontend/a8f3k2</span>
+                                    <button style="color:var(--text-muted);" class="ml-2 p-1 rounded hover:bg-[var(--bg-main)] hover:text-[var(--text-primary)] transition-colors cursor-pointer opacity-0 group-hover:opacity-100 shrink-0" title="Copy">
+                                        <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+                                    </button>
+                                </div>
+                                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 mb-0">Add this URL to your GitHub repo → Settings → Webhooks for auto-deploy.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Environment Variables -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h2 style="color:var(--text-primary);" class="text-lg font-bold mb-0.5">Environment Variables</h2>
+                                <p style="color:var(--text-muted);" class="text-xs mb-0">Available to your deploy.sh script and running process.</p>
+                            </div>
+                            <button onclick="toggleAddEnvVar()" style="color:var(--text-muted);border:1px solid var(--border-subtle);"
+                                class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                                <span class="material-symbols-outlined" style="font-size:14px;">add</span> Add Variable
+                            </button>
+                        </div>
+                        <div style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);"
+                            class="rounded-xl overflow-hidden" id="envVarsList">
+                            <!-- System-managed variable — locked, not editable -->
+                            <div class="env-row px-5 py-3 flex items-center justify-between"
+                                style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-2);">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--color-primary);">lock</span>
+                                    <span style="color:var(--color-primary);" class="text-xs font-mono font-semibold">ASSIGNED_PORT</span>
+                                    <span style="background:var(--color-primary-light);color:var(--color-primary);" class="text-[9px] font-semibold px-1.5 py-0.5 rounded-full">System</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span style="color:var(--text-primary);" class="text-xs font-mono font-semibold">3000</span>
+                                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--text-muted);" title="Managed by admin — injected automatically">info</span>
+                                </div>
+                            </div>
+                            <!-- User variable — plain text value -->
+                            <div class="env-row px-5 py-3 flex items-center justify-between"
+                                style="border-bottom:1px solid var(--border-subtle);">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">code</span>
+                                    <span style="color:var(--text-primary);" class="text-xs font-mono font-semibold">NODE_ENV</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono env-val">production</span>
+                                    <button onclick="editEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Edit value"><span class="material-symbols-outlined" style="font-size:14px;">edit</span></button>
+                                    <button onclick="deleteEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[rgba(239,68,68,.08)] hover:text-[#EF4444] transition-colors cursor-pointer" title="Delete variable"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>
+                                </div>
+                            </div>
+                            <!-- User variable — secret (masked) -->
+                            <div class="env-row px-5 py-3 flex items-center justify-between"
+                                style="border-bottom:1px solid var(--border-subtle);">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">key</span>
+                                    <span style="color:var(--text-primary);" class="text-xs font-mono font-semibold">DATABASE_URL</span>
+                                    <span style="background:var(--bg-surface-2);color:var(--text-muted);" class="text-[9px] font-medium px-1.5 py-0.5 rounded-full">Secret</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono env-val">••••••••••••</span>
+                                    <button onclick="revealEnvVar(this)" data-val="postgres://user:pass@localhost:5432/disal_db" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Reveal value"><span class="material-symbols-outlined" style="font-size:14px;">visibility</span></button>
+                                    <button onclick="editEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Edit value"><span class="material-symbols-outlined" style="font-size:14px;">edit</span></button>
+                                    <button onclick="deleteEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[rgba(239,68,68,.08)] hover:text-[#EF4444] transition-colors cursor-pointer" title="Delete variable"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>
+                                </div>
+                            </div>
+                            <!-- User variable — plain text -->
+                            <div class="env-row px-5 py-3 flex items-center justify-between"
+                                style="border-bottom:1px solid var(--border-subtle);">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">code</span>
+                                    <span style="color:var(--text-primary);" class="text-xs font-mono font-semibold">API_BASE_URL</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span style="color:var(--text-muted);" class="text-xs font-mono env-val">https://api.example.com</span>
+                                    <button onclick="editEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Edit value"><span class="material-symbols-outlined" style="font-size:14px;">edit</span></button>
+                                    <button onclick="deleteEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[rgba(239,68,68,.08)] hover:text-[#EF4444] transition-colors cursor-pointer" title="Delete variable"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>
+                                </div>
+                            </div>
+                            <!-- Add Variable inline form (hidden by default) -->
+                            <div id="addEnvVarForm" class="hidden">
+                                <div class="px-5 py-3 flex items-center gap-3" style="background:var(--color-primary-light);border-bottom:1px solid var(--border-subtle);">
+                                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--color-primary);">add_circle</span>
+                                    <input type="text" placeholder="KEY_NAME" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                                        class="text-xs font-mono font-semibold px-2.5 py-1.5 rounded-lg w-36 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-ring)]" />
+                                    <input type="text" placeholder="value" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-muted);"
+                                        class="text-xs font-mono px-2.5 py-1.5 rounded-lg flex-1 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-ring)]" />
+                                    <label class="flex items-center gap-1.5 cursor-pointer select-none">
+                                        <input type="checkbox" class="w-3 h-3 accent-[var(--color-primary)]" />
+                                        <span style="color:var(--text-muted);" class="text-[10px] font-medium">Secret</span>
+                                    </label>
+                                    <button onclick="saveEnvVar()" style="background:var(--color-primary);color:white;" class="px-3 py-1.5 rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer">Save</button>
+                                    <button onclick="toggleAddEnvVar()" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Cancel">
+                                        <span class="material-symbols-outlined" style="font-size:14px;">close</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Empty hint (shown when no user vars exist) -->
+                            <div id="envVarsEmpty" class="hidden px-5 py-6 text-center">
+                                <span class="material-symbols-outlined mb-1" style="font-size:24px;color:var(--text-muted);">data_object</span>
+                                <p style="color:var(--text-muted);" class="text-xs">No custom variables yet. Click <strong>Add Variable</strong> to inject environment variables into your deploy.sh script.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div>
+                        <h2 style="color:var(--color-error);" class="text-lg font-bold mb-1">Danger Zone</h2>
+                        <p style="color:var(--text-muted);" class="text-xs mb-4">Destructive and irreversible actions.</p>
+                        <div style="border:1px solid rgba(239,68,68,.3);background:var(--bg-surface-1);" class="rounded-xl overflow-hidden">
+                            <div class="px-5 py-4 flex items-center justify-between" style="border-bottom:1px solid rgba(239,68,68,.15);">
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-semibold block">Restart Service</span>
+                                    <span style="color:var(--text-muted);" class="text-xs">Stop and restart the running process. Brief downtime expected.</span>
+                                </div>
+                                <button onclick="restartService()" style="color:var(--color-warning);border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.05);" class="px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-[rgba(245,158,11,.1)] transition-colors cursor-pointer">Restart</button>
+                            </div>
+                            <div class="px-5 py-4 flex items-center justify-between" style="border-bottom:1px solid rgba(239,68,68,.15);">
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-semibold block">Stop Service</span>
+                                    <span style="color:var(--text-muted);" class="text-xs">Terminate the process and release the FRP tunnel port.</span>
+                                </div>
+                                <button onclick="stopService()" style="color:#EF4444;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.05);" class="px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-[rgba(239,68,68,.1)] transition-colors cursor-pointer">Stop</button>
+                            </div>
+                            <div class="px-5 py-4 flex items-center justify-between">
+                                <div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-semibold block">Delete Project</span>
+                                    <span style="color:var(--text-muted);" class="text-xs">Permanently remove this project, all deployments, and release the port.</span>
+                                </div>
+                                <button onclick="deleteProject()" style="background:rgba(239,68,68,.1);color:#EF4444;border:1px solid rgba(239,68,68,.3);" class="px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-[rgba(239,68,68,.15)] transition-colors cursor-pointer">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast"
+        class="toast fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-sm font-medium"
+        style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);">
+        <span id="toastIcon" class="material-symbols-outlined" style="font-size:18px;color:#22C55E;">check_circle</span>
+        <span id="toastMsg">URL copied to clipboard</span>
+    </div>
+
+    <script>
+        // ─── Tab Switching ───
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanels.forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ─── Project Data (from URL params — simulated + localStorage) ───
+        const params = new URLSearchParams(window.location.search);
+        const builtInProjects = {
+            'react-frontend': { name: 'React Frontend', port: '3000', branch: 'main', commit: 'e7f8a2b', status: 'live', time: '45 min ago', repo: 'student/react-frontend', domain: 'react-frontend' },
+            'database-tunnel': { name: 'Database Tunnel (Postgres)', port: '5432', branch: 'main', commit: 'c4d5e6f', status: 'idle', time: '2 days ago', repo: 'student/database-tunnel', domain: 'db-tunnel' },
+            'redis-cache': { name: 'Redis Cache', port: '6379', branch: 'feature/cache-v2', commit: '9a8b7c6', status: 'live', time: '12 min ago', repo: 'student/redis-cache', domain: 'redis-cache' },
+            'grading-system': { name: 'Grading System V1', port: '9005', branch: 'main', commit: 'f1e2d3c', status: 'failed', time: '1 hour ago', repo: 'student/grading-system', domain: 'grading-v1' }
+        };
+        // Merge in any user-created projects from localStorage
+        const storedProjects = JSON.parse(localStorage.getItem('disalProjects') || '{}');
+        const projectData = Object.assign({}, builtInProjects, storedProjects);
+
+        const slug = params.get('project') || 'react-frontend';
+        const proj = projectData[slug] || projectData['react-frontend'];
+
+        // Populate UI
+        document.getElementById('breadcrumbName').textContent = proj.name;
+        document.getElementById('projectTitle').textContent = proj.name;
+        document.getElementById('branchName').textContent = proj.branch;
+        document.getElementById('commitHash').textContent = proj.commit;
+        document.getElementById('deployTime').textContent = proj.time;
+        document.getElementById('liveUrl').textContent = '102.176.94.45:' + proj.port;
+        document.getElementById('domainLine').querySelector('span:nth-child(2)').textContent = proj.domain + '.apatechlab.com';
+        document.getElementById('repoName').textContent = proj.repo;
+        document.getElementById('openLiveBtn').href = 'http://102.176.94.45:' + proj.port;
+        document.getElementById('openGithubBtn').href = 'https://github.com/' + proj.repo;
+        document.getElementById('settingsRepoLink').href = 'https://github.com/' + proj.repo;
+
+        // ─── Settings Tab — Dynamic per project ───
+        (function populateSettings() {
+            const genCard = document.querySelector('#panel-settings .rounded-xl');
+            if (!genCard) return;
+            const rows = genCard.querySelectorAll('.px-5.py-4');
+            if (rows[0]) rows[0].querySelector('.text-xs:last-child, span.text-xs')  && (rows[0].querySelector('span.text-xs').textContent = slug);
+            if (rows[1]) { const repoSpan = rows[1].querySelector('.font-mono'); if (repoSpan) repoSpan.textContent = 'github.com/' + proj.repo; }
+            if (rows[2]) { const branchSpan = rows[2].querySelector('.font-mono'); if (branchSpan) branchSpan.textContent = proj.branch; }
+            // ASSIGNED_PORT system var
+            const portVal = document.querySelector('.env-row .text-xs.font-mono.font-semibold');
+            // Update the port value display in env vars
+            const envRows = document.querySelectorAll('.env-row');
+            if (envRows[0]) {
+                const valSpan = envRows[0].querySelector('.flex.items-center.gap-2 > span.text-xs');
+                if (valSpan) valSpan.textContent = proj.port;
+            }
+            // Update log terminal title
+            const termTitle = document.querySelector('#panel-logs .font-mono[style*="color:#737373"]');
+            if (termTitle) termTitle.textContent = 'deploy.sh — ' + proj.name;
+            // Update deploy.sh script comment
+            const scriptComment = document.querySelector('#panel-settings .p-4.font-mono');
+            if (scriptComment) {
+                const lines = scriptComment.querySelectorAll('div');
+                if (lines[1]) {
+                    const commentSpan = lines[1].querySelector('span:last-child');
+                    if (commentSpan) commentSpan.textContent = '# Deploy script for ' + proj.name;
+                }
+            }
+        })();
+
+        // --- Environment Variables helpers ---
+        function toggleAddEnvVar() {
+            const form = document.getElementById('addEnvVarForm');
+            form.classList.toggle('hidden');
+            if (!form.classList.contains('hidden')) {
+                form.querySelector('input').focus();
+            }
+        }
+
+        // ─── Env Var: Save ───
+        function saveEnvVar() {
+            const form = document.getElementById('addEnvVarForm');
+            const inputs = form.querySelectorAll('input[type="text"]');
+            const key = inputs[0].value.trim().toUpperCase().replace(/[^A-Z0-9_]/g, '_');
+            const val = inputs[1].value.trim();
+            const isSecret = form.querySelector('input[type="checkbox"]').checked;
+            if (!key) { inputs[0].focus(); return; }
+
+            // Build new row
+            const container = form.closest('.rounded-xl');
+            const newRow = document.createElement('div');
+            newRow.className = 'env-row px-5 py-3 flex items-center justify-between';
+            newRow.style.borderBottom = '1px solid var(--border-subtle)';
+            const icon = isSecret ? 'key' : 'code';
+            const displayVal = isSecret ? '••••••••••••' : (val || '(empty)');
+            const secretBadge = isSecret ? '<span style="background:var(--bg-surface-2);color:var(--text-muted);" class="text-[9px] font-medium px-1.5 py-0.5 rounded-full">Secret</span>' : '';
+            const revealBtn = isSecret ? '<button onclick="revealEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Reveal value" data-val="' + val.replace(/"/g,'&quot;') + '"><span class="material-symbols-outlined" style="font-size:14px;">visibility</span></button>' : '';
+            newRow.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--text-muted);">${icon}</span>
+                    <span style="color:var(--text-primary);" class="text-xs font-mono font-semibold">${key}</span>
+                    ${secretBadge}
+                </div>
+                <div class="flex items-center gap-2">
+                    <span style="color:var(--text-muted);" class="text-xs font-mono env-val">${displayVal}</span>
+                    ${revealBtn}
+                    <button onclick="editEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Edit value"><span class="material-symbols-outlined" style="font-size:14px;">edit</span></button>
+                    <button onclick="deleteEnvVar(this)" style="color:var(--text-muted);" class="p-1 rounded hover:bg-[rgba(239,68,68,.08)] hover:text-[#EF4444] transition-colors cursor-pointer" title="Delete variable"><span class="material-symbols-outlined" style="font-size:14px;">delete</span></button>
+                </div>`;
+            // Insert before addEnvVarForm
+            form.parentElement.insertBefore(newRow, form);
+
+            // Reset form
+            inputs[0].value = ''; inputs[1].value = '';
+            form.querySelector('input[type="checkbox"]').checked = false;
+            form.classList.add('hidden');
+            document.getElementById('envVarsEmpty')?.classList.add('hidden');
+            showToast('Variable ' + key + ' added', 'add_circle');
+        }
+
+        // ─── Env Var: Delete ───
+        function deleteEnvVar(btn) {
+            const row = btn.closest('.env-row');
+            const key = row.querySelector('.font-mono.font-semibold')?.textContent || 'variable';
+            if (!confirm('Delete ' + key + '? This will take effect on next deploy.')) return;
+            row.style.transition = 'opacity .2s, max-height .2s';
+            row.style.opacity = '0'; row.style.maxHeight = '0'; row.style.overflow = 'hidden';
+            setTimeout(() => row.remove(), 250);
+            showToast(key + ' deleted', 'delete');
+        }
+
+        // ─── Env Var: Edit ───
+        function editEnvVar(btn) {
+            const row = btn.closest('.env-row');
+            const valSpan = row.querySelector('.env-val') || row.querySelector('.flex.items-center.gap-2 > span.text-xs.font-mono');
+            if (!valSpan) return;
+            const current = valSpan.dataset.realVal || valSpan.textContent;
+            const newVal = prompt('Edit value:', current === '••••••••••••' ? '' : current);
+            if (newVal === null) return;
+            valSpan.textContent = newVal || '(empty)';
+            showToast('Variable updated', 'edit');
+        }
+
+        // ─── Env Var: Reveal/Hide Secret ───
+        function revealEnvVar(btn) {
+            const row = btn.closest('.env-row');
+            const valSpan = row.querySelector('.env-val') || row.querySelector('.flex.items-center.gap-2 > span.text-xs.font-mono');
+            const icon = btn.querySelector('.material-symbols-outlined');
+            const realVal = btn.dataset.val || 'postgres://user:pass@localhost:5432/db';
+            if (icon.textContent === 'visibility') {
+                valSpan.textContent = realVal;
+                icon.textContent = 'visibility_off';
+                btn.title = 'Hide value';
+            } else {
+                valSpan.textContent = '••••••••••••';
+                icon.textContent = 'visibility';
+                btn.title = 'Reveal value';
+            }
+        }
+
+        function colorWithAlpha(input, alpha) {
+            const c = String(input || '').trim();
+            if (!c) return '';
+
+            if (c.startsWith('#')) {
+                let hex = c.slice(1);
+                if (hex.length === 3) hex = hex.split('').map(ch => ch + ch).join('');
+                if (hex.length !== 6) return c;
+                const r = parseInt(hex.slice(0, 2), 16);
+                const g = parseInt(hex.slice(2, 4), 16);
+                const b = parseInt(hex.slice(4, 6), 16);
+                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            }
+
+            // Supports: rgb(r,g,b) and rgba(r,g,b,a)
+            const rgbMatch = c.match(/^rgba?\(([^)]+)\)$/i);
+            if (rgbMatch) {
+                const parts = rgbMatch[1].split(',').map(p => p.trim());
+                const r = parts[0] ?? '0';
+                const g = parts[1] ?? '0';
+                const b = parts[2] ?? '0';
+                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            }
+
+            // Fallback (named colors etc.)
+            return c;
+        }
+
+        // Status colors
+        const statusColors = { live: '#22C55E', idle: '#F59E0B', failed: '#EF4444', stopped: '#A1A1AA' };
+        const statusLabels = { live: 'Live', idle: 'Idle', failed: 'Failed', stopped: 'Stopped' };
+        const dot = document.getElementById('statusDot');
+        const badge = document.getElementById('statusBadge');
+        const color = statusColors[proj.status] || '#A1A1AA';
+
+        dot.style.background = color;
+        if (proj.status !== 'live') dot.classList.remove('animate-pulse');
+        badge.style.background = colorWithAlpha(color, 0.10);
+        badge.style.color = color;
+        badge.style.borderColor = colorWithAlpha(color, 0.20);
+        badge.querySelector('span').style.background = color;
+        badge.childNodes[badge.childNodes.length - 1].textContent = ' ' + statusLabels[proj.status];
+
+        // Failed project — hide URL, show error
+        if (proj.status === 'failed') {
+            document.getElementById('liveUrl').innerHTML = '<span style="color:var(--color-error);">err: 503 — Connection Refused</span>';
+            document.getElementById('openLiveBtn').style.display = 'none';
+            document.getElementById('liveIndicator').innerHTML = '<span class="w-1.5 h-1.5 rounded-full" style="background:#EF4444;"></span> <span style="color:#EF4444;">Error</span>';
+        }
+
+        // ─── Copy URL ───
+        function copyUrl() {
+            const url = 'http://102.176.94.45:' + proj.port;
+            navigator.clipboard.writeText(url).then(() => showToast('URL copied to clipboard', 'content_copy'));
+        }
+
+        // ─── Redeploy ───
+        function triggerRedeploy() {
+            const btn = event.target.closest('button');
+            const origHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Building…';
+            showToast('Redeployment triggered — building...', 'refresh');
+            setTimeout(() => { btn.disabled = false; btn.innerHTML = origHTML; showToast('Deploy complete — ' + proj.name + ' is live', 'check_circle'); }, 3000);
+        }
+
+        // ─── Auto-Redeploy Toggle ───
+        let autoOn = true;
+        function toggleAutoRedeploy() {
+            autoOn = !autoOn;
+            localStorage.setItem('autoRedeploy', autoOn ? 'true' : 'false');
+            const btn = document.getElementById('autoToggle');
+            const knob = btn.querySelector('span');
+            if (autoOn) {
+                btn.style.background = 'var(--color-primary)';
+                knob.style.transform = 'translateX(20px)';
+                showToast('Auto-redeploy enabled', 'webhook');
+            } else {
+                btn.style.background = 'var(--bg-surface-2)';
+                knob.style.transform = 'translateX(0px)';
+                showToast('Auto-redeploy disabled', 'webhook');
+            }
+        }
+
+        // ─── Danger Zone Actions ───
+        function restartService() {
+            if (!confirm('Restart ' + proj.name + '? This will cause brief downtime.')) return;
+            showToast('Restarting ' + proj.name + '…', 'refresh');
+            setTimeout(() => showToast(proj.name + ' restarted successfully', 'check_circle'), 2000);
+        }
+
+        function stopService() {
+            if (!confirm('Stop ' + proj.name + '? The FRP tunnel port will be released.')) return;
+            showToast('Stopping ' + proj.name + '…', 'stop_circle');
+            setTimeout(() => {
+                // Update status visually
+                dot.style.background = '#A1A1AA';
+                dot.classList.remove('animate-pulse');
+                badge.style.background = colorWithAlpha('#A1A1AA', 0.10);
+                badge.style.color = '#A1A1AA';
+                badge.style.borderColor = colorWithAlpha('#A1A1AA', 0.20);
+                badge.querySelector('span').style.background = '#A1A1AA';
+                badge.childNodes[badge.childNodes.length - 1].textContent = ' Stopped';
+                showToast(proj.name + ' stopped', 'check_circle');
+            }, 1500);
+        }
+
+        function deleteProject() {
+            const confirmName = prompt('Type "' + proj.name + '" to permanently delete this project:');
+            if (confirmName !== proj.name) { if (confirmName !== null) showToast('Name did not match — deletion cancelled', 'error'); return; }
+            showToast('Deleting ' + proj.name + '…', 'delete');
+            // Remove from localStorage
+            const projects = JSON.parse(localStorage.getItem('disalProjects') || '{}');
+            delete projects[slug];
+            localStorage.setItem('disalProjects', JSON.stringify(projects));
+            // If no projects left, clear deployment flag
+            if (Object.keys(projects).length === 0 && !builtInProjects[slug]) {
+                localStorage.removeItem('hasDeployment');
+                localStorage.removeItem('assignedPort');
+            }
+            setTimeout(() => { window.location.href = 'Tunnel Manager Board.html'; }, 1500);
+        }
+
+        // ─── Logs Tab Filter ───
+        document.getElementById('logFilter')?.addEventListener('change', function() {
+            const val = this.value;
+            const lines = document.querySelectorAll('#panel-logs .log-line');
+            lines.forEach(line => {
+                const text = line.textContent.toLowerCase();
+                if (val === 'All Logs') { line.style.display = ''; return; }
+                if (val === 'Build Only') { line.style.display = text.includes('[build]') || text.includes('[deploy]') ? '' : 'none'; }
+                if (val === 'Runtime Only') { line.style.display = text.includes('[runtime]') || text.includes('[info]') ? '' : 'none'; }
+                if (val === 'Errors Only') { line.style.display = text.includes('[warn]') || text.includes('[error]') || text.includes('err') ? '' : 'none'; }
+            });
+        });
+
+        // ─── Logs Tab Search ───
+        document.querySelector('#panel-logs input[type="text"]')?.addEventListener('input', function() {
+            const q = this.value.toLowerCase();
+            document.querySelectorAll('#panel-logs .log-line').forEach(line => {
+                line.style.display = !q || line.textContent.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // ─── Toast ───
+        function showToast(msg, icon) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            document.getElementById('toastIcon').textContent = icon || 'check_circle';
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // ─── Rollback ───
+        function rollbackDeploy(commitHash) {
+            if (!confirm('Rollback to commit ' + commitHash + '? This will redeploy from that version.')) return;
+            showToast('Rolling back to ' + commitHash + '…', 'history');
+            setTimeout(() => showToast('Rollback complete — ' + proj.name + ' redeployed', 'check_circle'), 2500);
+        }
+
+        // ─── Settings Edit Field ───
+        function editSettingsField(btn, fieldName) {
+            const row = btn.closest('.flex.items-center.justify-between');
+            const valSpan = row.querySelector('.text-xs:not(.font-medium):not(.text-sm)') || row.querySelector('span.text-xs');
+            if (!valSpan) return;
+            const current = valSpan.textContent;
+            const newVal = prompt('Edit ' + fieldName + ':', current);
+            if (newVal === null || newVal === current) return;
+            valSpan.textContent = newVal;
+            showToast(fieldName + ' updated — takes effect on next deploy', 'edit');
+        }
+
+        // ─── Copy Deploy Script ───
+        function copyDeployScript() {
+            const lines = document.querySelectorAll('#panel-settings .p-4.font-mono div');
+            let script = '';
+            lines.forEach(line => {
+                const spans = line.querySelectorAll('span:not(.select-none)');
+                let text = '';
+                spans.forEach(s => { if (!s.classList.contains('select-none')) text += s.textContent; });
+                script += text + '\n';
+            });
+            navigator.clipboard.writeText(script.trim()).then(() => showToast('Deploy script copied', 'content_copy'));
+        }
+
+        // ─── Download Logs ───
+        function downloadLogs() {
+            let text = '';
+            document.querySelectorAll('#panel-logs .log-line').forEach(line => {
+                text += line.textContent.trim() + '\n';
+            });
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = slug + '-logs-' + new Date().toISOString().slice(0,10) + '.txt';
+            a.click();
+            showToast('Logs downloaded', 'download');
+        }
+    </script>
+</body>
+
+</html>

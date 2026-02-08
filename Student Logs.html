@@ -1,129 +1,100 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en">
+<html lang="en">
 
 <head>
-    <script>
-        if (!localStorage.getItem('userRole')) {
-            window.location.href = 'Login.html';
-        }
-    </script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Logs - DISAL</title>
+    <title>Logs — DISAL Hosting</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="assets/css/tokens.css" rel="stylesheet" />
-    <link href="assets/css/variables.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
     <script src="assets/js/tailwind-config.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
-
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Grid Pattern */
-        .bg-grid-pattern {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
-        }
+        body{font-family:var(--font-sans)}.font-mono{font-family:var(--font-mono)}
+        .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .log-row{transition:background .1s ease}.log-row:hover{background:var(--bg-surface-2)}
+        .level-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;letter-spacing:.02em}
+        .level-info{background:rgba(34,197,94,.1);color:#22C55E}
+        .level-warn{background:rgba(245,158,11,.1);color:#F59E0B}
+        .level-error{background:rgba(239,68,68,.1);color:#EF4444}
+        .level-debug{background:rgba(99,102,241,.1);color:#6366F1}
+        .log-detail{max-height:0;overflow:hidden;transition:max-height .25s ease,opacity .2s ease;opacity:0}
+        .log-detail.open{max-height:400px;opacity:1}
+        .log-row.expanded{background:var(--bg-surface-2)}
+        .log-row .expand-icon{transition:transform .2s ease;font-size:14px}
+        .log-row.expanded .expand-icon{transform:rotate(90deg)}
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-text-main h-screen overflow-hidden flex font-display">
-    <!-- Side Navigation -->
-    <aside
-        class="dark hidden md:flex w-64 bg-sidebar border-r border-border-dark flex-col justify-between h-full shrink-0 z-20 relative">
-        <div class="flex flex-col gap-1 p-4">
-            <div class="flex flex-col mb-8 px-2">
-                <div onclick="window.location.href='index.html'"
-                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-[16px]">terminal</span>
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <div class="flex flex-col mb-8">
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
                     </div>
-                    <h1 class="text-white text-base font-bold tracking-tight">DISAL</h1>
-                </div>
-                <p class="text-text-muted text-xs mt-1 pl-8">HOSTING_PLATFORM_V2</p>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING</p>
             </div>
             <nav class="flex flex-col gap-1">
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
-                    href="Tunnel Manager Board.html">
-                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
-                        style="font-size: 20px;">grid_view</span>
-                    <span
-                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Dashboard</span>
+                <a href="Tunnel Manager Board.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">grid_view</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Dashboard</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md bg-surface-dark border-l-2 border-primary group transition-colors"
-                    href="Student Logs.html">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">terminal</span>
-                    <span class="text-white text-sm font-medium">Logs</span>
+                <a href="Student Logs.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">terminal</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Logs</span>
                 </a>
-                <div class="h-px bg-border-dark my-2 mx-3"></div>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-dark group transition-colors"
-                    href="Documentation.html">
-                    <span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors"
-                        style="font-size: 20px;">menu_book</span>
-                    <span
-                        class="text-text-muted group-hover:text-white text-sm font-medium transition-colors">Docs</span>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-border-dark">
-            <div class="flex items-center gap-3 px-2">
-                <div
-                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-text-dim">
-                    S</div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
                 <div class="flex flex-col">
-                    <span class="text-text-main text-sm font-medium">Student</span>
-                    <span class="text-text-dim text-xs">student@disal.io</span>
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@apatechlab.com</span>
                 </div>
             </div>
-            <!-- Theme Toggle -->
-            <button onclick="toggleTheme()"
-                class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
-                title="Toggle Theme">
-                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-            </button>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
+            </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-full overflow-hidden bg-background-main relative">
-        <!-- Grid Background (CSS Variable Controlled) -->
-        <!-- Grid Background Removed -->
-        <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
+
         <!-- Header -->
-        <header
-            class="h-16 border-b border-border-strong flex items-center justify-between px-4 md:px-8 bg-background-main/80 backdrop-blur-md z-10 sticky top-0">
-            <div class="flex items-center gap-4">
-                <nav class="flex items-center text-sm font-medium text-text-muted">
-                    <a class="hover:text-white transition-colors" href="index.html">Home</a>
-                    <span class="mx-2 text-border-dark">/</span>
-                    <a class="hover:text-white transition-colors" href="Tunnel Manager Board.html">Dashboard</a>
-                    <span class="mx-2 text-border-dark">/</span>
-                    <span class="text-white">Logs</span>
-                </nav>
-            </div>
-            <div class="flex items-center gap-4">
-                <button
-                    class="flex items-center gap-2 bg-surface-dark hover:bg-white/5 border border-border-dark text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">download</span>
-                    Export CSV
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);" class="font-semibold">Logs</span>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button onclick="exportCSV()" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" style="font-size:16px;">download</span> Export CSV
                 </button>
             </div>
         </header>
@@ -131,139 +102,338 @@
         <!-- Content -->
         <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide">
 
-            <!-- Filters -->
-            <div id="logsFilters" class="flex gap-4 mb-6 hidden">
+            <!-- Title -->
+            <div class="flex flex-col gap-1 mb-6">
+                <h1 style="color:var(--text-primary);" class="text-2xl font-extrabold tracking-tight mb-0">Log Explorer</h1>
+                <p style="color:var(--text-muted);" class="text-sm mb-0">Runtime logs and connection events across all your projects.</p>
+            </div>
+
+            <!-- Filters (Render-inspired) -->
+            <div id="logsFilters" class="hidden flex-wrap gap-3 mb-6 items-center">
                 <div class="relative grow max-w-sm">
-                    <span
-                        class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted text-[18px]">search</span>
-                    <input type="text" placeholder="Search event, tunnel id, or error..."
-                        class="w-full bg-surface-dark border border-border-dark rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-text-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined" style="font-size:16px;color:var(--text-muted);">search</span>
+                    <input id="logSearch" type="text" placeholder="Search logs…" oninput="filterLogs()" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full pl-9 pr-4 py-1.5 text-sm rounded-lg placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
                 </div>
-                <select
-                    class="bg-surface-dark border border-border-dark rounded-lg px-4 py-2 text-sm text-white outline-none">
-                    <option>All Tunnels</option>
-                    <option>API Gateway (8080)</option>
+                <select id="logProjectFilter" onchange="filterLogs()" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all cursor-pointer">
+                    <option>All Projects</option>
                     <option>React Frontend (3000)</option>
-                    <option>Postgres DB (5432)</option>
+                    <option>Database Tunnel (5432)</option>
+                    <option>Redis Cache (6379)</option>
+                    <option>Grading System V1</option>
                 </select>
-                <select
-                    class="bg-surface-dark border border-border-dark rounded-lg px-4 py-2 text-sm text-white outline-none">
-                    <option>All Event Types</option>
-                    <option>HTTP Requests</option>
-                    <option>Tunnel Status</option>
-                    <option>Errors</option>
+                <select id="logLevelFilter" onchange="filterLogs()" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all cursor-pointer">
+                    <option>All Levels</option>
+                    <option>INFO</option>
+                    <option>WARN</option>
+                    <option>ERROR</option>
+                    <option>DEBUG</option>
+                </select>
+                <select style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all cursor-pointer">
+                    <option>Last 1 hour</option>
+                    <option>Last 6 hours</option>
+                    <option>Last 24 hours</option>
+                    <option>Last 7 days</option>
                 </select>
             </div>
 
-            <!-- Table -->
-            <div id="logsTableContainer"
-                class="bg-surface-dark border border-border-dark rounded-lg overflow-hidden hidden">
-                <table class="w-full text-left text-sm text-text-muted">
-                    <thead class="bg-[#111116] text-xs uppercase font-medium border-b border-border-dark">
-                        <tr>
-                            <th class="px-6 py-3 font-semibold text-white">Timestamp</th>
-                            <th class="px-6 py-3 font-semibold text-white">Tunnel</th>
-                            <th class="px-6 py-3 font-semibold text-white">Method</th>
-                            <th class="px-6 py-3 font-semibold text-white">Path / Event</th>
-                            <th class="px-6 py-3 font-semibold text-white">Code/Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-border-dark/50">
-                        <!-- Row 1 -->
-                        <tr onclick="window.location.href='Tunnel_Status_Health.html'"
-                            class="hover:bg-white/[0.02] even:bg-white/[0.02] transition-colors cursor-pointer group">
-                            <td class="px-6 py-4 font-mono text-xs">10:42:01</td>
-                            <td class="px-6 py-4 text-white font-medium">API Gateway</td>
-                            <td class="px-6 py-4"><span class="text-blue-400 font-mono">GET</span></td>
-                            <td class="px-6 py-4 font-mono text-xs">/api/v1/users</td>
-                            <td class="px-6 py-4"><span class="text-success font-mono">200 OK</span></td>
-                        </tr>
-                        <!-- Row 2 -->
-                        <tr onclick="window.location.href='Tunnel_Status_Health.html'"
-                            class="hover:bg-white/[0.02] transition-colors cursor-pointer group">
-                            <td class="px-6 py-4 font-mono text-xs">10:41:55</td>
-                            <td class="px-6 py-4 text-white font-medium">React Frontend</td>
-                            <td class="px-6 py-4"><span class="text-blue-400 font-mono">GET</span></td>
-                            <td class="px-6 py-4 font-mono text-xs">/static/js/main.chunk.js</td>
-                            <td class="px-6 py-4"><span class="text-success font-mono">200 OK</span></td>
-                        </tr>
-                        <!-- Row 3 -->
-                        <tr onclick="window.location.href='Tunnel_Status_Health.html'"
-                            class="hover:bg-white/[0.02] transition-colors cursor-pointer group">
-                            <td class="px-6 py-4 font-mono text-xs">10:40:12</td>
-                            <td class="px-6 py-4 text-white font-medium">API Gateway</td>
-                            <td class="px-6 py-4"><span class="text-yellow-400 font-mono">POST</span></td>
-                            <td class="px-6 py-4 font-mono text-xs">/api/v1/auth/login</td>
-                            <td class="px-6 py-4"><span class="text-red-400 font-mono">401 Unauthorized</span></td>
-                        </tr>
-                        <!-- Row 4 -->
-                        <tr onclick="window.location.href='Tunnel_Status_Health.html'"
-                            class="hover:bg-white/[0.02] transition-colors cursor-pointer group">
-                            <td class="px-6 py-4 font-mono text-xs">10:35:00</td>
-                            <td class="px-6 py-4 text-white font-medium">Postgres DB</td>
-                            <td class="px-6 py-4"><span class="text-gray-400 font-mono">SYS</span></td>
-                            <td class="px-6 py-4 font-mono text-xs">Connection established from 127.0.0.1</td>
-                            <td class="px-6 py-4"><span class="text-success font-mono">CONNECTED</span></td>
-                        </tr>
-                        <!-- Row 5 -->
-                        <tr class="hover:bg-white/[0.02] transition-colors">
-                            <td class="px-6 py-4 font-mono text-xs">09:15:00</td>
-                            <td class="px-6 py-4 text-white font-medium">Redis Cache</td>
-                            <td class="px-6 py-4"><span class="text-gray-400 font-mono">SYS</span></td>
-                            <td class="px-6 py-4 font-mono text-xs">Tunnel started successfully</td>
-                            <td class="px-6 py-4"><span class="text-success font-mono">ONLINE</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Logs Table (Render/Vercel inspired) -->
+            <div id="logsTableContainer" class="hidden">
+                <div style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="rounded-xl overflow-hidden">
+                    <table class="w-full text-left text-sm">
+                        <thead style="background:var(--bg-surface-2);border-bottom:1px solid var(--border-subtle);">
+                            <tr>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider w-28">Time</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider w-16">Level</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider w-40">Project</th>
+                                <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>14:32:01</td>
+                                <td class="px-5 py-3"><span class="level-pill level-info">INFO</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">React Frontend</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">GET /api/v1/users <span style="color:var(--color-success);" class="font-semibold">200 OK</span> — 12ms</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);">
+                                <td colspan="4" class="px-0 py-0">
+                                    <div class="log-detail">
+                                        <div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:3000</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Method</span><span style="color:var(--text-primary);" class="font-mono">GET</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Path</span><span style="color:var(--text-primary);" class="font-mono">/api/v1/users</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Duration</span><span style="color:var(--text-primary);" class="font-mono">12ms</span></div>
+                                        </div>
+                                        <div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);">
+                                            <a href="Project Detail.html?project=react-frontend" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a>
+                                            <button onclick="event.stopPropagation();copyLogEntry('14:32:01 INFO React Frontend: GET /api/v1/users 200 OK — 12ms')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>14:31:55</td>
+                                <td class="px-5 py-3"><span class="level-pill level-info">INFO</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">React Frontend</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">GET /static/js/main.chunk.js <span style="color:var(--color-success);" class="font-semibold">200 OK</span> — 3ms</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);">
+                                <td colspan="4" class="px-0 py-0">
+                                    <div class="log-detail">
+                                        <div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:3000</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Method</span><span style="color:var(--text-primary);" class="font-mono">GET</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Path</span><span style="color:var(--text-primary);" class="font-mono">/static/js/main.chunk.js</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Duration</span><span style="color:var(--text-primary);" class="font-mono">3ms</span></div>
+                                        </div>
+                                        <div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);">
+                                            <a href="Project Detail.html?project=react-frontend" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a>
+                                            <button onclick="event.stopPropagation();copyLogEntry('14:31:55 INFO React Frontend: GET /static/js/main.chunk.js 200 OK — 3ms')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>14:30:12</td>
+                                <td class="px-5 py-3"><span class="level-pill level-warn">WARN</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">Database Tunnel</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">Slow query detected: SELECT * FROM grades — <span style="color:#F59E0B;" class="font-semibold">1.2s</span></td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);">
+                                <td colspan="4" class="px-0 py-0">
+                                    <div class="log-detail">
+                                        <div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:5432</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Query</span><span style="color:var(--text-primary);" class="font-mono">SELECT * FROM grades</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Duration</span><span style="color:#F59E0B;" class="font-mono font-semibold">1.2s ⚠</span></div>
+                                        </div>
+                                        <div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);">
+                                            <a href="Project Detail.html?project=database-tunnel" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a>
+                                            <button onclick="event.stopPropagation();copyLogEntry('14:30:12 WARN Database Tunnel: Slow query SELECT * FROM grades — 1.2s')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>14:28:44</td>
+                                <td class="px-5 py-3"><span class="level-pill level-error">ERROR</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">Grading System V1</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--color-error);">POST /api/v1/auth/login — <span class="font-semibold">401 Unauthorized</span> — ECONNREFUSED :9005</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);">
+                                <td colspan="4" class="px-0 py-0">
+                                    <div class="log-detail">
+                                        <div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:9005</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Method</span><span style="color:var(--text-primary);" class="font-mono">POST</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Path</span><span style="color:var(--text-primary);" class="font-mono">/api/v1/auth/login</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Status</span><span style="color:#EF4444;" class="font-mono font-semibold">401 Unauthorized</span></div>
+                                        </div>
+                                        <div style="background:#0A0A0A;border-top:1px solid #262626;" class="px-8 py-3">
+                                            <span class="text-[10px] font-semibold uppercase tracking-wider block mb-2" style="color:#737373;">Stack Trace</span>
+                                            <pre class="text-xs font-mono leading-relaxed m-0" style="color:#EF4444;">Error: connect ECONNREFUSED 127.0.0.1:9005
+  at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1187:16)
+  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)</pre>
+                                        </div>
+                                        <div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);">
+                                            <a href="Project Detail.html?project=grading-system" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a>
+                                            <button onclick="event.stopPropagation();copyLogEntry('14:28:44 ERROR Grading System V1: POST /api/v1/auth/login — 401 — ECONNREFUSED :9005')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 5 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>14:25:00</td>
+                                <td class="px-5 py-3"><span class="level-pill level-info">INFO</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">Database Tunnel</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">Connection established from <span style="color:var(--text-primary);">127.0.0.1</span> — tunnel active</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);">
+                                <td colspan="4" class="px-0 py-0">
+                                    <div class="log-detail">
+                                        <div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:5432</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Source</span><span style="color:var(--text-primary);" class="font-mono">127.0.0.1</span></div>
+                                            <div><span style="color:var(--text-muted);" class="block mb-0.5">Status</span><span style="color:#22C55E;" class="font-mono font-semibold">Tunnel Active</span></div>
+                                        </div>
+                                        <div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);">
+                                            <a href="Project Detail.html?project=database-tunnel" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a>
+                                            <button onclick="event.stopPropagation();copyLogEntry('14:25:00 INFO Database Tunnel: Connection established from 127.0.0.1 — tunnel active')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 6 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>14:20:33</td>
+                                <td class="px-5 py-3"><span class="level-pill level-debug">DEBUG</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">Redis Cache</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">Cache HIT key=session:usr99 ttl=3600s</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);"><td colspan="4" class="px-0 py-0"><div class="log-detail"><div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-3 gap-4 text-xs"><div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:6379</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Key</span><span style="color:var(--text-primary);" class="font-mono">session:usr99</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">TTL</span><span style="color:var(--text-primary);" class="font-mono">3600s</span></div></div><div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);"><a href="Project Detail.html?project=redis-cache" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a><button onclick="event.stopPropagation();copyLogEntry('14:20:33 DEBUG Redis Cache: Cache HIT key=session:usr99 ttl=3600s')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button></div></div></td></tr>
+                            <!-- Row 7 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>14:15:00</td>
+                                <td class="px-5 py-3"><span class="level-pill level-info">INFO</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">Redis Cache</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">Tunnel started on <span style="color:var(--color-primary);">:6379</span> → cache.tunnel.apatechlab.com</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);"><td colspan="4" class="px-0 py-0"><div class="log-detail"><div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-3 gap-4 text-xs"><div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:6379</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Port</span><span style="color:var(--text-primary);" class="font-mono">6379</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Domain</span><span style="color:var(--text-primary);" class="font-mono">cache.tunnel.apatechlab.com</span></div></div><div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);"><a href="Project Detail.html?project=redis-cache" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a><button onclick="event.stopPropagation();copyLogEntry('14:15:00 INFO Redis Cache: Tunnel started on :6379')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button></div></div></td></tr>
+                            <!-- Row 8 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>13:58:12</td>
+                                <td class="px-5 py-3"><span class="level-pill level-error">ERROR</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">Grading System V1</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--color-error);">Process crashed with exit code 1 — SIGTERM</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);"><td colspan="4" class="px-0 py-0"><div class="log-detail"><div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-3 gap-4 text-xs"><div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:9005</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Exit Code</span><span style="color:#EF4444;" class="font-mono font-semibold">1</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Signal</span><span style="color:#EF4444;" class="font-mono font-semibold">SIGTERM</span></div></div><div style="background:#0A0A0A;border-top:1px solid #262626;" class="px-8 py-3"><span class="text-[10px] font-semibold uppercase tracking-wider block mb-2" style="color:#737373;">Stack Trace</span><pre class="text-xs font-mono leading-relaxed m-0" style="color:#EF4444;">Error: Process exited with code 1
+  at ChildProcess.exithandler (node:child_process:420:12)
+  at ChildProcess.emit (node:events:513:28)
+  Received signal: SIGTERM</pre></div><div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);"><a href="Project Detail.html?project=grading-system" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a><button onclick="event.stopPropagation();copyLogEntry('13:58:12 ERROR Grading System V1: Process crashed with exit code 1 — SIGTERM')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button></div></div></td></tr>
+                            <!-- Row 9 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)" style="border-bottom:1px solid var(--border-subtle);">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>13:45:30</td>
+                                <td class="px-5 py-3"><span class="level-pill level-warn">WARN</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">React Frontend</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">Memory usage at <span style="color:#F59E0B;" class="font-semibold">78%</span> — approaching threshold</td>
+                            </tr>
+                            <tr class="log-detail-row" style="border-bottom:1px solid var(--border-subtle);"><td colspan="4" class="px-0 py-0"><div class="log-detail"><div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-3 gap-4 text-xs"><div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:3000</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Memory</span><span style="color:#F59E0B;" class="font-mono font-semibold">78% ⚠</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Threshold</span><span style="color:var(--text-primary);" class="font-mono">80%</span></div></div><div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);"><a href="Project Detail.html?project=react-frontend" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a><button onclick="event.stopPropagation();copyLogEntry('13:45:30 WARN React Frontend: Memory usage at 78% — approaching threshold')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button></div></div></td></tr>
+                            <!-- Row 10 -->
+                            <tr class="log-row cursor-pointer" onclick="toggleLogDetail(this)">
+                                <td style="color:var(--text-muted);" class="px-5 py-3 font-mono text-xs"><span class="material-symbols-outlined expand-icon" style="color:var(--text-muted);vertical-align:middle;margin-right:4px;">chevron_right</span>13:30:00</td>
+                                <td class="px-5 py-3"><span class="level-pill level-info">INFO</span></td>
+                                <td style="color:var(--text-primary);" class="px-5 py-3 text-xs font-medium">React Frontend</td>
+                                <td class="px-5 py-3 font-mono text-xs" style="color:var(--text-secondary);">Deploy complete — server listening on <span style="color:var(--color-primary);">:3000</span></td>
+                            </tr>
+                            <tr class="log-detail-row"><td colspan="4" class="px-0 py-0"><div class="log-detail"><div style="background:var(--bg-surface-2);" class="px-8 py-4 grid grid-cols-2 md:grid-cols-3 gap-4 text-xs"><div><span style="color:var(--text-muted);" class="block mb-0.5">Endpoint</span><span style="color:var(--text-primary);" class="font-mono">102.176.94.45:3000</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Port</span><span style="color:var(--text-primary);" class="font-mono">3000</span></div><div><span style="color:var(--text-muted);" class="block mb-0.5">Status</span><span style="color:#22C55E;" class="font-mono font-semibold">Listening</span></div></div><div class="px-8 py-3 flex items-center gap-3" style="border-top:1px solid var(--border-subtle);"><a href="Project Detail.html?project=react-frontend" style="color:var(--color-primary);" class="text-xs font-medium flex items-center gap-1 no-underline hover:underline"><span class="material-symbols-outlined" style="font-size:14px;">open_in_new</span> View Project</a><button onclick="event.stopPropagation();copyLogEntry('13:30:00 INFO React Frontend: Deploy complete — server listening on :3000')" style="color:var(--text-muted);" class="text-xs font-medium flex items-center gap-1 hover:text-[var(--text-primary)] cursor-pointer bg-transparent border-none"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> Copy</button></div></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex items-center justify-between mt-4 text-xs" style="color:var(--text-muted);">
+                    <span>Showing 1–10 of 142 events</span>
+                    <div class="flex items-center gap-2">
+                        <button disabled style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-muted);" class="px-3 py-1.5 rounded-lg opacity-50 cursor-not-allowed text-xs">Previous</button>
+                        <span style="background:var(--color-primary);color:white;" class="px-2.5 py-1 rounded-lg text-xs font-semibold">1</span>
+                        <button style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);" class="px-2.5 py-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer text-xs">2</button>
+                        <button style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);" class="px-2.5 py-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer text-xs">3</button>
+                        <span style="color:var(--text-muted);">…</span>
+                        <button style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);" class="px-3 py-1.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer text-xs">Next</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Empty State -->
-            <div id="logsEmptyState" class="hidden flex flex-col items-center justify-center p-12 text-center h-full">
-                <div
-                    class="w-16 h-16 bg-surface-dark border border-border-dark rounded-2xl flex items-center justify-center mb-6 shadow-2xl">
-                    <span class="material-symbols-outlined text-text-muted" style="font-size: 32px;">terminal</span>
+            <div id="logsEmptyState" class="hidden flex-col items-center justify-center p-12 text-center h-full">
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md);" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined" style="font-size:32px;color:var(--text-muted);">terminal</span>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-2">No active logs</h3>
-                <p class="text-text-muted max-w-sm mx-auto mb-8">Deploy your first app to start streaming real-time
-                    connection logs.</p>
-                <a href="index.html"
-                    class="flex h-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark px-6 text-sm font-bold text-white transition-all hover:bg-white/5">
-                    Go to Dashboard
+                <h3 style="color:var(--text-primary);" class="text-xl font-bold mb-2">No active logs</h3>
+                <p style="color:var(--text-muted);" class="max-w-sm mx-auto mb-8 text-sm">Deploy your first application to start streaming real-time connection and runtime logs.</p>
+                <a href="Tunnel Manager Board.html" style="background:var(--color-primary);color:white;" class="flex h-10 items-center justify-center rounded-lg px-6 text-sm font-semibold transition-all hover:opacity-90 no-underline shadow-sm">
+                    <span class="material-symbols-outlined mr-2" style="font-size:18px;">add</span> Create First Project
                 </a>
             </div>
-
-            <script>
-                // Simulate Empty State Check
-                const hasDeployment = localStorage.getItem('hasDeployment');
-                const logsFilters = document.getElementById('logsFilters');
-                const logsTableContainer = document.getElementById('logsTableContainer');
-                const logsPagination = document.getElementById('logsPagination');
-                const logsEmptyState = document.getElementById('logsEmptyState');
-
-                if (hasDeployment === 'true') {
-                    // Show Logs
-                    logsFilters.classList.remove('hidden');
-                    logsTableContainer.classList.remove('hidden');
-                    if (logsPagination) logsPagination.classList.remove('hidden');
-                } else {
-                    // Show Empty State
-                    logsEmptyState.classList.remove('hidden');
-                    logsEmptyState.classList.add('flex');
-                }
-            </script>
-            <!-- Pagination -->
-            <div id="logsPagination" class="flex items-center justify-between mt-4 text-xs text-text-muted hidden">
-                <span>Showing recent activity</span>
-                <div class="flex gap-2">
-                    <button
-                        class="px-3 py-1 bg-surface-dark border border-border-dark rounded hover:text-white transition-colors">Previous</button>
-                    <button
-                        class="px-3 py-1 bg-surface-dark border border-border-dark rounded hover:text-white transition-colors">Next</button>
-                </div>
-            </div>
-
         </div>
     </main>
-</body>
 
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-sm font-medium" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);transform:translateX(120%);transition:transform .3s ease;">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#22C55E;">content_copy</span>
+        <span id="toastMsg">Copied to clipboard</span>
+    </div>
+
+    <script>
+        const hasDeployment = localStorage.getItem('hasDeployment');
+        const filters = document.getElementById('logsFilters');
+        const table = document.getElementById('logsTableContainer');
+        const empty = document.getElementById('logsEmptyState');
+        if (hasDeployment === 'true') {
+            filters.classList.remove('hidden'); filters.classList.add('flex');
+            table.classList.remove('hidden');
+        } else {
+            empty.classList.remove('hidden'); empty.classList.add('flex');
+        }
+
+        // Expandable log rows
+        function toggleLogDetail(row) {
+            const detailRow = row.nextElementSibling;
+            if (!detailRow || !detailRow.classList.contains('log-detail-row')) return;
+            const panel = detailRow.querySelector('.log-detail');
+            const isOpen = panel.classList.contains('open');
+
+            // Close all others first
+            document.querySelectorAll('.log-detail.open').forEach(p => {
+                p.classList.remove('open');
+                p.closest('.log-detail-row').previousElementSibling.classList.remove('expanded');
+            });
+
+            if (!isOpen) {
+                panel.classList.add('open');
+                row.classList.add('expanded');
+            }
+        }
+
+        // Copy log entry
+        function copyLogEntry(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const t = document.getElementById('toast');
+                document.getElementById('toastMsg').textContent = 'Log entry copied';
+                t.style.transform = 'translateX(0)';
+                setTimeout(() => t.style.transform = 'translateX(120%)', 2500);
+            });
+        }
+
+        // ─── Filter Logs ───
+        function filterLogs() {
+            const q = (document.getElementById('logSearch')?.value || '').toLowerCase();
+            const proj = document.getElementById('logProjectFilter')?.value || 'All Projects';
+            const level = document.getElementById('logLevelFilter')?.value || 'All Levels';
+            document.querySelectorAll('.log-row').forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const projName = row.querySelector('td:nth-child(3)')?.textContent.trim() || '';
+                const levelPill = row.querySelector('.level-pill')?.textContent.trim() || '';
+                let show = true;
+                if (q && !text.includes(q)) show = false;
+                if (proj !== 'All Projects' && !proj.startsWith(projName)) show = false;
+                if (level !== 'All Levels' && levelPill !== level) show = false;
+                row.style.display = show ? '' : 'none';
+                // Also hide corresponding detail row
+                const detailRow = row.nextElementSibling;
+                if (detailRow?.classList.contains('log-detail-row')) {
+                    detailRow.style.display = show ? '' : 'none';
+                }
+            });
+        }
+
+        // ─── Export CSV ───
+        function exportCSV() {
+            let csv = 'Time,Level,Project,Message\n';
+            document.querySelectorAll('.log-row').forEach(row => {
+                if (row.style.display === 'none') return;
+                const cols = row.querySelectorAll('td');
+                const time = cols[0]?.textContent.replace(/chevron_right/g,'').trim() || '';
+                const level = cols[1]?.textContent.trim() || '';
+                const project = cols[2]?.textContent.trim() || '';
+                const msg = cols[3]?.textContent.trim().replace(/,/g,';') || '';
+                csv += `"${time}","${level}","${project}","${msg}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'disal-logs-' + new Date().toISOString().slice(0,10) + '.csv';
+            a.click();
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = 'CSV exported';
+            t.style.transform = 'translateX(0)';
+            setTimeout(() => t.style.transform = 'translateX(120%)', 2500);
+        }
+    </script>
+</body>
 </html>

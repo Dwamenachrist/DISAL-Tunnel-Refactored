@@ -1,149 +1,644 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-<!-- THEME LOCK: Verified Dark Mode Tokens via CSS Variables -->
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Documentation - DISAL Hosting</title>
+    <title>Documentation — DISAL Hosting</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="assets/css/tokens.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
     <script src="assets/js/tailwind-config.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body{font-family:var(--font-sans)}.font-mono{font-family:var(--font-mono)}
+        .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .toc-link{transition:all .15s ease}.toc-link.active{color:var(--color-primary);border-left:2px solid var(--color-primary);padding-left:10px;font-weight:600}
+        .toc-link:not(.active){border-left:2px solid transparent;padding-left:10px}
+        .toc-link:hover:not(.active){color:var(--text-primary);border-left-color:var(--border-strong)}
+        .prose-disal h2{font-size:1.25rem;font-weight:700;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border-subtle);color:var(--text-primary)}
+        .prose-disal h3{font-size:1rem;font-weight:600;margin:1.75rem 0 .75rem;color:var(--text-primary)}
+        .prose-disal p{margin:.75rem 0;line-height:1.75;font-size:.875rem;color:var(--text-secondary)}
+        .prose-disal ul,.prose-disal ol{margin:.5rem 0;padding-left:1.5rem;font-size:.875rem;color:var(--text-secondary)}
+        .prose-disal li{margin:.25rem 0;line-height:1.65}
+        .prose-disal code:not(pre code){background:var(--bg-surface-2);border:1px solid var(--border-subtle);padding:1px 5px;border-radius:4px;font-size:.8125rem;color:var(--text-primary);font-family:var(--font-mono)}
+        pre.code-block{position:relative;background:var(--bg-surface-2);border:1px solid var(--border-subtle);border-radius:12px;padding:1rem 1.25rem;margin:1rem 0;overflow-x:auto;font-family:var(--font-mono);font-size:.8125rem;line-height:1.75;color:var(--text-primary)}
+        .copy-btn{position:absolute;top:.625rem;right:.625rem;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:500;background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-muted);cursor:pointer;transition:all .15s}
+        .copy-btn:hover{background:var(--color-primary);color:white;border-color:var(--color-primary)}
+    </style>
 </head>
 
-<body
-    class="bg-background-dark text-text-main h-screen overflow-hidden flex font-display antialiased selection:bg-primary selection:text-white transition-colors duration-200">
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
 
-    <!-- Side Navigation -->
-    <aside
-        class="dark w-64 bg-background-dark border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
         <div class="flex flex-col gap-1 p-6">
             <div class="flex flex-col mb-8">
-                <div onclick="window.location.href='index.html'"
-                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-text-main">DISAL</span>
-                </div>
-                <p class="text-text-dim text-xs mt-2">HOSTING_PLATFORM_V2</p>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING</p>
             </div>
             <nav class="flex flex-col gap-1">
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark/50 group transition-colors"
-                    href="Empty Dashboard.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">grid_view</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Dashboard</span>
+                <a href="Tunnel Manager Board.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">grid_view</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Dashboard</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark/50 group transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">terminal</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Logs</span>
+                <a href="Student Logs.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">terminal</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Logs</span>
                 </a>
-                <div class="h-px bg-border-dark my-4"></div>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-dark border-l-2 border-primary group transition-colors"
-                    href="Documentation.html">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">menu_book</span>
-                    <span class="text-text-main text-sm font-medium">Docs</span>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">menu_book</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Docs</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-border-dark flex items-center justify-between">
-            <div class="flex items-center gap-3 px-2">
-                <div
-                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-text-dim">
-                    S</div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
                 <div class="flex flex-col">
-                    <span class="text-text-main text-sm font-medium">Student</span>
-                    <span class="text-text-dim text-xs">student@disal.io</span>
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@apatechlab.com</span>
                 </div>
             </div>
-            <!-- Theme Toggle -->
-            <button onclick="toggleTheme()"
-                class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
-                title="Toggle Theme">
-                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-            </button>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
+            </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main
-        class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative transition-colors duration-200">
-        <!-- Strict Grid Pattern -->
-        <!-- Grid Background Removed -->
-        <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden transition-colors duration-200">
 
-        <!-- Scrollable Content -->
-        <div class="flex-1 overflow-y-auto p-8 scrollbar-hide relative z-10">
-            <div class="max-w-3xl mx-auto space-y-12">
+        <!-- Header -->
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 shrink-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);" class="font-semibold">Documentation</span>
+            </nav>
+        </header>
 
-                <!-- Intro Section -->
-                <div>
-                    <h1 class="text-4xl font-extrabold tracking-tight text-text-main mb-6">Introduction</h1>
-                    <p class="text-lg text-text-dim leading-relaxed">
-                        The DISAL Hosting Platform is an internal PaaS designed to simplify the deployment of Final Year
-                        Projects.
-                        Instead of managing raw SSH connections and firewall rules, students can use this platform to
-                        provision ephemeral environments and deploy containerized applications with a single click.
-                    </p>
-                </div>
+        <!-- Content Area: TOC sidebar + Article -->
+        <div class="flex-1 flex overflow-hidden">
 
-                <div class="h-px bg-border-dark w-full"></div>
+            <!-- In-page TOC sidebar (Vercel docs style) -->
+            <nav id="tocSidebar" style="border-right:1px solid var(--border-subtle);" class="hidden lg:flex w-56 flex-col gap-0.5 p-6 overflow-y-auto shrink-0 scrollbar-hide">
+                <span style="color:var(--text-muted);" class="text-[11px] font-bold uppercase tracking-wider mb-3">On this page</span>
+                <a href="#introduction" class="toc-link active text-sm no-underline py-1" style="color:var(--text-muted);">Introduction</a>
+                <a href="#how-it-works" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">How It Works</a>
+                <a href="#getting-started" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">Getting Started</a>
+                <a href="#deploy-script" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">Deploy Script</a>
+                <a href="#env-vars" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">Environment Variables</a>
+                <a href="#webhooks" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">Webhook Redeployment</a>
+                <a href="#port-allocation" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">Port Allocation</a>
+                <a href="#troubleshooting" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">Troubleshooting</a>
+                <a href="#faq" class="toc-link text-sm no-underline py-1" style="color:var(--text-muted);">FAQ</a>
+            </nav>
 
-                <!-- Architecture/Flow -->
-                <div>
-                    <h2 class="text-2xl font-bold text-text-main mb-6">How it Works</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div
-                            class="bg-surface-dark border border-border-dark rounded-default p-6 hover:border-primary/30 transition-all">
-                            <div
-                                class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xl mb-4 font-mono border border-primary/20">
-                                01</div>
-                            <h3 class="text-lg font-bold text-text-main mb-2">Provision</h3>
-                            <p class="text-sm text-text-dim leading-relaxed">After your first deployment, the system
-                                provisions an assigned port and generates your access URL.</p>
+            <!-- Article Content -->
+            <article class="flex-1 overflow-y-auto scrollbar-hide">
+                <div class="max-w-3xl mx-auto px-4 md:px-10 py-10 prose-disal">
+
+                    <!-- Introduction -->
+                    <section id="introduction">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div style="background:var(--color-primary-light);color:var(--color-primary);" class="size-10 rounded-xl flex items-center justify-center">
+                                <span class="material-symbols-outlined" style="font-size:24px;">auto_stories</span>
+                            </div>
+                            <div>
+                                <h1 style="color:var(--text-primary);" class="text-2xl font-bold mb-0 leading-tight">Documentation</h1>
+                                <p style="color:var(--text-muted);" class="text-sm mb-0">Everything you need to deploy on DISAL Hosting</p>
+                            </div>
                         </div>
-                        <div
-                            class="bg-surface-dark border border-border-dark rounded-default p-6 hover:border-primary/30 transition-all">
-                            <div
-                                class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xl mb-4 font-mono border border-primary/20">
-                                02</div>
-                            <h3 class="text-lg font-bold text-text-main mb-2">Deploy</h3>
-                            <p class="text-sm text-text-dim leading-relaxed">Push code to your repository. Our
-                                integrated CI/CD pipeline builds the Docker image and executes your <code
-                                    class="bg-background-dark border border-border-dark px-1 rounded text-text-main font-mono text-xs">deploy.sh</code>
-                                script.</p>
+                        <p>DISAL Hosting is a managed deployment platform built for DISAL society Final Year Project students. It gives you a dedicated port, Git-based deployments, automatic redeployment on push, and runtime logs — all through a simple dashboard.</p>
+                        <div style="background:var(--color-primary-light);border-left:3px solid var(--color-primary);" class="rounded-r-lg px-4 py-3 my-5">
+                            <p class="mb-0 text-sm" style="color:var(--text-primary);"><strong>TL;DR —</strong> Push code with a <code>deploy.sh</code> at the root. We handle the rest.</p>
                         </div>
-                    </div>
-                </div>
+                    </section>
 
-                <!-- Alert -->
-                <div class="rounded-default bg-primary/10 border border-primary/20 p-4 flex gap-3 items-start">
-                    <span class="material-symbols-outlined text-primary mt-0.5">info</span>
-                    <p class="text-sm text-text-dim leading-relaxed">
-                        <strong class="text-text-main block mb-1">Note</strong>
-                        Access to the Admin Control Plane is restricted to faculty members and system administrators. If
-                        you require elevated privileges, please contact your supervisor.
-                    </p>
-                </div>
+                    <!-- How It Works -->
+                    <section id="how-it-works">
+                        <h2>How It Works</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5 flex flex-col gap-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div style="background:var(--color-primary);color:white;" class="size-7 rounded-lg flex items-center justify-center text-xs font-bold">1</div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-semibold">Admin allocates your port</span>
+                                </div>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">Your administrator assigns a dedicated port (9000–9999) to your student account via the admin panel.</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5 flex flex-col gap-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div style="background:var(--color-primary);color:white;" class="size-7 rounded-lg flex items-center justify-center text-xs font-bold">2</div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-semibold">You create a project</span>
+                                </div>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">Enter your project name and Git repository URL. The platform clones your repo and links it to your assigned port.</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5 flex flex-col gap-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div style="background:var(--color-primary);color:white;" class="size-7 rounded-lg flex items-center justify-center text-xs font-bold">3</div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-semibold">Push to Git</span>
+                                </div>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">When you push commits to your repository, the platform detects changes via webhooks and triggers a redeployment.</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5 flex flex-col gap-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div style="background:var(--color-primary);color:white;" class="size-7 rounded-lg flex items-center justify-center text-xs font-bold">4</div>
+                                    <span style="color:var(--text-primary);" class="text-sm font-semibold">App goes live</span>
+                                </div>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">Your <code>deploy.sh</code> script runs, your app starts on the assigned port, and the tunnel makes it publicly accessible.</p>
+                            </div>
+                        </div>
+                    </section>
 
-            </div>
+                    <!-- Getting Started -->
+                    <section id="getting-started">
+                        <h2>Getting Started</h2>
+                        <h3>Prerequisites</h3>
+                        <ul>
+                            <li>A Git repository (GitHub, GitLab, or Bitbucket)</li>
+                            <li>A <code>deploy.sh</code> script at the repository root</li>
+                            <li>Your app must listen on the port assigned by the platform (available as <code>$ASSIGNED_PORT</code>)</li>
+                        </ul>
+                        <h3>Quick Start</h3>
+                        <ol>
+                            <li>Wait for your administrator to allocate a port — you'll see it on your Dashboard.</li>
+                            <li>Click <strong>Create Project</strong> and fill in your project name + Git URL.</li>
+                            <li>The system clones your repo, runs <code>deploy.sh</code>, and starts your app.</li>
+                            <li>Your project appears on the <a href="Tunnel Manager Board.html" style="color:var(--color-primary);">Tunnel Manager Board</a> with a live status indicator.</li>
+                        </ol>
+                    </section>
+
+                    <!-- Deploy Script -->
+                    <section id="deploy-script">
+                        <h2>Deploy Script</h2>
+
+                        <h3>What is deploy.sh?</h3>
+                        <p>A <code>deploy.sh</code> file is a <strong>shell script</strong> — a plain text file containing terminal commands that run one after another. Think of it like a recipe: "first install my packages, then start my app." The <code>.sh</code> extension tells the server it's a Bash script.</p>
+                        <p>Every DISAL project <strong>must</strong> have a <code>deploy.sh</code> file at the root of the repository. When you deploy, the platform does exactly this:</p>
+                        <pre class="code-block"><code># What the platform runs behind the scenes:
+cd /home/students/your-username/your-project/
+export ASSIGNED_PORT=9042      # your dedicated port
+export NODE_ENV=production      # your custom env vars
+chmod +x deploy.sh
+./deploy.sh                     # ← YOUR script runs here</code></pre>
+                        <p>That's it. Whatever commands are inside <code>deploy.sh</code> will execute. You control what happens.</p>
+
+                        <h3>Project Structure</h3>
+                        <p>Your repository root should look like this:</p>
+                        <pre class="code-block"><code>my-project/
+├── deploy.sh           ← Required — the platform runs this
+├── package.json        ← (or requirements.txt, go.mod, etc.)
+├── server.js           ← Your app entry point
+├── .gitignore
+└── src/
+    └── ...</code></pre>
+
+                        <div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);" class="rounded-xl p-4 mt-4 mb-5 flex gap-3 items-start">
+                            <span class="material-symbols-outlined mt-0.5" style="font-size:18px;color:var(--color-error);">error</span>
+                            <div>
+                                <p class="text-sm font-semibold mb-1" style="color:var(--color-error);">deploy.sh must be at the root</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">Not inside <code>src/</code>, not inside a subfolder. It must be at the same level as <code>package.json</code> (or your main config file). If the platform can't find it, the deployment will fail.</p>
+                            </div>
+                        </div>
+
+                        <h3>Script Rules</h3>
+                        <ol>
+                            <li><strong>First line must be <code>#!/bin/bash</code></strong> — this tells the server to use Bash to run your script.</li>
+                            <li><strong>Use <code>$ASSIGNED_PORT</code></strong> — never hardcode a port number. The platform injects this variable automatically.</li>
+                            <li><strong>Bind to <code>0.0.0.0</code></strong> — not <code>localhost</code> or <code>127.0.0.1</code>. The tunnel needs to reach your app from outside.</li>
+                            <li><strong>The script must NOT exit</strong> — your last command should start a server that keeps running (e.g., <code>node server.js</code>, <code>flask run</code>). If the script finishes, your app is considered stopped.</li>
+                        </ol>
+
+                        <h3>Examples by Framework</h3>
+
+                        <p style="color:var(--text-primary);" class="text-sm font-semibold mt-5 mb-2">Node.js / Express</p>
+                        <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+# deploy.sh — Node.js project
+
+echo "📦 Installing dependencies..."
+npm ci --production
+
+echo "🚀 Starting server on port $ASSIGNED_PORT..."
+PORT=$ASSIGNED_PORT node server.js</code></pre>
+
+                        <p style="color:var(--text-primary);" class="text-sm font-semibold mt-5 mb-2">Node.js with Build Step (React/Next.js SSR)</p>
+                        <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+# deploy.sh — Node.js with build
+
+echo "📦 Installing dependencies..."
+npm ci
+
+echo "🔨 Building project..."
+npm run build
+
+echo "🚀 Starting on port $ASSIGNED_PORT..."
+PORT=$ASSIGNED_PORT npm start</code></pre>
+
+                        <p style="color:var(--text-primary);" class="text-sm font-semibold mt-5 mb-2">Python / Flask</p>
+                        <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+# deploy.sh — Python Flask project
+
+echo "📦 Installing dependencies..."
+pip install -r requirements.txt
+
+echo "🚀 Starting Flask on port $ASSIGNED_PORT..."
+flask run --host=0.0.0.0 --port=$ASSIGNED_PORT</code></pre>
+
+                        <p style="color:var(--text-primary);" class="text-sm font-semibold mt-5 mb-2">Python / Django</p>
+                        <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+# deploy.sh — Django project
+
+echo "📦 Installing dependencies..."
+pip install -r requirements.txt
+
+echo "🗄️ Running migrations..."
+python manage.py migrate --noinput
+
+echo "📁 Collecting static files..."
+python manage.py collectstatic --noinput
+
+echo "🚀 Starting Django on port $ASSIGNED_PORT..."
+python manage.py runserver 0.0.0.0:$ASSIGNED_PORT</code></pre>
+
+                        <p style="color:var(--text-primary);" class="text-sm font-semibold mt-5 mb-2">Static Site (HTML/CSS/JS only)</p>
+                        <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+# deploy.sh — Static site served with Python's built-in server
+
+echo "🚀 Serving static files on port $ASSIGNED_PORT..."
+python3 -m http.server $ASSIGNED_PORT --bind 0.0.0.0</code></pre>
+
+                        <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-xl p-4 mt-5 flex gap-3 items-start">
+                            <span class="material-symbols-outlined mt-0.5" style="font-size:18px;color:var(--color-primary);">tips_and_updates</span>
+                            <div>
+                                <p class="text-sm font-semibold mb-1" style="color:var(--text-primary);">Making deploy.sh executable</p>
+                                <p class="text-xs mb-1" style="color:var(--text-muted);line-height:1.6;">Before you push, run this in your terminal:</p>
+                                <pre class="code-block !mt-1 !mb-0 !py-2 !px-3"><code>chmod +x deploy.sh
+git add deploy.sh
+git commit -m "make deploy.sh executable"
+git push</code></pre>
+                                <p class="text-xs mt-2 mb-0" style="color:var(--text-muted);line-height:1.6;">You only need to do this once. Git remembers the file permission.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Environment Variables -->
+                    <section id="env-vars">
+                        <h2>Environment Variables</h2>
+                        <p>Environment variables (env vars) let you pass <strong>configuration and secrets</strong> to your app without putting them in your source code. They're injected by the platform <em>before</em> your <code>deploy.sh</code> runs, so they're available to every command in your script and to your running app.</p>
+
+                        <h3>How They Work</h3>
+                        <pre class="code-block"><code># The platform does this automatically before running deploy.sh:
+export ASSIGNED_PORT=9042          # ← System (you can't change this)
+export NODE_ENV=production          # ← You set this in Settings
+export DATABASE_URL=postgres://...  # ← You set this in Settings
+
+./deploy.sh   # Now all variables above are accessible inside</code></pre>
+
+                        <h3>Types of Variables</h3>
+                        <div class="grid grid-cols-1 gap-3 mt-3">
+                            <div style="background:var(--color-primary-light);border:1px solid var(--color-primary);border-left-width:3px;" class="rounded-r-xl rounded-l-lg p-4 flex gap-3 items-start">
+                                <span class="material-symbols-outlined mt-0.5" style="font-size:18px;color:var(--color-primary);">lock</span>
+                                <div>
+                                    <p class="text-sm font-semibold mb-1" style="color:var(--color-primary);">System — ASSIGNED_PORT</p>
+                                    <p class="text-xs mb-0" style="color:var(--text-secondary);line-height:1.6;">Automatically injected. This is the port your app <strong>must</strong> listen on. You cannot change it — it's controlled by the admin. Always use <code>$ASSIGNED_PORT</code> in your deploy.sh instead of hardcoding a number.</p>
+                                </div>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-4 flex gap-3 items-start">
+                                <span class="material-symbols-outlined mt-0.5" style="font-size:18px;color:var(--text-muted);">code</span>
+                                <div>
+                                    <p class="text-sm font-semibold mb-1" style="color:var(--text-primary);">User — Plain Variables</p>
+                                    <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">Configuration that isn't sensitive. Example: <code>NODE_ENV=production</code>, <code>API_BASE_URL=https://api.example.com</code>. Values are visible in the dashboard.</p>
+                                </div>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-4 flex gap-3 items-start">
+                                <span class="material-symbols-outlined mt-0.5" style="font-size:18px;color:var(--text-muted);">key</span>
+                                <div>
+                                    <p class="text-sm font-semibold mb-1" style="color:var(--text-primary);">User — Secrets</p>
+                                    <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">Sensitive values like database passwords, API keys, and tokens. Marked as "Secret" — hidden by default in the dashboard. <strong>Never put these in your Git repo.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Adding Variables</h3>
+                        <ol>
+                            <li>Go to your project → <strong>Settings</strong> tab</li>
+                            <li>Scroll to <strong>Environment Variables</strong></li>
+                            <li>Click <strong>Add Variable</strong></li>
+                            <li>Enter the key name (e.g., <code>DATABASE_URL</code>) and value</li>
+                            <li>Check <strong>Secret</strong> if the value is sensitive</li>
+                            <li>Click <strong>Save</strong> — the variable takes effect on next deploy</li>
+                        </ol>
+
+                        <h3>Using Variables in deploy.sh</h3>
+                        <p>All environment variables are available as <code>$VARIABLE_NAME</code> inside your script:</p>
+                        <pre class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+
+# System variable — always available
+echo "Listening on port: $ASSIGNED_PORT"
+
+# Your custom variables — set in Settings
+echo "Environment: $NODE_ENV"
+echo "Database: $DATABASE_URL"
+
+# Pass to your app
+PORT=$ASSIGNED_PORT DATABASE_URL=$DATABASE_URL node server.js</code></pre>
+
+                        <h3>Using Variables in Your Code</h3>
+                        <p>Your app can read them from the environment at runtime:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+                            <div>
+                                <p style="color:var(--text-primary);" class="text-xs font-semibold mb-1.5">Node.js</p>
+                                <pre class="code-block !mt-0"><code>const port = process.env.ASSIGNED_PORT;
+const dbUrl = process.env.DATABASE_URL;
+
+app.listen(port, '0.0.0.0');</code></pre>
+                            </div>
+                            <div>
+                                <p style="color:var(--text-primary);" class="text-xs font-semibold mb-1.5">Python</p>
+                                <pre class="code-block !mt-0"><code>import os
+
+port = os.environ['ASSIGNED_PORT']
+db_url = os.environ.get('DATABASE_URL')
+
+app.run(host='0.0.0.0', port=int(port))</code></pre>
+                            </div>
+                        </div>
+
+                        <div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);" class="rounded-xl p-4 mt-4 flex gap-3 items-start">
+                            <span class="material-symbols-outlined mt-0.5" style="font-size:18px;color:var(--color-error);">warning</span>
+                            <div>
+                                <p class="text-sm font-semibold mb-1" style="color:var(--color-error);">Never hardcode secrets in your code</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;">Don't write <code>const password = "abc123"</code> in your source code. Anyone with access to your Git repo can see it. Always use environment variables for passwords, API keys, and connection strings.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Webhooks -->
+                    <section id="webhooks">
+                        <h2>Webhook Redeployment</h2>
+                        <p>DISAL Hosting supports automatic redeployment via Git webhooks. When you push new commits, the platform:</p>
+                        <ol>
+                            <li>Receives the webhook event from your Git provider</li>
+                            <li>Pulls the latest code from your repository</li>
+                            <li>Stops the currently running process</li>
+                            <li>Re-runs your <code>deploy.sh</code> script</li>
+                            <li>Starts your app on the same port</li>
+                        </ol>
+
+                        <h3>Setting Up Webhooks</h3>
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5 mt-3 space-y-3">
+                            <div class="flex gap-3 items-start">
+                                <div style="background:var(--color-primary-light);color:var(--color-primary);" class="size-6 rounded flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</div>
+                                <div>
+                                    <p class="text-sm font-medium mb-0.5" style="color:var(--text-primary);">Go to your repo → Settings → Webhooks</p>
+                                    <p class="text-xs mb-0" style="color:var(--text-muted);">GitHub, GitLab, and Bitbucket are supported.</p>
+                                </div>
+                            </div>
+                            <div style="background:var(--border-subtle);" class="h-px"></div>
+                            <div class="flex gap-3 items-start">
+                                <div style="background:var(--color-primary-light);color:var(--color-primary);" class="size-6 rounded flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</div>
+                                <div>
+                                    <p class="text-sm font-medium mb-0.5" style="color:var(--text-primary);">Set the Payload URL</p>
+                                    <pre class="code-block !mt-2 !mb-0 !py-2 !px-3"><code>https://apatechlab.com/api/webhook/{your-project-id}</code></pre>
+                                </div>
+                            </div>
+                            <div style="background:var(--border-subtle);" class="h-px"></div>
+                            <div class="flex gap-3 items-start">
+                                <div style="background:var(--color-primary-light);color:var(--color-primary);" class="size-6 rounded flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</div>
+                                <div>
+                                    <p class="text-sm font-medium mb-0.5" style="color:var(--text-primary);">Select "Just the push event"</p>
+                                    <p class="text-xs mb-0" style="color:var(--text-muted);">Only push events trigger redeployments.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mt-4">You can also toggle auto-redeploy on/off per-project from the <a href="Tunnel Manager Board.html" style="color:var(--color-primary);">Tunnel Manager Board</a>.</p>
+                    </section>
+
+                    <!-- Port Allocation -->
+                    <section id="port-allocation">
+                        <h2>Port Allocation</h2>
+                        <p>Each student is assigned a unique port in the <code>9000–9999</code> range by their administrator. This port is:</p>
+                        <ul>
+                            <li><strong>Persistent</strong> — it stays the same across redeployments</li>
+                            <li><strong>Exclusive</strong> — no other student shares your port</li>
+                            <li><strong>Tunnelled</strong> — exposed via a secure tunnel to a public subdomain</li>
+                        </ul>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-4 text-center">
+                                <span class="material-symbols-outlined mb-2" style="font-size:24px;color:var(--color-primary);">dns</span>
+                                <p class="text-xs font-semibold mb-0.5" style="color:var(--text-primary);">Range</p>
+                                <p class="text-xs font-mono mb-0" style="color:var(--text-muted);">9000 – 9999</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-4 text-center">
+                                <span class="material-symbols-outlined mb-2" style="font-size:24px;color:var(--color-primary);">lock</span>
+                                <p class="text-xs font-semibold mb-0.5" style="color:var(--text-primary);">Allocation</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);">Admin-controlled</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-4 text-center">
+                                <span class="material-symbols-outlined mb-2" style="font-size:24px;color:var(--color-primary);">public</span>
+                                <p class="text-xs font-semibold mb-0.5" style="color:var(--text-primary);">Access</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);">Via DISAL tunnel</p>
+                            </div>
+                        </div>
+                        <p class="mt-4">Your assigned port is displayed on your Dashboard and locked in the Create Project modal. Use the environment variable <code>$ASSIGNED_PORT</code> in your <code>deploy.sh</code> to reference it dynamically.</p>
+                    </section>
+
+                    <!-- Troubleshooting -->
+                    <section id="troubleshooting">
+                        <h2>Troubleshooting</h2>
+                        <p>Common issues and how to fix them:</p>
+                        <div class="space-y-3 mt-4">
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span style="background:rgba(239,68,68,.1);color:var(--color-error);" class="text-[10px] font-bold px-2 py-0.5 rounded-full">ERROR</span>
+                                    <p class="text-sm font-semibold mb-0" style="color:var(--text-primary);">"deploy.sh: Permission denied"</p>
+                                </div>
+                                <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6;"><strong>Cause:</strong> The file isn't marked as executable in Git.</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;"><strong>Fix:</strong> Run <code>chmod +x deploy.sh</code> then commit and push.</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span style="background:rgba(239,68,68,.1);color:var(--color-error);" class="text-[10px] font-bold px-2 py-0.5 rounded-full">ERROR</span>
+                                    <p class="text-sm font-semibold mb-0" style="color:var(--text-primary);">"deploy.sh: not found"</p>
+                                </div>
+                                <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6;"><strong>Cause:</strong> The file doesn't exist at the repository root, or it's inside a subfolder.</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;"><strong>Fix:</strong> Make sure <code>deploy.sh</code> is at the same level as <code>package.json</code> (not inside <code>src/</code> or any other folder).</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span style="background:rgba(245,158,11,.1);color:var(--color-warning);" class="text-[10px] font-bold px-2 py-0.5 rounded-full">ISSUE</span>
+                                    <p class="text-sm font-semibold mb-0" style="color:var(--text-primary);">App deploys but shows "stopped" immediately</p>
+                                </div>
+                                <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6;"><strong>Cause:</strong> Your deploy.sh script exits after running. The last command needs to be a long-running server process.</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;"><strong>Fix:</strong> Make sure the last line is something like <code>node server.js</code> or <code>flask run</code> — not <code>npm run build</code> (which finishes and exits).</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span style="background:rgba(245,158,11,.1);color:var(--color-warning);" class="text-[10px] font-bold px-2 py-0.5 rounded-full">ISSUE</span>
+                                    <p class="text-sm font-semibold mb-0" style="color:var(--text-primary);">"Works locally but can't access on DISAL"</p>
+                                </div>
+                                <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6;"><strong>Cause:</strong> Your app is binding to <code>localhost</code> or <code>127.0.0.1</code> — which means "only accept connections from this machine." The tunnel can't reach it.</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;"><strong>Fix:</strong> Bind to <code>0.0.0.0</code> instead. In Express: <code>app.listen(port, '0.0.0.0')</code>. In Flask: <code>--host=0.0.0.0</code>.</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span style="background:rgba(245,158,11,.1);color:var(--color-warning);" class="text-[10px] font-bold px-2 py-0.5 rounded-full">ISSUE</span>
+                                    <p class="text-sm font-semibold mb-0" style="color:var(--text-primary);">"Port already in use"</p>
+                                </div>
+                                <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6;"><strong>Cause:</strong> A previous instance of your app is still running on the same port.</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;"><strong>Fix:</strong> Go to Project Detail → Danger Zone → <strong>Restart Service</strong>. This kills the old process before redeploying.</p>
+                            </div>
+                            <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span style="background:rgba(245,158,11,.1);color:var(--color-warning);" class="text-[10px] font-bold px-2 py-0.5 rounded-full">ISSUE</span>
+                                    <p class="text-sm font-semibold mb-0" style="color:var(--text-primary);">"\r: command not found" (Windows line endings)</p>
+                                </div>
+                                <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6;"><strong>Cause:</strong> You created deploy.sh on Windows, which uses <code>\r\n</code> line endings. Linux expects <code>\n</code> only.</p>
+                                <p class="text-xs mb-0" style="color:var(--text-muted);line-height:1.6;"><strong>Fix:</strong> In VS Code, click "CRLF" in the bottom-right corner and switch to "LF". Or run <code>sed -i 's/\r$//' deploy.sh</code> and push again.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- FAQ -->
+                    <section id="faq">
+                        <h2>FAQ</h2>
+                        <div class="space-y-3 mt-4">
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    My deployment failed — what should I check?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm" >
+                                    <p class="mb-0" style="color:var(--text-muted);">Check your <a href="Student Logs.html" style="color:var(--color-primary);">runtime logs</a> for error messages. Common issues include: missing <code>deploy.sh</code>, incorrect port binding, missing dependencies, or syntax errors in your start script.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    Can I change my assigned port?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">No. Ports are managed by your administrator. Contact them if you need a change. The port persists across all deployments.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    How do I disable auto-redeploy?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">Toggle the <strong>AUTO</strong> switch on the <a href="Tunnel Manager Board.html" style="color:var(--color-primary);">Tunnel Manager Board</a>. When off, pushes to your repo won't trigger redeployments — you can redeploy manually instead.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    What languages/frameworks are supported?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">Anything that runs on Linux. Node.js, Python, Go, Java, Rust — as long as your <code>deploy.sh</code> installs dependencies and starts a server, it works. The platform is runtime-agnostic.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    My app works locally but not on DISAL — why?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">Make sure your app binds to <code>0.0.0.0</code> (not <code>localhost</code> or <code>127.0.0.1</code>) and uses <code>$ASSIGNED_PORT</code> as the listening port. Also verify all environment variables are set in Settings. See the <a href="#troubleshooting" style="color:var(--color-primary);">Troubleshooting</a> section for more details.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    How do environment variables work?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">The platform injects them before running your <code>deploy.sh</code>. <code>ASSIGNED_PORT</code> is always there automatically. You can add your own (like <code>DATABASE_URL</code>) in Project → Settings → Environment Variables. They're available as <code>$VAR_NAME</code> in your script and via <code>process.env.VAR_NAME</code> (Node) or <code>os.environ['VAR_NAME']</code> (Python) in your code. See the <a href="#env-vars" style="color:var(--color-primary);">Environment Variables</a> section.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    I'm on Windows — do I need to worry about anything?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">Yes — make sure <code>deploy.sh</code> uses <strong>LF</strong> line endings, not CRLF. In VS Code, look at the bottom-right corner for "CRLF" and click it to switch to "LF" before saving. Windows line endings cause a <code>"\r: command not found"</code> error on the Linux server.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    Can I deploy a static site (just HTML/CSS/JS)?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">Yes! Your <code>deploy.sh</code> just needs to start a simple web server. Use Python's built-in server: <code>python3 -m http.server $ASSIGNED_PORT --bind 0.0.0.0</code>. See the <a href="#deploy-script" style="color:var(--color-primary);">Static Site example</a> in the Deploy Script section.</p>
+                                </div>
+                            </details>
+                            <details style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-xl group">
+                                <summary style="color:var(--text-primary);" class="flex items-center justify-between px-5 py-3.5 cursor-pointer text-sm font-medium list-none">
+                                    When do env var changes take effect?
+                                    <span class="material-symbols-outlined transition-transform group-open:rotate-180" style="font-size:18px;color:var(--text-muted);">expand_more</span>
+                                </summary>
+                                <div style="border-top:1px solid var(--border-subtle);" class="px-5 py-3.5 text-sm">
+                                    <p class="mb-0" style="color:var(--text-muted);">On the <strong>next deployment</strong>. After adding or changing a variable in Settings, click <strong>Redeploy</strong> (or push a new commit if auto-redeploy is on). The platform re-injects all variables before running your script.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </section>
+
+                    <!-- Footer spacer -->
+                    <div class="h-16"></div>
+                </div>
+            </article>
         </div>
     </main>
 
+    <script>
+    /* ─── Copy code button ─── */
+    function copyCode(btn) {
+        const code = btn.nextElementSibling?.textContent || btn.parentElement.querySelector('code').textContent;
+        navigator.clipboard.writeText(code).then(() => { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1500); });
+    }
 
+    /* ─── Scroll-spy for TOC ─── */
+    (function() {
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+        const article = document.querySelector('article');
+        if (!article || !sections.length) return;
+
+        function onScroll() {
+            let current = sections[0]?.id;
+            for (const sec of sections) {
+                if (sec.getBoundingClientRect().top <= 120) current = sec.id;
+            }
+            tocLinks.forEach(l => {
+                l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+            });
+        }
+        article.addEventListener('scroll', onScroll);
+        onScroll();
+    })();
+    </script>
 </body>
-
 </html>

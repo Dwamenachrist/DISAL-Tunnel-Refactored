@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Documentation — DISAL Hosting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body { font-family: var(--font-sans); }
+        .font-mono { font-family: var(--font-mono); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .doc-content h2 { margin-top: 2.5rem; }
+        .doc-content p { color: var(--text-secondary); line-height: 1.75; }
+    </style>
+</head>
+
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <div class="flex flex-col mb-8">
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
+                    </div>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING</p>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a href="Tunnel Manager Board.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">grid_view</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Dashboard</span>
+                </a>
+                <a href="Student Logs.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">terminal</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Logs</span>
+                </a>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <!-- Active: Docs -->
+                <a href="Documentation.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">menu_book</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Docs</span>
+                </a>
+            </nav>
+        </div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
+                <div class="flex flex-col">
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@disal.io</span>
+                </div>
+            </div>
+            <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ─── MAIN CONTENT ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-8 scrollbar-hide relative z-10">
+            <div class="max-w-3xl mx-auto space-y-10 doc-content">
+
+                <!-- Intro -->
+                <div>
+                    <h1 style="color:var(--text-primary);" class="text-4xl font-extrabold tracking-tight mb-4">Introduction</h1>
+                    <p class="text-lg leading-relaxed">
+                        The DISAL Hosting Platform is an internal PaaS designed to simplify the deployment of Final Year
+                        Projects. Instead of managing raw SSH connections and firewall rules, students can use this platform
+                        to provision ephemeral environments and deploy containerized applications with a single click.
+                    </p>
+                </div>
+
+                <div style="background:var(--border-subtle);" class="h-px w-full"></div>
+
+                <!-- How it Works -->
+                <div>
+                    <h2 style="color:var(--text-primary);" class="text-2xl font-bold mb-6">How it Works</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Step 1 -->
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-lg p-6 hover:border-[var(--color-primary)] transition-all">
+                            <div style="background:var(--color-primary-light);color:var(--color-primary);border:1px solid var(--color-primary);" class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4 font-mono">01</div>
+                            <h3 style="color:var(--text-primary);" class="text-lg font-bold mb-2">Provision</h3>
+                            <p class="text-sm leading-relaxed mb-0">After your administrator allocates a port, the system provisions your environment and generates your access URL.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-lg p-6 hover:border-[var(--color-primary)] transition-all">
+                            <div style="background:var(--color-primary-light);color:var(--color-primary);border:1px solid var(--color-primary);" class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4 font-mono">02</div>
+                            <h3 style="color:var(--text-primary);" class="text-lg font-bold mb-2">Deploy</h3>
+                            <p class="text-sm leading-relaxed mb-0">Push code to your repository. Our integrated CI/CD pipeline builds the Docker image and executes your
+                                <code style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--color-primary);" class="px-1.5 py-0.5 rounded text-xs font-mono">deploy.sh</code> script.
+                            </p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-lg p-6 hover:border-[var(--color-primary)] transition-all">
+                            <div style="background:var(--color-primary-light);color:var(--color-primary);border:1px solid var(--color-primary);" class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4 font-mono">03</div>
+                            <h3 style="color:var(--text-primary);" class="text-lg font-bold mb-2">Monitor</h3>
+                            <p class="text-sm leading-relaxed mb-0">View real-time logs, uptime metrics, and connection status from your dashboard. Get instant alerts on deployment failures.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-lg p-6 hover:border-[var(--color-primary)] transition-all">
+                            <div style="background:var(--color-primary-light);color:var(--color-primary);border:1px solid var(--color-primary);" class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4 font-mono">04</div>
+                            <h3 style="color:var(--text-primary);" class="text-lg font-bold mb-2">Redeploy</h3>
+                            <p class="text-sm leading-relaxed mb-0">Push updates to your Git repo and the webhook listener auto-triggers a redeployment via the Orchestrator — or use manual redeploy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:var(--border-subtle);" class="h-px w-full"></div>
+
+                <!-- deploy.sh Guide -->
+                <div>
+                    <h2 style="color:var(--text-primary);" class="text-2xl font-bold mb-4">The deploy.sh Script</h2>
+                    <p class="text-sm leading-relaxed mb-4">
+                        Your repository must contain a <code style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--color-primary);" class="px-1.5 py-0.5 rounded text-xs font-mono">deploy.sh</code> file at the root. This script tells the Orchestrator how to build and run your project.
+                    </p>
+                    <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="rounded-lg overflow-hidden">
+                        <div style="background:var(--bg-surface-2);border-bottom:1px solid var(--border-subtle);" class="px-4 py-2 flex items-center justify-between">
+                            <span style="color:var(--text-muted);" class="text-xs font-mono">deploy.sh</span>
+                            <button onclick="copyCode(this)" style="color:var(--text-muted);" class="text-xs hover:text-[var(--text-primary)] transition-colors cursor-pointer flex items-center gap-1">
+                                <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+                                Copy
+                            </button>
+                        </div>
+                        <pre style="color:var(--text-secondary);background:var(--bg-surface-1);" class="p-4 text-sm font-mono leading-relaxed overflow-x-auto m-0 border-none"><code>#!/bin/bash
+# DISAL Hosting — deploy.sh example
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Start the server on the assigned port
+PORT=$ASSIGNED_PORT npm start</code></pre>
+                    </div>
+                </div>
+
+                <div style="background:var(--border-subtle);" class="h-px w-full"></div>
+
+                <!-- Webhook Redeployment -->
+                <div>
+                    <h2 style="color:var(--text-primary);" class="text-2xl font-bold mb-4">Webhook Redeployment</h2>
+                    <p class="text-sm leading-relaxed mb-4">
+                        The platform listens for push events on your connected Git repository. When a new commit is detected:
+                    </p>
+                    <ol style="color:var(--text-secondary);" class="text-sm space-y-2 list-decimal list-inside mb-4">
+                        <li>The <strong style="color:var(--text-primary);">Webhook Listener</strong> receives the push event</li>
+                        <li>If <strong style="color:var(--text-primary);">Auto Redeploy</strong> is ON, the Orchestrator automatically runs <code style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--color-primary);" class="px-1 py-0.5 rounded text-xs font-mono">deploy.sh</code></li>
+                        <li>If Auto Redeploy is OFF, you receive a notification banner and can trigger a <strong style="color:var(--text-primary);">Manual Redeploy</strong></li>
+                    </ol>
+                </div>
+
+                <div style="background:var(--border-subtle);" class="h-px w-full"></div>
+
+                <!-- Port Allocation -->
+                <div>
+                    <h2 style="color:var(--text-primary);" class="text-2xl font-bold mb-4">Port Allocation</h2>
+                    <p class="text-sm leading-relaxed mb-4">
+                        Ports in the range <code style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--color-primary);" class="px-1.5 py-0.5 rounded text-xs font-mono">9000–9999</code> are reserved for student deployments. Your administrator assigns a unique port to your account via the Port Allocation Manager. You cannot change this yourself.
+                    </p>
+                    <p class="text-sm leading-relaxed mb-4">
+                        Your deploy.sh script should bind to this port using the <code style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--color-primary);" class="px-1.5 py-0.5 rounded text-xs font-mono">$ASSIGNED_PORT</code> environment variable.
+                    </p>
+                </div>
+
+                <!-- Info Alert -->
+                <div style="background:var(--color-primary-light);border:1px solid var(--color-primary);" class="rounded-lg p-4 flex gap-3 items-start">
+                    <span class="material-symbols-outlined mt-0.5" style="color:var(--color-primary);">info</span>
+                    <div>
+                        <p style="color:var(--text-primary);" class="text-sm font-semibold mb-1">Note</p>
+                        <p style="color:var(--text-secondary);" class="text-sm leading-relaxed mb-0">
+                            Access to the Admin Control Plane is restricted to faculty members and system administrators.
+                            If you require elevated privileges, please contact your supervisor.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Spacer at bottom -->
+                <div class="h-8"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function copyCode(btn) {
+            const pre = btn.closest('.rounded-lg').querySelector('pre code');
+            navigator.clipboard.writeText(pre.textContent).then(() => {
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:14px;">check</span> Copied!';
+                btn.style.color = 'var(--color-success)';
+                setTimeout(() => { btn.innerHTML = orig; btn.style.color = 'var(--text-muted)'; }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>

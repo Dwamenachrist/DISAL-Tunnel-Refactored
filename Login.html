@@ -1,205 +1,280 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Login - DISAL Hosting</title>
+    <title>Sign In — DISAL Hosting</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/variables.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
     <script src="assets/js/tailwind-config.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
+
     <script>
+        /* ============================================================
+           LOGIN LOGIC
+           Flowchart: login-page → dassal-auth → account-check → dashboard/error
+           ============================================================ */
+
         function togglePassword() {
             const pwd = document.getElementById('password');
             const icon = document.getElementById('eye-icon');
             if (pwd.type === 'password') {
                 pwd.type = 'text';
-                icon.innerText = 'visibility_off';
+                icon.textContent = 'visibility_off';
             } else {
                 pwd.type = 'password';
-                icon.innerText = 'visibility';
+                icon.textContent = 'visibility';
             }
         }
 
-        // Simple client-side validation mirroring the "Account Valid?" node
+        /** Client-side validation — mirrors "Account Valid?" decision node */
         function validateCredentials(studentId, password) {
-            const idPattern = /^[0-9]{8}$/; // e.g. 21005678
+            const idPattern = /^[0-9]{8}$/;   // e.g. 21005678
             if (!idPattern.test(studentId)) return false;
-            if (!password) return false;
+            if (!password || password.length < 1) return false;
             return true;
         }
 
-        function showAuthError(message) {
+        function showError(message) {
             const banner = document.getElementById('auth-error');
-            const text = document.getElementById('auth-error-text');
-            if (text) {
-                text.textContent = message || 'Invalid credentials. Please verify your Student ID and password.';
-            }
+            const text   = document.getElementById('auth-error-text');
+            if (text) text.textContent = message || 'Invalid credentials. Please verify your ID and password.';
             if (banner) {
                 banner.classList.remove('hidden');
+                banner.style.animation = 'slideDown 0.25s ease-out';
             }
         }
 
-        function hideAuthError() {
+        function hideError() {
             const banner = document.getElementById('auth-error');
             if (banner) banner.classList.add('hidden');
         }
 
+        /** Dynamic label update based on role selection */
+        function onRoleChange() {
+            const role     = document.getElementById('role').value;
+            const idLabel  = document.getElementById('id-label');
+            const idInput  = document.getElementById('studentId');
+            const subtitle = document.getElementById('form-subtitle');
+
+            if (role === 'admin') {
+                idLabel.textContent   = 'Admin ID';
+                idInput.placeholder   = 'e.g. 10000001';
+                subtitle.textContent  = 'Sign in to the infrastructure control panel';
+            } else {
+                idLabel.textContent   = 'Student ID';
+                idInput.placeholder   = 'e.g. 21005678';
+                subtitle.textContent  = 'Sign in to manage your deployments';
+            }
+        }
+
         function handleLogin(event) {
             event.preventDefault();
-            hideAuthError();
+            hideError();
 
-            const role = document.getElementById('role').value;
+            const role      = document.getElementById('role').value;
             const studentId = document.getElementById('studentId').value.trim();
-            const password = document.getElementById('password').value;
+            const password  = document.getElementById('password').value;
 
-            // Button loading state
+            // Loading state — "Authenticating..." (per spec)
             const btn = document.getElementById('submit-btn');
-            const originalText = btn.innerText;
-            btn.innerText = 'Authenticating...';
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            const btnText = document.getElementById('submit-btn-text');
+            const btnSpinner = document.getElementById('submit-btn-spinner');
+            btnText.textContent = 'Authenticating...';
+            btnSpinner.classList.remove('hidden');
+            btn.disabled = true;
+            btn.style.opacity = '0.75';
+            btn.style.cursor = 'not-allowed';
 
+            // Simulate auth delay (replace with real API call)
             setTimeout(() => {
                 const isValid = validateCredentials(studentId, password);
 
                 if (!isValid) {
-                    // NO (Failure) -> Error Message + Retry
-                    showAuthError('Account not found or invalid credentials. Please try again or contact your administrator.');
-                    btn.innerText = originalText;
-                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    // FAILURE → Error Message + Retry (flowchart: error-message node)
+                    showError('Account not found or invalid credentials. Please check your ID and password, then try again.');
+                    btnText.textContent = 'Sign In';
+                    btnSpinner.classList.add('hidden');
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
                     return;
                 }
 
-                // YES (Student/Admin)
+                // SUCCESS → Store role + redirect
                 localStorage.setItem('userRole', role);
 
                 if (role === 'admin') {
                     window.location.href = 'Admin Dashboard.html';
                 } else {
                     const hasDeployment = localStorage.getItem('hasDeployment') === 'true';
-                    if (hasDeployment) {
-                        window.location.href = 'Tunnel Manager Board.html';
-                    } else {
-                        window.location.href = 'Empty Dashboard.html';
-                    }
+                    window.location.href = hasDeployment
+                        ? 'Tunnel Manager Board.html'
+                        : 'Empty Dashboard.html';
                 }
             }, 600);
         }
     </script>
+
     <style>
-        .bg-grid-pattern {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(45, 45, 53, 0.15) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(45, 45, 53, 0.15) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 
-<body
-    class="bg-background-main font-display text-text-primary overflow-hidden antialiased selection:bg-primary selection:text-text-on-primary flex h-screen items-center justify-center relative">
+<!-- ============================================================
+     LOGIN PAGE
+     Ref: Vercel login — centered card, no sidebar, zero distractions
+     Spec: SCREEN S0.5 in UI_UX_FLOW.md
+     ============================================================ -->
+<body class="font-display text-text-primary overflow-hidden antialiased selection:bg-primary/20 selection:text-primary flex min-h-screen items-center justify-center relative"
+      style="background-color: var(--bg-main);">
 
-    <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div>
+    <!-- Grid Pattern Background -->
+    <div class="bg-grid-pattern"></div>
 
-    <div class="w-full max-w-md p-6 z-10">
-        <!-- Logo -->
+    <!-- Theme Toggle — top right corner -->
+    <button onclick="toggleTheme()"
+            class="fixed top-4 right-4 z-50 p-2 rounded-lg transition-colors"
+            style="color: var(--text-muted); background-color: var(--bg-surface-1); border: 1px solid var(--border-subtle);"
+            onmouseover="this.style.color='var(--text-primary)';this.style.borderColor='var(--border-strong)'"
+            onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border-subtle)'"
+            title="Toggle theme">
+        <span class="material-symbols-outlined text-[18px] dark:hidden">dark_mode</span>
+        <span class="material-symbols-outlined text-[18px] hidden dark:block">light_mode</span>
+    </button>
 
-        <a class="flex justify-center mb-8 cursor-pointer hover:opacity-90 transition-opacity" href="index.html">
-            <div class="flex items-center gap-2">
-                <div class="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <span class="material-symbols-outlined" style="font-size: 24px;">dns</span>
+    <div class="w-full max-w-md px-6 z-10">
+
+        <!-- Logo — links back to landing page -->
+        <a href="index.html" class="flex justify-center mb-8 hover:opacity-90 transition-opacity">
+            <div class="flex items-center gap-2.5">
+                <div class="flex size-10 items-center justify-center rounded-xl text-white"
+                     style="background-color: var(--color-primary);">
+                    <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">deployed_code</span>
                 </div>
-                <span class="text-xl font-bold tracking-tight text-text-primary">DISAL Hosting</span>
+                <span class="text-xl font-bold tracking-tight" style="color: var(--text-primary);">DISAL Hosting</span>
             </div>
         </a>
 
-        <!-- Card -->
-        <div class="bg-surface-1 border border-border-subtle rounded-2xl shadow-strong p-8 transition-all">
-            <h1 id="form-title" class="text-2xl font-bold text-center mb-2 text-text-primary">Welcome Back</h1>
-            <p id="form-subtitle" class="text-text-secondary text-center text-sm mb-1">Sign in to manage your
-                deployments</p>
-            <p class="text-text-muted text-center text-xs mb-6">Sign in with your organization credentials.</p>
+        <!-- ============================================================
+             LOGIN CARD
+             White bg · subtle border · 16px radius · barely-there shadow
+             Ref: Vercel login card — the shadow is almost invisible in light mode
+             ============================================================ -->
+        <div class="rounded-2xl p-8"
+             style="background-color: var(--bg-surface-1); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
 
-            <!-- Error Message (maps to Error Message node in master flow) -->
+            <!-- Title + Subtitle -->
+            <h1 class="text-2xl font-bold text-center mb-1" style="color: var(--text-primary);">Welcome Back</h1>
+            <p id="form-subtitle" class="text-center text-sm mb-6" style="color: var(--text-secondary);">
+                Sign in to manage your deployments
+            </p>
+
+            <!-- Error Banner — hidden by default (flowchart: error-message node) -->
             <div id="auth-error"
-                class="hidden mb-4 rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-xs text-error flex items-start gap-2">
-                <span class="material-symbols-outlined text-[18px] mt-[1px]">error</span>
-                <p id="auth-error-text">
-                    Invalid credentials. Please verify your Student ID and password, then retry.
-                </p>
+                 class="hidden mb-5 rounded-lg px-4 py-3 text-sm flex items-start gap-2.5"
+                 style="background-color: var(--color-error-bg); border: 1px solid rgba(220,38,38,0.15); color: var(--color-error);">
+                <span class="material-symbols-outlined text-[18px] mt-0.5 shrink-0">error</span>
+                <p id="auth-error-text">Invalid credentials. Please verify your ID and password.</p>
             </div>
 
             <form onsubmit="handleLogin(event)" class="flex flex-col gap-5">
+
+                <!-- Role Selector (spec says role first) -->
                 <div>
-                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1" for="studentId">Student
-                        ID</label>
-                    <input type="text" id="studentId" required
-                        class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-text-muted font-mono"
-                        placeholder="e.g. 21005678">
+                    <label class="block text-sm font-medium mb-1.5" style="color: var(--text-primary);" for="role">Role</label>
+                    <div class="relative">
+                        <select id="role" onchange="onRoleChange()"
+                                class="w-full rounded-lg px-4 h-11 text-sm appearance-none cursor-pointer transition-all outline-none"
+                                style="background-color: var(--bg-surface-2); border: 1px solid var(--border-subtle); color: var(--text-primary);"
+                                onfocus="this.style.borderColor='var(--color-primary)';this.style.boxShadow='0 0 0 3px var(--color-primary-ring)'"
+                                onblur="this.style.borderColor='var(--border-subtle)';this.style.boxShadow='none'">
+                            <option value="student">Student</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[18px]"
+                              style="color: var(--text-muted);">expand_more</span>
+                    </div>
                 </div>
 
+                <!-- Student ID (8-digit validation) -->
                 <div>
-                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1"
-                        for="password">Password</label>
+                    <label id="id-label" class="block text-sm font-medium mb-1.5" style="color: var(--text-primary);" for="studentId">Student ID</label>
+                    <input type="text" id="studentId" required maxlength="8"
+                           class="w-full rounded-lg px-4 h-11 text-sm font-mono transition-all outline-none"
+                           style="background-color: var(--bg-surface-2); border: 1px solid var(--border-subtle); color: var(--text-primary);"
+                           onfocus="this.style.borderColor='var(--color-primary)';this.style.boxShadow='0 0 0 3px var(--color-primary-ring)'"
+                           onblur="this.style.borderColor='var(--border-subtle)';this.style.boxShadow='none'"
+                           placeholder="e.g. 21005678">
+                </div>
+
+                <!-- Password with show/hide toggle -->
+                <div>
+                    <label class="block text-sm font-medium mb-1.5" style="color: var(--text-primary);" for="password">Password</label>
                     <div class="relative">
                         <input type="password" id="password" required
-                            class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-text-muted pr-10"
-                            placeholder="">
+                               class="w-full rounded-lg px-4 h-11 text-sm pr-11 transition-all outline-none"
+                               style="background-color: var(--bg-surface-2); border: 1px solid var(--border-subtle); color: var(--text-primary);"
+                               onfocus="this.style.borderColor='var(--color-primary)';this.style.boxShadow='0 0 0 3px var(--color-primary-ring)'"
+                               onblur="this.style.borderColor='var(--border-subtle)';this.style.boxShadow='none'">
                         <button type="button" onclick="togglePassword()"
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors focus:outline-none">
+                                class="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                                style="color: var(--text-muted);"
+                                onmouseover="this.style.color='var(--text-primary)'"
+                                onmouseout="this.style.color='var(--text-muted)'">
                             <span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
                         </button>
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1" for="role">Role</label>
-                    <div class="relative">
-                        <select id="role"
-                            class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer">
-                            <option value="student">Student</option>
-                            <option value="admin">Administrator</option>
-                        </select>
-                        <span
-                            class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none"
-                            style="font-size: 20px;">expand_more</span>
-                    </div>
+                <!-- Remember Me -->
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="remember"
+                           class="size-4 rounded transition-colors cursor-pointer"
+                           style="border: 1px solid var(--border-subtle); accent-color: var(--color-primary);">
+                    <label for="remember" class="text-sm cursor-pointer" style="color: var(--text-secondary);">Remember me</label>
                 </div>
 
-                <div class="flex items-center justify-between text-xs mt-1 px-1">
-                    <label
-                        class="flex items-center gap-2 text-text-secondary cursor-pointer hover:text-text-primary transition-colors">
-                        <input type="checkbox"
-                            class="rounded border-border-subtle bg-surface-2 text-primary focus:ring-offset-0 focus:ring-primary size-4">
-                        Remember me
-                    </label>
-                </div>
-
+                <!-- Submit Button — full width, orange, 44px tall (touch-friendly) -->
                 <button type="submit" id="submit-btn"
-                    class="mt-2 w-full bg-primary hover:bg-primary-hover text-text-on-primary font-bold h-12 rounded-xl transition-all shadow-glow hover:scale-[1.01] active:scale-[0.99]">
-                    Sign In
+                        class="w-full h-11 rounded-lg font-semibold text-sm text-white flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                        style="background-color: var(--color-primary); box-shadow: 0 1px 3px rgba(232,121,43,0.3); cursor: pointer;"
+                        onmouseover="this.style.backgroundColor='var(--color-primary-hover)'"
+                        onmouseout="this.style.backgroundColor='var(--color-primary)'">
+                    <!-- Spinner (hidden by default) -->
+                    <svg id="submit-btn-spinner" class="hidden animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="opacity-25"></circle>
+                        <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="opacity-75"></path>
+                    </svg>
+                    <span id="submit-btn-text">Sign In</span>
                 </button>
-
-                <div class="text-center text-sm mt-4 text-text-secondary">
-                    <span id="toggle-text">Don't have access?</span>
-                    <a href="mailto:admin@disal.com"
-                        class="text-primary hover:text-text-primary cursor-pointer ml-1 font-medium transition-colors">Contact
-                        your administrator</a>
-                </div>
             </form>
         </div>
 
-        <p class="text-center text-xs text-gray-600 mt-8">
-            &copy; 2026 DISAL Hosting. All rights reserved.
+        <!-- Help text -->
+        <p class="text-center text-sm mt-6" style="color: var(--text-secondary);">
+            No access?
+            <a href="mailto:admin@disal.com" class="font-medium transition-colors"
+               style="color: var(--color-primary);"
+               onmouseover="this.style.color='var(--color-primary-hover)'"
+               onmouseout="this.style.color='var(--color-primary)'">
+                Contact your administrator
+            </a>
+        </p>
+
+        <!-- Copyright -->
+        <p class="text-center text-xs mt-6" style="color: var(--text-muted);">
+            © 2026 DISAL Hosting
         </p>
     </div>
 

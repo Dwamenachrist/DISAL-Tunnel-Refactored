@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard — DISAL Hosting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body { font-family: var(--font-sans); }
+        .font-mono { font-family: var(--font-mono); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <!-- Logo -->
+            <div class="flex flex-col mb-8">
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
+                    </div>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING</p>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex flex-col gap-1">
+                <!-- Active: Dashboard -->
+                <a href="Empty Dashboard.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">grid_view</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Dashboard</span>
+                </a>
+                <!-- Logs -->
+                <a href="Student Logs.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">terminal</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Logs</span>
+                </a>
+                <!-- Divider -->
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <!-- Docs -->
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- User Profile + Theme Toggle -->
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
+                <div class="flex flex-col">
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@disal.io</span>
+                </div>
+            </div>
+            <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors" title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ─── MAIN CONTENT ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
+        <!-- Grid Background -->
+        <div class="bg-grid-pattern"></div>
+
+        <!-- Header -->
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-16 flex items-center justify-between px-4 md:px-8 backdrop-blur-md z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" class="hover:!text-[var(--text-primary)] transition-colors no-underline" style="color:var(--text-muted);">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);">Dashboard</span>
+            </nav>
+        </header>
+
+        <!-- Empty State Content -->
+        <div class="flex-1 flex flex-col items-center justify-center p-4 md:p-8 relative z-10">
+            <div class="max-w-md w-full text-center flex flex-col items-center">
+                <!-- Icon container -->
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md);" class="w-20 h-20 mb-8 relative flex items-center justify-center rounded-xl transition-colors">
+                    <span class="material-symbols-outlined" style="font-size:40px;color:var(--text-muted);">dns</span>
+                </div>
+
+                <!-- STATE A: Has Port → "No Projects Yet" -->
+                <div id="stateA" class="hidden flex flex-col items-center">
+                    <h3 style="color:var(--text-primary);" class="text-xl font-bold mb-2">No projects yet</h3>
+                    <p style="color:var(--text-muted);" class="text-sm max-w-sm mb-6">
+                        You have a port allocated. Deploy your first app to get started with your assigned access URL.
+                    </p>
+                    <button onclick="openModal()" style="background:var(--color-primary);color:white;" class="flex h-10 items-center justify-center rounded-lg px-6 text-sm font-semibold transition-all hover:opacity-90 hover:scale-[1.02] shadow-sm cursor-pointer">
+                        <span class="material-symbols-outlined mr-2" style="font-size:20px;">add</span>
+                        Create Project
+                    </button>
+                </div>
+
+                <!-- STATE B: No Port → "Waiting for Access" -->
+                <div id="stateB" class="hidden flex flex-col items-center">
+                    <h3 style="color:var(--text-primary);" class="text-xl font-bold mb-2">Waiting for access</h3>
+                    <p style="color:var(--text-muted);" class="text-sm max-w-sm mb-6">
+                        Your administrator hasn't allocated a port to your account yet. Once provisioned, you can deploy your first project here.
+                    </p>
+                    <div style="background:var(--color-warning-bg);border:1px solid var(--color-warning);color:var(--color-warning);" class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium">
+                        <span class="material-symbols-outlined" style="font-size:18px;">hourglass_top</span>
+                        Pending port allocation
+                    </div>
+                </div>
+
+                <a href="Documentation.html" style="color:var(--text-muted);" class="mt-8 text-xs font-medium transition-colors flex items-center gap-1.5 no-underline hover:!text-[var(--color-primary)]">
+                    <span class="material-symbols-outlined" style="font-size:16px;">menu_book</span>
+                    Read the deployment guide
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ─── MODAL OVERLAY ─── -->
+    <div id="modalOverlay" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 transition-opacity duration-200" style="background:var(--bg-overlay);backdrop-filter:blur(4px);">
+        <!-- Modal Card -->
+        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-xl);" class="w-full max-w-[500px] rounded-xl flex flex-col transform transition-all">
+            <!-- Modal Header -->
+            <div style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-2);" class="flex items-center justify-between p-6 rounded-t-xl">
+                <div>
+                    <h2 style="color:var(--text-primary);" class="text-lg font-bold mb-0">Create New Project</h2>
+                    <p style="color:var(--text-muted);" class="text-sm mt-1 mb-0">Configure your deployment environment</p>
+                </div>
+                <button onclick="closeModal()" style="color:var(--text-muted);" class="p-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" style="font-size:20px;">close</span>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="tunnelForm" onsubmit="handleCreateTunnel(event)" class="p-6 space-y-5">
+                <!-- Project Name -->
+                <div class="space-y-1.5">
+                    <label style="color:var(--text-primary);" class="text-sm font-medium">Project Name</label>
+                    <input required id="projectName" type="text" placeholder="e.g. grading-system-v1"
+                        style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                        class="w-full rounded-lg px-4 py-2.5 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                </div>
+
+                <!-- Git Repository URL -->
+                <div class="space-y-1.5">
+                    <label style="color:var(--text-primary);" class="text-sm font-medium">Git Repository URL</label>
+                    <input required id="gitRepoUrl" type="url" placeholder="https://github.com/user/repo.git"
+                        style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                        class="w-full rounded-lg px-4 py-2.5 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                </div>
+
+                <!-- Entitlement Notice -->
+                <div id="entitlementNotice" class="hidden rounded-lg px-4 py-3 text-xs flex gap-2 items-start" style="border:1px solid var(--color-error);background:var(--color-error-bg);color:var(--color-error);">
+                    <span class="material-symbols-outlined" style="font-size:16px;margin-top:1px;">error</span>
+                    <p class="mb-0">No port allocation detected for this account. Contact your administrator to allocate a port before deploying.</p>
+                </div>
+
+                <!-- Port + Runtime row -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label style="color:var(--text-primary);" class="text-sm font-medium">Assigned Port</label>
+                        <input id="assignedPortField" disabled type="text" value="Pending"
+                            style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);"
+                            class="w-full rounded-lg px-4 py-2.5 text-sm font-mono italic cursor-not-allowed opacity-70">
+                        <p id="assignedPortHint" style="color:var(--text-muted);" class="text-[11px] mb-0">Assigned by your administrator.</p>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label style="color:var(--text-primary);" class="text-sm font-medium">Runtime</label>
+                        <select style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                            class="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all appearance-none cursor-pointer">
+                            <option>Node.js 18</option>
+                            <option>Python 3.10</option>
+                            <option>Go 1.21</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Info notice -->
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg p-4 flex gap-3">
+                    <span class="material-symbols-outlined mt-0.5" style="font-size:20px;color:var(--color-primary);">info</span>
+                    <p style="color:var(--text-muted);" class="text-xs leading-relaxed mb-0">
+                        Ensure your repository contains a <code style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="px-1.5 py-0.5 rounded font-mono text-[11px]">deploy.sh</code> script at the root.
+                    </p>
+                </div>
+
+                <!-- Actions -->
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" onclick="closeModal()" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="px-4 py-2 text-sm font-medium rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit" style="background:var(--color-primary);color:white;" class="px-5 py-2 text-sm font-semibold rounded-lg hover:opacity-90 shadow-sm transition-all cursor-pointer">
+                        Initialize Deployment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        /* ── State management ── */
+        function initDashboardState() {
+            const hasEntitlement = localStorage.getItem('hasPortEntitlement') === 'true';
+            const assignedPort = localStorage.getItem('assignedPort');
+            const stateA = document.getElementById('stateA');
+            const stateB = document.getElementById('stateB');
+
+            if (hasEntitlement && assignedPort) {
+                stateA.classList.remove('hidden');
+                stateA.classList.add('flex');
+                stateB.classList.add('hidden');
+                stateB.classList.remove('flex');
+            } else {
+                stateB.classList.remove('hidden');
+                stateB.classList.add('flex');
+                stateA.classList.add('hidden');
+                stateA.classList.remove('flex');
+            }
+        }
+
+        /* ── Modal ── */
+        const modal = document.getElementById('modalOverlay');
+        const mainEl = document.querySelector('main');
+        const sidebarEl = document.querySelector('aside');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            mainEl.style.filter = 'blur(4px)';
+            sidebarEl.style.filter = 'blur(4px)';
+            syncEntitlementState();
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            mainEl.style.filter = 'none';
+            sidebarEl.style.filter = 'none';
+        }
+
+        function syncEntitlementState() {
+            const hasEntitlement = localStorage.getItem('hasPortEntitlement') === 'true';
+            const assignedPort = localStorage.getItem('assignedPort');
+            const notice = document.getElementById('entitlementNotice');
+            const portField = document.getElementById('assignedPortField');
+            const hint = document.getElementById('assignedPortHint');
+
+            if (hasEntitlement && assignedPort) {
+                if (notice) notice.classList.add('hidden');
+                if (portField) {
+                    portField.value = assignedPort;
+                    portField.style.color = 'var(--text-primary)';
+                    portField.style.opacity = '1';
+                }
+                if (hint) hint.textContent = 'Your app must bind to this port in deploy.sh.';
+            } else {
+                if (notice) notice.classList.remove('hidden');
+                if (portField) {
+                    portField.value = 'No Port Allocated';
+                    portField.style.color = 'var(--text-muted)';
+                    portField.style.opacity = '0.7';
+                }
+                if (hint) hint.textContent = 'Admin must allocate a port before you can deploy.';
+            }
+        }
+
+        /* ── Deployment handler ── */
+        function handleCreateTunnel(e) {
+            e.preventDefault();
+            const hasEntitlement = localStorage.getItem('hasPortEntitlement') === 'true';
+            const assignedPort = localStorage.getItem('assignedPort');
+
+            if (!hasEntitlement || !assignedPort) {
+                alert('Deployment blocked: no assigned port found. Please contact your administrator.');
+                syncEntitlementState();
+                return;
+            }
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Provisioning...';
+
+            setTimeout(() => {
+                localStorage.setItem('hasDeployment', 'true');
+                alert('Deployment Successful! Port ' + assignedPort + ' is now active.');
+                window.location.href = 'Tunnel Manager Board.html';
+            }, 1200);
+        }
+
+        /* ── Init ── */
+        initDashboardState();
+        syncEntitlementState();
+    </script>
+</body>
+
+</html>

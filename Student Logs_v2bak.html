@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Logs — DISAL Hosting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body { font-family: var(--font-sans); }
+        .font-mono { font-family: var(--font-mono); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+        <div class="flex flex-col gap-1 p-6">
+            <div class="flex flex-col mb-8">
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
+                    </div>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">HOSTING</p>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a href="Tunnel Manager Board.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">grid_view</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Dashboard</span>
+                </a>
+                <!-- Active: Logs -->
+                <a href="Student Logs.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">terminal</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Logs</span>
+                </a>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
+                </a>
+            </nav>
+        </div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">S</div>
+                <div class="flex flex-col">
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Student</span>
+                    <span style="color:var(--text-muted);" class="text-xs">student@disal.io</span>
+                </div>
+            </div>
+            <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ─── MAIN CONTENT ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
+        <!-- Header -->
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-16 flex items-center justify-between px-4 md:px-8 backdrop-blur-md z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <a href="Tunnel Manager Board.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Dashboard</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);">Logs</span>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" style="font-size:18px;">download</span>
+                    Export CSV
+                </button>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide">
+
+            <!-- Filters -->
+            <div id="logsFilters" class="hidden gap-4 mb-6 flex-wrap">
+                <div class="relative grow max-w-sm">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined" style="font-size:18px;color:var(--text-muted);">search</span>
+                    <input type="text" placeholder="Search event, tunnel id, or error..."
+                        style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                        class="w-full pl-10 pr-4 py-2 text-sm rounded-lg placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                </div>
+                <select style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                    class="rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all cursor-pointer">
+                    <option>All Projects</option>
+                    <option>API Gateway (8080)</option>
+                    <option>React Frontend (3000)</option>
+                    <option>Postgres DB (5432)</option>
+                </select>
+                <select style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);"
+                    class="rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all cursor-pointer">
+                    <option>All Event Types</option>
+                    <option>HTTP Requests</option>
+                    <option>Connection Status</option>
+                    <option>Errors</option>
+                </select>
+            </div>
+
+            <!-- Logs Table -->
+            <div id="logsTableContainer" style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="hidden rounded-lg overflow-hidden">
+                <table class="w-full text-left text-sm">
+                    <thead style="background:var(--bg-surface-2);border-bottom:1px solid var(--border-subtle);">
+                        <tr>
+                            <th style="color:var(--text-primary);" class="px-6 py-3 text-xs font-semibold uppercase tracking-wider">Timestamp</th>
+                            <th style="color:var(--text-primary);" class="px-6 py-3 text-xs font-semibold uppercase tracking-wider">Project</th>
+                            <th style="color:var(--text-primary);" class="px-6 py-3 text-xs font-semibold uppercase tracking-wider">Method</th>
+                            <th style="color:var(--text-primary);" class="px-6 py-3 text-xs font-semibold uppercase tracking-wider">Path / Event</th>
+                            <th style="color:var(--text-primary);" class="px-6 py-3 text-xs font-semibold uppercase tracking-wider">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="color:var(--text-muted);" class="px-6 py-4 font-mono text-xs">10:42:01</td>
+                            <td style="color:var(--text-primary);" class="px-6 py-4 font-medium">API Gateway</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-info);" class="font-mono text-xs">GET</span></td>
+                            <td style="color:var(--text-secondary);" class="px-6 py-4 font-mono text-xs">/api/v1/users</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-success);" class="font-mono text-xs font-medium">200 OK</span></td>
+                        </tr>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="color:var(--text-muted);" class="px-6 py-4 font-mono text-xs">10:41:55</td>
+                            <td style="color:var(--text-primary);" class="px-6 py-4 font-medium">React Frontend</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-info);" class="font-mono text-xs">GET</span></td>
+                            <td style="color:var(--text-secondary);" class="px-6 py-4 font-mono text-xs">/static/js/main.chunk.js</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-success);" class="font-mono text-xs font-medium">200 OK</span></td>
+                        </tr>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="color:var(--text-muted);" class="px-6 py-4 font-mono text-xs">10:40:12</td>
+                            <td style="color:var(--text-primary);" class="px-6 py-4 font-medium">API Gateway</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-warning);" class="font-mono text-xs">POST</span></td>
+                            <td style="color:var(--text-secondary);" class="px-6 py-4 font-mono text-xs">/api/v1/auth/login</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-error);" class="font-mono text-xs font-medium">401 Unauthorized</span></td>
+                        </tr>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="color:var(--text-muted);" class="px-6 py-4 font-mono text-xs">10:35:00</td>
+                            <td style="color:var(--text-primary);" class="px-6 py-4 font-medium">Postgres DB</td>
+                            <td class="px-6 py-4"><span style="color:var(--text-muted);" class="font-mono text-xs">SYS</span></td>
+                            <td style="color:var(--text-secondary);" class="px-6 py-4 font-mono text-xs">Connection established from 127.0.0.1</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-success);" class="font-mono text-xs font-medium">CONNECTED</span></td>
+                        </tr>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors">
+                            <td style="color:var(--text-muted);" class="px-6 py-4 font-mono text-xs">09:15:00</td>
+                            <td style="color:var(--text-primary);" class="px-6 py-4 font-medium">Redis Cache</td>
+                            <td class="px-6 py-4"><span style="color:var(--text-muted);" class="font-mono text-xs">SYS</span></td>
+                            <td style="color:var(--text-secondary);" class="px-6 py-4 font-mono text-xs">Tunnel started successfully</td>
+                            <td class="px-6 py-4"><span style="color:var(--color-success);" class="font-mono text-xs font-medium">ONLINE</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="logsEmptyState" class="hidden flex-col items-center justify-center p-12 text-center h-full">
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md);" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined" style="font-size:32px;color:var(--text-muted);">terminal</span>
+                </div>
+                <h3 style="color:var(--text-primary);" class="text-xl font-bold mb-2">No active logs</h3>
+                <p style="color:var(--text-muted);" class="max-w-sm mx-auto mb-8 text-sm">Deploy your first app to start streaming real-time connection logs.</p>
+                <a href="Empty Dashboard.html" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="flex h-10 items-center justify-center rounded-lg px-6 text-sm font-semibold transition-all hover:bg-[var(--bg-surface-2)] no-underline">
+                    Go to Dashboard
+                </a>
+            </div>
+
+            <!-- Pagination -->
+            <div id="logsPagination" class="hidden flex items-center justify-between mt-4 text-xs" style="color:var(--text-muted);">
+                <span>Showing recent activity</span>
+                <div class="flex gap-2">
+                    <button style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);" class="px-3 py-1 rounded-lg hover:bg-[var(--bg-surface-2)] hover:text-[var(--text-primary)] transition-colors cursor-pointer">Previous</button>
+                    <button style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-secondary);" class="px-3 py-1 rounded-lg hover:bg-[var(--bg-surface-2)] hover:text-[var(--text-primary)] transition-colors cursor-pointer">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        /* ── State: show table or empty state based on localStorage ── */
+        const hasDeployment = localStorage.getItem('hasDeployment');
+        const logsFilters = document.getElementById('logsFilters');
+        const logsTable = document.getElementById('logsTableContainer');
+        const logsPagination = document.getElementById('logsPagination');
+        const logsEmpty = document.getElementById('logsEmptyState');
+
+        if (hasDeployment === 'true') {
+            logsFilters.classList.remove('hidden');
+            logsFilters.classList.add('flex');
+            logsTable.classList.remove('hidden');
+            if (logsPagination) { logsPagination.classList.remove('hidden'); logsPagination.classList.add('flex'); }
+        } else {
+            logsEmpty.classList.remove('hidden');
+            logsEmpty.classList.add('flex');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login - DISAL Hosting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <script>
+        function togglePassword() {
+            const pwd = document.getElementById('password');
+            const icon = document.getElementById('eye-icon');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+                icon.innerText = 'visibility_off';
+            } else {
+                pwd.type = 'password';
+                icon.innerText = 'visibility';
+            }
+        }
+
+        // Simple client-side validation mirroring the "Account Valid?" node
+        function validateCredentials(studentId, password) {
+            const idPattern = /^[0-9]{8}$/; // e.g. 21005678
+            if (!idPattern.test(studentId)) return false;
+            if (!password) return false;
+            return true;
+        }
+
+        function showAuthError(message) {
+            const banner = document.getElementById('auth-error');
+            const text = document.getElementById('auth-error-text');
+            if (text) {
+                text.textContent = message || 'Invalid credentials. Please verify your Student ID and password.';
+            }
+            if (banner) {
+                banner.classList.remove('hidden');
+            }
+        }
+
+        function hideAuthError() {
+            const banner = document.getElementById('auth-error');
+            if (banner) banner.classList.add('hidden');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            hideAuthError();
+
+            const role = document.getElementById('role').value;
+            const studentId = document.getElementById('studentId').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Button loading state
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'Authenticating...';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                const isValid = validateCredentials(studentId, password);
+
+                if (!isValid) {
+                    // NO (Failure) -> Error Message + Retry
+                    showAuthError('Account not found or invalid credentials. Please try again or contact your administrator.');
+                    btn.innerText = originalText;
+                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    return;
+                }
+
+                // YES (Student/Admin)
+                localStorage.setItem('userRole', role);
+
+                if (role === 'admin') {
+                    window.location.href = 'Admin Dashboard.html';
+                } else {
+                    const hasDeployment = localStorage.getItem('hasDeployment') === 'true';
+                    if (hasDeployment) {
+                        window.location.href = 'Tunnel Manager Board.html';
+                    } else {
+                        window.location.href = 'Empty Dashboard.html';
+                    }
+                }
+            }, 600);
+        }
+    </script>
+    <style>
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(45, 45, 53, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(45, 45, 53, 0.15) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-main font-display text-text-primary overflow-hidden antialiased selection:bg-primary selection:text-text-on-primary flex h-screen items-center justify-center relative">
+
+    <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div>
+
+    <div class="w-full max-w-md p-6 z-10">
+        <!-- Logo -->
+
+        <a class="flex justify-center mb-8 cursor-pointer hover:opacity-90 transition-opacity" href="index.html">
+            <div class="flex items-center gap-2">
+                <div class="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">dns</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-text-primary">DISAL Hosting</span>
+            </div>
+        </a>
+
+        <!-- Card -->
+        <div class="bg-surface-1 border border-border-subtle rounded-2xl shadow-strong p-8 transition-all">
+            <h1 id="form-title" class="text-2xl font-bold text-center mb-2 text-text-primary">Welcome Back</h1>
+            <p id="form-subtitle" class="text-text-secondary text-center text-sm mb-1">Sign in to manage your
+                deployments</p>
+            <p class="text-text-muted text-center text-xs mb-6">Sign in with your organization credentials.</p>
+
+            <!-- Error Message (maps to Error Message node in master flow) -->
+            <div id="auth-error"
+                class="hidden mb-4 rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-xs text-error flex items-start gap-2">
+                <span class="material-symbols-outlined text-[18px] mt-[1px]">error</span>
+                <p id="auth-error-text">
+                    Invalid credentials. Please verify your Student ID and password, then retry.
+                </p>
+            </div>
+
+            <form onsubmit="handleLogin(event)" class="flex flex-col gap-5">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1" for="studentId">Student
+                        ID</label>
+                    <input type="text" id="studentId" required
+                        class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-text-muted font-mono"
+                        placeholder="e.g. 21005678">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1"
+                        for="password">Password</label>
+                    <div class="relative">
+                        <input type="password" id="password" required
+                            class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-text-muted pr-10"
+                            placeholder="">
+                        <button type="button" onclick="togglePassword()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors focus:outline-none">
+                            <span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-text-muted mb-1.5 ml-1" for="role">Role</label>
+                    <div class="relative">
+                        <select id="role"
+                            class="w-full bg-surface-2 border border-border-subtle rounded-xl px-4 h-12 text-sm text-text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer">
+                            <option value="student">Student</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                        <span
+                            class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none"
+                            style="font-size: 20px;">expand_more</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs mt-1 px-1">
+                    <label
+                        class="flex items-center gap-2 text-text-secondary cursor-pointer hover:text-text-primary transition-colors">
+                        <input type="checkbox"
+                            class="rounded border-border-subtle bg-surface-2 text-primary focus:ring-offset-0 focus:ring-primary size-4">
+                        Remember me
+                    </label>
+                </div>
+
+                <button type="submit" id="submit-btn"
+                    class="mt-2 w-full bg-primary hover:bg-primary-hover text-text-on-primary font-bold h-12 rounded-xl transition-all shadow-glow hover:scale-[1.01] active:scale-[0.99]">
+                    Sign In
+                </button>
+
+                <div class="text-center text-sm mt-4 text-text-secondary">
+                    <span id="toggle-text">Don't have access?</span>
+                    <a href="mailto:admin@disal.com"
+                        class="text-primary hover:text-text-primary cursor-pointer ml-1 font-medium transition-colors">Contact
+                        your administrator</a>
+                </div>
+            </form>
+        </div>
+
+        <p class="text-center text-xs text-gray-600 mt-8">
+            &copy; 2026 DISAL Hosting. All rights reserved.
+        </p>
+    </div>
+
+</body>
+
+</html>
