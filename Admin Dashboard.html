@@ -1,234 +1,202 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-<!-- THEME LOCK: Verified Dark Mode Tokens via CSS Variables -->
+<html lang="en">
 
 <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard — DISAL Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
     <script>
         // Auth Guard
         if (localStorage.getItem('userRole') !== 'admin') {
             // window.location.href = 'Login.html';
         }
     </script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Infrastructure Controller | DISAL Admin</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="assets/css/tokens.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script src="assets/js/tailwind-config.js"></script>
-    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body{font-family:var(--font-sans)}.font-mono{font-family:var(--font-mono)}
+        .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .project-card{transition:border-color .15s ease,box-shadow .15s ease}
+        .project-card:hover{border-color:var(--border-strong);box-shadow:0 4px 6px -1px rgba(0,0,0,.04),0 2px 4px -2px rgba(0,0,0,.04)}
+    </style>
 </head>
 
-<body
-    class="bg-background-dark text-text-main h-screen overflow-hidden flex font-display antialiased transition-colors duration-200">
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
 
-    <!-- Side Navigation -->
-    <aside
-        class="dark hidden md:flex w-64 bg-sidebar border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
         <div class="flex flex-col gap-1 p-6">
             <div class="flex flex-col mb-8">
-                <div onclick="window.location.href='index.html'"
-                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-text-main">DISAL</span>
-                </div>
-                <p class="text-text-dim text-xs mt-2">INFRA_CONTROLLER_V2</p>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">INFRA_CONTROLLER</p>
             </div>
             <nav class="flex flex-col gap-1">
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-dark border-l-2 border-primary group transition-colors"
-                    href="Admin Dashboard.html">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">grid_view</span>
-                    <span class="text-text-main text-sm font-medium">Overview</span>
+                <a href="Admin Dashboard.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">grid_view</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Overview</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Admin Active Tunnels.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">cloud_sync</span>
-                    <span class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Project
-                        List</span>
+                <a href="Admin Active Tunnels.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">cloud_sync</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Active Projects</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Audit Logs.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">article</span>
-                    <span class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">System
-                        Alerts</span>
+                <a href="Audit Logs.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">article</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Audit Logs</span>
                 </a>
-                <div class="h-px bg-border-dark my-4"></div>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Documentation.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">menu_book</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Docs</span>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-border-dark flex items-center justify-between">
-            <div class="flex items-center gap-3 px-2">
-                <div
-                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-primary">
-                    AD</div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">AD</div>
                 <div class="flex flex-col">
-                    <span class="text-text-main text-sm font-medium">Admin User</span>
-                    <span class="text-text-dim text-xs">admin@disal.io</span>
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Admin User</span>
+                    <span style="color:var(--text-muted);" class="text-xs">admin@disal.io</span>
                 </div>
             </div>
-            <!-- Theme Toggle -->
-            <button onclick="toggleTheme()"
-                class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
-                title="Toggle Theme">
-                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-            </button>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
+            </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main
-        class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative transition-colors duration-200">
-        <!-- Strict Grid Pattern -->
-        <!-- Strict Grid Pattern: Removed -->
-        <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
 
         <!-- Header -->
-        <header class="flex flex-col gap-6 px-4 md:px-8 pt-8 pb-2 shrink-0 relative z-10">
-            <!-- Breadcrumbs -->
-            <nav class="flex items-center text-sm font-medium text-text-dim">
-                <a class="hover:text-text-main transition-colors" href="index.html">Home</a>
-                <span class="mx-2 text-border-dark">/</span>
-                <span class="text-text-dim">Infrastructure</span>
-                <span class="mx-2 text-border-dark">/</span>
-                <span class="text-text-main">Overview</span>
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);" class="font-semibold">Overview</span>
             </nav>
-
-            <!-- Page Heading & Actions -->
-            <div class="flex justify-between items-end">
-                <div class="flex flex-col gap-1">
-                    <h2 class="text-3xl font-bold tracking-tight text-text-main">Infrastructure Controller</h2>
-                    <p class="text-text-dim text-sm">Real-time monitoring of all active student Deployments.</p>
-                </div>
-                <!-- Status Chip -->
-                <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-dark border border-border-dark">
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 px-3 py-1.5 rounded-full" style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);">
                     <span class="relative flex h-2 w-2">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background:#22C55E;"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2" style="background:#22C55E;"></span>
                     </span>
-                    <span class="text-success text-xs font-bold uppercase tracking-wide">System Healthy</span>
-                </div>
-            </div>
-
-            <!-- Metrics -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-                <!-- Metric 1 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-5 flex flex-col justify-between group hover:border-primary/30 transition-colors shadow-lg shadow-black/20">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-text-dim text-xs font-bold uppercase tracking-wider font-mono">Active
-                            Apps</span>
-                        <span class="material-symbols-outlined text-text-dim group-hover:text-primary transition-colors"
-                            style="font-size: 20px;">apps</span>
-                    </div>
-                    <div class="flex items-end gap-3">
-                        <span class="text-3xl font-mono font-medium text-text-main tracking-tighter">1,248</span>
-                        <span class="text-success text-xs font-mono mb-1.5">+12%</span>
-                    </div>
-                </div>
-                <!-- Metric 2 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-5 flex flex-col justify-between group hover:border-primary/30 transition-colors shadow-lg shadow-black/20">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-text-dim text-xs font-bold uppercase tracking-wider font-mono">Data Flow
-                            (24h)</span>
-                        <span class="material-symbols-outlined text-text-dim group-hover:text-primary transition-colors"
-                            style="font-size: 20px;">network_check</span>
-                    </div>
-                    <div class="flex items-end gap-3">
-                        <span class="text-3xl font-mono font-medium text-text-main tracking-tighter">45.2 <span
-                                class="text-lg text-text-dim">TB</span></span>
-                        <span class="text-success text-xs font-mono mb-1.5">+8.4%</span>
-                    </div>
-                </div>
-                <!-- Metric 3 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-5 flex flex-col justify-between group hover:border-primary/30 transition-colors shadow-lg shadow-black/20">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-text-dim text-xs font-bold uppercase tracking-wider font-mono">Edge
-                            Nodes</span>
-                        <span class="material-symbols-outlined text-text-dim group-hover:text-primary transition-colors"
-                            style="font-size: 20px;">dns</span>
-                    </div>
-                    <div class="flex items-end gap-3">
-                        <span class="text-3xl font-mono font-medium text-text-main tracking-tighter">12<span
-                                class="text-text-dim text-xl">/12</span></span>
-                        <span class="text-text-dim text-xs font-mono mb-1.5">100% Online</span>
-                    </div>
+                    <span style="color:#22C55E;" class="text-xs font-bold uppercase tracking-wide">System Healthy</span>
                 </div>
             </div>
         </header>
 
-        <!-- Main Status Area -->
-        <div class="flex-1 overflow-auto p-4 md:p-8 relative z-10 mt-6">
-            <h3 class="text-xs font-bold text-text-dim uppercase tracking-widest mb-4 font-mono">Core Services Status
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Service 1 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-6 hover:border-primary/30 transition-all group">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="p-2 rounded-lg bg-primary/10 text-primary">
-                            <span class="material-symbols-outlined">api</span>
-                        </div>
-                        <span
-                            class="text-[10px] font-bold text-success bg-success/10 px-2 py-0.5 rounded-full uppercase tracking-tighter">Healthy</span>
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide">
+
+            <!-- Title -->
+            <div class="flex flex-col gap-1 mb-6">
+                <h1 style="color:var(--text-primary);" class="text-2xl font-extrabold tracking-tight mb-0">System Overview</h1>
+                <p style="color:var(--text-muted);" class="text-sm mb-0">Real-time monitoring of all active student Deployments.</p>
+            </div>
+
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                <!-- Metric 1: Active Apps -->
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-5 flex flex-col gap-4 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <span style="color:var(--text-muted);" class="text-xs font-bold uppercase tracking-wider font-mono">Active Apps</span>
+                        <span class="material-symbols-outlined" style="font-size:20px;color:var(--text-muted);">apps</span>
                     </div>
-                    <h4 class="text-text-main font-bold mb-1">Auth API Service</h4>
-                    <p class="text-text-dim text-xs leading-relaxed">Handling 12k+ requests/min. 99.9% uptime maintained
-                        across all regions.</p>
+                    <div class="flex items-end gap-3">
+                        <span style="color:var(--text-primary);" class="text-3xl font-mono font-medium tracking-tighter">1,248</span>
+                        <span style="color:#22C55E;" class="text-xs font-mono mb-1.5">+12%</span>
+                    </div>
+                </div>
+
+                <!-- Metric 2: Data Flow -->
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-5 flex flex-col gap-4 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <span style="color:var(--text-muted);" class="text-xs font-bold uppercase tracking-wider font-mono">Data Flow (24h)</span>
+                        <span class="material-symbols-outlined" style="font-size:20px;color:var(--text-muted);">network_check</span>
+                    </div>
+                    <div class="flex items-end gap-3">
+                        <span style="color:var(--text-primary);" class="text-3xl font-mono font-medium tracking-tighter">45.2 <span style="color:var(--text-muted);" class="text-lg">TB</span></span>
+                        <span style="color:#22C55E;" class="text-xs font-mono mb-1.5">+8.4%</span>
+                    </div>
+                </div>
+
+                <!-- Metric 3: Edge Nodes -->
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-5 flex flex-col gap-4 cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <span style="color:var(--text-muted);" class="text-xs font-bold uppercase tracking-wider font-mono">Edge Nodes</span>
+                        <span class="material-symbols-outlined" style="font-size:20px;color:var(--text-muted);">dns</span>
+                    </div>
+                    <div class="flex items-end gap-3">
+                        <span style="color:var(--text-primary);" class="text-3xl font-mono font-medium tracking-tighter">12<span style="color:var(--text-muted);" class="text-xl">/12</span></span>
+                        <span style="color:var(--text-muted);" class="text-xs font-mono mb-1.5">100% Online</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Services Title -->
+            <div class="flex items-center justify-between mb-4">
+                 <h3 style="color:var(--text-muted);" class="text-xs font-bold uppercase tracking-widest font-mono">Core Services Status</h3>
+            </div>
+
+            <!-- Core Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Service 1 -->
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-6 hover:shadow-md transition-shadow group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div style="background:var(--color-primary-light);color:var(--color-primary);" class="p-2 rounded-lg">
+                            <span class="material-symbols-outlined" style="font-size:20px;">api</span>
+                        </div>
+                        <span style="background:rgba(34,197,94,0.1);color:#22C55E;" class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Healthy</span>
+                    </div>
+                    <h4 style="color:var(--text-primary);" class="font-bold mb-1">Auth API Service</h4>
+                    <p style="color:var(--text-muted);" class="text-xs leading-relaxed">Handling 12k+ requests/min. 99.9% uptime maintained.</p>
                 </div>
 
                 <!-- Service 2 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-6 hover:border-primary/30 transition-all group">
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-6 hover:shadow-md transition-shadow group">
                     <div class="flex items-center justify-between mb-4">
-                        <div class="p-2 rounded-lg bg-primary/10 text-primary">
-                            <span class="material-symbols-outlined">storage</span>
+                        <div style="background:var(--color-primary-light);color:var(--color-primary);" class="p-2 rounded-lg">
+                            <span class="material-symbols-outlined" style="font-size:20px;">storage</span>
                         </div>
-                        <span
-                            class="text-[10px] font-bold text-success bg-success/10 px-2 py-0.5 rounded-full uppercase tracking-tighter">Healthy</span>
+                        <span style="background:rgba(34,197,94,0.1);color:#22C55E;" class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Healthy</span>
                     </div>
-                    <h4 class="text-text-main font-bold mb-1">Container Registry</h4>
-                    <p class="text-text-dim text-xs leading-relaxed">Redis Cluster operating at 4% memory load. Write
-                        latency: 0.8ms.</p>
+                    <h4 style="color:var(--text-primary);" class="font-bold mb-1">Container Registry</h4>
+                    <p style="color:var(--text-muted);" class="text-xs leading-relaxed">Redis Cluster operating at 4% memory load. Write latency: 0.8ms.</p>
                 </div>
 
                 <!-- Service 3 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-6 hover:border-primary/30 transition-all group">
+                <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);" class="project-card rounded-xl p-6 hover:shadow-md transition-shadow group">
                     <div class="flex items-center justify-between mb-4">
-                        <div class="p-2 rounded-lg bg-primary/10 text-primary">
-                            <span class="material-symbols-outlined">shield</span>
+                        <div style="background:var(--color-primary-light);color:var(--color-primary);" class="p-2 rounded-lg">
+                            <span class="material-symbols-outlined" style="font-size:20px;">shield</span>
                         </div>
-                        <span
-                            class="text-[10px] font-bold text-success bg-success/10 px-2 py-0.5 rounded-full uppercase tracking-tighter">Active</span>
+                        <span style="background:rgba(34,197,94,0.1);color:#22C55E;" class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Active</span>
                     </div>
-                    <h4 class="text-text-main font-bold mb-1">Threat Mitigation</h4>
-                    <p class="text-text-dim text-xs leading-relaxed">WAF active. Filtered 82 malicious requests in the
-                        last hour.</p>
+                    <h4 style="color:var(--text-primary);" class="font-bold mb-1">Threat Mitigation</h4>
+                    <p style="color:var(--text-muted);" class="text-xs leading-relaxed">WAF active. Filtered 82 malicious requests in the last hour.</p>
                 </div>
             </div>
+
         </div>
     </main>
-
-
 </body>
-
 </html>

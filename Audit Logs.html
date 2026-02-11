@@ -1,222 +1,221 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-<!-- THEME LOCK: Verified Dark Mode Tokens via CSS Variables -->
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Audit Logs - Admin | DISAL Hosting</title>
+    <title>Audit Logs — DISAL Admin</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="assets/css/tokens.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
     <script src="assets/js/tailwind-config.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
+    <script>
+        // Auth Guard
+        if (localStorage.getItem('userRole') !== 'admin') {
+            // window.location.href = 'Login.html';
+        }
+    </script>
+    <style>
+        body{font-family:var(--font-sans)}.font-mono{font-family:var(--font-mono)}
+        .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .filter-pill{transition:all .15s ease}.filter-pill.active{background:var(--navy-600);color:#fff;border-color:var(--navy-600)}
+    </style>
 </head>
 
-<body
-    class="bg-background-dark text-text-main h-screen overflow-hidden flex font-display antialiased transition-colors duration-200">
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
 
-    <!-- Side Navigation -->
-    <aside
-        class="dark hidden md:flex w-64 bg-sidebar border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
         <div class="flex flex-col gap-1 p-6">
             <div class="flex flex-col mb-8">
-                <div onclick="window.location.href='index.html'"
-                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-text-main">DISAL</span>
-                </div>
-                <p class="text-text-dim text-xs mt-2">INFRA_CONTROLLER_V2</p>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">INFRA_CONTROLLER</p>
             </div>
             <nav class="flex flex-col gap-1">
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Admin Dashboard.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">grid_view</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Overview</span>
+                <a href="Admin Dashboard.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">grid_view</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Overview</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Admin Active Tunnels.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">cloud_sync</span>
-                    <span class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Project
-                        List</span>
+                <a href="Admin Active Tunnels.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">cloud_sync</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Active Projects</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-dark border-l-2 border-primary group transition-colors"
-                    href="Audit Logs.html">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">article</span>
-                    <span class="text-text-main text-sm font-medium">System Alerts</span>
+                <a href="Audit Logs.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">article</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Audit Logs</span>
                 </a>
-                <div class="h-px bg-border-dark my-4"></div>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Documentation.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">menu_book</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Docs</span>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-border-dark flex items-center justify-between">
-            <div class="flex items-center gap-3 px-2">
-                <div
-                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-text-dim">
-                    AD</div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">AD</div>
                 <div class="flex flex-col">
-                    <span class="text-text-main text-sm font-medium">Admin User</span>
-                    <span class="text-text-dim text-xs">admin@disal.io</span>
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Admin User</span>
+                    <span style="color:var(--text-muted);" class="text-xs">admin@disal.io</span>
                 </div>
             </div>
-            <!-- Theme Toggle -->
-            <button onclick="toggleTheme()"
-                class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
-                title="Toggle Theme">
-                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-            </button>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
+            </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main
-        class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative transition-colors duration-200">
-        <!-- Strict Grid Pattern -->
-        <!-- Strict Grid Pattern: Removed -->
-        <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
 
         <!-- Header -->
-        <header
-            class="h-16 border-b border-border-dark flex items-center justify-between px-4 md:px-8 bg-background-dark/80 backdrop-blur-md z-10 sticky top-0 transition-colors duration-200">
-            <div class="flex items-center gap-4">
-                <div class="flex items-center text-sm font-medium text-text-dim">
-                    <span class="text-text-main">System Alerts</span>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <button
-                    class="flex items-center gap-2 bg-surface-dark hover:bg-background-dark border border-border-dark text-text-main px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">download</span>
-                    Export CSV
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);" class="font-semibold">System Alerts</span>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button style="border:1px solid var(--border-subtle);color:var(--text-main);" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors hover:bg-[var(--bg-surface-2)] cursor-pointer">
+                    <span class="material-symbols-outlined" style="font-size:18px;">download</span> Export CSV
                 </button>
             </div>
         </header>
 
-        <!-- Content -->
-        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide relative z-10">
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide">
 
-            <!-- Filters -->
-            <div class="flex gap-4 mb-6">
-                <div class="relative grow max-w-sm">
-                    <span
-                        class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-dim text-[18px]">search</span>
-                    <input type="text" placeholder="Search event, user, or IP..."
-                        class="w-full bg-surface-dark border border-border-dark rounded-default pl-10 pr-4 py-2.5 text-sm text-text-main placeholder-text-dim/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                </div>
-                <select
-                    class="bg-surface-dark border border-border-dark rounded-default px-4 py-2.5 text-sm text-text-main outline-none focus:border-primary focus:ring-1 focus:ring-primary">
-                    <option>All Events</option>
-                    <option>App Deployment</option>
-                    <option>Security Alert</option>
-                    <option>User Login</option>
-                </select>
+            <!-- Title -->
+            <div class="flex flex-col gap-1 mb-6">
+                <h1 style="color:var(--text-primary);" class="text-2xl font-extrabold tracking-tight mb-0">Audit Logs</h1>
+                <p style="color:var(--text-muted);" class="text-sm mb-0">Complete history of system events, security alerts, and deployment actions.</p>
             </div>
 
-            <!-- Table -->
-            <div
-                class="bg-surface-dark border border-border-dark rounded-default overflow-hidden shadow-lg shadow-black/20">
-                <table class="w-full text-left text-sm text-text-dim">
-                    <thead class="bg-inset text-xs uppercase font-medium border-b border-border-dark">
+            <!-- Toolbar -->
+            <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
+                <div class="relative grow max-w-md">
+                   <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="material-symbols-outlined" style="font-size:16px;color:var(--text-muted);">search</span>
+                    </div>
+                    <input type="text" placeholder="Search event, user, or IP..." style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full pl-9 pr-4 py-2 text-sm rounded-lg placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                </div>
+                <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+                    <button class="filter-pill active px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer whitespace-nowrap" style="border:1px solid var(--border-subtle);">All Events</button>
+                    <button class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer whitespace-nowrap" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#EF4444;"></span>Critical
+                    </button>
+                    <button class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer whitespace-nowrap" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#F59E0B;"></span>Warnings
+                    </button>
+                    <button class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer whitespace-nowrap" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#3B82F6;"></span>Info
+                    </button>
+                </div>
+            </div>
+
+            <!-- Logs Table -->
+            <div style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="rounded-xl overflow-hidden shadow-sm">
+                <table class="w-full text-left text-sm">
+                    <thead style="background:var(--bg-surface-2);border-bottom:1px solid var(--border-subtle);">
                         <tr>
-                            <th class="px-6 py-4 font-semibold text-text-main">Timestamp</th>
-                            <th class="px-6 py-4 font-semibold text-text-main">Event Type</th>
-                            <th class="px-6 py-4 font-semibold text-text-main">Severity</th>
-                            <th class="px-6 py-4 font-semibold text-text-main">User</th>
-                            <th class="px-6 py-4 font-semibold text-text-main">Details</th>
+                            <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Timestamp</th>
+                            <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Event Type</th>
+                            <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Severity</th>
+                            <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">User</th>
+                            <th style="color:var(--text-primary);" class="px-5 py-3 text-xs font-semibold uppercase tracking-wider hidden lg:table-cell">Details</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-border-dark">
+                    <tbody class="divide-y" style="border-color:var(--border-subtle);">
                         <!-- Row 1 -->
-                        <tr class="hover:bg-text-main/[0.02] even:bg-white/[0.02] transition-colors">
-                            <td class="px-6 py-4 font-mono text-xs">2023-12-25 14:30:22</td>
-                            <td class="px-6 py-4 text-text-main font-medium">APP_DEPLOYED</td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-success/10 text-success border border-success/20">INFO</span>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors">
+                            <td class="px-5 py-3.5 font-mono text-xs" style="color:var(--text-muted);">2023-12-25 14:30:22</td>
+                            <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-medium">APP_DEPLOYED</span></td>
+                            <td class="px-5 py-3.5">
+                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:rgba(34,197,94,0.1);color:#22C55E;border:1px solid rgba(34,197,94,0.2);">INFO</span>
                             </td>
-                            <td class="px-6 py-4">student_99</td>
-                            <td class="px-6 py-4 font-mono text-xs">Deployed: grading-system-v1 (port 3000)</td>
+                            <td class="px-5 py-3.5 text-xs" style="color:var(--text-secondary);">student_99</td>
+                            <td class="px-5 py-3.5 font-mono text-xs hidden lg:table-cell" style="color:var(--text-muted);">Deployed: grading-system-v1 (port 3000)</td>
                         </tr>
                         <!-- Row 2 -->
-                        <tr class="hover:bg-text-main/[0.02] transition-colors">
-                            <td class="px-6 py-4 font-mono text-xs">2023-12-25 14:28:10</td>
-                            <td class="px-6 py-4 text-text-main font-medium">AUTH_FAILURE</td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-warning/10 text-warning border border-warning/20">WARN</span>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors">
+                            <td class="px-5 py-3.5 font-mono text-xs" style="color:var(--text-muted);">2023-12-25 14:28:10</td>
+                            <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-medium">AUTH_FAILURE</span></td>
+                            <td class="px-5 py-3.5">
+                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:rgba(245,158,11,0.1);color:#F59E0B;border:1px solid rgba(245,158,11,0.2);">WARN</span>
                             </td>
-                            <td class="px-6 py-4">unknown_user</td>
-                            <td class="px-6 py-4 font-mono text-xs">Invalid token from IP 192.168.1.105</td>
+                            <td class="px-5 py-3.5 text-xs" style="color:var(--text-secondary);">unknown_user</td>
+                            <td class="px-5 py-3.5 font-mono text-xs hidden lg:table-cell" style="color:var(--text-muted);">Invalid token from IP 192.168.1.105</td>
                         </tr>
                         <!-- Row 3 -->
-                        <tr class="hover:bg-text-main/[0.02] transition-colors">
-                            <td class="px-6 py-4 font-mono text-xs">2023-12-25 12:10:05</td>
-                            <td class="px-6 py-4 text-text-main font-medium">SYSTEM_UPDATE</td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-info/10 text-info border border-info/20">SYSTEM</span>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors">
+                            <td class="px-5 py-3.5 font-mono text-xs" style="color:var(--text-muted);">2023-12-25 12:10:05</td>
+                            <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-medium">SYSTEM_UPDATE</span></td>
+                            <td class="px-5 py-3.5">
+                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:rgba(59,130,246,0.1);color:#3B82F6;border:1px solid rgba(59,130,246,0.2);">SYSTEM</span>
                             </td>
-                            <td class="px-6 py-4">admin_root</td>
-                            <td class="px-6 py-4 font-mono text-xs">Edge Node US-EAST-1 patched</td>
+                            <td class="px-5 py-3.5 text-xs" style="color:var(--text-secondary);">admin_root</td>
+                            <td class="px-5 py-3.5 font-mono text-xs hidden lg:table-cell" style="color:var(--text-muted);">Edge Node US-EAST-1 patched</td>
                         </tr>
-                        <!-- Row 4 -->
-                        <tr class="hover:bg-text-main/[0.02] transition-colors">
-                            <td class="px-6 py-4 font-mono text-xs">2023-12-25 09:45:00</td>
-                            <td class="px-6 py-4 text-text-main font-medium">APP_DESTROYED</td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-success/10 text-success border border-success/20">INFO</span>
+                         <!-- Row 4 -->
+                         <tr class="hover:bg-[var(--bg-surface-2)] transition-colors">
+                            <td class="px-5 py-3.5 font-mono text-xs" style="color:var(--text-muted);">2023-12-25 09:45:00</td>
+                            <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-medium">APP_DESTROYED</span></td>
+                            <td class="px-5 py-3.5">
+                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:rgba(34,197,94,0.1);color:#22C55E;border:1px solid rgba(34,197,94,0.2);">INFO</span>
                             </td>
-                            <td class="px-6 py-4">student_42</td>
-                            <td class="px-6 py-4 font-mono text-xs">Teardown requested via Dashboard</td>
+                            <td class="px-5 py-3.5 text-xs" style="color:var(--text-secondary);">student_42</td>
+                            <td class="px-5 py-3.5 font-mono text-xs hidden lg:table-cell" style="color:var(--text-muted);">Teardown requested via Dashboard</td>
                         </tr>
                         <!-- Row 5 -->
-                        <tr class="hover:bg-text-main/[0.02] transition-colors">
-                            <td class="px-6 py-4 font-mono text-xs">2023-12-24 23:55:12</td>
-                            <td class="px-6 py-4 text-text-main font-medium">RATE_LIMIT_EXCEEDED</td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-error/10 text-error border border-error/20">CRITICAL</span>
+                        <tr class="hover:bg-[var(--bg-surface-2)] transition-colors">
+                            <td class="px-5 py-3.5 font-mono text-xs" style="color:var(--text-muted);">2023-12-24 23:55:12</td>
+                            <td class="px-5 py-3.5"><span style="color:var(--text-primary);" class="font-medium">RATE_LIMIT_EXCEEDED</span></td>
+                            <td class="px-5 py-3.5">
+                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:rgba(239,68,68,0.1);color:#EF4444;border:1px solid rgba(239,68,68,0.2);">CRITICAL</span>
                             </td>
-                            <td class="px-6 py-4">bot_net_scan</td>
-                            <td class="px-6 py-4 font-mono text-xs">Blocked 5000 requests/sec from 10.0.0.5</td>
+                            <td class="px-5 py-3.5 text-xs" style="color:var(--text-secondary);">bot_net_scan</td>
+                            <td class="px-5 py-3.5 font-mono text-xs hidden lg:table-cell" style="color:var(--text-muted);">Blocked 5000 requests/sec from 10.0.0.5</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <!-- Pagination -->
-            <div class="flex items-center justify-between mt-4 text-xs text-text-dim">
-                <span>Showing 1-5 of 1,240 events</span>
+            <!-- Pagination (Mock) -->
+            <div class="flex items-center justify-between mt-4">
+                <span style="color:var(--text-muted);" class="text-xs">Showing 1-5 of 1,240 events</span>
                 <div class="flex gap-2">
-                    <button
-                        class="px-3 py-1.5 bg-surface-dark border border-border-dark rounded-lg hover:text-text-main transition-colors">Previous</button>
-                    <button
-                        class="px-3 py-1.5 bg-surface-dark border border-border-dark rounded-lg hover:text-text-main transition-colors">Next</button>
+                    <button style="border:1px solid var(--border-subtle);color:var(--text-muted);" class="px-3 py-1.5 rounded-lg text-xs hover:bg-[var(--bg-surface-2)] hover:text-[var(--text-primary)] transition-colors cursor-pointer">Previous</button>
+                    <button style="border:1px solid var(--border-subtle);color:var(--text-muted);" class="px-3 py-1.5 rounded-lg text-xs hover:bg-[var(--bg-surface-2)] hover:text-[var(--text-primary)] transition-colors cursor-pointer">Next</button>
                 </div>
             </div>
 
         </div>
     </main>
 
-
+    <script>
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(p => { p.classList.remove('active'); p.style.background = 'transparent'; p.style.color = 'var(--text-muted)'; });
+                pill.classList.add('active'); pill.style.background = ''; pill.style.color = '';
+            });
+        });
+    </script>
 </body>
-
 </html>

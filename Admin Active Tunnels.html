@@ -1,411 +1,371 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-<!-- THEME LOCK: Verified Dark Mode Tokens via CSS Variables -->
+<html lang="en">
 
 <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Active Projects — DISAL Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
     <script>
-        // Auth Guard - soft disabled for validation
         if (localStorage.getItem('userRole') !== 'admin') {
             // window.location.href = 'Login.html';
         }
     </script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Active Projects - Admin | DISAL Hosting</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="assets/css/tokens.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script src="assets/js/tailwind-config.js"></script>
-    <script src="assets/js/theme-toggle.js"></script>
+    <style>
+        body{font-family:var(--font-sans)}.font-mono{font-family:var(--font-mono)}
+        .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        .filter-pill{transition:all .15s ease}.filter-pill.active{background:var(--navy-600);color:#fff;border-color:var(--navy-600)}
+        .project-card{transition:border-color .15s ease,box-shadow .15s ease}
+        .project-card:hover{border-color:var(--border-strong);box-shadow:0 4px 6px -1px rgba(0,0,0,.04),0 2px 4px -2px rgba(0,0,0,.04)}
+    </style>
 </head>
 
-<body
-    class="bg-background-dark text-text-main h-screen overflow-hidden flex font-display antialiased transition-colors duration-200">
+<body style="background:var(--bg-main);color:var(--text-secondary);flex-direction:row;" class="h-screen overflow-hidden flex antialiased selection:bg-[var(--color-primary)] selection:text-white transition-colors duration-200">
 
-    <!-- Side Navigation -->
-    <aside
-        class="dark hidden md:flex w-64 bg-sidebar border-r border-border-dark flex flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
+    <!-- ─── SIDEBAR ─── -->
+    <aside style="background:var(--bg-sidebar);border-right:1px solid var(--border-subtle);" class="hidden md:flex w-64 flex-col justify-between h-full shrink-0 z-20 relative transition-colors duration-200">
         <div class="flex flex-col gap-1 p-6">
             <div class="flex flex-col mb-8">
-                <div onclick="window.location.href='index.html'"
-                    class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
+                <a href="index.html" class="flex items-center gap-2.5 no-underline hover:opacity-80 transition-opacity">
+                    <div style="background:var(--color-primary-light);color:var(--color-primary);" class="flex size-8 items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined" style="font-size:20px;">terminal</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-text-main">DISAL</span>
-                </div>
-                <p class="text-text-dim text-xs mt-2">INFRA_CONTROLLER_V2</p>
+                    <span style="color:var(--text-primary);" class="text-lg font-bold tracking-tight">DISAL</span>
+                </a>
+                <p style="color:var(--text-muted);" class="text-[11px] mt-1.5 pl-[42px] font-mono tracking-wide">INFRA_CONTROLLER</p>
             </div>
             <nav class="flex flex-col gap-1">
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Admin Dashboard.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">grid_view</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Overview</span>
+                <a href="Admin Dashboard.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">grid_view</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Overview</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-dark border-l-2 border-primary group transition-colors"
-                    href="Admin Active Tunnels.html">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 20px;">cloud_sync</span>
-                    <span class="text-text-main text-sm font-medium">Project List</span>
+                <a href="Admin Active Tunnels.html" style="background:var(--color-primary-light);border-left:2px solid var(--color-primary);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors no-underline">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--color-primary);">cloud_sync</span>
+                    <span style="color:var(--color-primary);" class="text-sm font-medium">Active Projects</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Audit Logs.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">article</span>
-                    <span class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">System
-                        Alerts</span>
+                <a href="Audit Logs.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">article</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Audit Logs</span>
                 </a>
-                <div class="h-px bg-border-dark my-4"></div>
-                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark group transition-colors"
-                    href="Documentation.html">
-                    <span class="material-symbols-outlined text-text-dim group-hover:text-text-main transition-colors"
-                        style="font-size: 20px;">menu_book</span>
-                    <span
-                        class="text-text-dim group-hover:text-text-main text-sm font-medium transition-colors">Docs</span>
+                <div style="background:var(--border-subtle);" class="h-px my-3 mx-3"></div>
+                <a href="Documentation.html" style="color:var(--text-muted);" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors no-underline group">
+                    <span class="material-symbols-outlined group-hover:!text-[var(--text-primary)]" style="font-size:20px;color:var(--text-muted);">menu_book</span>
+                    <span class="text-sm font-medium group-hover:!text-[var(--text-primary)]">Docs</span>
                 </a>
             </nav>
         </div>
-        <div class="p-4 border-t border-border-dark flex items-center justify-between">
-            <div class="flex items-center gap-3 px-2">
-                <div
-                    class="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center text-xs font-bold text-primary">
-                    AD</div>
+        <div style="border-top:1px solid var(--border-subtle);" class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 px-1">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);color:var(--text-muted);" class="size-8 rounded-full flex items-center justify-center text-xs font-bold">AD</div>
                 <div class="flex flex-col">
-                    <span class="text-text-main text-sm font-medium">Admin User</span>
-                    <span class="text-text-dim text-xs">admin@disal.io</span>
+                    <span style="color:var(--text-primary);" class="text-sm font-medium">Admin User</span>
+                    <span style="color:var(--text-muted);" class="text-xs">admin@disal.io</span>
                 </div>
             </div>
-            <!-- Theme Toggle -->
-            <button onclick="toggleTheme()"
-                class="p-2 rounded-lg hover:bg-surface-dark text-text-dim hover:text-text-main transition-colors"
-                title="Toggle Theme">
-                <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-                <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-            </button>
+            <div class="flex items-center gap-1">
+                <button onclick="toggleTheme()" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden" style="font-size:20px;">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block" style="font-size:20px;">light_mode</span>
+                </button>
+                <button onclick="localStorage.removeItem('userRole');window.location.href='Login.html'" style="color:var(--text-muted);" class="p-2 rounded-lg hover:bg-[rgba(239,68,68,.08)] hover:!text-[var(--color-error)] transition-colors cursor-pointer" title="Sign Out">
+                    <span class="material-symbols-outlined" style="font-size:20px;">logout</span>
+                </button>
+            </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main
-        class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative transition-colors duration-200">
-        <!-- Strict Grid Pattern -->
-        <!-- Grid Background Removed for cleaner utility view -->
-        <!-- <div class="absolute inset-0 pointer-events-none bg-grid-pattern z-0"></div> -->
+    <!-- ─── MAIN ─── -->
+    <main style="background:var(--bg-main);" class="flex-1 flex flex-col h-full overflow-hidden relative transition-colors duration-200">
 
         <!-- Header -->
-        <header
-            class="h-16 border-b border-border-dark flex items-center justify-between px-4 md:px-8 bg-background-dark/80 backdrop-blur-md z-10 sticky top-0 transition-colors duration-200">
-            <div class="flex items-center gap-4">
-                <nav class="flex items-center text-sm font-medium text-text-dim">
-                    <a class="hover:text-text-main transition-colors" href="Landing Page.html">Home</a>
-                    <span class="mx-2 text-border-dark">/</span>
-                    <a class="hover:text-text-main transition-colors" href="Admin Dashboard.html">Infrastructure</a>
-                    <span class="mx-2 text-border-dark">/</span>
-                    <span class="text-text-main">Active Projects</span>
-                </nav>
-            </div>
-            <div class="flex items-center gap-4">
-                <!-- Search Bar -->
-                <div class="relative group">
+        <header style="border-bottom:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="h-14 flex items-center justify-between px-4 md:px-8 z-10 sticky top-0 transition-colors duration-200">
+            <nav class="flex items-center text-sm font-medium" style="color:var(--text-muted);">
+                <a href="index.html" style="color:var(--text-muted);" class="hover:!text-[var(--text-primary)] transition-colors no-underline">Home</a>
+                <span class="mx-2" style="color:var(--border-strong);">/</span>
+                <span style="color:var(--text-primary);" class="font-semibold">Active Projects</span>
+            </nav>
+            <div class="flex items-center gap-3">
+                <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span
-                            class="material-symbols-outlined text-text-dim group-focus-within:text-primary transition-colors text-[20px]">search</span>
+                        <span class="material-symbols-outlined" style="font-size:16px;color:var(--text-muted);">search</span>
                     </div>
-                    <input
-                        class="bg-surface-dark border border-border-dark text-text-main text-sm rounded-lg focus:ring-1 focus:ring-primary focus:border-primary block w-64 pl-10 p-2 placeholder-text-dim/50 transition-all font-display"
-                        placeholder="Search apps..." type="text" />
+                    <input id="projectSearch" type="text" placeholder="Search apps… (⌘K)" oninput="searchProjects(this.value)" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-52 pl-9 pr-4 py-1.5 text-sm rounded-lg placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
                 </div>
-                <!-- Primary Action -->
-                <button
-                    class="flex items-center gap-2 bg-surface-dark hover:bg-background-dark border border-border-dark text-text-main px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">refresh</span>
-                    Refresh List
+                <button onclick="openModal()" style="background:var(--color-primary);color:white;" class="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all hover:opacity-90 shadow-sm cursor-pointer">
+                    <span class="material-symbols-outlined" style="font-size:18px;">add_link</span> Allocate Port
                 </button>
             </div>
         </header>
 
         <!-- Scrollable Content -->
-        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide relative z-10">
-            <!-- Filter & View Controls -->
-            <div class="flex flex-col gap-6 mb-6 lg:flex-row lg:items-start lg:justify-between">
-                <div>
-                    <h1 class="text-2xl font-bold text-text-main mb-1">Global Active Projects</h1>
-                    <p class="text-text-dim text-sm">Monitor all active application deployments across the
-                        infrastructure.</p>
-                </div>
-                <!-- Port Allocation Manager (Admin "Vending Machine") -->
-                <div
-                    class="w-full max-w-md bg-surface-dark border border-border-dark rounded-default p-4 flex flex-col gap-3 shadow-lg shadow-black/20">
-                    <div class="flex items-center justify-between gap-2">
-                        <div class="flex flex-col gap-0.5">
-                            <h2 class="text-sm font-semibold text-text-main">Port Allocation Manager</h2>
-                            <p class="text-[11px] text-text-dim">Create student access and update TOML config.</p>
-                        </div>
-                        <span
-                            class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-primary/10 text-primary border border-primary/20">TOML
-                            Source of Truth</span>
-                    </div>
-                    <form class="flex flex-col gap-3" onsubmit="handlePortAllocation(event)">
-                        <div class="flex flex-col gap-1">
-                            <label class="text-[11px] font-mono uppercase tracking-wider text-text-dim">Student ID</label>
-                            <input id="allocStudentId" type="text" placeholder="e.g. 21005678"
-                                class="w-full bg-background-dark border border-border-dark rounded-lg px-3 py-2 text-xs text-text-main placeholder-text-dim/60 focus:border-primary focus:ring-1 focus:ring-primary outline-none">
-                        </div>
-                        <div class="flex items-center gap-2 text-[11px] text-text-dim">
-                            <span class="material-symbols-outlined text-[16px] text-text-dim">info</span>
-                            <span>Port will be auto-assigned in the <span class="font-mono">9000‑9999</span> range.</span>
-                        </div>
-                        <div class="flex items-center justify-between gap-2">
-                            <button type="button" onclick="handleServiceRestart()"
-                                class="px-3 py-1.5 rounded-lg border border-border-dark bg-background-dark text-[11px] font-medium text-text-dim hover:text-text-main hover:bg-surface-dark transition-colors flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-[16px]">restart_alt</span>
-                                Service Restart
-                            </button>
-                            <button type="submit"
-                                class="px-4 py-1.5 rounded-lg bg-primary text-[11px] font-bold text-white hover:bg-primary/90 transition-colors flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-[16px]">add_link</span>
-                                Create Student Access
-                            </button>
-                        </div>
-                        <p id="allocStatus" class="text-[11px] text-success hidden">
-                            Port allocated and TOML config updated. Student dashboard will now show assigned port.
-                        </p>
-                        <p id="restartStatus" class="text-[11px] text-info hidden">
-                            FRP service restart triggered. New mappings are now active.
-                        </p>
-                    </form>
-                </div>
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 scrollbar-hide">
+
+            <!-- Title -->
+            <div class="flex flex-col gap-1 mb-6">
+                <h1 style="color:var(--text-primary);" class="text-2xl font-extrabold tracking-tight mb-0">Global Active Projects</h1>
+                <p style="color:var(--text-muted);" class="text-sm mb-0">Monitor all active application deployments across the infrastructure.</p>
             </div>
 
-            <!-- TOML Config Preview -->
-            <div
-                class="mb-6 rounded-default border border-border-dark bg-surface-dark/60 p-4 font-mono text-[11px] text-text-dim">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-xs font-semibold text-text-main">toml_config/ports.toml</span>
-                    <span id="tomlStatusBadge"
-                        class="px-2 py-0.5 rounded-full text-[10px] border border-border-dark text-text-dim bg-background-dark">No student
-                        ports allocated</span>
-                </div>
-                <pre id="tomlPreview" class="whitespace-pre-wrap leading-relaxed text-[11px]">
-[ports]
-; student_id = "port"
-; Entries will appear here after allocation.
-                </pre>
+            <!-- Filter Pills -->
+            <div class="flex flex-wrap items-center gap-4 mb-6">
+                <button data-filter="all" class="filter-pill active px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);">All Projects</button>
+                <button data-filter="live" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#22C55E;"></span>Live
+                </button>
+                <button data-filter="idle" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#F59E0B;"></span>Idle
+                </button>
+                <button data-filter="failed" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium cursor-pointer" style="border:1px solid var(--border-subtle);background:transparent;color:var(--text-muted);">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:#EF4444;"></span>Failed
+                </button>
             </div>
 
-            <!-- Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Projects Grid -->
+            <div id="gridView" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
                 <!-- Card 1 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-5 flex flex-col gap-4 hover:border-primary/50 transition-all group relative overflow-hidden shadow-lg shadow-black/20">
-                    <div class="flex justify-between items-start">
-                        <div class="flex flex-col gap-1">
-                            <h3 class="font-bold text-text-main text-base">API Gateway - Port 8080</h3>
-                            <span class="text-xs text-text-dim">User: student_8841</span>
+                <div data-status="live" class="project-card rounded-xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2 h-2 rounded-full animate-pulse" style="background:#22C55E;"></span>
+                            <div class="flex flex-col">
+                                <h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">API Gateway</h3>
+                                <span style="color:var(--text-muted);" class="text-[11px]">User: student_8841</span>
+                            </div>
                         </div>
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-success/10 text-success border border-success/20">
-                            <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
-                            Live
-                        </span>
+                        <span style="color:#22C55E;" class="text-xs font-medium">Live</span>
                     </div>
-                    <div
-                        class="bg-inset rounded border border-border-dark p-3 font-mono text-xs text-text-dim flex items-center justify-between group-hover:border-border-dark/80 transition-colors">
-                        <div class="truncate flex items-center gap-2">http://api.tunnel.disal.io</div>
-                        <button
-                            class="text-text-dim hover:text-text-main transition-colors opacity-0 group-hover:opacity-100">
-                            <span class="material-symbols-outlined text-[16px]">content_copy</span>
-                        </button>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);">
+                        <span>Port: 8080</span><span style="color:var(--border-strong);">·</span><span>Uptime: 4d 12h</span>
                     </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-border-dark mt-auto">
-                        <div class="flex items-center gap-2 text-xs text-text-dim">
-                            <span class="material-symbols-outlined text-[16px]">schedule</span>
-                            Uptime: 4d 12h
-                        </div>
-                        <div class="flex gap-2">
-                            <button
-                                class="text-text-dim hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
-                                title="Force Stop">
-                                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
-                            </button>
-                        </div>
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center justify-between group">
+                        <span style="color:var(--color-primary);" class="truncate">http://api.tunnel.disal.io</span>
+                        <button style="color:var(--text-muted);" class="hover:text-[var(--text-primary)] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Copy"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span></button>
+                    </div>
+                    <div class="flex items-center justify-end pt-1 gap-1">
+                        <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Restart Service"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                        <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-error)] hover:bg-[var(--color-error-bg)] transition-colors cursor-pointer" title="Force Stop"><span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span></button>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-5 flex flex-col gap-4 hover:border-primary/50 transition-all group relative overflow-hidden shadow-lg shadow-black/20">
-                    <div class="flex justify-between items-start">
-                        <div class="flex flex-col gap-1">
-                            <h3 class="font-bold text-text-main text-base">React Frontend</h3>
-                            <span class="text-xs text-text-dim">User: student_2022</span>
+                <div data-status="live" class="project-card rounded-xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2 h-2 rounded-full animate-pulse" style="background:#22C55E;"></span>
+                            <div class="flex flex-col">
+                                <h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">React Frontend</h3>
+                                <span style="color:var(--text-muted);" class="text-[11px]">User: student_2022</span>
+                            </div>
                         </div>
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-success/10 text-success border border-success/20">
-                            <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
-                            Live
-                        </span>
+                        <span style="color:#22C55E;" class="text-xs font-medium">Live</span>
                     </div>
-                    <div
-                        class="bg-inset rounded border border-border-dark p-3 font-mono text-xs text-text-dim flex items-center justify-between group-hover:border-border-dark/80 transition-colors">
-                        <div class="truncate flex items-center gap-2">http://preview.disal.io/usr99</div>
-                        <button
-                            class="text-text-dim hover:text-text-main transition-colors opacity-0 group-hover:opacity-100">
-                            <span class="material-symbols-outlined text-[16px]">content_copy</span>
-                        </button>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);">
+                        <span>Port: 3000</span><span style="color:var(--border-strong);">·</span><span>Uptime: 0h 45m</span>
                     </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-border-dark mt-auto">
-                        <div class="flex items-center gap-2 text-xs text-text-dim">
-                            <span class="material-symbols-outlined text-[16px]">schedule</span>
-                            Uptime: 0h 45m
-                        </div>
-                        <div class="flex gap-2">
-                            <button
-                                class="text-text-dim hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
-                                title="Force Stop">
-                                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
-                            </button>
-                        </div>
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center justify-between group">
+                        <span style="color:var(--color-primary);" class="truncate">http://preview.disal.io/usr99</span>
+                        <button style="color:var(--text-muted);" class="hover:text-[var(--text-primary)] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Copy"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span></button>
+                    </div>
+                    <div class="flex items-center justify-end pt-1 gap-1">
+                        <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Restart Service"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                        <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-error)] hover:bg-[var(--color-error-bg)] transition-colors cursor-pointer" title="Force Stop"><span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span></button>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div
-                    class="bg-surface-dark border border-border-dark rounded-default p-5 flex flex-col gap-4 hover:border-primary/50 transition-all group relative overflow-hidden shadow-lg shadow-black/20">
-                    <div class="flex justify-between items-start">
-                        <div class="flex flex-col gap-1">
-                            <h3 class="font-bold text-text-main text-base">Postgres DB</h3>
-                            <span class="text-xs text-text-dim">User: research_grp_A</span>
+                <div data-status="idle" class="project-card rounded-xl p-5 flex flex-col gap-3 cursor-pointer hover:shadow-md transition-shadow" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2 h-2 rounded-full" style="background:#F59E0B;"></span>
+                            <div class="flex flex-col">
+                                <h3 style="color:var(--text-primary);" class="font-semibold text-[15px] mb-0">Postgres DB</h3>
+                                <span style="color:var(--text-muted);" class="text-[11px]">User: research_grp_A</span>
+                            </div>
                         </div>
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-warning/10 text-warning border border-warning/20">
-                            <span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
-                            Idle
-                        </span>
+                        <span style="color:#F59E0B;" class="text-xs font-medium">Idle</span>
                     </div>
-                    <div
-                        class="bg-inset rounded border border-border-dark p-3 font-mono text-xs text-text-dim flex items-center justify-between group-hover:border-border-dark/80 transition-colors">
-                        <div class="truncate flex items-center gap-2">http://db.tunnel.disal.io</div>
-                        <button
-                            class="text-text-dim hover:text-text-main transition-colors opacity-0 group-hover:opacity-100">
-                            <span class="material-symbols-outlined text-[16px]">content_copy</span>
-                        </button>
+                    <div class="flex items-center gap-1.5 text-xs font-mono" style="color:var(--text-muted);">
+                        <span>Port: 5432</span><span style="color:var(--border-strong);">·</span><span>Uptime: 2d 01h</span>
                     </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-border-dark mt-auto">
-                        <div class="flex items-center gap-2 text-xs text-text-dim">
-                            <span class="material-symbols-outlined text-[16px]">schedule</span>
-                            Uptime: 2d 01h
-                        </div>
-                        <div class="flex gap-2">
-                            <button
-                                class="text-text-dim hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
-                                title="Force Stop">
-                                <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
-                            </button>
-                        </div>
+                    <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg px-3 py-2.5 font-mono text-sm flex items-center justify-between group">
+                        <span style="color:var(--color-primary);" class="truncate">http://db.tunnel.disal.io</span>
+                        <button style="color:var(--text-muted);" class="hover:text-[var(--text-primary)] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Copy"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span></button>
+                    </div>
+                    <div class="flex items-center justify-end pt-1 gap-1">
+                        <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer" title="Restart Service"><span class="material-symbols-outlined" style="font-size:16px;">refresh</span></button>
+                        <button style="color:var(--text-muted);" class="p-1 rounded hover:text-[var(--color-error)] hover:bg-[var(--color-error-bg)] transition-colors cursor-pointer" title="Force Stop"><span class="material-symbols-outlined" style="font-size:16px;">power_settings_new</span></button>
                     </div>
                 </div>
+
             </div>
+
+            <!-- TOML Config (Collapsed) -->
+            <details style="border-top:1px solid var(--border-subtle);" class="mt-10 pt-6">
+                <summary style="color:var(--text-primary);" class="cursor-pointer text-sm font-bold flex items-center gap-2 select-none mb-4 list-none">
+                    <span class="material-symbols-outlined" style="font-size:18px;">expand_more</span> System Configuration
+                    <span style="color:var(--text-muted);" class="font-normal text-xs ml-1">— toml_config/ports.toml</span>
+                </summary>
+                <div style="border:1px solid var(--border-subtle);background:var(--bg-surface-1);" class="rounded-xl p-4 font-mono text-[11px] text-text-muted">
+                    <div class="flex items-center justify-between mb-2">
+                         <span id="tomlStatusBadge" class="px-2 py-0.5 rounded-full text-[10px]" style="border:1px solid var(--border-subtle);color:var(--text-muted);">No student ports allocated</span>
+                         <button onclick="handleServiceRestart()" class="text-[10px] underline cursor-pointer hover:text-[var(--color-primary)]">Force Reload</button>
+                    </div>
+                    <pre id="tomlPreview" class="whitespace-pre-wrap leading-relaxed" style="color:var(--text-secondary);">
+[ports]
+; student_id = "port"
+; Entries will appear here after allocation.
+                    </pre>
+                </div>
+            </details>
+
         </div>
     </main>
 
+    <!-- ─── PORT ALLOCATION MODAL ─── -->
+    <div id="modalOverlay" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" style="background:var(--bg-overlay);backdrop-filter:blur(4px);">
+        <div style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);box-shadow:var(--shadow-xl);" class="w-full max-w-[480px] rounded-2xl flex flex-col overflow-hidden">
+            <div style="border-bottom:1px solid var(--border-subtle);" class="flex items-center justify-between px-6 py-4 shrink-0">
+                <h2 style="color:var(--text-primary);" class="text-base font-bold mb-0">Port Allocation Manager</h2>
+                <button onclick="closeModal()" style="color:var(--text-muted);" class="p-1 rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer"><span class="material-symbols-outlined" style="font-size:18px;">close</span></button>
+            </div>
+
+            <div class="p-6">
+                <div style="background:var(--bg-surface-2);border:1px solid var(--border-subtle);" class="rounded-lg p-3 flex gap-3 items-start mb-6">
+                    <span class="material-symbols-outlined mt-0.5" style="font-size:16px;color:var(--color-primary);">info</span>
+                    <p style="color:var(--text-muted);" class="text-xs mb-0">Allocating a port will update the system's TOML configuration and grant the student access to deploy.</p>
+                </div>
+
+                <form onsubmit="handlePortAllocation(event)" class="flex flex-col gap-4">
+                    <div class="space-y-1.5">
+                        <label style="color:var(--text-primary);" class="text-sm font-medium">Student ID <span style="color:var(--color-error);">*</span></label>
+                        <input id="allocStudentId" type="text" placeholder="e.g. 21005678" style="background:var(--bg-surface-1);border:1px solid var(--border-subtle);color:var(--text-primary);" class="w-full rounded-lg px-3 py-2 text-sm placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--color-primary)] focus:ring-[3px] focus:ring-[var(--color-primary-ring)] transition-all">
+                    </div>
+
+                    <div id="allocResult" class="hidden p-3 rounded-lg border border-[var(--color-success)] bg-[rgba(34,197,94,0.1)] mb-2">
+                        <p class="text-xs text-[var(--color-success)] font-medium flex items-center gap-2">
+                            <span class="material-symbols-outlined" style="font-size:14px;">check_circle</span>
+                            Port Allocated: <span id="resPort" class="font-mono font-bold">9090</span>
+                        </p>
+                    </div>
+
+                    <div class="flex justify-end gap-3 mt-2">
+                        <button type="button" onclick="closeModal()" style="color:var(--text-muted);border:1px solid var(--border-subtle);" class="px-4 py-2 text-sm font-medium rounded-lg hover:bg-[var(--bg-surface-2)] transition-colors cursor-pointer">Cancel</button>
+                        <button type="submit" style="background:var(--color-primary);color:white;" class="px-5 py-2 text-sm font-semibold rounded-lg hover:opacity-90 shadow-sm transition-all cursor-pointer flex items-center gap-2">
+                            <span class="material-symbols-outlined" style="font-size:18px;">save</span> Allocate & Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
+        /* ── Modal & Port Allocation Logic ── */
+        const modal = document.getElementById('modalOverlay'), mainEl = document.querySelector('main');
+        function openModal() {
+            modal.classList.remove('hidden');
+            mainEl.classList.add('blur-sm','pointer-events-none');
+            document.getElementById('allocResult').classList.add('hidden');
+            document.getElementById('allocStudentId').value = '';
+        }
+        function closeModal() { modal.classList.add('hidden'); mainEl.classList.remove('blur-sm','pointer-events-none'); }
+
         function handlePortAllocation(e) {
             e.preventDefault();
             const studentInput = document.getElementById('allocStudentId');
-            const allocStatus = document.getElementById('allocStatus');
-            const restartStatus = document.getElementById('restartStatus');
-            const tomlPreview = document.getElementById('tomlPreview');
-            const tomlStatusBadge = document.getElementById('tomlStatusBadge');
-
             const studentId = (studentInput.value || '').trim();
-            if (!studentId) {
-                alert('Please enter a valid Student ID before allocating a port.');
-                return;
-            }
+            if (!studentId) { alert('Enter Student ID'); return; }
 
-            // Very simple deterministic mock port assignment based on studentId hash
+            // Deterministic mock port
             const basePort = 9000;
             let hash = 0;
-            for (let i = 0; i < studentId.length; i++) {
-                hash = (hash + studentId.charCodeAt(i)) % 1000;
-            }
+            for (let i = 0; i < studentId.length; i++) hash = (hash + studentId.charCodeAt(i)) % 1000;
             const assignedPort = basePort + (hash || 1);
 
-            // Persist entitlement for the student path (Student Dashboard)
+            // Persist
             localStorage.setItem('hasPortEntitlement', 'true');
             localStorage.setItem('assignedPort', String(assignedPort));
             localStorage.setItem('entitledStudentId', studentId);
 
-            // Update TOML-like preview buffer
+            // Update TOML
             const existing = localStorage.getItem('tomlConfig');
             const header = '[ports]';
-            let bodyLines = [];
-            if (existing) {
-                bodyLines = existing.split('\n').filter(Boolean);
-            }
-
-            // Ensure header present
-            if (!bodyLines.includes(header)) {
-                bodyLines.unshift(header);
-            }
-
+            let bodyLines = existing ? existing.split('\n').filter(Boolean) : [];
+            if (!bodyLines.includes(header)) bodyLines.unshift(header);
+            
             const entry = `${studentId} = "${assignedPort}"`;
             const filtered = bodyLines.filter(line => !line.startsWith(studentId + ' ='));
             filtered.push(entry);
             const newConfig = filtered.join('\n');
             localStorage.setItem('tomlConfig', newConfig);
 
-            if (tomlPreview) {
-                tomlPreview.textContent = newConfig;
-            }
-            if (tomlStatusBadge) {
-                tomlStatusBadge.textContent = 'Port allocation updated';
-                tomlStatusBadge.classList.remove('text-text-dim');
-                tomlStatusBadge.classList.remove('border-border-dark', 'bg-background-dark');
-                tomlStatusBadge.classList.add('text-success', 'border-success/20', 'bg-success/10');
-            }
-
-            if (allocStatus) {
-                allocStatus.classList.remove('hidden');
-            }
-            if (restartStatus) {
-                restartStatus.classList.add('hidden');
-            }
+            // Update UI
+            document.getElementById('allocResult').classList.remove('hidden');
+            document.getElementById('resPort').textContent = assignedPort;
+            
+            if (document.getElementById('tomlPreview')) document.getElementById('tomlPreview').textContent = newConfig;
+            
+            // Auto close after success? No, let user see result.
+            // Trigger restart simulation
+            handleServiceRestart(true);
         }
 
-        function handleServiceRestart() {
-            const restartStatus = document.getElementById('restartStatus');
-            localStorage.setItem('serviceRestarted', 'true');
-            if (restartStatus) {
-                restartStatus.classList.remove('hidden');
-            }
-            alert('Service Restart triggered. FRP will reload the TOML Config File.');
+        function handleServiceRestart(silent = false) {
+             localStorage.setItem('serviceRestarted', 'true');
+             const badge = document.getElementById('tomlStatusBadge');
+             if(badge) {
+                 badge.textContent = 'Config active & reloaded';
+                 badge.style.color = '#22C55E';
+                 badge.style.borderColor = 'rgba(34,197,94,0.2)';
+                 badge.style.background = 'rgba(34,197,94,0.1)';
+             }
+             if(!silent) alert('System Service Restarted.');
         }
 
-        // Initialize TOML preview from localStorage on load
-        (function initTomlPreview() {
-            const tomlPreview = document.getElementById('tomlPreview');
-            const tomlStatusBadge = document.getElementById('tomlStatusBadge');
+        // Init TOML
+        (function() {
             const stored = localStorage.getItem('tomlConfig');
-            if (stored && tomlPreview) {
-                tomlPreview.textContent = stored;
-                if (tomlStatusBadge) {
-                    tomlStatusBadge.textContent = 'Existing student port mappings loaded';
-                    tomlStatusBadge.classList.remove('text-text-dim');
-                    tomlStatusBadge.classList.remove('border-border-dark', 'bg-background-dark');
-                    tomlStatusBadge.classList.add('text-success', 'border-success/20', 'bg-success/10');
+            if(stored) {
+                document.getElementById('tomlPreview').textContent = stored;
+                const badge = document.getElementById('tomlStatusBadge');
+                if(badge) {
+                    badge.textContent = 'Existing config loaded';
+                     badge.style.color = '#22C55E';
+                     badge.style.borderColor = 'rgba(34,197,94,0.2)';
+                     badge.style.background = 'rgba(34,197,94,0.1)';
                 }
             }
         })();
+
+        /* ── Search & Filter ── */
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(p => { p.classList.remove('active'); p.style.background = 'transparent'; p.style.color = 'var(--text-muted)'; });
+                pill.classList.add('active'); pill.style.background = ''; pill.style.color = '';
+                const f = pill.dataset.filter;
+                document.querySelectorAll('.project-card[data-status]').forEach(el => {
+                    el.style.display = (f === 'all' || el.dataset.status === f) ? '' : 'none';
+                });
+            });
+        });
+
+        function searchProjects(q) {
+            q = q.toLowerCase();
+            document.querySelectorAll('.project-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(q) ? '' : 'none';
+            });
+        }
     </script>
-
 </body>
-
 </html>
